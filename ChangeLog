@@ -1,3 +1,7 @@
+2004-01-22  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* README: AUTHORS: Updated.
+
 2004-01-21  Brian Cameron <brian.cameron@sun.com>
 
 	* intltool-merge.in.in, tests/cases/merge6.xml.in,
