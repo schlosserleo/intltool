@@ -213,3 +213,35 @@ $ intltool-merge po/ -d -u -c po/.intltool-merge-cache somename.desktop.in
 somename.desktop
 
 You can also type intltool-merge --help for a bit more info.
+
+
+Passing special parameters to xgettext via environment
+......................................................
+
+If you need to add parameters passed to xgettext on a case-by-case
+basis, you can do so using environment variable XGETTEXT_ARGS.
+
+If you would run it as follows:
+
+	XGETTEXT_ARGS=--no-location intltool-update -p
+
+You would create a PO Template file without lines which indicate
+location of messages in the source code.
+
+
+Changing keywords used in xgettext invocation
+.............................................
+
+If you need to change default keywords used to extract messages from 
+source code, you need to add variable XGETTEXT_KEYWORDS to 
+Makefile.in.in file inside directory where intltool-update is run
+from, eg.
+
+        --- start ----
+
+        XGETTEXT_KEYWORDS = --keyword --keyword=P_
+
+        --- end ----
+
+Default keywords xgettext looks for if no XGETTEXT_KEYWORDS is defined
+are _, N_ and U_. 

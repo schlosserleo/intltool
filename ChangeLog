@@ -1,3 +1,8 @@
+2004-01-19  Mark McLoughlin  <mark@skynet.ie>
+
+	* README: add $XGETTEXT_KEYWORDS and $XGETTEXT_ARGS documentation
+	from Danio.
+
 2004-01-19  Danilo Šegan  <dsegan@gmx.net>
 
 	* intltool-update.in.in (FindPOTKeywords): Searches Makefile.in.in
