@@ -40,6 +40,7 @@ my $VERSION = "@VERSION@";
 use strict; 
 use Getopt::Long;
 use Text::Wrap;
+use File::Basename;
 
 my $ret = eval 'require XML::Parser';
 if(!$ret) {
@@ -47,8 +48,10 @@ if(!$ret) {
 } 
 
 ## Add dir to own perl modules
+my $dir = dirname($0);
 push @INC, "@EXPANDED_DATADIR@/@PACKAGE@";
-push @INC, "./modules";
+push @INC, "$dir/modules";
+push @INC, "$dir/intltool-modules";
 
 $ret = eval 'require XML::Parser::Style::OrigTree';
 if(!$ret) {

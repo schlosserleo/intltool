@@ -1,3 +1,18 @@
+2003-12-06  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* intltoolize.in: Install OrigTree.pm in the distribution tree.
+
+	* intltool-merge.in.in: Find the local version of OrigTree when
+	building a package.
+
+	* README: Updated. Another file needs to be added to EXTRA_DIST
+	in a client package's Makefile.am file now.
+
+	* tests/selftest.pl.in: Fix(?) the running of test 18 (multiple
+	output test).
+
+	* intltool.m4: Check for the XML::Parse module at build time.
+
 2003-12-03  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* intltoolize.in: Handle standard GNU gettext 0.12 and 0.13

@@ -45,9 +45,11 @@ intltool_m4="${datadir}/aclocal/intltool.m4"
 dry_run=no
 help="Try '$progname --help' for more information."
 rm="rm -f"
+rm_rec="rm -rf"
 ln_s="ln -s"
 cp="cp -f"
 mkdir="mkdir"
+mkinstalldirs="mkinstalldirs"
 
 # Global variables.
 automake=
@@ -100,9 +102,11 @@ EOF
     if test "$dry_run" != yes; then
       dry_run=yes
       rm="echo $rm"
+      rm_rec="echo $rm_rec"
       test -n "$ln_s" && ln_s="echo $ln_s"
       cp="echo $cp"
       mkdir="echo mkdir"
+      mkinstalldirs="echo $mkinstalldirs"
     fi
     ;;
 
@@ -138,6 +142,7 @@ fi
 
 
 files='intltool-extract.in intltool-merge.in intltool-update.in'
+deep_files='XML/Parser/Style/OrigTree.pm'
 
 auxdir=.
 auxdirline=`egrep '^AC_CONFIG_AUX_DIR' $configure 2>/dev/null`
@@ -218,6 +223,7 @@ fi
 
 # Change to the auxiliary directory.
 (
+cur=`pwd`
 if test "$auxdir" != .; then
   test -z "$automake" && echo "Putting files in AC_CONFIG_AUX_DIR, '$auxdir'."
   cd $auxdir || exit 1
@@ -237,6 +243,32 @@ for file in $files; do
     status=1
   fi
 done
+
+if test ! -d intltool-modules; then
+  if ! $mkdir intltool-modules; then
+    echo "$progname: unable to create 'intltool-modules' directory" 1>&2
+    exit 1
+  fi
+fi
+cd intltool-modules || exit 1
+
+for file in $deep_files; do
+  if test -f "$file" && test -z "$force"; then
+    test -z "$automake" && echo "$progname: '$file' exists: use '--force' to overwrite" 1>&2
+    continue
+  fi
+
+  dirname=`echo x$file | sed 's%^x\(.*/\).*$%\1%'`
+  $rm_rec $file
+  if $cur/$mkinstalldirs $dirname; then
+    if test -n "$ln_s" && $ln_s $pkgdatadir/$file $dirname; then :
+    elif $cp $pkgdatadir/$file $dirname; then :
+    else
+      echo "$progname: cannot copy '$pkgdatadir/$file' to '$dirname'" 1>&2
+      status=1
+    fi
+  fi
+done
 )
 
 # FIXME: This probably does not work w/ builddir != srcdir because it
@@ -248,7 +280,7 @@ if grep GENPOT po/Makefile.in.in >/dev/null; then
 # gettextize 4.x Standard 
 elif grep '# Copyright (C) 1995-1997, 2000-2002' po/Makefile.in.in > /dev/null; then
   patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-5
-# gettext 0.12
+# gettext 0.12 and 0.13
 elif grep '# Copyright (C) 1995-1997, 2000-2003' po/Makefile.in.in > /dev/null;
 then
   patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-8

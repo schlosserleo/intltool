@@ -20,7 +20,7 @@ The intltool collection can be used to do these things:
 The intltool package has a script, intltoolize, which copies the various
 scripts and does the other magic to your module. So users building
 from tarballs don't need intltool, only folks building from cvs.
-(This is modeled on gettextize.)
+(This is modelled on gettextize.)
 
 
 How to Use with autoconf/automake
@@ -43,9 +43,10 @@ To use intltool in your module, do the following:
 
 	AC_PROG_INTLTOOL([minimum required version])
 
- o Add intltool-extract.in, intltool-merge.in and intltool-update.in
-   to EXTRA_DIST in your top-level Makefile.am and also to the
-   top-level .cvsignore. Also add the non-.in versions to .cvsignore
+ o Add intltool-extract.in, intltool-merge.in, intltool-update.in and
+   intltool-modules/XML/Parser/Style/OrigTree.pm to EXTRA_DIST in your
+   top-level Makefile.am and also to the top-level .cvsignore. Also add the
+   non-.in versions to .cvsignore
 
  o Remove po/desk.pl and po/update.* scripts.  intltool-update will take
    over their functionality.
