@@ -1,3 +1,11 @@
+2001-08-24  Zbigniew Chyla  <cyba@gnome.pl>
+
+	* xml-i18n-update.in.in: Appended "--keyword=U_" to the list of
+	parameters passed to xgettext.
+	U_() is used in Evolution to get UTF-8 string from current (probably
+	non-utf) translation domain.
+	Of course this is useful only in GNOME 1.x apps.
+
 2001-08-21  Zbigniew Chyla  <cyba@gnome.pl>
 
 	* README: s/XML_UTF8_XML_KIND/XML_I18N_XML_KIND/

@@ -359,7 +359,7 @@ sub generate_pot
                        ."&& mv $PACKAGE\.po \.\/$PACKAGE\.pot \)";
 
     system("xgettext", "--default-domain\=$PACKAGE", "--directory\=\.\.",
-	   "--add-comments", "--keyword\=\_", "--keyword\=N\_",
+	   "--add-comments", "--keyword\=\_", "--keyword\=N\_", "--keyword\=U\_",
 	   "--files-from\=\.\/POTFILES\.in");
 
     system($gettext_test);
