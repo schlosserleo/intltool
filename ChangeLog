@@ -1,3 +1,7 @@
+2004-10-12  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS: Document fixes for #154717
+
 2004-10-07  Rodney Dawes  <dobey@novell.com>
 
 	* intltool.m4: Use `pwd`/intltool-extract for the substitution of

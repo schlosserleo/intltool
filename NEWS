@@ -1,3 +1,5 @@
+* Fix paths and quoting for intltool script variables in intltool.m4
+  -- bug #154717 (James Henstridge, Rodney Dawes)
 * Fix merging of xml:space="preserve" tags
   -- bug #151017 (Danilo Segan).
 * Look for Q_() keyword as well
