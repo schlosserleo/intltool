@@ -572,6 +572,39 @@ sub print_report
     }
 }
 
+sub find_var
+{
+        my ($search_str) = @_;
+                                                                               
+        #print "Searching for $search_str\n";
+                                                                               
+        foreach my $line (@file)
+        {
+                if ($line =~ /$search_str=(.*)\n$/)
+                {
+                        return &substitute_var ($1);
+                }
+        }
+}
+
+sub substitute_var
+{
+        my ($str) = @_;
+                                                                               
+        if ($str =~ /^(.*)\${?([A-Z]+)}?(.*)$/)
+        {
+                my $rest = $3;
+                my $untouched = $1;
+                my $sub = &find_var ($2);
+                                                                               
+                return substitute_var ("$untouched$sub$rest");
+        }
+        return $str;
+}
+
+# remove this hack, also further down.
+my @file;
+
 sub find_package_name
 {
     my $base_dirname = getcwd();
@@ -604,6 +637,7 @@ sub find_package_name
 	    $conf_in || die "Cannot find top_srcdir in Makefile."
         }
 
+
 	my %varhash = ();
         my $conf_source; {
            local (*IN);
@@ -615,6 +649,11 @@ sub find_package_name
            local $/; # slurp mode
            $conf_source = <IN>;
         }
+
+
+	#hack
+	open (IN, "<$conf_in") || die "can't open $conf_in: $!";
+	@file = <IN>;
 
 	my $name = "";
 	$name = $1 if $conf_source =~ /^AM_INIT_AUTOMAKE\([\s\[]*([^,\)\s\]]+)/m;
@@ -633,6 +672,9 @@ sub find_package_name
 		$name =~ s/[\$](\S+)/$varhash{$1}/;
 	    }
 	}
+
+	$name = substitute_var ($name);
+
 	return $name if $name;
     }
 

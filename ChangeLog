@@ -1,3 +1,7 @@
+2003-02-12  Kenneth Christiansen <kenneth@gnu.org>
+                                                                                
+        * intltool-update.in.in: Added variable substitution.
+
 2003-01-18  Kenneth Christiansen <kenneth@gnu.org>
                                                                                 
         * README: Added small section for packages not 
