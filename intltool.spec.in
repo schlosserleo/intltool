@@ -64,7 +64,7 @@ fi
 %install
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-make prefix=$RPM_BUILD_ROOT%{_prefix} sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} install
+make prefix=$RPM_BUILD_ROOT%{_prefix} sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} mandir=$RPM_BUILD_ROOT%{_mandir} install
 
 for FILE in "$RPM_BUILD_ROOT/bin/*"; do
 	file "$FILE" | grep -q not\ stripped && strip $FILE
