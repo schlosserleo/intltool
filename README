@@ -222,6 +222,16 @@ somename.desktop
 
 You can also type intltool-merge --help for a bit more info.
 
+To specify parameters for intltool-update (such as keywords or gettext
+domain), you can use Makevars syntax as used in recent GNU gettext, by
+putting something like the following in po/Makevars file:
+
+  DOMAIN = mydomain
+  XGETTEXT_OPTIONS = --keyword --keyword=blah
+
+This will make "intltool-update -p" produce mydomain.pot, passing
+parameters "--keyword --keyword=blah" to xgettext when extracting
+strings.
 
 Passing special parameters to xgettext via environment
 ......................................................

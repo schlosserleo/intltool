@@ -1,5 +1,20 @@
 2004-06-14  Danilo Šegan  <dsegan@gmx.net>
 
+	* README: Extend section on using without autoconf to mention
+	Makevars.
+	* NEWS: Document using without autoconf-style files.
+
+	* intltool-update.in.in (FindMakevarsDomain): Read $DOMAIN from 
+	po/Makevars.
+	(FindPOTKeywords): Try Makevars/XGETTEXT_OPTIONS first, then
+	Makefile.in.in/XGETTEXT_KEYWORDS.
+	(FindPackageName): Try FindMakevarsDomain first.
+	Don't bork out if there's no configure.in or configure.ac.
+	(CONF_Handle_Open): Try Makevars first, don't bork out if
+	there're no autoconf-style files.
+
+2004-06-14  Danilo Šegan  <dsegan@gmx.net>
+
 	* tests/results/merge5p.sheet: Make it correct UTF-8.
 	* tests/selftest.pl.in (check_merge_result): Use "-u" in test 8.
 
