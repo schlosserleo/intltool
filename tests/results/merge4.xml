@@ -1,4 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <sect>
-    <title.-_:>Fax</title.-_:>
-    <title.-_: xml:lang="test">Translated Fax</title.-_:>
+   <title.-_:>
+      Fax
+   </title.-_:>
+   <title.-_: xml:lang="az">
+      Fax
+   </title.-_:>
+   <title.-_: xml:lang="fr">
+      Fax
+   </title.-_:>
+   <title.-_: xml:lang="fr_BE">
+      Fax
+   </title.-_:>
+   <title.-_: xml:lang="fr_FR">
+      Fax
+   </title.-_:>
+   <title.-_: xml:lang="merge6">
+      Fax
+   </title.-_:>
+   <title.-_: xml:lang="schemasmerge1">
+      Fax
+   </title.-_:>
+   <title.-_: xml:lang="schemasmerge2">
+      Fax
+   </title.-_:>
+   <title.-_: xml:lang="test">
+      Translated Fax
+   </title.-_:>
 </sect>

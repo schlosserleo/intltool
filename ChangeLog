@@ -1,3 +1,26 @@
+2003-11-05  Brian Cameron <Brian.Cameron@sun.com>
+
+	* intltool-merge.in.in
+	* tests/results/merge4.xml
+	* tests/results/merge5p.xml
+	* tests/results/merge5u.xml
+	* tests/results/merge6.xml
+	* tests/results/merge7.xml
+
+	Fix for bug #116526.  Now intltool-merge uses a real XML parser,
+	which means that it now depends on XML::Parser.  Added logic so
+	that element values are now translated as appropriate.  Updated
+	test output that is affected by this change.  The following
+	types of changes in output are caused by using an XML parser:
+	whitespace differences and comments are no longer retained in
+	the output.
+
+	Note that the logic has been changed so that the default 
+	translation is now included if no translation exists.  This makes
+	more sense now that you can have situations where untranslated
+	strings might exist inside a block that has a translatable
+	element (and vice versa).
+
 2003-09-13  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-merge.in.in: Added --multiple-output
