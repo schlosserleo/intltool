@@ -1,3 +1,11 @@
+2004-01-21  Brian Cameron <brian.cameron@sun.com>
+
+	* intltool-merge.in.in, tests/cases/merge6.xml.in,
+	  tests/results/merge6.xml:  Now intltool-merge
+	  supports dashes in attribute names, and supports
+	  attributes delimited by single quotes.  Updated
+	  make test so it checks for these cases.
+
 2004-01-21  Danilo Šegan  <dsegan@gmx.net>
 
 	* intltool-update.in.in: Fix bug I introduced in #131885 (don't
