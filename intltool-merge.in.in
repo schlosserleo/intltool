@@ -43,11 +43,6 @@ use Getopt::Long;
 use File::stat;
 use Fcntl;      # For O_* constants
 
-my $use_cache = $ENV{"INTLTOOL_USE_CACHE"} || 0;
-if ($use_cache == 1 || $use_cache == 2) {
-	require NDBM_File;
-}
-
 ## Scalars used by the option stuff
 my $HELP_ARG = 0;
 my $VERSION_ARG = 0;
@@ -58,6 +53,7 @@ my $DESKTOP_STYLE_ARG = 0;
 my $QUIET_ARG = 0;
 my $PASS_THROUGH_ARG = 0;
 my $UTF8_ARG = 0;
+my $cache_file;
 
 ## Handle options
 GetOptions 
@@ -71,7 +67,8 @@ GetOptions
  "keys-style|k" => \$KEYS_STYLE_ARG,
  "desktop-style|d" => \$DESKTOP_STYLE_ARG,
  "pass-through|p" => \$PASS_THROUGH_ARG,
- "utf8|u" => \$UTF8_ARG
+ "utf8|u" => \$UTF8_ARG,
+ "cache|c=s" => \$cache_file
  ) or &error;
 
 my $PO_DIR;
@@ -228,16 +225,11 @@ sub utf8_sanity_check
 
 sub get_translation_database
 {
-    if ($use_cache == 1) {
-        &create_ndbm_cache_writeback;
-    } elsif ($use_cache == 2) {
-	&create_ndbm_cache_writethrough;
-    } elsif ($use_cache == 3) {
-	&create_text_cache;
+    if ($cache_file) {
+	&get_cached_translation_database;
     } else {
         &create_translation_database;
     }
-	
 }
 
 sub get_po_timestamp
@@ -252,88 +244,45 @@ sub get_po_timestamp
     return $timestamp;
 }
 
-sub create_ndbm_cache_writethrough
+sub create_cache
 {
-    my $timestamp = &get_po_timestamp;
-    my $cached_translations = "$PO_DIR/.intltool-cache-ndbm-writethrough-$timestamp";	
+    print "Generating and caching the translation database\n" unless $QUIET_ARG;
 
-    if (-e "$cached_translations.db") {
-	print "Found cached translation database\n" unless $QUIET_ARG;
-	tie (%translations, 'NDBM_File', $cached_translations, O_RDONLY, 0640);
-    }
+    &create_translation_database;
 
-    else {
-	system ("rm -f $PO_DIR/.intltool-cache-*.db");
-	print "Generating and caching the translation database\n" unless $QUIET_ARG;
-	tie (%translations, 'NDBM_File', $cached_translations, O_RDWR|O_CREAT, 0640);
-
-	&create_translation_database;
-    }
+    open CACHE, ">$cache_file" || die;
+    print CACHE join "\x01", %translations;
+    close CACHE;
 }
 
-sub create_ndbm_cache_writeback
+sub load_cache 
 {
-    my $timestamp = &get_po_timestamp;
-    my $cached_translations = "$PO_DIR/.intltool-cache-ndbm-writeback-$timestamp";	
+    print "Found cached translation database\n" unless $QUIET_ARG;
 
-    if (-e "$cached_translations.db") {
-	print "Found cached translation database\n" unless $QUIET_ARG;
-	tie (%translations, 'NDBM_File', $cached_translations, O_RDONLY, 0640);
+    my $contents;
+    open CACHE, "<$cache_file" || die;
+    {
+        local $/;
+        $contents = <CACHE>
     }
-
-    else {
-	system ("rm -f $PO_DIR/.intltool-cache-*.db");
-	print "Generating and caching the translation database\n" unless $QUIET_ARG;
-
-	&create_translation_database;
-	my %new_translations = ();
-	tie (%new_translations, 'NDBM_File', $cached_translations, O_RDWR|O_CREAT, 0640);
-	
-	for my $key (keys %translations) {
-	    $new_translations{$key} = $translations{$key};
-	}
-    }
+    close CACHE;
+    %translations = split "\x01", $contents;
 }
 
-sub create_text_cache
+sub get_cached_translation_database
 {
-    my $timestamp = &get_po_timestamp;
-    my $cached_translations = "$PO_DIR/.intltool-cache-text-$timestamp";	
+    if (-e $cache_file) {
+	my $newest_po_time = &get_po_timestamp;
+	my $cache_file_time = stat ($cache_file)->ctime;
 
-    if (-e "$cached_translations") {
-	print "Found cached translation database\n" unless $QUIET_ARG;
-	
-	my $key  = ""; 
-	my $last = 1; ## 1 = data, 0 = key
-	open CACHE, "$cached_translations";
-	foreach my $line (<CACHE>) {
-	    chomp $line;
-
-	    if ($last) {
-		$last = 0;
-		$key  = $line;
-	    }
-
-	    else {
-		$last = 1;
-		$translations{$key} = $line;
-	    }
+        if ($cache_file_time >= $newest_po_time) {
+	    &load_cache;
+            return;
 	}
-    }
-    else {
-	system ("rm -f $PO_DIR/.intltool-cache-*");
-	print "Generating and caching the translation database\n" unless $QUIET_ARG;
+   }
 
-	&create_translation_database;
-	
-	open CACHE, ">$cached_translations";
-	for my $key (keys %translations) {
-	    print CACHE "$key\n$translations{$key}\n"
-	}
-	close CACHE;
-    }
+   &create_cache;
 }
-
 
 sub create_translation_database
 {
@@ -342,7 +291,11 @@ sub create_translation_database
 
         if ($UTF8_ARG) {
             my $encoding = get_po_encoding ($po_file);
-            open PO_FILE, "iconv -f $encoding -t UTF-8 $po_file|";	
+            if (lc $encoding eq "utf-8") {
+                open PO_FILE, "<$po_file";	
+            } else {
+                open PO_FILE, "iconv -f $encoding -t UTF-8 $po_file|";	
+            }
         } else {
             open PO_FILE, "<$po_file";	
         }
@@ -374,10 +327,6 @@ sub create_translation_database
 
 sub finalize
 {
-    if ($use_cache == 1 || $use_cache == 2) {
-	# close database if used
-	untie %translations;
-    }
 }
 
 sub unescape_one_sequence
