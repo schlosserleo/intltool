@@ -32,15 +32,18 @@ use strict;
 ## Always print as the first thing
 $| = 1;
 
+my $failed = 0;
+
 sub check_result($)
 {
     my $testcase = $_[0];
     my $result =`diff -Nup results/$testcase.h cases/$testcase.h`;
     
-    if (!$result) { 
+    if ($? == 0 && $result eq "") { 
 	print "[OK]\n"; ## diff was empty, ie. files were equal
     } else { 
 	print "[FAILED]\n"; 
+	$failed = 1;
     }
 }
 
@@ -50,13 +53,14 @@ sub check_result_output($)
     $testcase =~ s/\.in//;
     my $result =`diff -Nup results/$testcase cases/$testcase`;
 
-    if (!$result) {
+    if ($? == 0 && $result eq "") {
         print "[OK]\n"; ## diff was empty, ie. files were equal
     } else {
         print "[FAILED]\n";
         open OUT, ">>errors";
         print OUT $result;
         close OUT;
+	$failed = 1;
     }
 }
 
@@ -73,7 +77,7 @@ unlink "errors";
 print "1. Checking output from simple desktop file:                  ";
 
 $case = "extract1.desktop";
-`/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update cases/$case`;
+system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update cases/$case") == 0 or $failed = 1;
 check_result($case);
 
 ## 2. Extract/Simple desktop-like file
@@ -81,7 +85,7 @@ check_result($case);
 print "2. Checking output from simple desktop-like file:             ";
 
 $case = "extract2.keyprop";
-`/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update cases/$case`;
+system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update cases/$case") == 0 or $failed = 1;
 check_result($case);
 
 ## 3. Extract/Simple desktop-like file
@@ -89,6 +93,8 @@ check_result($case);
 print "3. Checking output from simple xml-file:                      ";
 
 $case = "merge1.xml";
-`/usr/bin/perl ../xml-i18n-merge -o cases/ cases/$case.in cases/$case`;
+system("/usr/bin/perl ../xml-i18n-merge -o --quiet cases/ cases/$case.in cases/$case") == 0 or $failed = 1;
 check_result_output($case);
+
+exit $failed;
 

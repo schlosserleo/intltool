@@ -1,3 +1,13 @@
+2001-01-31  Darin Adler  <darin@eazel.com>
+
+	* Makefile.am: Build top level first.
+	* tests/.cvsignore: Ignore more generated stuff.
+	* tests/cases/.cvsignore: Ignore more generated stuff.
+	* tests/results/.cvsignore: Ignore more generated stuff.
+	* tests/selftest.pl: Indicate failure with exit 1.
+	* xml-i18n-extract.in: Fix help.
+	* xml-i18n-merge.in: Add --quiet option. Fix help.
+
 2001-01-31  Kenneth Christiansen <kenneth@gnu.org>
 
         * tests/cases/test.po: Changed, and made clear

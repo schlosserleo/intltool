@@ -1,8 +1,8 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = tests
+SUBDIRS = . tests
 
-NULL=
+NULL = 
 
 aclocal_macros = xml-i18n-tools.m4
 

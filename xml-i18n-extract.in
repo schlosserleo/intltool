@@ -136,10 +136,9 @@ sub help{
     print "Generates a header file from an xml source file.\n\nGrabs all strings ";
     print "between <_translatable_node> and it's end tag,\nwhere tag are all allowed ";
     print "xml tags. Read the docs for more info.\n\n"; 
-    print "  -V, --version                shows the version\n";
-    print "  -H, --help                   shows this help page\n";
-    print "  -X, --verbose		  verbose mode\n";
-    print "  -Q, --quiet                  quiet mode\n";
+    print "  -v, --version                shows the version\n";
+    print "  -h, --help                   shows this help page\n";
+    print "  -q, --quiet                  quiet mode\n";
     print "\nReport bugs to <kenneth\@gnu.org>.\n";
     exit;
 }

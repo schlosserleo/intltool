@@ -44,12 +44,14 @@ my $VERSION_ARG = "0";
 my $XML_STYLE_ARG = "0";
 my $KEYS_STYLE_ARG = "0";
 my $DESKTOP_STYLE_ARG = "0";
+my $QUIET_ARG = "0";
 
 
 ## Handle options
 GetOptions (
-	    "help|h|?"   => \$HELP_ARG,
-	    "version|v"  => \$VERSION_ARG,
+	    "help|h|?" => \$HELP_ARG,
+	    "version|v" => \$VERSION_ARG,
+            "quiet|q" => \$QUIET_ARG,
 	    "xml-style|o" => \$XML_STYLE_ARG,
 	    "keys-style|k" => \$KEYS_STYLE_ARG,
 	    "desktop-style|d" => \$DESKTOP_STYLE_ARG
@@ -121,8 +123,9 @@ sub help{
     print "Usage: ${PROGRAM} [OPTIONS] PO_DIRECTORY FILENAME OUTPUT_FILE\n";
     print "Generates an xml file that includes translated versions of some attributes,\n";
     print "from an untranslated source and a po directory that includes translations.\n";
-    print "  -V, --version                shows the version\n";
-    print "  -H, --help                   shows this help page\n";
+    print "  -v, --version                shows the version\n";
+    print "  -h, --help                   shows this help page\n";
+    print "  -q, --quiet                  quiet mode\n";
     print "  -o, --xml-style              includes translations in the xml style\n";
     print "  -k, --keys-style		  includes translations in the keys style\n";
     print "  -d, --desktop-style          includes translations in the desktop style\n";
@@ -140,7 +143,7 @@ sub error{
 
 
 sub message {
-    print "Merging translations into $OUTFILE.\n";
+    print "Merging translations into $OUTFILE.\n" unless $QUIET_ARG;
 }
 
 
