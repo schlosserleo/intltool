@@ -24,6 +24,7 @@
 AC_DEFUN(XML_I18N_TOOLS_NEWER_THAN_0_9,[ true ])
 
 dnl AC_PROG_XML_I18N_TOOLS([MINIMUM-VERSION [,"G2" if always using --utf8] ])
+
 # serial 1 AC_PROG_XML_I18N_TOOLS
 AC_DEFUN(AC_PROG_XML_I18N_TOOLS,
 [
@@ -34,34 +35,28 @@ AC_DEFUN(AC_PROG_XML_I18N_TOOLS,
   AC_DEFUN(X18T_KEYS_KIND, 
         ifelse([$2],[G2],[ -u ],[ $(XML_I18N_KEYS_KIND) ]))
 
-XML_I18N_MERGE_OAF_RULE='%.oaf : %.oaf.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge -o -p $(top_srcdir)/po $< [$]*.oaf'
-AC_SUBST(XML_I18N_MERGE_OAF_RULE)
+XML_I18N_MERGE_DESKTOP_RULE=  '%.desktop:   %.desktop.in   $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -d X18T_PFORG1'
+XML_I18N_MERGE_DIRECTORY_RULE='%.directory: %.directory.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -d X18T_PFORG1'
+XML_I18N_MERGE_KEYS_RULE=     '%.keys:      %.keys.in      $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -k X18T_KEYS_KIND'
+XML_I18N_MERGE_OAF_RULE=      '%.oaf:       %.oaf.in       $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -o -p'
+XML_I18N_MERGE_PONG_RULE=     '%.pong:      %.pong.in      $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -x X18T_PFORG1'
+XML_I18N_MERGE_SERVER_RULE=   '%.server:    %.server.in    $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -o -u'
+XML_I18N_MERGE_SHEET_RULE=    '%.sheet:     %.sheet.in     $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -x -u'
+XML_I18N_MERGE_SOUNDLIST_RULE='%.soundlist: %.soundlist.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -d X18T_PFORG1'
+XML_I18N_MERGE_XML_RULE=      '%.xml:       %.xml.in       $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -x X18T_XML_KIND'
 
-XML_I18N_MERGE_SERVER_RULE='%.server : %.server.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge -o -u $(top_srcdir)/po $< [$]*.server'
-AC_SUBST(XML_I18N_MERGE_SERVER_RULE)
-
-XML_I18N_MERGE_KEYS_RULE='%.keys : %.keys.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge -k X18T_KEYS_KIND $(top_srcdir)/po $< [$]*.keys'
-AC_SUBST(XML_I18N_MERGE_KEYS_RULE)
-
-XML_I18N_MERGE_DESKTOP_RULE='%.desktop : %.desktop.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge -d X18T_PFORG1 $(top_srcdir)/po $< [$]*.desktop'
 AC_SUBST(XML_I18N_MERGE_DESKTOP_RULE)
-
-XML_I18N_MERGE_DIRECTORY_RULE='%.directory : %.directory.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge -d X18T_PFORG1 $(top_srcdir)/po $< [$]*.directory'
 AC_SUBST(XML_I18N_MERGE_DIRECTORY_RULE)
-
-XML_I18N_MERGE_SOUNDLIST_RULE='%.soundlist : %.soundlist.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge -d X18T_PFORG1 $(top_srcdir)/po $< [$]*.soundlist'
-AC_SUBST(XML_I18N_MERGE_SOUNDLIST_RULE)
-
-XML_I18N_MERGE_PONG_RULE='%.pong : %.pong.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge -x X18T_PFORG1 $(top_srcdir)/po $< [$]*.pong'
+AC_SUBST(XML_I18N_MERGE_KEYS_RULE)
+AC_SUBST(XML_I18N_MERGE_OAF_RULE)
 AC_SUBST(XML_I18N_MERGE_PONG_RULE)
-
-XML_I18N_MERGE_XML_RULE='%.xml : %.xml.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge -x X18T_XML_KIND $(top_srcdir)/po $< [$]*.xml'
+AC_SUBST(XML_I18N_MERGE_SERVER_RULE)
+AC_SUBST(XML_I18N_MERGE_SHEET_RULE)
+AC_SUBST(XML_I18N_MERGE_SOUNDLIST_RULE)
 AC_SUBST(XML_I18N_MERGE_XML_RULE)
 
-XML_I18N_MERGE_SHEET_RULE='%.sheet : %.sheet.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge -x -u $(top_srcdir)/po $< [$]*.sheet'
-AC_SUBST(XML_I18N_MERGE_SHEET_RULE)
+# Use the tools built into the package, not the ones that are installed.
 
-# Always use our own xml-i18n-tools.
 XML_I18N_EXTRACT='$(top_builddir)/xml-i18n-extract'
 AC_SUBST(XML_I18N_EXTRACT)dnl
 

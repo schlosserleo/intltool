@@ -1,5 +1,9 @@
 2001-10-01  Darin Adler  <darin@bentspoon.com>
 
+	* xml-i18n-tools.m4: A bit more cleanup in here.
+
+2001-10-01  Darin Adler  <darin@bentspoon.com>
+
 	* xml-i18n-tools.m4: Fix longstanding problem where the merge rule
 	doesn't work if you don't have any .po files by using $(wildcard)
 	inside the make rules.
