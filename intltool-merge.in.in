@@ -462,9 +462,17 @@ sub unescape_one_sequence
     return "\\" if $sequence eq "\\\\";
     return "\"" if $sequence eq "\\\"";
     return "\n" if $sequence eq "\\n";
+    return "\r" if $sequence eq "\\r";
+    return "\t" if $sequence eq "\\t";
+    return "\b" if $sequence eq "\\b";
+    return "\f" if $sequence eq "\\f";
+    return "\a" if $sequence eq "\\a";
+    return chr(11) if $sequence eq "\\v"; # vertical tab, see ascii(7)
 
-    # gettext also handles \n, \t, \b, \r, \f, \v, \a, \xxx (octal),
-    # \xXX (hex) and has a comment saying they want to handle \u and \U.
+    return chr(hex($1)) if ($sequence =~ /\\x([0-9a-fA-F]{2})/);
+    return chr(oct($1)) if ($sequence =~ /\\([0-7]{3})/);
+
+    # FIXME: Is \0 supported as well? Kenneth and Rodney don't want it, see bug #48489
 
     return $sequence;
 }
@@ -473,7 +481,7 @@ sub unescape_po_string
 {
     my ($string) = @_;
 
-    $string =~ s/(\\.)/unescape_one_sequence($1)/eg;
+    $string =~ s/(\\x[0-9a-fA-F]{2}|\\[0-7]{3}|\\.)/unescape_one_sequence($1)/eg;
 
     return $string;
 }

@@ -1,5 +1,17 @@
 2004-10-23  Danilo Šegan  <dsegan@gmx.net>
 
+	* intltool-merge.in.in (unescape_po_string): Catch \xDD and \ddd
+	sequences as well.
+	(unescape_one_sequence): Add support for \r, \t, \b, \f, \a, \v,
+	\xDD, \ddd.
+
+	* tests/cases/merge6.po: s/\0123/\123/.
+
+	* tests/results/merge6.xml: Update result.
+	* tests/results/multi.merge6.xml: Update result.
+
+2004-10-23  Danilo Šegan  <dsegan@gmx.net>
+
 	Fixes #137029.
 
 	* NEWS: Updated.
