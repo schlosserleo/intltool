@@ -22,6 +22,9 @@ fi
 
 AC_OUTPUT([
 Makefile
+tests/Makefile
+tests/cases/Makefile
+tests/results/Makefile
 xml-i18n-extract
 xml-i18n-merge
 xml-i18n-toolize
