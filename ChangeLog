@@ -1,3 +1,9 @@
+2001-01-16  Kenneth Christiansen <kenneth@gnu.org>
+
+        * xml-i18n-update.in: GNU license at top. 
+	Changed the optionsystem to resemple the 
+	other scripts in the xml-i18n-tools package. 
+
 2001-01-16  Darin Adler  <darin@eazel.com>
 
 	* xml-i18n-update.in: Added back in the line of
