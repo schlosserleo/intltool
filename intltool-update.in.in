@@ -26,8 +26,11 @@ my $VERSION  = "@VERSION@";
 my $_PACKAGE = "@PACKAGE@";
 
 ## Loaded modules
-# FIXME: use strict;
+## FIXME: use strict;
 use Getopt::Long;
+use Cwd;
+use File::Copy;
+use File::Find;
 
 ## Scalars used by the option stuff
 my $LANG     	   = $ARGV[0];
@@ -43,9 +46,8 @@ my $VERBOSE	   = "0";
 my @languages;
 my %po_files_by_lang = ();
 
-my $xml_extension = "xml|glade|desktop\.in|directory\.in|soundlist\.in|keys\.in|oaf(\.in)+";
-my $xml_extension_extern = $xml_extension;
-$xml_extension_extern =~ s/\\/\\\\/g;
+my $xml_extension = "xml|glade|desktop\.in|directory\.in|"
+		   ."soundlist\.in|keys\.in|oaf(\.in)+";
 
 my $PACKAGE = &find_package_name;
 
@@ -165,21 +167,23 @@ sub help
 
 sub maintain
 {   
-    ## Search and find all translatable files
-    $list_i18n_plain = "find ../ -print | egrep '.*\\.(c|y|cc|c++|h|gob)\$' ";
-    $list_i18n_xml   = "find ../ -print | egrep '.*\\.($xml_extension_extern)\$' ";
+    my (@buf_i18n_plain, 
+	@buf_i18n_xml, 
+	@buf_potfiles, 
+	@buf_potfiles_ignore,
+	@buf_allfiles_sorted, 
+	@buf_potfiles_sorted
+    );
 
-    open(BUF3, "POTFILES.in") || die "${PROGRAM}:  there's no POTFILES.in!!!\n";
-    
+    ## Search and find all translatable files
+    find sub { push @buf_i18n_plain, "$File::Find::name" if /\.(c|y|cc|c\+\+|h|gob)$/ }, "..";
+    find sub { push @buf_i18n_xml, "$File::Find::name" if /\.($xml_extension)$/ }, "..";
+
+    open(POTFILES, "POTFILES.in") || die "$PROGRAM:  there's no POTFILES.in!!!\n";
+    @buf_potfiles = <POTFILES>;    
+
     print "Searching for missing translatable files...\n";
     
-    open(BUF1, "$list_i18n_plain|");
-    open(BUF2, "$list_i18n_xml|");
-
-    @buf_i18n_plain 	= <BUF1>;
-    @buf_i18n_xml 	= <BUF2>;
-    @buf_potfiles	= <BUF3>;
-
     ## Check if we should ignore some found files, when 
     ## comparing with POTFILES.in
     if (-s "POTFILES.skip"){
@@ -197,8 +201,8 @@ sub maintain
         open FILE, "<$file";
         while (<FILE>) {
             if (/_\("/){
-                $file = unpack("x3 A*",$file) . "\n";
-                push @buf_allfiles, $file;
+		## Remove the first 3 chars and add newline
+		push @buf_allfiles, unpack("x3 A*", $file) . "\n";
                 last;
             }
         }
@@ -208,8 +212,8 @@ sub maintain
         open FILE, "<$file";
         while (<FILE>) {
             if (/\s_(.*)="/){
-                $file = unpack("x3 A*",$file) . "\n";
-                push @buf_allfiles, $file;
+                ## Remove the first 3 chars and add newline
+                push @buf_allfiles, unpack("x3 A*", $file) . "\n";
                 last;
             }
         }
@@ -296,7 +300,7 @@ sub generate_pot
 
     print "Building the $PACKAGE.pot...\n" if $VERBOSE;
 
-    system ("mv POTFILES.in POTFILES.in.old");    
+    move("POTFILES.in", "POTFILES.in.old");
 
     open INFILE, "<POTFILES.in.old";
     open OUTFILE, ">POTFILES.in";
@@ -307,16 +311,18 @@ sub generate_pot
     close OUTFILE;
     close INFILE;
 
-    $GETTEXT ="xgettext --default-domain\=$PACKAGE --directory\=\.\."
-             ." --add-comments --keyword\=\_ --keyword\=N\_"
-             ." --files-from\=\.\/POTFILES\.in ";  
-    $GTEST   ="test \! -f $PACKAGE\.po \|\| \( rm -f \.\/$PACKAGE\.pot "
-             ."&& mv $PACKAGE\.po \.\/$PACKAGE\.pot \)";
+    my $gettext_test   ="test \! -f $PACKAGE\.po \|\| \( rm -f \.\/$PACKAGE\.pot "
+                       ."&& mv $PACKAGE\.po \.\/$PACKAGE\.pot \)";
 
-    system($GETTEXT);
-    system($GTEST);
+    system("xgettext", "--default-domain\=$PACKAGE", "--directory\=\.\.",
+	   "--add-comments", "--keyword\=\_", "--keyword\=N\_",
+	   "--files-from\=\.\/POTFILES\.in");
+
+    system($gettext_test);
+
     print "Wrote $PACKAGE.pot\n" if $VERBOSE;
-    system("mv POTFILES.in.old POTFILES.in");
+
+    move("POTFILES.in.old", "POTFILES.in");
 
     print "Removing generated header (.h) files..." if $VERBOSE;
 
@@ -351,9 +357,10 @@ sub perform_merge
 {
     my ($LANG) = @_;
 
-    $MERGE="cp $LANG.po $LANG.po.old && msgmerge $LANG.po.old $PACKAGE.pot -o $LANG.po";
+    copy("$LANG.po", "$LANG.po.old") || die "copy failed: $!";
 
-    system($MERGE);
+    ## Preform merge
+    system("msgmerge", "$LANG.po.old", "$PACKAGE.pot", "-o", "$LANG.po");
     
     ## Remove the backup file
     unlink "$LANG.po.old";
@@ -362,8 +369,8 @@ sub perform_merge
 sub not_existing
 {
     ## Report error if supplied language file is non-existing
-    print "${PROGRAM}:  sorry, $LANG.po does not exist!\n";
-    print "Try `${PROGRAM} --help' for more information.\n";    
+    print "$PROGRAM:  sorry, $LANG.po does not exist!\n";
+    print "Try `$PROGRAM --help' for more information.\n";    
     exit;
 }
 
@@ -387,9 +394,8 @@ sub po_file2lang
 
 sub status 
 {
-    $exec_status="msgfmt --statistics $LANG.po";
-    
-    system($exec_status);
+    ## Print statistics
+    system("msgfmt", "--statistics", "$LANG.po");
     print "\n";   
 }
 
@@ -408,27 +414,34 @@ sub show_status
 
     foreach my $lang (@languages){
         print "$lang: ";
-	$exec_status="msgfmt --statistics $lang.po";
-	system($exec_status);
+ 	## Print statistics
+	system("msgfmt", "--statistics", "$lang.po");
     }  
 }    
 
 sub find_package_name 
 {
-    my $base_dirname = `pwd`;
-    $base_dirname =~ s%.*/%%;
-    chomp $base_dirname;
+    my $base_dirname = getcwd();
+    $base_dirname =~ s@.*/@@;
 
-    my $conf_in = "";
+    my ($conf_in, $src_dir);
 
     if ($base_dirname eq "po") {
         if (-f "../configure.in") {
             $conf_in = "../configure.in";
         } else {
-            my $srcdir = `grep '^top_srcdir[ \t]*=' ./Makefile`;
-            $srcdir =~ s/top_srcdir[ \t]*=[ \t]*([^ \t\n\r]*)/$1/;
-            chomp $srcdir;
-            $conf_in = "${srcdir}" . "/configure.in" . "\n";
+	    my $makefile_source; {
+		local (*IN);
+		local $/; # slurp mode
+	 	open (IN, "<Makefile") || die "can't open Makefile: $!";
+		$makefile_source = <IN>;
+	    }
+            if ($makefile_source =~ /^top_srcdir[ \t]*=/) {   
+                $src_dir = $_;
+                $srcdir =~ s/top_srcdir[ \t]*=[ \t]*([^ \t\n\r]*)/$1/;
+                chomp $srcdir;
+                $conf_in = "$srcdir" . "/configure.in" . "\n";
+	    }
         }
 
         my $conf_source; {

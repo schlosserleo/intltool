@@ -1,3 +1,9 @@
+2001-01-30  Kenneth Christiansen <kenneth@gnu.org>
+
+        * xml-i18n-update.in: Made more protable, by
+	replacing extern calls to pwd, grep and find.
+	Also cleaned up the script a little.
+
 2001-01-29  Kenneth Christiansen <kenneth@gnu.org>
 
 	* xml-i18n-prepare.in: Made it be generated.
