@@ -1,3 +1,11 @@
+Version 0.22
+
+* Added support for translation of descriptions used by ATK in glade files
+ (Kenneth).
+* Made schemas extraction code more bulletproof (Kenneth).
+* Force intltool-update to exit if POTFILES.in is not found (Abel Cheung).
+* Add detection of glade2 files in -m mode (Abel Cheung).
+
 Version 0.21
 
 * Use $srcdir in the version check (Mark McLoughlin)
