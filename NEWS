@@ -1,15 +1,29 @@
-Version XXX
+Version 0.9.5
 
-XXX unfinished 
-* Generates UTF-8 or (as previously) broken XML files.(Cyrille Chepelov)
+* Fix .server support (Carlos)
+* Makefile fixes (Robin * Slomkowski)
+* Man-pages (not installed yet) (Carlos, Dan Muet, Kenneth)
+* Simplifications in prepare tool (Darin)
+* M4 files (Darin)
+* Fixes for evolution (Zbigniew)
+* Fix documentain errors (Zbigniew)
+* Removed buggy checks (Maciej)
+* UTF-8 support (Cyrille)
+* New XML_I18N_XML_KIND variable (Cyrille Chepelov)
+* Support for Dia's .sheet files (Cyrille Chepelov)
+* New testcases (Darin, Cyrille)
+* Made regexps more bulletproof (Darin)
+* Bugfixes for glade (Darin)
+* Generates UTF-8 or (as previously) broken XML files. (Cyrille Chepelov)
 * Generates UTF-8 or (as previously) mixed-encoding .keys files. (CC)
 * Support for Dia .sheet files (CC)
 * two optional arguments to the AC_PROG_XML_I18N_TOOLS: first is the
-minimum required version, second is either blank or the [G2] string
-(no brackets). (CC)
+  minimum required version, second is either blank or the [G2] string
+  (no brackets). (CC)
 * XML_I18N_TOOLS_NEWER_THAN_0_9 equals to "true" (CC)
 
 Please see the README for more information on these new features.
+
 
 Version 0.9
 

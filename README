@@ -1,7 +1,7 @@
-xml-i18n-tools (README)
+intltool (README)
 =======================
 
-The xml-i18n-tools collection will do this steps:
+The intltool collection will do this steps:
 
  o Extract translatable strings from various source files (.xml.in,
    .glade, .desktop.in, oaf.in).
@@ -13,7 +13,7 @@ The xml-i18n-tools collection will do this steps:
    .oaf files.  This merge step will happen at build resp. installation
    time.
 
-xml-i18n-tools has a script xml-i18n-toolize which copies the various
+intltool has a script xml-i18n-toolize which copies the various
 scripts and does the other magic to your module, so users building
 from tarballs don't need xml-i18n-tools, only folks building from cvs.
 (This is modeled on gettextize.)
@@ -22,9 +22,9 @@ from tarballs don't need xml-i18n-tools, only folks building from cvs.
 How to Use
 ----------
 
-To use xml-i18n-tools in your module, do the following:
+To use intltool in your module, do the following:
 
- o Install xml-i18n-tools, and make sure that the macro it installs is
+ o Install intltool, and make sure that the macro it installs is
    in aclocal's path, or do:
 
 	export ACLOCAL_FLAGS='-I /usr/local/share/aclocal' 

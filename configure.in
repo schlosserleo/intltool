@@ -2,9 +2,9 @@ dnl Process this file with autoconf to create configure.
 
 AC_INIT(xml-i18n-toolize.in)
 
-XML_I18N_TOOLS_VERSION="0.9"
+INTLTOOL_VERSION="0.9.5"
 
-AM_INIT_AUTOMAKE(xml-i18n-tools, $XML_I18N_TOOLS_VERSION)
+AM_INIT_AUTOMAKE(intltool, $INTLTOOL_VERSION)
 
 pkgdatadir='${datadir}'"/${PACKAGE}"
 AC_SUBST(pkgdatadir) dnl automake does not need this, but libtoolize does
@@ -16,7 +16,7 @@ if test -z "$PERL"; then
    AC_MSG_ERROR([perl not found])
 fi
 if test -z "`$PERL -v | fgrep '5.' 2> /dev/null`"; then
-   AC_MSG_ERROR([perl 5.x required for xml-i18n-tools])
+   AC_MSG_ERROR([perl 5.x required for intltool])
 fi
 
 AC_OUTPUT([

@@ -1,3 +1,7 @@
+2001-09-19  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* Added the changes from kenneth (intltool rel 0.9.5)
+
 2001-09-18  Darin Adler  <darin@bentspoon.com>
 
 	* xml-i18n-tools.m4: Fixed the long-standing "split line"

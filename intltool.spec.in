@@ -1,5 +1,5 @@
 # Note this is NOT a relocatable thing :)
-%define name		xml-i18n-tools
+%define name		intltool
 %define ver		@VERSION@
 %define RELEASE		1
 %define rel		%{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
@@ -11,7 +11,7 @@ Release: 	%rel
 Copyright: 	GPL
 Group:		Development/Tools
 Source: 	%{name}-%{ver}.tar.gz
-URL: 		http://nautilus.eazel.com/
+URL: 		ftp://ftp.gnome.org
 BuildRoot:	/var/tmp/%{name}-%{ver}-root
 BuildArch:      noarch
 
