@@ -1,3 +1,21 @@
+Version 0.26
+
+* Handle no translations in get_newest_po_age (Rodney Dawes)
+* Cleaned up tests and fixed few bugs (Kenneth)
+* Send error messages to stderr, and fix other similar bugs
+  (bug #105013, Denis Barbier)
+* handle using a different output file. (James Henstridge)
+* Correct the invocation of INTLTOOL_MERGE. (bug #106898, Malcolm Tredinnick)
+* Extract attributes in XML when there are spaces arount the equal sign
+  (Alberto Manuel Brand?o Sim?es)
+* use iconv -f, instead of iconv --f (bug #105181, Hidetoshi Tajima)
+* Added variable substitution. (Kenneth)
+* Added small section for packages not using the aufo* tools (Kenneth)
+* Call msgmerge with options before non-options to fix potential 
+  non-GNU getopt issues. (Gregory Stark, Jordi Mallach)
+* Make it work when running an UTF-8 locale (Kenneth)
+* Fix some iconv/charset issues (bug #113121, Morten Welinder)
+
 Version 0.25
 
 * support latest version of Makefile.in.in from glib-gettextize
