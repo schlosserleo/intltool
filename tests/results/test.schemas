@@ -48,6 +48,7 @@
         </locale>
       </schema>
 
+      <schema>
         <key>some random key</key>
         <owner>clock-applet</owner>
         <type>int</type>

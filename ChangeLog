@@ -1,3 +1,8 @@
+2002-10-16  Yanko Kaneti  <yaneti@declera.com>
+
+	* tests/cases/test.schemas.in:
+	* tests/results/test.schemas: fix some cut/paste/del silliness.
+
 2002-10-02  Yanko Kaneti  <yaneti@declera.com>
 
 	* intltool-extract.in.in
