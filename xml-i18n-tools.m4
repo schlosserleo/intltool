@@ -55,6 +55,16 @@ AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
 s%@XML_I18N_MERGE_KEYS_RULE@%[$]XML_I18N_MERGE_KEYS_RULE%g
 AC_DIVERT_POP()dnl
 
+dnl This is a hack - we use the expansion of AC_SUBST instead of   
+dnl AC_SUBST itself to avoid automake putting
+dnl XML_I18N_MERGE_DESKTOP_RULE = @XML_I18N_MERGE_DESKTOP_RULE@
+dnl in all the Makefile.in's
+XML_I18N_MERGE_DESKTOP_RULE='\%.keys : \%.keys.in $(top_srcdir)/xml-i18n-merge $(top_srcdir)/po/*.po\
+        $(top_srcdir)/xml-i18n-merge -d $(top_srcdir)/po $< [$]*.keys'
+AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
+s%@XML_I18N_MERGE_DESKTOP_RULE@%[$]XML_I18N_MERGE_DESKTOP_RULE%g
+AC_DIVERT_POP()dnl
+
 # Redirect the config.log output again, so that the ltconfig log is not
 # clobbered by the next message.
 exec 5>>./config.log

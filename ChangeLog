@@ -1,5 +1,11 @@
 2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
 
+	* xml-i18n-merge.in: 
+	* xml-i18n-tools.m4:
+	Added merging for *.desktop files.
+
+2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
+
 	* xml-i18n-unicodify: Added small utility
 	to convert *.po files to UTF-8.
 
