@@ -20,6 +20,8 @@
 	* configure.in: Define pat hto find charset.alias (expand 
 	libdir in EXPANDED_LIBDIR)
 
+	Fixes #89693
+
 2002-08-31  Kenneth Christiansen <kenneth@gnu.org>
 
 	* intltool-extract.in.in:
