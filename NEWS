@@ -1,3 +1,7 @@
+Version 0.20
+
+* Added support for .schemas files (Kenneth)
+
 Version 0.19
 
 * A few .m4 fixes (Jacob Berkman)

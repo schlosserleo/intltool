@@ -1,3 +1,9 @@
+=== intltool 0.20 ===
+
+2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* NEWS: Updated.
+
 2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
         * configure.in: Bump version, so people can require
