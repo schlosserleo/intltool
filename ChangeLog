@@ -1,9 +1,3 @@
-2002-11-23  Yanko Kaneti  <yaneti@declera.com>
-
-	* Makefile.am: Actually comment doc-i18n-tool once again.
-	This was commented on purpose - the whole tool is not supposed
-	to be in the build.  Not sure why it was not  documented properly.
-
 2002-11-21  Yanko Kaneti  <yaneti@declera.com>
 
 	* xml-i18n-po-Makefile.in.in-patch-5 (added):
