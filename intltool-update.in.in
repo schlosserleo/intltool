@@ -926,6 +926,7 @@ sub FindPackageName
     {
 	($name, $version) = ($1, $2);
 	($varhash{"AC_PACKAGE_NAME"} = $name) =~ s/[\[\]\s]//g;
+	($varhash{"PACKAGE"} = $name) =~ s/[\[\]\s]//g;
 	($varhash{"AC_PACKAGE_VERSION"} = $version) =~ s/[\[\]\s]//g;
  	($varhash{"VERSION"} = $version) =~ s/[\[\]\s]//g;
    }
@@ -934,6 +935,7 @@ sub FindPackageName
     {
 	($name, $version) = ($1, $2);
 	($varhash{"AC_PACKAGE_NAME"} = $name) =~ s/[\[\]\s]//g;
+	($varhash{"PACKAGE"} = $name) =~ s/[\[\]\s]//g;
 	($varhash{"AC_PACKAGE_VERSION"} = $version) =~ s/[\[\]\s]//g;
  	($varhash{"VERSION"} = $version) =~ s/[\[\]\s]//g;
     }

@@ -1,3 +1,10 @@
+2004-06-07  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-update.in.in (FindPackageName): Substitute the PACKAGE
+	variable in the same way we do AC_PACKAGE_NAME
+	Fixes a bug introduced by changing the regex clause for doing the
+	variable substitution
+
 2004-05-30  Rodney Dawes  <dobey@novell.com>
 
 	* intltool.m4 (AC_PROG_INTLTOOL): Apply patch to fix arugment ordering
