@@ -578,8 +578,8 @@ sub generate_po_template
     my $gettext_support_nonascii = 0;
 
     # checks for GNU gettext >= 0.12
-    # don't use argument list, since shell interpretation is desired here
-    if (system("$XGETTEXT --version --from-code=UTF-8 >&/dev/null") == 0)
+    my $dummy = `$XGETTEXT --version --from-code=UTF-8 >/dev/null 2>/dev/null`;
+    if ($? == 0)
     {
 	$gettext_support_nonascii = 1;
     }
@@ -589,7 +589,7 @@ sub generate_po_template
 	print STDERR "WARNING: This version of gettext does not support extracting non-ASCII\n".
 		     "         strings. That means you should install a version of gettext\n".
 		     "         that supports non-ASCII strings (such as GNU gettext >= 0.12),\n".
-		     "         or have to let non-ASCII strings untranslated.\n";
+		     "         or have to let non-ASCII strings untranslated. (If there is any)\n";
     }
 
     my $encoding = "ASCII";

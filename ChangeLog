@@ -1,3 +1,8 @@
+2003-08-20  Abel Cheung  <maddog@linux.org.hk>
+
+	* intltool-update.in.in: Avoid bashism in xgettext version check.
+	(bug #120267)
+
 === intltool 0.27.2 ===
 
 2003-08-12  Abel Cheung  <maddog@linux.org.hk>
