@@ -1,5 +1,9 @@
 2001-01-31  Kenneth Christiansen <kenneth@gnu.org>
 
+	* tests/: Started small test program.
+
+2001-01-31  Kenneth Christiansen <kenneth@gnu.org>
+
         * xml-i18n-extract.in:  
         * xml-i18n-update.in:
 	Made the whole new system work more smart
