@@ -1,7 +1,12 @@
 2003-12-01  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
-	* intltool-merge.in.in: Remove some changes committed by accident.
+	* intltool-merge.in.in:	
+	* tests/results/merge6.xml:
+	* tests/results/merge7.xml:
+	
+	Remove some changes committed by accident.
 	Added OrigStyle as the default Style.
+	Updated tests to match the changes.
 	
 2003-11-30  Abel Cheung  <maddog@linux.org.hk>
 
