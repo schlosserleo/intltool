@@ -1,3 +1,12 @@
+2001-09-19  Darin Adler  <darin@bentspoon.com>
+
+	* tests/cases/test.po: Removed a troublesome test case. We don't
+	really need to handle cases where we escape a non-reserved character.
+
+	* xml-i18n-merge.in.in: Fix escape logic so it's clear that it won't
+	be confused by partial escape sequences. Also remove the absurd code
+	that turns "\n" into "n".
+
 2001-09-19  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* xml-i18n-tools.spec.in: fixes from jgotts@linuxsavvy.com
@@ -15,8 +24,6 @@
 	* xml-i18n-tools.m4: Fixed the long-standing "split line"
 	bug by just using semicolons instead of newlines. I have
 	no idea why we didn't think of this before.
-
-=== xml-i18n-tools 0.10 ===
 
 2001-09-15  Darin Adler  <darin@bentspoon.com>
 

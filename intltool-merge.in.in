@@ -266,16 +266,23 @@ sub create_translation_database
     }
 }
 
+sub unescape_one_sequence
+{
+    my ($sequence) = @_;
+
+    return "\\" if $sequence eq "\\\\";
+    return "\"" if $sequence eq "\\\"";
+
+    return $sequence;
+}
+
 sub unescape_po_string
 {
-    my ($value) = @_;
+    my ($string) = @_;
 
-    # this is likely to be quite incomplete. 
-    # I suck at encoding thought as perl noi^W. -- CC
-    my $retval = $value;
-    $retval =~ s/\\([n\"\\])/$1/g;
+    $string =~ s/(\\.)/unescape_one_sequence($1)/eg;
 
-    return $retval;
+    return $string;
 }
 
 sub lookup_translations 
