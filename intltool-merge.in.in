@@ -714,8 +714,9 @@ sub parseTree
                         # Skip this language if there is no translation
                         #
                         $do_language = 0;
-                        foreach my $trans (@translation_strings) {
-                            my $translation = $translations{$lang, $trans};
+                        foreach my $string (@translation_strings) {
+                            my $decode_string = entity_decode($string);
+                            my $translation = $translations{$lang, $decode_string};
                             if ($translation) {
                                 $do_language = 1;
                                 last;
