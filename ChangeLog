@@ -1,9 +1,14 @@
+2001-01-09  Darin Adler  <darin@eazel.com>
+
+	* README: Fix formatting. Mention .cvsignore.
+	* xml-i18n-extract.in: Improved the no-c-format change.
+
 2001-01-09  Kenneth Christiansen <kenneth@gnu.org>
 
         * xml-i18n-update.in: Modified "get package_name" code so 
 	that it handles AM_INIT_AUTOMAKE($SOMETHING, $SOMETHING).
 	With this change the script how works fine for evolution
-	aswell.
+	as well.
 
 2001-01-09  Kenneth Christiansen <kenneth@gnu.org>
 
@@ -137,7 +142,3 @@
 	automatically applied after xml-18n-toolize
 	
 	* xml-i18n-tools.m4: M4 macro file that defines AM_PROG_XML_I18N_TOOLS
-
-
-
-	

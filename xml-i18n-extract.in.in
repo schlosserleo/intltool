@@ -261,10 +261,6 @@ sub addMessages{
     $theMessage =~ s/&lt;/</mg;
     $theMessage =~ s/&gt;/>/mg;
 
-    if ($theMessage =~ /%/) {
-        print OUT "/* xgettext:no-c-format */\n";
-    }
-
     if ($theMessage =~ /\n/) {
 
         @elements =  split (/\n/, $theMessage);
@@ -274,7 +270,7 @@ sub addMessages{
                if ($theMessage =~ /%/) {
                    print OUT "/* xgettext:no-c-format */\n";
                }
- 	       print OUT "gchar *s = N_"; 
+ 	       print OUT "char *s = N_"; 
                print OUT "(\"$elements[$n]\\n\"\n";
            }
 
@@ -291,8 +287,11 @@ sub addMessages{
 
 	} else {
 
+	    if ($theMessage =~ /%/) {
+		print OUT "/* xgettext:no-c-format */\n";
+	    }
             if ($tag) { print OUT "/* $tag */\n"; }		
-	    print OUT "gchar *s = N_(\"$theMessage\");\n";
+	    print OUT "char *s = N_(\"$theMessage\");\n";
 
 	}
 	    
