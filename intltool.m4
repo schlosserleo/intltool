@@ -117,18 +117,6 @@ chmod ugo+x xml-i18n-update;
 chmod u+w xml-i18n-update;
 ], XML_I18N_TOOLS_PERL=${XML_I18N_TOOLS_PERL})
 
-#check the version of XML_18N_TOOLS used
-min_x18t_version_s=ifelse([$1], ,0.9,$1)
-AC_MSG_CHECKING(for xml-i18n-tools >= $min_x18t_version_s)
-min_x18t_version=`echo $min_x18t_version_s |awk 'BEGIN {FS=".";} {printf "%d", ([$]1 * 1000 + [$]2) * 1000 + [$]3;}'`
-x18t_version=`./xml-i18n-merge --version | head -1 | sed -e "s/.*)//" | awk 'BEGIN {FS=".";} {printf "%d", ([$]1 * 1000 + [$]2) * 1000 + [$]3;}'`
-if test "$x18t_version" -ge "$min_x18t_version"; then
-   AC_MSG_RESULT(found)
-else
-   AC_MSG_ERROR(you need to autogen with xml-i18n-tools >= $min_x18t_version_s
-for this version of $PACKAGE.)     
-fi
-
 # Redirect the config.log output again, so that the ltconfig log is not
 # clobbered by the next message.
 exec 5>>./config.log

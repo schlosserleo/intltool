@@ -1,3 +1,11 @@
+2001-08-19  Maciej Stachowiak  <mjs@noisehavoc.org>
+
+	* xml-i18n-tools.m4: REmove buggy check for xml-i18n-tools 0.9 or
+	greater. First of all, ./xml-i18n-merge is not generated until
+	after configure runs, so running it inside configure is not a good
+	idea. The check won't do much anyway since if you have the version
+	of the m4 file that requires 0.9, you must also have 0.9 itself.
+
 2001-08-19  Cyrille Chepelov  <chepelov@calixo.net>
 
 	* xml-i18n-merge.in.in: (get_po_encoding): more resilient regex as
