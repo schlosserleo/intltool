@@ -832,7 +832,7 @@ sub SubstituteVariable
     {
 	if (/^(\w+)=(.*)$/)
 	{
-	    $varhash{$1} = $2;
+	    ($varhash{$1} = $2) =~  s/^["'](.*)["']$/$1)/;
 	}
     }
     
@@ -949,6 +949,7 @@ sub FindPackageName
     $name =~ s/\$\$/\$/g;
     
     $name = SubstituteVariable ($name);
+    $name =~ s/^["'](.*)["']$/$1/;
 
     return $name if $name;
 }
