@@ -149,7 +149,8 @@ elsif ((defined $ARGV[0]) && $ARGV[0] =~ /^[a-z]/)
 
     ## Report error if the language file supplied
     ## to the command line is non-existent
-    &Console_WriteError_NotExisting("$lang.po") if ! -s "$lang.po";
+    &Console_WriteError_NotExisting("$SRCDIR/$lang.po")
+        if ! -s "$SRCDIR/$lang.po";
 
     if (!$DIST_ARG)
     {
@@ -661,14 +662,14 @@ sub GeneratePOTemplate
 	elsif (/\.($xml_support|$ini_support)$/ || /^\[/)
 	{
 	    s/^\[.*]\s*//;
-	    print OUTFILE "$_.h\n";
+            print OUTFILE "../$_.h\n";
 	    push @temp_headers, "../$_.h";
 	    $gettext_code = &TextFile_DetermineEncoding ("../$_.h") if ($gettext_support_nonascii and not defined $forced_gettext_code);
 	} 
 	else 
 	{
 	    if ($SRCDIR eq ".") {
-	        print OUTFILE "$_\n";
+	        print OUTFILE "../$_\n";
 	    } else {
 	        print OUTFILE "$SRCDIR/../$_\n";
 	    }
@@ -713,7 +714,7 @@ sub GeneratePOTemplate
     unlink "$MODULE.pot";
     my @xgettext_argument=("$XGETTEXT",
 			   "--add-comments",
-			   "--directory\=\.\.",
+			   "--directory\=\.",
 			   "--output\=$MODULE\.pot",
 			   "--files-from\=\.\/POTFILES\.in\.temp");
     my $XGETTEXT_KEYWORDS = &FindPOTKeywords;
@@ -781,10 +782,10 @@ sub POFile_Update
     my $MSGMERGE = $ENV{"MSGMERGE"} || "@INTLTOOL_MSGMERGE@";
     my ($lang, $outfile) = @_;
 
-    print "Merging $lang.po with $MODULE.pot..." if $VERBOSE;
+    print "Merging $SRCDIR/$lang.po with $MODULE.pot..." if $VERBOSE;
 
-    my $infile = "$lang.po";
-    $outfile = "$lang.po" if ($outfile eq "");
+    my $infile = "$SRCDIR/$lang.po";
+    $outfile = "$SRCDIR/$lang.po" if ($outfile eq "");
 
     # I think msgmerge won't overwrite old file if merge is not successful
     system ("$MSGMERGE", "-o", $outfile, $infile, "$MODULE.pot");
@@ -823,7 +824,7 @@ sub Console_Write_TranslationStatus
     my ($lang, $output_file) = @_;
     my $MSGFMT = $ENV{"MSGFMT"} || "@INTLTOOL_MSGFMT@";
 
-    $output_file = "$lang.po" if ($output_file eq "");
+    $output_file = "$SRCDIR/$lang.po" if ($output_file eq "");
 
     system ("$MSGFMT", "-o", "/dev/null", "--statistics", $output_file);
 }
@@ -845,7 +846,7 @@ sub Console_Write_CoverageReport
     foreach my $lang (@languages)
     {
 	print "$lang: ";
-	system ("$MSGFMT", "-o", "/dev/null", "--statistics", "$lang.po");
+	system ("$MSGFMT", "-o", "/dev/null", "--statistics", "$SRCDIR/$lang.po");
     }
 }
 

@@ -1,3 +1,27 @@
+2005-01-20  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.in.in (MSGMERGE, GENPOT): Set srcdir for these two scripts
+	(DISTFILES): Remove $(GETTEXT_PACKAGE).pot from here
+	(.po.pox): Use $(top_builddir)/po/$(GETTEXT_PACKAGE).pot
+	(.po.gmo): Don't prepend $(srcdir)/ to $$file here
+	($(srcdir)/$(GETTEXT_PACKAGE).pot): Change this rule to not have the
+	$(srcdir)/ prepended to it
+	(mostlyclean): Fix a bug and remove $(GETTEXT_PACKAGE).pot instead of
+	$(GETTEXT_PACKAGE).po, since this is actually the file
+	(dist distdir): Don't depend on the update-po rule
+	(update-po): Don't cd to $(srcdir) to update the po files
+	Use the $(MSGMERGE) variable for building, instead of using a busted
+	path to $(INTLTOOL_UPDATE)
+	
+	* intltool-update.in.in: Replace $lang.po with $SRCDIR/$lang.po in
+	all the locations we use $lang.po
+	(GeneratePOTemplate): Use ../$_.h\n for the
+	OUTFILE when generating the headers for xml/ini support
+	Use ../$_\n for regular files when SRCDIR == "."
+	Use . as the directory argument for xgettext instead of ..
+	
+	Fixes #159846
+
 2005-01-20  Miloslav Trmac <mitr@volny.cz>
 
 	* intltool-extract.in.in (type_xml): Ignore empty strings that are
