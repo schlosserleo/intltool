@@ -1,5 +1,10 @@
 2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
 
+	* xml-i18n-unicodify: Added small utility
+	to convert *.po files to UTF-8.
+
+2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
+
         * xml-i18n-merge.in: Yay, updated the oaf 
 	merge mechanism so it supported multiply
 	lines. This also fixed a problem Kmaraas
