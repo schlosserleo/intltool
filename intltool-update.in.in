@@ -604,7 +604,9 @@ sub find_package_name
 
 	$name = "\$AC_PACKAGE_NAME" if "$name" eq "AC_PACKAGE_NAME";
 
-	while ($name =~ /[\$](\S+)/) {
+	my $oldname = "";
+	while (($name =~ /[\$](\S+)/) && ("$oldname" ne "$name")) {
+	    $oldname = $name;
 	    if (exists $varhash{$1}) {
 		$name =~ s/[\$](\S+)/$varhash{$1}/;
 	    }
