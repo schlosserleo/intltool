@@ -286,7 +286,7 @@ sub maintain
     }
 
     ## Save file with information about the files missing
-    ## if any, and give information about this proceedier
+    ## if any, and give information about this procedure.
     if(@result){
         open OUT, ">missing";
         print OUT @result;
@@ -295,9 +295,9 @@ sub maintain
         print "Files supposed to be ignored should be placed in \"POTFILES.skip\"\n";
     }
 
-    ## If there is nothing to complain about, notice the user
+    ## If there is nothing to complain about, notify the user
     else{
-        print "\nWell, it's all perfect! Congratulation!\n";
+        print "\nIt's all perfect. Congratulations!\n";
     }
 }
 
