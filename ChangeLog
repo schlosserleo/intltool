@@ -3,6 +3,9 @@
 	* doc/*.8:
 	  Updated manpages to reflect current options.
 	* ChangeLog: convert to UTF-8.
+	* intltool-extract.in.in, intltool-merge.in.in,
+	* intltool-prepare.in, intltool-update.in.in:
+	  Update help message.
 
 2003-06-02  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
