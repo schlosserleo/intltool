@@ -1,3 +1,9 @@
+2002-05-31  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* intltool-extract.in.in: Added support for translation of 
+	descriptions used by ATK in glade files.
+
+
 2002-05-23  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
         * intltool-extract.in.in: Made schemas extraction code more
