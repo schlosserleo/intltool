@@ -159,10 +159,7 @@ sub determine_type($) {
    elsif ($type =~ /glade(\.in)*$/) {
         $gettext_type="gettext\/glade";
    }
-   elsif ($type =~ /desktop(\.in)+$/) {
-        $gettext_type="gettext\/ini";
-   }
-   elsif ($type =~ /directory(\.in)+$/) {
+   elsif ($type =~ /(?:desktop(?:\.in)+|directory(?:\.in)+|soundlist(?:\.in)+)$/) {
         $gettext_type="gettext\/ini";
    }
    elsif ($type =~ /keys(\.in)+$/) {
