@@ -1,3 +1,7 @@
+2002-08-28  Gregory Leblanc  <gleblanc@linuxweasel.com>
+
+	* intltool.spec.in: Few cleanups, detailed inline
+
 2002-08-29  Kenneth Christiansen <kenneth@gnu.org>
 
 	* Applied patch from Denis Barbier to support the RTF822 format 

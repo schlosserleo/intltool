@@ -25,6 +25,13 @@ Provides:       xml-i18n-tools = 0.11
   (encoding to be 7-bit clean). Also merges into other kinds of files.
 
 %changelog
+* Wed Aug 28 2002 Gregory Leblanc <gleblanc@linuxweasel.com>
+- marked man pages as docs
+- changed owner to root
+- removed empty post and postun scripts
+- removed manual stripping of binaries.
+- made setup quiet
+
 * Wed Sep 19 2001 John Gotts <jgotts@linuxsavvy.com>
 - Improved the URL.  Added the appropriate Obsoletes:.  Removed the incorrect
   and preliminary development package stuff.  The datadir changed names and the
@@ -39,7 +46,7 @@ Provides:       xml-i18n-tools = 0.11
 - created this thing
 
 %prep
-%setup
+%setup -q
 
 %build
 %ifarch alpha
@@ -66,24 +73,17 @@ fi
 
 make prefix=$RPM_BUILD_ROOT%{_prefix} sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} mandir=$RPM_BUILD_ROOT%{_mandir} install
 
-for FILE in "$RPM_BUILD_ROOT/bin/*"; do
-	file "$FILE" | grep -q not\ stripped && strip $FILE
-done
-
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-%post
-  
-%postun 
 
 %files
 
-%defattr(0555, bin, bin)
+%defattr(0555, root, root)
 %{_bindir}/*
 
-%defattr (0444, bin, bin)
+%defattr (0444, root, root)
 %doc AUTHORS COPYING ChangeLog NEWS README
-%{_mandir}/man8/*
+%doc %{_mandir}/man8/*
 %{_datadir}/aclocal/*
 %{_datadir}/intltool/*
