@@ -186,6 +186,7 @@ sub extract {
     &convert;
 
     open OUT, ">$OUTFILE";
+    binmode (OUT) if $^O eq 'MSWin32';
     &msg_write;
     close OUT;
 

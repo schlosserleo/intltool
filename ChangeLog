@@ -1,3 +1,22 @@
+2005-03-10  Tor Lillqvist  <tml@novell.com>
+
+	* intltool-extract.in.in
+	* intltool-merge.in.in: Open output files in binary mode on native
+	Win32 so that newlines aren't translated to CRLF. Both work, and
+	using Unix newlines makes sure that our make check works, as the
+	expected result files have Unix newlines. An alternative would be
+	to strip CRs from the test results before comparing.
+
+	* intltool-update.in.in:
+	* intltool-merge.in.in: Use NUL: on Win32. Note that we do this
+	only in the Perl scripts. The shell scripts are run under some
+	Unix emulation (Cygwin or MSYS) on Win32 anyway, so in them it's
+	fine to use /dev/null.
+
+	* tests/selftest.pl.in (check_multimerge_result): Run through the
+	env command so it works also if using a Win32 native Perl (as
+	opposed to a Cygwin- or MSYS-hosted one).
+
 2005-03-01  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.in.in (DISTFILES): Remove $(GMOFILES) from here

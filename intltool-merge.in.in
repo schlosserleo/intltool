@@ -92,6 +92,7 @@ my $OUTFILE;
 my %po_files_by_lang = ();
 my %translations = ();
 my $iconv = $ENV{"ICONV"} || $ENV{"INTLTOOL_ICONV"} || "@INTLTOOL_ICONV@";
+my $devnull = ($^O eq 'MSWin32' ? 'NUL:' : '/dev/null');
 
 # Use this instead of \w for XML files to handle more possible characters.
 my $w = "[-A-Za-z0-9._:]";
@@ -299,7 +300,7 @@ sub get_po_encoding
         $encoding = "ISO-8859-1";
     }
 
-    system ("$iconv -f $encoding -t UTF-8 </dev/null 2>/dev/null");
+    system ("$iconv -f $encoding -t UTF-8 <$devnull 2>$devnull");
     if ($?) {
 	$encoding = get_local_charset($encoding);
     }
@@ -542,6 +543,8 @@ sub ba_merge_translations
     }
 
     open OUTPUT, ">$OUTFILE" or die "can't open $OUTFILE: $!";
+    # Binmode so that selftest works ok if using a native Win32 Perl...
+    binmode (OUTPUT) if $^O eq 'MSWin32';
 
     while ($source =~ s|^(.*?)([ \t]*<\s*$w+\s+($w+\s*=\s*"$q"\s*)+/?>)([ \t]*\n)?||s) 
     {
@@ -975,6 +978,7 @@ sub xml_merge_output
 	        mkdir $lang or die "Cannot create subdirectory $lang: $!\n";
             }
             open OUTPUT, ">$lang/$OUTFILE" or die "Cannot open $lang/$OUTFILE: $!\n";
+            binmode (OUTPUT) if $^O eq 'MSWin32';
             my $tree = readXml($FILE);
             print_header($FILE, \*OUTPUT);
             parseTree(\*OUTPUT, $tree, $lang);
@@ -983,6 +987,7 @@ sub xml_merge_output
         }
     } 
     open OUTPUT, ">$OUTFILE" or die "Cannot open $OUTFILE: $!\n";
+    binmode (OUTPUT) if $^O eq 'MSWin32';
     my $tree = readXml($FILE);
     print_header($FILE, \*OUTPUT);
     parseTree(\*OUTPUT, $tree);
@@ -994,6 +999,7 @@ sub keys_merge_translations
 {
     open INPUT, "<${FILE}" or die;
     open OUTPUT, ">${OUTFILE}" or die;
+    binmode (OUTPUT) if $^O eq 'MSWin32';
 
     while (<INPUT>) 
     {
@@ -1029,6 +1035,7 @@ sub desktop_merge_translations
 {
     open INPUT, "<${FILE}" or die;
     open OUTPUT, ">${OUTFILE}" or die;
+    binmode (OUTPUT) if $^O eq 'MSWin32';
 
     while (<INPUT>) 
     {
@@ -1072,6 +1079,7 @@ sub schemas_merge_translations
     }
 
     open OUTPUT, ">$OUTFILE" or die;
+    binmode (OUTPUT) if $^O eq 'MSWin32';
 
     # FIXME: support attribute translations
 
@@ -1173,6 +1181,7 @@ sub rfc822deb_merge_translations
     }
 
     open OUTPUT, ">${OUTFILE}" or die;
+    binmode (OUTPUT) if $^O eq 'MSWin32';
 
     while ($source =~ /(^|\n+)(_*)([^:\s]+)(:[ \t]*)(.*?)(?=\n[\S\n]|$)/sg)
     {

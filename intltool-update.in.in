@@ -95,6 +95,8 @@ my $POTFILES_in;
 $SRCDIR = $ENV{"srcdir"} if $ENV{"srcdir"};
 $POTFILES_in = "<$SRCDIR/POTFILES.in";
 
+my $devnull = ($^O eq 'MSWin32' ? 'NUL:' : '/dev/null');
+
 ## Handle options
 GetOptions 
 (
@@ -628,7 +630,7 @@ sub GeneratePOTemplate
     my $gettext_support_nonascii = 0;
 
     # checks for GNU gettext >= 0.12
-    my $dummy = `$XGETTEXT --version --from-code=UTF-8 >/dev/null 2>/dev/null`;
+    my $dummy = `$XGETTEXT --version --from-code=UTF-8 >$devnull 2>$devnull`;
     if ($? == 0)
     {
 	$gettext_support_nonascii = 1;
@@ -826,7 +828,7 @@ sub Console_Write_TranslationStatus
 
     $output_file = "$SRCDIR/$lang.po" if ($output_file eq "");
 
-    system ("$MSGFMT", "-o", "/dev/null", "--verbose", $output_file);
+    system ("$MSGFMT", "-o", "$devnull", "--verbose", $output_file);
 }
 
 sub Console_Write_CoverageReport
@@ -846,7 +848,7 @@ sub Console_Write_CoverageReport
     foreach my $lang (@languages)
     {
 	print "$lang: ";
-	system ("$MSGFMT", "-o", "/dev/null", "--verbose", "$SRCDIR/$lang.po");
+	system ("$MSGFMT", "-o", "$devnull", "--verbose", "$SRCDIR/$lang.po");
     }
 }
 

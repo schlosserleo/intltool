@@ -82,8 +82,8 @@ sub check_multimerge_result
 
 ## SELFTESTS
 
-my $INTLTOOL_MERGE="LC_ALL=C @PERL@ ../intltool-merge";
-my $INTLTOOL_EXTRACT="LC_ALL=C @PERL@ ../intltool-extract";
+my $INTLTOOL_MERGE="env LC_ALL=C @PERL@ ../intltool-merge";
+my $INTLTOOL_EXTRACT="env LC_ALL=C @PERL@ ../intltool-extract";
 
 ## Welcome notice
 
