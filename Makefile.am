@@ -14,7 +14,7 @@ pkgdata_DATA = xml-i18n-tools.Makefile.patch
 aclocal_DATA = $(aclocal_macros)
 
 # The  xml-i18n-tools distributor.
-bin_SCRIPTS = xml-i18n-toolize
+bin_SCRIPTS = xml-i18n-toolize xml-i18n-update xml-i18n-extract
 
 EXTRA_DIST = \
 	$(aclocal_macros) \

@@ -1,5 +1,20 @@
 2001-01-08  Maciej Stachowiak  <mjs@eazel.com>
 
+	Fix bug 5454 (Translators have to run ./autogen.sh in each module
+	they work on).
+
+	* Makefile.am: Install xml-i18n-update and xml-i18n-extract, so
+	translators can update their po file without doing an autogen.sh,
+	by doing `xml-i18n-update <lang>' with the xml-i18n-tools package
+	installed.
+	
+	* xml-i18n-update.in: Translators have to run ./autogen.sh in each
+	module they work on. Find installed xml-i18n-extract as well as
+	the one in the source tree, for purposes of running on
+	non-autogen'd modules.
+
+2001-01-08  Maciej Stachowiak  <mjs@eazel.com>
+
 	* xml-i18n-update.in: Fix builddir != srcdir build (I think).
 
 2001-01-08  Darin Adler  <darin@eazel.com>

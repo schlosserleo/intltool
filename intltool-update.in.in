@@ -202,16 +202,17 @@ sub InvalidOption{
 }
  
 sub GenHeaders{
-    my $XML_I18N_EXTRACT = "./xml-i18n-extract";
+    my $XML_I18N_EXTRACT = `which xml-i18n-extract 2>/dev/null`;
+    chomp $XML_I18N_EXTRACT;
  
     $XML_I18N_EXTRACT = $ENV{"XML_I18N_EXTRACT"} if $ENV{"XML_I18N_EXTRACT"};
  
- 
+    print "extract: ${XML_I18N_EXTRACT}\n";
 
     # Generate the .h header files, so we can allow glade and
     # xml translation support
     #--------------------------------------------------------
-    if(-s $XML_I18N_EXTRACT){
+    if (-s $XML_I18N_EXTRACT){
   
 	print "Found xml-i18n-extract script\nRunning $XML_I18N_EXTRACT...\n";
 
