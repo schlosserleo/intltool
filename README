@@ -1,14 +1,30 @@
-How to use
-----------
+xml-i18n-tools (README)
+=======================
+
+The xml-i18n-tools collection will do this steps:
+
+ o Extract translatable strings from various source files (.xml.in,
+   .glade, .desktop.in, oaf.in).
+
+ o Collect the extracted strings together with messages from traditional
+   source files (.c, .h) in po/$(PACKAGE).pot.
+
+ o Merge back the translations from .po files into .xml, .desktop and
+   .oaf files.  This merge step will happen at build resp. installation
+   time.
 
 xml-i18n-tools has a script xml-i18n-toolize which copies the various
 scripts and does the other magic to your module, so users building
 from tarballs don't need xml-i18n-tools, only folks building from cvs.
 (This is modeled on gettextize.)
 
+
+How to Use
+----------
+
 To use xml-i18n-tools in your module, do the following:
 
- o Install xml-i18n-tools, and make sure that the macro it installs is 
+ o Install xml-i18n-tools, and make sure that the macro it installs is
    in aclocal's path, or do:
 
 	export ACLOCAL_FLAGS='-I /usr/local/share/aclocal' 
@@ -19,19 +35,82 @@ To use xml-i18n-tools in your module, do the following:
 	xml-i18n-toolize --copy --force --automake
 
  o Add this line to configure.in near the top
- 
+
 	AM_PROG_XML_I18N_TOOLS
 
  o Add xml-i18n-extract.in, xml-i18n-merge.in and xml-i18n-update.in
    to EXTRA_DIST in your top-level Makefile.am and also to the
    top-level .cvsignore. Also add the non-.in versions to .cvsignore
- 
- o Add the .xml and .glade files you want translated to POTFILES.in
- 
-At this point, strings marked translatable will be automatically
-extracted to the .po files.
 
-EXTRA STEPS FOR OAFINFO FILES
+ o Remove po/desk.pl and po/update.* scripts.  xml-i18n-update will take
+   over their funtionallity.
+
+At this point, translatable strings will be automatically extracted to
+the .po files, if you'll make use of the following special
+recommendations.
+
+xml-i18n-prepare will help you to prepare the package.  This script will
+try to extract translations from existing .desktop files which will
+become obsolete after xml-i18n-toolization has taken place.
+
+Examples are listed in the USED file.
+
+
+Extra Steps for DESKTOP Files
+..............................
+
+This step also applies for similar files (.directory, .soundlist).
+
+ o Try to run xml-i18n-prepare.
+
+ o Make sure xml-i18n-prepare did find existing translations in the old
+   .desktop files and did correctly merge them into the various po/*.po
+   files.  Don't forget to commit the changed .po files; otherwise
+   exiting translations will get lost!
+
+ o Remove old .desktop files and add new .desktop.in files.
+
+ o Adjust .cvsignore
+
+ o Adjust Makefile.am, e.g.:
+
+	--- start ----
+
+        utilsdir = $(datadir)/gnome/apps/Utilities
+        utils_in_files = bug-buddy.desktop.in
+        utils_DATA = $(utils_in_files:.desktop.in=.desktop)
+        @XML_I18N_MERGE_DESKTOP_RULE@
+
+	--- end ----
+
+ o Add .desktop.in files to po/POTFILES.in
+
+Here's a .desktop.in example:
+
+	--- start ----
+
+        [Desktop Entry]
+        _Name=Bug Report Tool
+        _Comment=Report a bug in GNOME
+        Exec=bug-buddy
+        Icon=bug-buddy.png
+        Terminal=0
+        Type=Application
+
+	--- end ----
+
+
+Extra Steps for GLADE Files
+...........................
+
+ o Add the .glade files you want translated to POTFILES.in
+
+ o Remove the intermediate *-glade.h or strings-glade.c files and drop
+   them from POTFILES.in
+
+
+Extra Steps for OAFINFO Files
+.............................
 
 To get oaf translation extraction and merging requires a few more steps:
 
@@ -66,7 +145,9 @@ naming convention, with namespacing, for example:
 	foo.oafinfo --> GNOME_Foo.oaf.in
 	foo-baa.oafinfo --> GNOME_Foo_baa.oaf.in
 
-EXTRA STEPS FOR XML FILES (FILES WITH .xml EXTENSION)
+
+Extra Steps for XML Files (Files with .xml Extension)
+.....................................................
 
 To get xml (files with .xml extension) translation extraction 
 and merging requires these steps:
