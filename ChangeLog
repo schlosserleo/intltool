@@ -1,3 +1,10 @@
+2003-12-23  Kristian Rietveld  <kris@gtk.org>
+
+	[Commit as per Kenneth's request]
+
+	* intltool.m4: include ac_aux_dir into INIT-CMDS of
+	AC_OUTPUT_COMMANDS. (#129773, patch from Chee Bin HOH).
+
 2003-12-22  Brian Cameron <brian.cameron@sun.com>
 
 	* intltool-merge.in.in.: Fixed bug in translating entities.

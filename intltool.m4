@@ -153,6 +153,6 @@ fi
 chmod ugo+x ${ac_aux_dir}/intltool-update
 chmod u+w ${ac_aux_dir}/intltool-update
 
-], INTLTOOL_PERL=${INTLTOOL_PERL})
+], INTLTOOL_PERL=${INTLTOOL_PERL} ac_aux_dir=${ac_aux_dir})
 
 ])
