@@ -1,3 +1,11 @@
+2003-12-31  Thomas Vander Stichele  <thomas at apestaart dot org>
+
+        * intltool.m4: 
+          reverted patches:
+          from Chee Bin HOH commited by Kristian (#129773, 2003-12-23)
+	  from Kees Cook commited by Kenneth (#116362, 2003-12-16)
+          to work on proper solution for AC_CONFIG_AUX_DIR
+
 2003-12-30  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* modules/Makefile.am: Fixed #130140

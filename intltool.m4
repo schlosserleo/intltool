@@ -80,9 +80,9 @@ AC_SUBST(INTLTOOL_THEME_RULE)
 
 # Use the tools built into the package, not the ones that are installed.
 
-INTLTOOL_EXTRACT="\$(top_builddir)/${ac_aux_dir}/intltool-extract"
-INTLTOOL_MERGE="\$(top_builddir)/${ac_aux_dir}/intltool-merge"
-INTLTOOL_UPDATE="\$(top_builddir)/${ac_aux_dir}/intltool-update"
+INTLTOOL_EXTRACT='$(top_builddir)/intltool-extract'
+INTLTOOL_MERGE='$(top_builddir)/intltool-merge'
+INTLTOOL_UPDATE='$(top_builddir)/intltool-update'
 
 AC_SUBST(INTLTOOL_EXTRACT)
 AC_SUBST(INTLTOOL_MERGE)
@@ -125,34 +125,34 @@ ifdef([AC_DIVERSION_ICMDS],[
 
 AC_OUTPUT_COMMANDS([
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${ac_aux_dir}/intltool-extract.in > ${ac_aux_dir}/intltool-extract.out
-if cmp -s ${ac_aux_dir}/intltool-extract ${ac_aux_dir}/intltool-extract.out 2>/dev/null; then
-  rm -f ${ac_aux_dir}/intltool-extract.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/intltool-extract.in > intltool-extract.out
+if cmp -s intltool-extract intltool-extract.out 2>/dev/null; then
+  rm -f intltool-extract.out
 else
-  mv -f ${ac_aux_dir}/intltool-extract.out ${ac_aux_dir}/intltool-extract
+  mv -f intltool-extract.out intltool-extract
 fi
-chmod ugo+x ${ac_aux_dir}/intltool-extract
-chmod u+w ${ac_aux_dir}/intltool-extract
+chmod ugo+x intltool-extract
+chmod u+w intltool-extract
 
 sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" \
-    < ${ac_aux_dir}/intltool-merge.in > ${ac_aux_dir}/intltool-merge.out
-if cmp -s ${ac_aux_dir}/intltool-merge ${ac_aux_dir}/intltool-merge.out 2>/dev/null; then
-  rm -f ${ac_aux_dir}/intltool-merge.out
+    < ${srcdir}/intltool-merge.in > intltool-merge.out
+if cmp -s intltool-merge intltool-merge.out 2>/dev/null; then
+  rm -f intltool-merge.out
 else
-  mv -f ${ac_aux_dir}/intltool-merge.out ${ac_aux_dir}/intltool-merge
+  mv -f intltool-merge.out intltool-merge
 fi
-chmod ugo+x ${ac_aux_dir}/intltool-merge
-chmod u+w ${ac_aux_dir}/intltool-merge
+chmod ugo+x intltool-merge
+chmod u+w intltool-merge
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${ac_aux_dir}/intltool-update.in > ${ac_aux_dir}/intltool-update.out
-if cmp -s ${ac_aux_dir}/intltool-update ${ac_aux_dir}/intltool-update.out 2>/dev/null; then
-  rm -f ${ac_aux_dir}/intltool-update.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/intltool-update.in > intltool-update.out
+if cmp -s intltool-update intltool-update.out 2>/dev/null; then
+  rm -f intltool-update.out
 else
-  mv -f ${ac_aux_dir}/intltool-update.out ${ac_aux_dir}/intltool-update
+  mv -f intltool-update.out intltool-update
 fi
-chmod ugo+x ${ac_aux_dir}/intltool-update
-chmod u+w ${ac_aux_dir}/intltool-update
+chmod ugo+x intltool-update
+chmod u+w intltool-update
 
-], INTLTOOL_PERL=${INTLTOOL_PERL} ac_aux_dir=${ac_aux_dir})
+], INTLTOOL_PERL=${INTLTOOL_PERL})
 
 ])
