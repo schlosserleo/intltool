@@ -35,9 +35,14 @@ if test -z "`$PERL -v | fgrep 'v5.' 2> /dev/null`" -a -z "`$PERL -v | fgrep 'ver
 fi
 
 # find the actual value for $prefix that we'll end up with
+# i think there's a better way to do this...
 REAL_PREFIX=
 if test "x$exec_prefix" = "xNONE"; then
-  REAL_PREFIX=$ac_default_prefix
+  if test "x$prefix" = "xNONE"; then
+    REAL_PREFIX=$ac_default_prefix
+  else
+    REAL_PREFIX=$prefix
+  fi
 else
   REAL_PREFIX=$exec_prefix
 fi

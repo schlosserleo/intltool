@@ -1,3 +1,8 @@
+2002-09-09  jacob berkman  <jacob@ximian.com>
+
+	* configure.in: check for $prefix before defaulting to the default
+	prefix.  there's a better way to do this...
+
 2002-09-06  jacob berkman  <jacob@ximian.com>
 
 	* intltool-unicodify.in: don't hard code charset.alias path
