@@ -1,5 +1,7 @@
 2003-12-16  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+	* intltool-update.in.in: Fixed a little bug; minor code cleanup.
+
 	* intltool-update.in.in: Fixed some FIXME's in the code.
 	Did my best at not breaking anything - ie. performed some tests.
 
