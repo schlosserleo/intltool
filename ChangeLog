@@ -1,3 +1,8 @@
+2001-12-04  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in: Fix regexp so we don't run into
+	trouble when desktop file entries have metacharacters in them.
+
 2001-11-13  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* USED: gedit's HEAD use now intltool.
