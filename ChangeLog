@@ -1,3 +1,7 @@
+2001-02-06  Maciej Stachowiak  <mjs@eazel.com>
+
+	* .cvsignore, tests/.cvsignore: Silence cvs.
+
 2001-02-05  Maciej Stachowiak  <mjs@eazel.com>
 
 	reviewed by: George Lebl <jirka@eazel.com>

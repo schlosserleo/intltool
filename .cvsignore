@@ -18,6 +18,13 @@ stamp-h.in
 xml-i18n-extract
 xml-i18n-merge
 xml-i18n-prepare
+xml-i18n-extract.in
+xml-i18n-merge.in
+xml-i18n-prepare.in
 xml-i18n-toolize
 xml-i18n-tools.spec
+xml-i18n-unicodify
 xml-i18n-update
+xml-i18n-update.in
+
+
