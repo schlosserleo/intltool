@@ -76,12 +76,12 @@
  
  install: install-exec install-data
  install-exec:
-@@ -282,22 +272,11 @@
+@@ -282,23 +272,11 @@
  	tmpdir=`pwd`; \
  	echo "$$lang:"; \
  	test "$(srcdir)" = . && cdcmd="" || cdcmd="cd $(srcdir) && "; \
 -	echo "$${cdcmd}$(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$lang.new.po"; \
-+	echo "$${cdcmd}$(INTLTOOL_MERGE) $(DOMAIN) $$lang.po"; \
++	echo "$${cdcmd}$(INTLTOOL_MERGE) $$lang"; \
  	cd $(srcdir); \
 -	if $(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$tmpdir/$$lang.new.po; then \
 -	  if cmp $$lang.po $$tmpdir/$$lang.new.po >/dev/null 2>&1; then \
@@ -97,9 +97,9 @@
 -	else \
 -	  echo "msgmerge for $$lang.po failed!" 1>&2; \
 -	  rm -f $$tmpdir/$$lang.new.po; \
-+	if !$(INTLTOOL_MERGE) $(DOMAIN) $$lang.po; then \
-+	  echo "intltool-update for $$lang.po failed!" 1>&2; \
-+	  cp $$lang.old.po $$lang.po; \
- 	fi
+-	fi
++	$(INTLTOOL_MERGE) $$lang || \
++	  (echo "intltool-update for $$lang.po failed!" 1>&2; \
++	  cp $$lang.old.po $$lang.po;)
  
  $(DUMMYPOFILES):

@@ -1,3 +1,8 @@
+2003-02-27  Malcolm Tredinnick <malcolm@commsecure.com.au>
+	
+	* intltool-po-Makefile.in.in-patch-5: Correct the invocation of
+	INTLTOOL_MERGE. Fixes bug #106898.
+
 2003-02-25  Alberto Manuel Brandão Simões  <albie@alfarrabio.di.uminho.pt>
 
 	* intltool-extract.in.in (type_xml): Extract attributes when there
