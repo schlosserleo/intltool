@@ -40,6 +40,8 @@ prefix=@prefix@
 datadir=@datadir@
 pkgdatadir=@pkgdatadir@
 
+intltool_m4="${datadir}/aclocal/intltool.m4"
+
 dry_run=no
 help="Try '$progname --help' for more information."
 rm="rm -f"

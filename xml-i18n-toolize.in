@@ -40,6 +40,8 @@ prefix=@prefix@
 datadir=@datadir@
 pkgdatadir=@pkgdatadir@
 
+xml_i18n_tools_m4="${datadir}/aclocal/xml-i18n-tools.m4"
+
 dry_run=no
 help="Try \`$progname --help' for more information."
 rm="rm -f"

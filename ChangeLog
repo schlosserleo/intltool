@@ -1,3 +1,10 @@
+2001-10-03  Peter Williams  <peterw@ximian.com>
+
+	* intltoolize.in: Define $intltool_m4 because it's supposed to
+	be defined.
+
+	* xml-i18n-toolize.in: Analogous fix.
+
 2001-10-03  Darin Adler  <darin@bentspoon.com>
 
 	* COPYING.LIB: Maciej says that switching to LGPL was a mistake.
