@@ -1,7 +1,12 @@
 2001-11-06  Darin Adler  <darin@bentspoon.com>
 
+	* intltool-update.in.in: Get package name from GETTEXT_PACKAGE
+	if present.
+
+2001-11-06  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-prepare.in: Fix bug where it used a regex when all
-        we want to do was compare two strings.
+	we want to do was compare two strings.
 
 2001-11-03  Darin Adler  <darin@bentspoon.com>
 

@@ -510,15 +510,13 @@ sub find_package_name
            $conf_source = <IN>;
         }
 
-        if ($conf_source =~ /AM_INIT_AUTOMAKE\(([^,]*),(.*)/) {
-            my $package_name = $1;
-            if ($package_name =~ /^[\$](.*)/){
-                if ($conf_source =~ /$1=(.*)/) {
-                    $package_name = $1;
-                }
-            }
-	    return $package_name;
+	my $name = "";
+	$name = $1 if $conf_source =~ /^AM_INIT_AUTOMAKE\(([^,\)]+)/m;
+	$name = $1 if $conf_source =~ /^GETTEXT_PACKAGE=(\S+)/m;
+	if ($name =~ /^[\$](\S+)/) {
+            return $1 if $conf_source =~ /^\s*$1=(\S*)/m;
         }
+	return $name if $name;
     }
 
     print "$PROGRAM: Unable to determine package name.\n" .
