@@ -454,7 +454,7 @@ sub keys_merge_translations
                 next if !$translation;
 
                 $_ = $non_translated_line;
-                s/^(\w+)=$string/[$lang]$1=$translation/;
+		s/^(\w+)=\Q$string\E/[$lang]$1=$translation/;
                 print OUTPUT;
             }
 	} else {

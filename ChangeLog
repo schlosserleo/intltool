@@ -1,5 +1,8 @@
 2001-10-29  jacob berkman  <jacob@ximian.com>
 
+	* intltool-merge.in.in (keys_merge_translations): line from stric
+	to not choke on things like "C++ file"
+
 	* intltool-po-Makefile.in.in-patch-3: add back top_builddir
 	definition because $INTLTOOL_UPDATE refers to it
 
