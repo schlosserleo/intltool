@@ -1,3 +1,7 @@
+2001-03-14  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* USED: added this file containing modules which use xml-i18n-tools.
+
 2001-02-26  Maciej Stachowiak  <mjs@eazel.com>
 
 	reviewed by: Robey Pointer  <robey@eazel.com>

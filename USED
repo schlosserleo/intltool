@@ -1,0 +1,21 @@
+This is the list of modules which use xml-i18n-tools. If some fundamental change
+occurs for the tools, these modules should be revised and tested again.
+
+bonobo
+control-center	(only control-center-1-0)
+eog
+evolution
+gabber		(not in GNOME CVS)
+galeon
+gal
+gedit		(only gedit-1-0)
+gnome-applets
+gnome-core	(not yet commited)
+gnome-vfs
+gnumeric
+gtkhtml
+gtranslator
+libgda
+nautilus
+oaf
+
