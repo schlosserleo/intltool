@@ -1,3 +1,10 @@
+2001-08-26  Darin Adler  <darin@bentspoon.com>
+
+	* xml-i18n-tools.m4: Don't touch the xml-i18n-* scripts when they
+	haven't really changed. This reduces the amount of redundant
+	re-translating that happens if you rerun configure, something I
+	do a lot.
+
 2001-08-24  Zbigniew Chyla  <cyba@gnome.pl>
 
 	* xml-i18n-update.in.in: Appended "--keyword=U_" to the list of
