@@ -1,12 +1,12 @@
 #! /bin/sh
-# xml-i18n-toolize - Prepare a package to use xml-i18-tools.
+# xml-i18n-toolize - Prepare a package to use intltool.
 # @configure_input@
 # Copyright (C) 1996-1999 Free Software Foundation, Inc.
 # Copyright (C) 2001 Eazel, Inc.
 #
 # Originally based on libtoolize by Gordon Matzigkeit <gord@gnu.ai.mit.edu>, 1996
 #
-# Modified for xml-i18n-tools by Maciej Stachowiak <mjs@eazel.com>
+# Modified for intltool by Maciej Stachowiak <mjs@eazel.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

@@ -1,3 +1,8 @@
+2001-10-02  Kenneth Christiansen  <kenneth@gnu.org>
+
+	* intltool-*: Changed license, and s/xml-i18n-tools/intltool/;
+	* COPYING.LIB: New file describing the LGPL licence 
+
 2001-10-02  Darin Adler  <darin@bentspoon.com>
 
 	* intltool.m4: A bit of cleanup and reorganization.
