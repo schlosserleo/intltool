@@ -1,5 +1,5 @@
---- Makefile.in.in.clean	Thu Nov 21 19:31:34 2002
-+++ Makefile.in.in	Thu Nov 21 19:47:12 2002
+--- Makefile.in.in.clean	Sat Nov 23 10:09:17 2002
++++ Makefile.in.in	Sat Nov 23 10:10:20 2002
 @@ -7,6 +7,10 @@
  # functionality.
  # Please note that the actual code of GNU gettext is covered by the GNU
@@ -96,15 +96,25 @@
  
  install: install-exec install-data
  install-exec:
-@@ -271,7 +255,6 @@
+@@ -257,7 +241,7 @@
+ 	$(MAKE) update-po
+ 	@$(MAKE) dist2
+ # This is a separate target because 'update-po' must be executed before.
+-dist2: $(DISTFILES)
++dist2:
+ 	dists="$(DISTFILES)"; \
+ 	if test -f $(srcdir)/ChangeLog; then dists="$$dists ChangeLog"; fi; \
+ 	if test -f $(srcdir)/LINGUAS; then dists="$$dists LINGUAS"; fi; \
+@@ -270,8 +254,6 @@
+ 	done
  
  update-po: Makefile
- 	$(MAKE) $(DOMAIN).pot-update
+-	$(MAKE) $(DOMAIN).pot-update
 -	$(MAKE) $(UPDATEPOFILES)
  	$(MAKE) update-gmo
  
  # General rule for updating PO files.
-@@ -282,22 +265,11 @@
+@@ -282,22 +264,11 @@
  	tmpdir=`pwd`; \
  	echo "$$lang:"; \
  	test "$(srcdir)" = . && cdcmd="" || cdcmd="cd $(srcdir) && "; \
