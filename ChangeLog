@@ -1,3 +1,23 @@
+2004-05-06  Danilo Šegan  <dsegan@gmx.net>
+
+	Fix bug #131505.
+
+	* tests/selftest.pl.in (check_merge_result): Add a new testcase.
+	* tests/results/extract-comments.xml.h: Added.
+	* tests/cases/extract-comments.xml: Added a test case.
+
+	* tests/cases/schemasmerge1.po: Remove bracketed comment from string.
+	* tests/cases/schemasmerge2.po: Likewise.
+	* tests/results/test.schemas.in.h (s): Adjust results.
+	* tests/cases/test.schemas.in: Modify comment for new syntax.
+
+	* README: Document additions regarding translators' comments in 
+	XML files.
+
+	* intltool-merge.in.in: Ignore comments when merging.
+	* intltool-extract.in.in (type_xml): Add support for comments.
+	(type_schemas): Likewise.
+
 2004-04-06  Danilo Šegan  <dsegan@gmx.net>
 
 	* intltool-update.in.in:

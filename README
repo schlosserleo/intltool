@@ -247,3 +247,15 @@ from, eg.
 
 Default keywords xgettext looks for if no XGETTEXT_KEYWORDS is defined
 are _, N_ and U_. 
+
+
+Translators' comments in XML and .schemas files
+...............................................
+
+To provide comments to translators in free-form XML or .schema files, 
+you need to precede the string to be translated with the plain XML 
+comment.  If comments contain character ">", they will be ignored
+(this is implementation issue, should be fixed in the future).
+
+In .schemas files, comments need to be inside <default>, <short> or 
+<long> elements (i.e. they cannot be before the opening tag).

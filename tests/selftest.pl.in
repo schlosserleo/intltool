@@ -174,4 +174,9 @@ $case = "merge6.xml";
 system("$INTLTOOL_MERGE -x -s --quiet --multiple-output cases cases/$case.in $case") == 0 or $failed = 1;
 check_merge_result($case);
 
+print "19. Extract comments for translators from XML file:                  ";
+$case = "extract-comments.xml";
+system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
 exit $failed;
