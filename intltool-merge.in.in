@@ -870,7 +870,7 @@ sub xml_merge_output
             print OUTPUT qq{<?xml version="1.0" encoding="UTF-8"?>\n};
             parseTree(\*OUTPUT, $tree, 0, $lang);
             close OUTPUT;
-            print "CREATED $lang/$OUTFILE\n";
+            print "CREATED $lang/$OUTFILE\n" unless $QUIET_ARG;
         }
     } 
     open OUTPUT, ">$OUTFILE" or die "Cannot open $OUTFILE: $!\n";
