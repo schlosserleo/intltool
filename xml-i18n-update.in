@@ -379,12 +379,23 @@ sub Status{
 
 
 sub FindPackageName {
-    $base_dirname = `pwd`;
+    my $base_dirname = `pwd`;
     $base_dirname =~ s%.*/%%;
     chomp $base_dirname;
 
-    if ($base_dirname eq "po" && -f "../configure.in") {
-	$package_name = `grep AM_INIT_AUTOMAKE ../configure.in`;
+    my $conf_in = "";
+
+    if ($base_dirname eq "po") {
+	if (-f "../configure.in") {
+	    $conf_in = "../configure.in";
+	} else {
+	    my $srcdir = `grep '^top_srcdir[ \t]*=' ./Makefile`;
+	    $srcdir =~ s/top_srcdir[ \t]*=[ \t]*([^ \t\n\r]*)/$1/;
+	    chomp $srcdir;
+	    $conf_in = "${srcdir}" . "/configure.in" . "\n";
+	}
+
+	$package_name = `grep AM_INIT_AUTOMAKE ${conf_in}`;
 	chomp $package_name;
 	$package_name =~ s/AM_INIT_AUTOMAKE\(([^,]*),.*/$1/;
 	return $package_name;

@@ -1,3 +1,7 @@
+2001-01-08  Maciej Stachowiak  <mjs@eazel.com>
+
+	* xml-i18n-update.in: Fix builddir != srcdir build (I think).
+
 2001-01-08  Darin Adler  <darin@eazel.com>
 
 	* xml-i18n-extract.in: Remove comment at the top of each
