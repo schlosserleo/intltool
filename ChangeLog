@@ -1,3 +1,15 @@
+2002-10-22  Kenneth Christiansen <kenneth@gnu.org>
+
+	* intltool-po-Makefile.in.in-patch-5:
+	* intltool/Makefile.am:
+	* intltoolize.in:
+
+	Made intltool work with gettextize 4.x
+
+	Needs backporting to the xml-i18n-tools
+	part of intltool. Should be trivial, but I don't
+	have time to do it right now.
+
 2002-10-20  Mark McLoughlin  <mark@skynet.ie>
 
 	* intltool-extract.in.in:
