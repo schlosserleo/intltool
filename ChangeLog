@@ -1,3 +1,11 @@
+2001-02-01  Laszlo Kovacs <laszlo.kovacs@sun.com>
+	* new testcase added in tests
+	tests/results/extract3.xml.in.h added
+	tests/cases/extract3.xml.in added
+	tests/results/Makefile.am,
+	tests/cases/Makefile.am and
+	tests/selftest.pl changed
+
 2001-02-01  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* xml-i18n-prepare.in: additional keywords can be specified on comand
