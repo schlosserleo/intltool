@@ -1,23 +1,25 @@
 0.8.4:
 
-The GNOME community is proud to announce a new release of xml-i18n-tools
-(codename "Så skeet de ilywl - de havde a slet  ett regnet mæ"), that 
-includes more fixes and less bugs than ever before.
+The xml-i18n-tools contributors are proud to announce a new release of 
+xml-i18n-tools (codename "Så skeet de ilywl - de havde a slet ett regnet 
+mæ"), that includes more fixes and less bugs than ever before.
 
 The release can until it's up on ftp.gnome.org be fetched from the 
 following location: 
 
-	http://www.sslug.dk/locale/xml-i18n-tools-0.8.3.tar.gz
+	http://www.sslug.dk/locale/xml-i18n-tools-0.8.4.tar.gz
 
 * New in this release:
 
  - Support for the new gettext 0.10.36 (Darin, Stanislav Brabec)
 
+ - Backport of changes in branches to HEAD (Darin)
+
  - Better XML support (George)
 
  - More tests (Darin)
 
- - Handling of more extentions (Clahey, Laszlo, me) 
+ - Handling of more extensions (Clahey, Laszlo, me) 
 
  - Spec file cleanup (Arik)
 
