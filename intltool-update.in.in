@@ -58,6 +58,7 @@ my $xml_extension =
 "glade(\.in)*|".	# .in is not required
 "scm(\.in)*|".		# .in is not required
 "desktop(\.in)+|".
+"caves(\.in)+|". 
 "directory(\.in)+|".
 "soundlist(\.in)+|".
 "keys(\.in)+|".
@@ -167,7 +168,7 @@ sub determine_type($) {
    elsif ($type =~ /glade(\.in)*$/) {
         $gettext_type="gettext\/glade";
    }
-   elsif ($type =~ /(?:desktop(?:\.in)+|directory(?:\.in)+|soundlist(?:\.in)+)$/) {
+   elsif ($type =~ /(?:desktop(?:\.in)+|caves(?:\.in)+|directory(?:\.in)+|soundlist(?:\.in)+)$/) { 
         $gettext_type="gettext\/ini";
    }
    elsif ($type =~ /scm(\.in)*$/) {

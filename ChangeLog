@@ -1,3 +1,16 @@
+2002-01-06  Juan Pablo Mendoza <jpablo@gnome.org>
+
+	* intltool-update.in.in:
+	* intltool.m4:
+
+	Added suport for caves files (gnome-games/gnome-stones/*.caves),
+	theses are just like desktop files.
+
+	From Edgar Luna:
+
+	* intltool-prepare.in (contains): chomp the readed
+	  line since it may contain stuff like \n and so.
+
 2001-12-31  Darin Adler  <darin@bentspoon.com>
 
 	* NEWS: Oops, 0.12 already went out.
