@@ -1,3 +1,12 @@
+2001-01-06  Kenneth Christiansen <kenneth@gnu.org>
+
+        * update.sh: Script for translators not being able to run 
+          autogen.sh. Can be placed in po/ dirs. Well tested.
+
+2001-01-06  Kenneth Christiansen <kenneth@gnu.org>
+
+        * NEWS: Added initial announcement
+
 2001-01-05  Maciej Stachowiak  <mjs@eazel.com>
 
 	* xml-i18n-tools.Makefile.patch: Fix up to remove accidentally
