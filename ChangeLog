@@ -1,3 +1,19 @@
+2002-02-23  James Henstridge  <james@daa.com.au>
+
+	* tests/selftest.pl.in (check_merge_result($)): add test case for
+	new style glade files.
+
+	* intltool-update.in.in (determine_type): make change requested by
+	Darin.
+
+2002-02-22  James Henstridge  <james@daa.com.au>
+
+	* intltool-update.in.in (determine_type): treat .glade2 files as
+	glade files.
+
+	* intltool-extract.in.in (type_glade): handle translatable strings
+	in new style glade files as well.
+
 2002-02-16  Daniel Veillard <daniel@veilard.com>
 
 	* doc-i18n-tool/doc-i18n-tool.c: added the capacity to ignore

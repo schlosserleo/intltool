@@ -61,6 +61,7 @@ my $xml_extension =
 "xml(\.in)*|".		# .in is not required
 "ui|".
 "glade(\.in)*|".	# .in is not required
+"glade2(\.in)*|".	# .in is not required
 "scm(\.in)*|".		# .in is not required
 "oaf(\.in)+|".
 "etspec|".
@@ -207,7 +208,7 @@ sub determine_type ($)
    elsif ($type =~ /$xml_regex$/) {
         $gettext_type="xml";
    }
-   elsif ($type =~ /glade(\.in)*$/) {
+   elsif ($type =~ /glade2?(\.in)*$/) {
         $gettext_type="glade";
    }
    elsif ($type =~ /$ini_regex$/) { 

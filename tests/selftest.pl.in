@@ -136,4 +136,9 @@ $case = "merge8.keys";
 system("/usr/bin/perl ../intltool-merge -k -u --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
+print "12. Extract messages from a glade 2.0 style XML file:                ";
+$case = "extract8.glade";
+system("/usr/bin/perl ../intltool-extract --type=gettext/glade --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
 exit $failed;
