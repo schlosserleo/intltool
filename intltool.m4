@@ -1,4 +1,4 @@
-ll## intltool.m4 - Configure intltool for the target system. -*-Shell-script-*-
+## intltool.m4 - Configure intltool for the target system. -*-Shell-script-*-
 ## Copyright (C) 2001 Eazel, Inc.
 ## Author: Maciej Stachowiak <mjs@noisehavoc.org>
 ##         Kenneth Christiansen <kenneth@gnu.org>

@@ -1,3 +1,7 @@
+
+* Fix typographical error in intltool.m4
+  -- bug #153630 (Rodney Dawes)
+
 Version 0.31.2
 
 * Handle package name extraction better

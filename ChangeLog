@@ -1,3 +1,10 @@
+2004-09-24  Rodney Dawes  <dobey@novell.com>
+
+	* intltool.m4: Fix typo in front of comment
+	* NEWS: Document fix
+
+	Fixes #153630
+
 2004-08-22  Rodney Dawes  <dobey@novell.com>
 
 	* configure.in: Update version to 0.31.2
