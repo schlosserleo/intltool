@@ -1,3 +1,8 @@
+2003-11-05  Brian Cameron <Brian.Cameron@sun.com>
+
+	* intltool-merge.in.in
+	Fixed bug which caused --multiple-output to break.
+	
 2003-11-10  Bill Haneman <billh@gnome.org>
 
 	* intltool.m4

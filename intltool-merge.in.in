@@ -43,7 +43,7 @@ use Text::Wrap;
 
 my $ret = eval 'require XML::Parser';
 if(!$ret) {
-    die "You must have XML::Parser installed to run $0\n";
+    die "You must have XML::Parser installed to run $0\n\n";
 } 
 
 #use vars qw($must_end_tag, $last_depth, $translation_depth, @tag_stack, @entered_tag);
@@ -610,13 +610,6 @@ sub parseTree
     my $indent    = 3;
     my $not_cdata = 0;
 
-    # Set flags for situation where this function is first called and passed in a 
-    # language to handle.
-    #
-    if ($depth == 0 && $language) {
-       $translation_depth = 0;
-    }
-
     $entered_tag[$depth + 1] = 0;
 
     # Check to see if this is not a CDATA element.
@@ -692,6 +685,10 @@ sub parseTree
             if ($translation_depth == $depth) {
 
                 for my $lang (sort keys %po_files_by_lang) {
+
+                    if ($MULTIPLE_OUTPUT && $lang ne "$language") {
+                        next;
+                    }
 
                     print $fh " " x ($depth * $indent), "<", $current_tag, " xml:lang=\"", $lang, "\"";
                     $must_end_tag = $depth;
@@ -862,7 +859,7 @@ sub xml_merge_output
         for my $lang (sort keys %po_files_by_lang) {
             open OUTPUT, ">$OUTFILE-$lang" or die "Cannot open $OUTFILE-$lang: $!\n";
         	my $tree = readXml($FILE);
-			print OUTPUT qq{<?xml version="1.0" encoding="UTF-8"?>\n};
+            print OUTPUT qq{<?xml version="1.0" encoding="UTF-8"?>\n};
         	parseTree(\*OUTPUT, $tree, 0, $lang);
             close OUTPUT;
             print "CREATED $OUTFILE-$lang\n";
@@ -870,7 +867,7 @@ sub xml_merge_output
     } else {
         open OUTPUT, ">$OUTFILE" or die "Cannot open $OUTFILE: $!\n";
     	my $tree = readXml($FILE);
-		print OUTPUT qq{<?xml version="1.0" encoding="UTF-8"?>\n};
+        print OUTPUT qq{<?xml version="1.0" encoding="UTF-8"?>\n};
     	parseTree(\*OUTPUT, $tree, 0);
         close OUTPUT;
         print "CREATED $OUTFILE\n";
