@@ -1,3 +1,10 @@
+2004-11-21  Rodney Dawes  <dobey@novell.com>
+
+	* intltool.m4: Update serial for IT_PROG_INTLTOOL to 2
+
+	* intltoolize.in: Update serial check to check for IT_PROG_INTLTOOL
+	instead of AC_PROG_INTLTOOL
+	
 2004-11-12  Danilo Šegan  <dsegan@gmx.net>
 
 	Fixes bug #157718.
