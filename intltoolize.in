@@ -142,7 +142,6 @@ fi
 
 
 files='intltool-extract.in intltool-merge.in intltool-update.in'
-deep_files='XML/Parser/Style/OrigTree.pm'
 
 auxdir=.
 auxdirline=`egrep '^AC_CONFIG_AUX_DIR' $configure 2>/dev/null`
@@ -253,29 +252,6 @@ if test ! -d intltool-modules; then
   fi
 fi
 cd intltool-modules || exit 1
-
-for file in $deep_files; do
-  if test -f "$file" && test -z "$force"; then
-    test -z "$automake" && echo "$progname: '$file' exists: use '--force' to overwrite" 1>&2
-    continue
-  fi
-
-  dirname=`echo x$file | sed 's%^x\(.*/\).*$%\1%'`
-  $rm_rec $file
-  # mkinstalldirs is also put in auxdir
-  auxdir_absolute=`cd $cur && cd $auxdir && pwd`
-  if $auxdir_absolute/$mkinstalldirs $dirname; then
-    if test -n "$ln_s" && $ln_s $pkgdatadir/$file $dirname; then :
-    elif $cp $pkgdatadir/$file $dirname; then :
-    else
-      echo "$progname: cannot copy '$pkgdatadir/$file' to '$dirname'" 1>&2
-      status=1
-    fi
-  else
-    echo "$progname: cannot execute $mkinstalldirs" 1>&2
-    status=1
-  fi
-done
 exit $status
 # make sure this subshell exits with the exit value if it failed
 ) || exit $?

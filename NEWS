@@ -14,6 +14,9 @@ an eye on intltool at the same time.
 
 Thanks guys!
 
+* Removed OrigTree in favor of more simply setting handlers directly
+  in intltool-merge (Brian Cameron)
+
 * made intltool-merge use XML::Parser (#116526 and others) [Brian Cameron]
 
   - added and updated tests
@@ -23,7 +26,7 @@ Thanks guys!
     before/after translation.
   - Added it to build, made it install (Kenneth Christiansen)
     - Added missing DESTDIR (Abel Cheung)
-    - Also nstall OrigTree.pm in the distribution tree (Malcolm Tredinnick)
+    - Also install OrigTree.pm in the distribution tree (Malcolm Tredinnick)
     - Check for the XML::Parser module at build time (Malcolm Tredinnick)
 
 * Added INTLTOOL_KBD_RULE for GOK\s *.kdb files (Bill Haneman)

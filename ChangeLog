@@ -1,3 +1,17 @@
+2004-01-05  Brian Cameron <brian.cameron@sun.com>
+
+	* configure.in, intltoolize.in, Makefile.am, NEWS, README:
+	  Removed references to OrigTree and the modules directory
+	  since the OrigTree module is longer used.
+	* intltool-merge.in.in, tests/cases/merge6.xml.in,
+	  tests/results/merge6.xml:  Now intltool-merge retains the
+	  DOCTYPE from the original document in the output.
+	  Also, it translates entities in attributes properly (see
+	  the intltool_tree_start function.  Lastly it no longer
+	  uses the OrigTree Style.  Now just uses Tree and
+	  overrides the start and char handlers.  Much cleaner.
+
+
 2004-01-05  Morten Welinder  <terra@gnome.org>
 
 	* intltoolize.in (cur): Don't use "if ! ...".

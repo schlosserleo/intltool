@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = . tests doc doc-i18n-tool modules
+SUBDIRS = . tests doc doc-i18n-tool
 
 NULL = 
 
