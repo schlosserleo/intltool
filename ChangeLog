@@ -1,5 +1,9 @@
 2001-01-17  Kenneth Christiansen <kenneth@gnu.org>
 
+        * xml-i18n-extract.in: More verbose work.
+
+2001-01-17  Kenneth Christiansen <kenneth@gnu.org>
+
         * xml-i18n-extract.in: Also update help here
 
 2001-01-17  Kenneth Christiansen <kenneth@gnu.org>

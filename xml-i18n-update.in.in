@@ -37,8 +37,8 @@ my $DIST_ARG	   = "0";
 my $POT_ARG	   = "0";
 my $HEADERS_ARG    = "0";
 my $MAINTAIN_ARG   = "0";
-my $REPORT_ARG = "0";
-my $QUIET_ARG	   = "0";
+my $REPORT_ARG     = "0";
+my $VERBOSE	   = "0";
 
 my @languages;
 my %po_files_by_lang = ();
@@ -64,7 +64,7 @@ GetOptions (
 	    "headers|s"		=> \$HEADERS_ARG,
 	    "maintain|m"	=> \$MAINTAIN_ARG,
 	    "report|r"		=> \$REPORT_ARG,
-	    "quiet|q"		=> \$QUIET_ARG
+	    "verbose|x"		=> \$VERBOSE
 	    ) or &invalid_option;
 
 
@@ -99,7 +99,7 @@ sub split_on_argument {
         &show_status;
 
     } elsif ($LANG) {
-	if ($LANG =~ /^--/){ ## not an option
+	if ($LANG =~ /^-/){ ## not an option
 	    &help;
 	} else {
 	    &main;
@@ -115,6 +115,7 @@ sub split_on_argument {
 sub main 
 {
    if(-s "$LANG.po"){
+	print "Working, please wait..." if (! $VERBOSE);
         &gen_headers; 
 	&generate_pot;
 	&merging;
@@ -149,8 +150,7 @@ sub help
     print "  -S, --headers                generate the XML headerfiles in POTFILES.in\n";
     print "  -M, --maintain               search for missing files in POTFILES.in\n";
     print "  -R, --report                 creates a status report for the module.\n";
-    print "  -Q, --quiet                  almost no feedback\n";
-    print "  -X, --verbose                verbose mode\n";
+    print "  -X, --verbose                show lots of feedback\n";
     print "  -V, --version                shows the version\n";
     print "\nExamples of use:\n";
     print "update.sh --pot    just creates a new pot file from the source\n";
@@ -246,6 +246,7 @@ sub invalid_option
     ## Handle invalid arguments
     print "${PROGRAM}: invalid option -- $LANG\n";
     print "Try `${PROGRAM} --help' for more information.\n";
+    exit 1;
 }
  
 sub gen_headers
@@ -274,10 +275,10 @@ sub gen_headers
 
            if (/\.(xml|glade|oaf(\.in)+)$/){
               $filename = "../$_";
-              if ($QUIET_ARG){
-                 system($XML_I18N_EXTRACT, "--update", "--quiet", $filename);
+              if ($VERBOSE){
+                 system($XML_I18N_EXTRACT, "--update", $filename);
               } else {
-		 system($XML_I18N_EXTRACT, "--update", $filename);
+		 system($XML_I18N_EXTRACT, "--update", "--quiet", $filename);
               }
            }
        }
@@ -289,7 +290,7 @@ sub generate_pot
 {
     ## Generate the potfiles from the POTFILES.in file
 
-    print "Building the $PACKAGE.pot...\n";
+    print "Building the $PACKAGE.pot...\n" if $VERBOSE;
 
     system ("mv POTFILES.in POTFILES.in.old");    
 
@@ -310,10 +311,10 @@ sub generate_pot
 
     system($GETTEXT);
     system($GTEST);
-    print "Wrote $PACKAGE.pot\n";
+    print "Wrote $PACKAGE.pot\n" if $VERBOSE;
     system("mv POTFILES.in.old POTFILES.in");
 
-    print "Removing generated header (.h) files...";
+    print "Removing generated header (.h) files..." if $VERBOSE;
 
     open FILE, "<POTFILES.in";
     while (<FILE>) 
@@ -322,7 +323,7 @@ sub generate_pot
         unlink "../$_.h" if /\.(glade|xml|oaf(\.in)+)$/;
     }
     close FILE;
-    print "done\n";
+    print "done\n" if $VERBOSE;
 }
 
 sub merging
@@ -334,7 +335,7 @@ sub merging
     }
 
     if ($ARGV[0] ne "--dist" && $ARGV[0] ne "-D") {
-        print "Merging $LANG.po with $PACKAGE.pot...";
+        print "Merging $LANG.po with $PACKAGE.pot..." if $VERBOSE;
     }
 
     &perform_merge($LANG);
