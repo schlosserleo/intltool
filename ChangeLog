@@ -1,3 +1,8 @@
+Fri Feb 14 09:51:01 2003  Hidetoshi Tajima  <hidetoshi.tajima@sun.com>
+
+	* intltool-unicodify.in: Fix bug #105181. use iconv -f, instead of
+	iconv --f.
+
 2003-02-13  Kenneth Christiansen <kenneth@gnu.org>
                                                                                 
         * intltool-update.in.in: Fixed some bugs introduced with
