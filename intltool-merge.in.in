@@ -91,7 +91,7 @@ my $OUTFILE;
 
 my %po_files_by_lang = ();
 my %translations = ();
-my $iconv = $ENV{"INTLTOOL_ICONV"} || "iconv";
+my $iconv = $ENV{"ICONV"} || $ENV{"INTLTOOL_ICONV"} || "@INTLTOOL_ICONV@";
 
 # Use this instead of \w for XML files to handle more possible characters.
 my $w = "[-A-Za-z0-9._:]";

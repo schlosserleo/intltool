@@ -1,3 +1,7 @@
+Version 0.31.3
+
+* Use absolute paths and allow env var overrides for gettext scripts
+  -- bug #152020 (Rodney Dawes)
 * Allow shell-backticks (and other shell features) in variable names
   -- bug #152448 (Danilo Segan)
 * Fix typographical error in intltool.m4

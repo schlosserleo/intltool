@@ -525,7 +525,7 @@ sub Console_WriteError_InvalidOption
 
 sub GenerateHeaders
 {
-    my $EXTRACT = `which intltool-extract 2>/dev/null`;
+    my $EXTRACT = "@INTLTOOL_EXTRACT@";
     chomp $EXTRACT;
 
     $EXTRACT = $ENV{"INTLTOOL_EXTRACT"} if $ENV{"INTLTOOL_EXTRACT"};
@@ -579,12 +579,9 @@ sub GenerateHeaders
 #
 sub GeneratePOTemplate
 {
-    my $XGETTEXT = `which xgettext 2>/dev/null`;
-    my $XGETTEXT_ARGS = '';
+    my $XGETTEXT = $ENV{"XGETTEXT"} || "@INTLTOOL_XGETTEXT@";
+    my $XGETTEXT_ARGS = $ENV{"XGETTEXT_ARGS"} || '';
     chomp $XGETTEXT;
-
-    $XGETTEXT = $ENV{"XGETTEXT"} if $ENV{"XGETTEXT"};
-    $XGETTEXT_ARGS = $ENV{"XGETTEXT_ARGS"} if $ENV{"XGETTEXT_ARGS"};
 
     if (! -x $XGETTEXT)
     {
@@ -753,6 +750,7 @@ sub POFile_Update
 {
     -f "$MODULE.pot" or die "$PROGRAM: $MODULE.pot does not exist.\n";
 
+    my $MSGMERGE = $ENV{"MSGMERGE"} || "@INTLTOOL_MSGMERGE@";
     my ($lang, $outfile) = @_;
 
     print "Merging $lang.po with $MODULE.pot..." if $VERBOSE;
@@ -761,7 +759,7 @@ sub POFile_Update
     $outfile = "$lang.po" if ($outfile eq "");
 
     # I think msgmerge won't overwrite old file if merge is not successful
-    system ("msgmerge", "-o", $outfile, $infile, "$MODULE.pot");
+    system ("$MSGMERGE", "-o", $outfile, $infile, "$MODULE.pot");
 }
 
 sub Console_WriteError_NotExisting
@@ -795,14 +793,17 @@ sub POFile_GetLanguage ($)
 sub Console_Write_TranslationStatus
 {
     my ($lang, $output_file) = @_;
+    my $MSGFMT = $ENV{"MSGFMT"} || "@INTLTOOL_MSGFMT@";
 
     $output_file = "$lang.po" if ($output_file eq "");
 
-    system ("msgfmt", "-o", "/dev/null", "--statistics", $output_file);
+    system ("$MSGFMT", "-o", "/dev/null", "--statistics", $output_file);
 }
 
 sub Console_Write_CoverageReport
 {
+    my $MSGFMT = $ENV{"MSGFMT"} || "@INTLTOOL_MSGFMT@";
+
     &GatherPOFiles;
 
     foreach my $lang (@languages) 
@@ -816,7 +817,7 @@ sub Console_Write_CoverageReport
     foreach my $lang (@languages)
     {
 	print "$lang: ";
-	system ("msgfmt", "-o", "/dev/null", "--statistics", "$lang.po");
+	system ("$MSGFMT", "-o", "/dev/null", "--statistics", "$lang.po");
     }
 }
 

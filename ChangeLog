@@ -1,3 +1,28 @@
+2004-09-29  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS: Document bug fix for #152020
+
+	* Makefile.am: Update script creation rule to sed in the
+	various hardcoded gettext script paths
+
+	* configure.in: Update version to 0.31.3
+	Add AC_PATH_PROG checks for various gettext scripts
+
+	* intltool-merge.in.in: Update to use $ICONV, $INTLTOOL_ICONV, or the
+	hardcoded path that we replace @INTLTOOL_ICONV@ with
+
+	* intltool-update.in.in (GenerateHeaders): Use @INTLTOOL_EXTRACT@ path
+	(GeneratePOTemplate): Use @INTLTOOL_XGETTEXT@ or $XGETTEXT for path
+	(POFile_Update): Use $MSGMERGE or @INTLTOOL_MSGMERGE@ for the path
+	(Console_Write_TranslationStatus): Use $MSGFMT or @INTLTOOL_MSGFMT@
+	(Console_Write_CoverageReport): Use $MSGFMT or @INTLTOOL_MSGFMT@ path
+
+	* intltool.m4 (AC_PROG_INTLTOOL):
+	Add AC_PATH_PROG checks for various gettext scripts we use
+	Replace the variables we get with AC_PATH_PROG in AC_OUTPUT_COMMANDS
+
+	Fixes #152020
+
 2004-09-24  Danilo Šegan  <dsegan@gmx.net>
 
 	* NEWS: Document anything significant in this patch.

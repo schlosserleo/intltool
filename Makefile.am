@@ -68,4 +68,10 @@ dist-hook:
 	cp intltool.spec $(distdir)
 
 %: %.in Makefile
-	sed -e "s:@INTLTOOL_PERL@:$(PERL):;" < $< > $@
+	sed -e "s:@INTLTOOL_PERL@:$(PERL):g" \
+	    -e "s:@INTLTOOL_ICONV@:$(ICONV):g" \
+	    -e "s:@INTLTOOL_MSGFMT@:$(MSGFMT):g" \
+	    -e "s:@INTLTOOL_MSGMERGE@:$(MSGMERGE):g" \
+	    -e "s:@INTLTOOL_XGETTEXT@:$(XGETTEXT):g" \
+	    -e "s:@INTLTOOL_EXTRACT@:$(bindir)/intltool-extract:g" \
+	    < $< > $@

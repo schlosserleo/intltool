@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to create configure.
 AC_INIT(intltoolize.in)
-INTLTOOL_VERSION=0.31.2
+INTLTOOL_VERSION=0.31.3
 
 AM_INIT_AUTOMAKE(intltool, $INTLTOOL_VERSION)
 
@@ -39,6 +39,11 @@ if `$PERL -e "require XML::Parser" 2>/dev/null`; then
 else
    AC_MSG_ERROR([XML::Parser perl module is required for intltool])
 fi
+
+AC_PATH_PROG(ICONV, iconv, iconv)
+AC_PATH_PROG(MSGFMT, msgfmt, msgfmt)
+AC_PATH_PROG(MSGMERGE, msgmerge, msgmerge)
+AC_PATH_PROG(XGETTEXT, xgettext, xgettext)
 
 # find the actual value for $prefix that we'll end up with
 # i think there's a better way to do this...

@@ -104,6 +104,11 @@ if test "x$2" != "xno-xml"; then
    fi
 fi
 
+AC_PATH_PROG(ICONV, iconv, iconv)
+AC_PATH_PROG(MSGFMT, msgfmt, msgfmt)
+AC_PATH_PROG(MSGMERGE, msgmerge, msgmerge)
+AC_PATH_PROG(XGETTEXT, xgettext, xgettext)
+
 # Remove file type tags (using []) from po/POTFILES.
 
 ifdef([AC_DIVERSION_ICMDS],[
@@ -130,7 +135,15 @@ ifdef([AC_DIVERSION_ICMDS],[
 
 AC_OUTPUT_COMMANDS([
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${ac_aux_dir}/intltool-extract.in > intltool-extract.out
+intltool_edit="-e \"s:@INTLTOOL_EXTRACT@:${INTLTOOL_EXTRACT}:g\" \
+               -e \"s:@INTLTOOL_ICONV@:${ICONV}:g\" \
+               -e \"s:@INTLTOOL_MSGFMT@:${MSGFMT}:g\" \
+               -e \"s:@INTLTOOL_MSGMERGE@:${MSGMERGE}:g\" \
+               -e \"s:@INTLTOOL_XGETTEXT@:${XGETTEXT}:g\" \
+               -e \"s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:g\""
+
+eval sed ${intltool_edit} < ${ac_aux_dir}/intltool-extract.in \
+  > intltool-extract.out
 if cmp -s intltool-extract intltool-extract.out 2>/dev/null; then
   rm -f intltool-extract.out
 else
@@ -139,8 +152,8 @@ fi
 chmod ugo+x intltool-extract
 chmod u+w intltool-extract
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" \
-    < ${ac_aux_dir}/intltool-merge.in > intltool-merge.out
+eval sed ${intltool_edit} < ${ac_aux_dir}/intltool-merge.in \
+  > intltool-merge.out
 if cmp -s intltool-merge intltool-merge.out 2>/dev/null; then
   rm -f intltool-merge.out
 else
@@ -149,7 +162,8 @@ fi
 chmod ugo+x intltool-merge
 chmod u+w intltool-merge
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${ac_aux_dir}/intltool-update.in > intltool-update.out
+eval sed ${intltool_edit} < ${ac_aux_dir}/intltool-update.in \
+  > intltool-update.out
 if cmp -s intltool-update intltool-update.out 2>/dev/null; then
   rm -f intltool-update.out
 else
@@ -158,6 +172,8 @@ fi
 chmod ugo+x intltool-update
 chmod u+w intltool-update
 
-], INTLTOOL_PERL=${INTLTOOL_PERL} ac_aux_dir=${ac_aux_dir})
+], INTLTOOL_PERL=${INTLTOOL_PERL} ac_aux_dir=${ac_aux_dir}
+INTLTOOL_EXTRACT=${INTLTOOL_EXTRACT} ICONV=${ICONV}
+MSGFMT=${MSGFMT} MSGMERGE=${MSGMERGE} XGETTEXT=${XGETTEXT})
 
 ])
