@@ -1,3 +1,12 @@
+2001-05-11  Laszlo Kovacs <laszlo.kovacs@sun.com>
+	patch reviewed by Kenneth Christiansen <kenneth@gnu.org>
+	* xml-i18n-update.in.in: added proper handling of files
+	with .xml extension
+	* xml-i18n-tools.m4: added macro to merge back translations
+	in files with .xml extension
+	* README: added description about how to extract text and
+	merge back from files with .xml extension
+
 2001-05-09  Darin Adler  <darin@eazel.com>
 
 	* xml-i18n-tools.spec.in: Fixed broken DocDir line that was

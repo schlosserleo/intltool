@@ -31,6 +31,8 @@ To use xml-i18n-tools in your module, do the following:
 At this point, strings marked translatable will be automatically
 extracted to the .po files.
 
+EXTRA STEPS FOR OAFINFO FILES
+
 To get oaf translation extraction and merging requires a few more steps:
 
  o Rename your .oafinfo (or .oaf) files to .oaf.in and put an
@@ -63,5 +65,35 @@ naming convention, with namespacing, for example:
 
 	foo.oafinfo --> GNOME_Foo.oaf.in
 	foo-baa.oafinfo --> GNOME_Foo_baa.oaf.in
+
+EXTRA STEPS FOR XML FILES (FILES WITH .xml EXTENSION)
+
+To get xml (files with .xml extension) translation extraction 
+and merging requires these steps:
+
+ o Rename your .xml files to .xml.in and put an underscore before 
+   every element that should be localized.
+
+ o Make sure you have at least one .po file in the "po" directory.
+
+ o Add the .xml.in files to POTFILES.in.
+
+ o Put lines like these in every Makefile.am that installs xml files:
+
+        --- start ----
+
+        xmldir = $(datadir)/xml
+
+        xml_in_files = My_xml_file.xml.in
+        xml_DATA = $(xml_in_files:.xml.in=.xml)
+
+        @XML_I18N_MERGE_XML_RULE@
+
+        EXTRA_DIST=$(xml_in_files) $(xml_DATA)
+
+        --- end ----
+
+At this point, your xml translations will be extracted and
+merged.
 
 That's it.

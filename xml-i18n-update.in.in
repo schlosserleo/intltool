@@ -46,7 +46,7 @@ my $VERBOSE	   = "0";
 my @languages;
 my %po_files_by_lang = ();
 
-my $xml_extension = "xml|ui|glade|desktop\.in|directory\.in|"
+my $xml_extension = "xml(\.in)*|ui|glade|desktop\.in|directory\.in|"
 		   ."soundlist\.in|keys\.in|oaf(\.in)+|"
 		   ."etspec|pong(\.in)+";
 
@@ -144,7 +144,7 @@ sub determine_type($) {
    if ($type =~ /\[type: (gettext\/[^\]].*)]/) {
         $gettext_type=$1;
    }
-   elsif ($type =~ /(?:xml|ui|oaf(?:\.in)+|pong(?:\.in)+|etspec)$/) {
+   elsif ($type =~ /(?:xml(\.in)*|ui|oaf(?:\.in)+|pong(?:\.in)+|etspec)$/) {
         $gettext_type="gettext\/xml";
    }
    elsif ($type =~ /glade$/) {
