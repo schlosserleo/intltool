@@ -1,3 +1,18 @@
+2003-05-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* intltool-update.in.in: Removed some \s's that were
+	coursing problems. I still don't know why though - so 
+	if you understand perl, please take a look.
+
+=== intltool 0.26 ===
+
+2003-05-17  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* NEWS: Updated
+	* configure.in: Version 0.26
+	* intltool-merge.in.in: 
+	Fix some iconv/charset issues (bug #113121, Morten Welinder)
+
 2003-03-15  Rodney Dawes  <dobey@free.fr>
 
 	* intltool-merge.in.in: Handle no translations in get_newest_po_age
