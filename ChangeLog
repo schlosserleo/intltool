@@ -1,3 +1,8 @@
+2001-09-02  Robin * Slomkowski  <rslomkow@rslomkow.org>
+
+	* tests/cases/Makefile.am: changed extract1.desktop.in
+		to extract1.desktop as the .in file did not exist.
+
 2001-09-01  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* xml-i18n-update.in.in: Fixed the .server support.
