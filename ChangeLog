@@ -1,5 +1,12 @@
 2002-11-23  Yanko Kaneti  <yaneti@declera.com>
 
+	* intltool-merge.in.in: revert the fix for #98988 as it apparently
+	reencodes messages from UTF-8 to the locale chareset which later
+	breaks some uses of these strings (like in gconf schemas which must
+	be UTF-8).
+
+2002-11-23  Yanko Kaneti  <yaneti@declera.com>
+
 	* xml-i18n-po-Makefile.in.in-patch-5: additional changes to the patch
 	to avoid double updating of the po files.
 
