@@ -1,3 +1,8 @@
+Wed Nov 20 17:53:14 2002  Jonathan Blandford  <jrb@redhat.com>
+
+	* intltool.m4 (INTLTOOL_THEME_RULE): whoops.  Make it work
+	desktop style.
+
 Wed Nov 20 15:05:36 2002  Jonathan Blandford  <jrb@redhat.com>
 
 	* intltool.m4 (INTLTOOL_THEME_RULE): Add a new .theme.in->.theme
