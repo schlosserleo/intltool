@@ -37,14 +37,13 @@ XML_I18N_MERGE_OAF_RULE='\%.oaf : \%.oaf.in $(top_builddir)/xml-i18n-merge $(top
 HACK_SUBST(XML_I18N_MERGE_OAF_RULE)
 
 XML_I18N_MERGE_SERVER_RULE='\%.server : \%.server.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -o -p $(top_srcdir)/po $< [$]*.server'
+	$(top_builddir)/xml-i18n-merge -o -u $(top_srcdir)/po $< [$]*.server'
 HACK_SUBST(XML_I18N_MERGE_SERVER_RULE)
 
 dnl same deal
 XML_I18N_MERGE_KEYS_RULE='\%.keys : \%.keys.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -k -p $(top_srcdir)/po $< [$]*.keys'
+	$(top_builddir)/xml-i18n-merge -k $(XML_I18N_KEYS_KIND) $(top_srcdir)/po $< [$]*.keys'
 HACK_SUBST(XML_I18N_MERGE_KEYS_RULE)
-
 dnl same deal
 XML_I18N_MERGE_DESKTOP_RULE='\%.desktop : \%.desktop.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
 	$(top_builddir)/xml-i18n-merge -d -p $(top_srcdir)/po $< [$]*.desktop'

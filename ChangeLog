@@ -1,5 +1,18 @@
 2001-08-18  Cyrille Chepelov  <chepelov@calixo.net>
 
+	* xml-i18n-merge.in.in: (get_po_encoding): put a warning and a
+	default if the charset spec is absent. 
+	(entity_encode_sane): renamed to entity_encode_int_minimalist.
+	(entity_encode_int): renamed to entity_encode_int_even_high_bit.
+		
+	* xml-i18n-tools.m4: (XML_I18N_MERGE_SERVER_RULE): use --utf8.
+	(XML_I18N_MERGE_KEYS_RULE): use $(XML_I18N_KEYS_KIND).
+
+	* NEWS:
+	* README: updated to mention XML_I18N_KEYS_KIND
+	
+2001-08-18  Cyrille Chepelov  <chepelov@calixo.net>
+
 	* xml-i18n-merge.in.in: added two new flags, --pass-through(-p)
 	and --utf8(-u). The former asks for previous XML behaviour, the
 	latter complies better with the XML spec. If neither is asked,

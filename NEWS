@@ -3,8 +3,9 @@ Version XXX
 XXX unfinished 
 * Generates UTF-8 or (as previously) broken XML files. Please read the
 README for more information -- grep for XML_KIND (Cyrille Chepelov)
-* Support for .sheet files (Cyrille Chepelov)
-
+* Generates UTF-8 or (as previously) mixed-encoding .keys files.
+Please read the README for more information -- grep for KEYS_KIND (CC)
+* Support for Dia .sheet files (CC)
 
 Version 0.9
 

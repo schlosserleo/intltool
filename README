@@ -187,3 +187,10 @@ to the encodings used. A single "XML" file could thus have strings in
 different encodings. This broken behavior can be asked for by setting
 XML_UTF8_XML_KIND=--pass-through in the above snippet.
 
+
+
+---
+
+XXX: add section for KEYS files. Works almost like XML files .
+The XML_UTF8_KEYS_KIND Makefile.am variable controls the kind of files
+output (--pass-through for GNOME1, --utf8 for GNOME2).

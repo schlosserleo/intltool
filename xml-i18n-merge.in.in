@@ -101,6 +101,7 @@ sub split_on_argument {
 	&preparation;
 	&xml_merge_translations;
     } elsif ($KEYS_STYLE_ARG && @ARGV > 2) {
+        &utf8_sanity_check;
         &place_normal;
         &message;
         &preparation;
@@ -214,7 +215,7 @@ sub po_file2lang
 sub get_po_encoding
 {
     my ($in_po_file) = @_;
-    my $encoding;
+    my $encoding = "";
 
     open IN_PO_FILE, $in_po_file;
     
@@ -227,6 +228,10 @@ sub get_po_encoding
     }
     close IN_PO_FILE;
     
+    if (!$encoding) {
+        print ("Warning: no encoding found in $in_po_file. Assuming ISO-8859-1\n");
+        $encoding = "ISO-8859-1";
+    }
     return $encoding
 }
 
@@ -327,13 +332,13 @@ sub entity_encode
     my @list_of_chars = unpack ('C*', $pre_encoded);
 
     if ($PASS_THROUGH_ARG) {
-        return join ('', map (&entity_encode_int, @list_of_chars));
+        return join ('', map (&entity_encode_int_even_high_bit, @list_of_chars));
     } else {
-        return join ('', map (&entity_encode_sane, @list_of_chars));
+        return join ('', map (&entity_encode_int_minimalist, @list_of_chars));
     }
 }
 
-sub entity_encode_sane
+sub entity_encode_int_minimalist
 {
     if ($_ == 34) { return "&quot;" }
     elsif ($_ == 38) { return "&amp;" }
@@ -343,7 +348,7 @@ sub entity_encode_sane
     return chr $_;
 }
 
-sub entity_encode_int
+sub entity_encode_int_even_high_bit
 {
     if ($_ > 127 || $_ == 34 || $_ == 38 || $_ == 39 || $_ == 60 || $_ == 62) {
         # the ($_ > 127) should probably be removed  
