@@ -41,6 +41,7 @@ use File::Basename;
 use Getopt::Long;
 
 ## Scalars used by the option stuff
+my $TYPE_ARG	= "0";
 my $LOCAL_ARG	= "0";
 my $HELP_ARG 	= "0";
 my $VERSION_ARG = "0";
@@ -51,6 +52,7 @@ my $FILE;
 my $OUTFILE;
 
 my $gettext_type = "";
+my $input;
 my %messages = ();
 
 ## Always print first
@@ -58,12 +60,13 @@ $| = 1;
 
 ## Handle options
 GetOptions (
+	    "type=s"     => \$TYPE_ARG,
             "local|l"    => \$LOCAL_ARG,
             "help|h|?"   => \$HELP_ARG,
             "version|v"  => \$VERSION_ARG,
             "update"     => \$UPDATE_ARG,
 	    "quiet|q"    => \$QUIET_ARG,
-            ) or &Error;
+            ) or &error;
 
 &split_on_argument;
 
@@ -112,22 +115,8 @@ sub place_local {
 }
 
 sub determine_type {
-   if ($FILE =~ /\[type: gettext\/([^\]].*)]/) {
-	$gettext_type=$1;
-        $FILE =~ s/\[[^\]].*]\s*//;
-        $OUTFILE =~ s/\[[^\]].*]\s*//;
-   }
-   elsif ($FILE =~ /(xml|oaf(\.in)+)$/) {
-	$gettext_type="xml";
-   }
-   elsif ($FILE =~ /glade$/) {
-        $gettext_type="glade";
-   }
-   elsif ($FILE =~ /desktop$/) {
-	$gettext_type="init";
-   }
-   elsif ($FILE =~ /keys$/) {
-	$gettext_type="keys";
+   if ($TYPE_ARG =~ /^gettext\/(.*)/) {
+	$gettext_type=$1
    }
 }
 
@@ -181,7 +170,6 @@ sub extract {
 sub convert($) {
 
     ## Reading the file
-    my $input;
     {
 	local (*IN);
 	local $/; #slurp mode
@@ -189,28 +177,30 @@ sub convert($) {
 	$input = <IN>;
     }
 
-    # This used to put a comment in $OUTFILE, but that comment 
-    # showed up all over the .pot file, so it should not be put
-    # in there. The comment was more appropriate back when the
-    # files went in the source tree rather than a /tmp directory..
+    &type_ini;
+    &type_keys;
+    &type_xml;
+    &type_glade;
+}
 
-    ##################
+sub type_ini {
+
     if ($ENABLE_INI) { 
-    ##################
         
         ### For generic translatable desktop files ###
     
-        if ($gettext_type eq "ini"){
-    
+        if ($gettext_type eq "ini"){    
+
             while ($input =~ /^_.*=(.*)$/mg) {
                 $messages{$1} = [];
             }
         }
     }
+}
+
+sub type_keys {
     
-    ###################
     if ($ENABLE_KEYS) {
-    ###################
     
         ### For generic translatable mime/keys files ###
 
@@ -220,11 +210,11 @@ sub convert($) {
             }
         }
     }
+}
 
+sub type_xml {
 
-    ##################
     if ($ENABLE_XML) {
-    ##################
 
 	### For generic translatable XML files ###
         
@@ -240,10 +230,11 @@ sub convert($) {
 
 	}
     }
+}
 
-    ####################
+sub type_glade {
+
     if ($ENABLE_GLADE) {
-    ####################
         
         ### For translatable Glade XML files ###
 

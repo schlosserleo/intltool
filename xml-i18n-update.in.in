@@ -135,6 +135,28 @@ sub main
    }
 }
 
+sub determine_type($) {
+
+   my $type = $_;
+
+   if ($type =~ /\[type: (gettext\/[^\]].*)]/) {
+        $gettext_type=$1;
+   }
+   elsif ($type =~ /(?:xml|oaf(?:\.in)+)$/) {
+        $gettext_type="gettext\/xml";
+   }
+   elsif ($type =~ /glade$/) {
+        $gettext_type="gettext\/glade";
+   }
+   elsif ($type =~ /desktop(?:\.in)+$/) {
+        $gettext_type="gettext\/ini";
+   }
+   elsif ($type =~ /keys(?:\.in)+$/) {
+        $gettext_type="gettext\/keys";
+   } 
+   else { $gettext_type=""; }
+}
+
 sub version{
 
     ## Print version information
@@ -281,19 +303,16 @@ sub gen_headers
            ## Find xml files in POTFILES.in and generate the
            ## files with help from the xml-i18n-extract script
            
-           my $gettext_type="";
+	   my $gettext_type=&determine_type($1);
 
-	   if (/^(\[type: gettext\/[^\[].*])/) {
-	       $gettext_type=$1;
-           }
            if (/\.($xml_extension)$/ || /^\[/){
 	       $_ =~ s/^\[[^\[].*]\s*//;
-               $filename = "$gettext_type../$_";
+               $filename = "../$_";
 
                if ($VERBOSE){
-                   system($XML_I18N_EXTRACT, "--update", $filename);
+                   system($XML_I18N_EXTRACT, "--update", "--type=$gettext_type", $filename);
                } else {
-	 	   system($XML_I18N_EXTRACT, "--update", "--quiet", $filename);
+	 	   system($XML_I18N_EXTRACT, "--update", "--type=$gettext_type", "--quiet", $filename);
                }
            }
        }

@@ -1,3 +1,11 @@
+2001-01-31  Kenneth Christiansen <kenneth@gnu.org>
+
+        * xml-i18n-extract.in:  
+        * xml-i18n-update.in:
+	Made the whole new system work more smart
+	for instance you can not use --type=gettext/ini 
+	option to the extract script.
+
 2001-01-30  Kenneth Christiansen <kenneth@gnu.org>
 
         * xml-i18n-extract.in:
