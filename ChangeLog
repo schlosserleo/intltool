@@ -1,5 +1,9 @@
 2002-04-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+        * doc/Makefile.am: Made it pass distcheck again
+
+2002-04-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
 	* doc/Makefile.am: Added I18N-HOWTO.
 	* doc/I18N-HOWTO: Added HOWTO on adding i18n support to an
 	application. Thanks to Thomas Vander Stichele for improving and
