@@ -1,3 +1,9 @@
+2004-01-05  Thomas Vander Stichele  <thomas at apestaart dot org>
+
+        * intltool.m4: recommit patch from Chee Bin HOH (#129773)
+          this solves ${ac_aux_dir} not present in config.status when
+          built with automake 1.4
+
 2003-12-31  Thomas Vander Stichele  <thomas at apestaart dot org>
 
         * intltool.m4: fix for the case where AC_CONFIG_AUX_DIR is set
