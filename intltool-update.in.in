@@ -997,7 +997,7 @@ sub FindPackageName
 sub FindPOTKeywords
 {
 
-    my $keywords = "--keyword\=\_ --keyword\=N\_ --keyword\=U\_";
+    my $keywords = "--keyword\=\_ --keyword\=N\_ --keyword\=U\_ --keyword\=Q\_";
     my $varname = "XGETTEXT_OPTIONS";
     my $make_source; {
 	local (*IN);

@@ -1,3 +1,6 @@
+* Look for Q_() keyword as well
+  -- bug #154063 (Danilo Segan).
+
 Version 0.31.3
 
 * Use absolute paths and allow env var overrides for gettext scripts
