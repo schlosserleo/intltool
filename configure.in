@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to create configure.
 AC_INIT(intltoolize.in)
-INTLTOOL_VERSION=0.30
+INTLTOOL_VERSION=0.31
 
 AM_INIT_AUTOMAKE(intltool, $INTLTOOL_VERSION)
 
@@ -70,8 +70,8 @@ AC_SUBST(EXPANDED_DATADIR)
 
 AC_OUTPUT([
 Makefile
-doc-i18n-tool/Makefile
 doc/Makefile
+doc-i18n-tool/Makefile
 intltool-extract.in
 intltool-merge.in
 intltool-prepare
