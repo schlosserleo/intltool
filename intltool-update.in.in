@@ -268,16 +268,71 @@ sub find_leftout_files
         }
     }
 
-    foreach my $file (@buf_i18n_plain) {
+    foreach my $file (@buf_i18n_plain)
+      {
+        my $in_comment = 0;
+	my $in_macro = 0;
+
         open FILE, "<$file";
-        while (<FILE>) {
-            if (/_\(\"/){
+        while (<FILE>)
+	  {
+	    # Handle continued multi-line comment.
+	    if ($in_comment)
+	      {
+		next unless s-.*\*/--;
+		$in_comment = 0;
+	      }
+
+	    # Handle continued macro.
+	    if ($in_macro)
+	      {
+		$in_macro = 0 unless /\\$/;
+		next;
+	      }
+
+	    # Handle start of macro (or any preprocessor directive).
+	    if (/^\s*\#/)
+	      {
+		$in_macro = 1 if /^([^\\]|\\.)*\\$/;
+		next;
+	      }
+
+	    # Handle comments and quoted text.
+	    while (m-(/\*|//|\'|\")-) # \' and \" keep emacs perl mode happy
+	      {
+		my $match = $1;
+		if ($match eq "/*")
+		  {
+		    if (!s-/\*.*?\*/--)
+		      {
+			s-/\*.*--;
+			$in_comment = 1;
+		      }
+		  }
+		elsif ($match eq "//")
+		  {
+		    s-//.*--;
+		  }
+		else # ' or "
+		  {
+		    if (!s-$match([^\\]|\\.)*?$match-QUOTEDTEXT-)
+		      {
+			warn "mismatched quotes at line $. in $file\n";
+			s-$match.*--;
+		      }
+		  }
+	      }
+	
+
+	    if (/_\(QUOTEDTEXT/)
+	      {
 		## Remove the first 3 chars and add newline
 		push @buf_allfiles, unpack("x3 A*", $file) . "\n";
-                last;
-            }
-        }
-    }
+		last;
+	      }
+	  }
+	close FILE;
+      }
 
     foreach my $file (@buf_i18n_xml) {
         open FILE, "<$file";

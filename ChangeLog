@@ -1,5 +1,10 @@
 2002-02-25  Darin Adler  <darin@bentspoon.com>
 
+	* intltool-update.in.in: Handle C comments when reading files for
+	"--maintain".
+
+2002-02-25  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-merge.in.in: Don't merge fuzzy translations in.
 	* tests/results/merge1.xml: Correct test results to reflect fuzzy
 	translations.
