@@ -245,7 +245,7 @@ sub find_leftout_files
         }, "..";
 
 
-    open POTFILES, "POTFILES.in" || die "$PROGRAM:  there's no POTFILES.in!\n";
+    open POTFILES, "POTFILES.in" or die "$PROGRAM:  there's no POTFILES.in!\n";
 
     @buf_potfiles = grep /^[^#]/, <POTFILES>;
 			    
@@ -335,7 +335,7 @@ sub find_leftout_files
     foreach my $file (@buf_i18n_xml) {
         open FILE, "<$file";
         while (<FILE>) {
-            if (/\s_(.*)=\"/){
+            if (/\s_(.*)=\"/ || /translatable=\"yes\"/){
                 push @buf_allfiles, unpack("x3 A*", $file) . "\n";
                 last;
             }

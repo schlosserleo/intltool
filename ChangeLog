@@ -1,3 +1,9 @@
+2002-05-21  Abel Cheung  <maddog@linux.org.hk>
+
+	* intltool-update.in.in: Force intltool-update to exit if
+	POTFILES.in is not found. Add detection of glade2 files in
+	-m mode.
+
 2002-05-20  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
         * configure.in: Forgot to bump version.
