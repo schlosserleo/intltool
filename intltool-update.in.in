@@ -560,7 +560,7 @@ sub find_package_name
 
     my ($conf_in, $src_dir);
 
-    if ($base_dirname eq "po") {
+    if ($base_dirname =~ /^po(-.+)?$/) {
         if (-f "../configure.in") {
             $conf_in = "../configure.in";
         } else {

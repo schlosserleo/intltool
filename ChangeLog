@@ -1,5 +1,11 @@
 2002-02-27  Kenneth Christiansen <kenneth@gnu.org>
 
+        * configure.in: Fixed small bug that I missed.
+	* intltool-update.in.in: Make it work in all dirs called 
+	po/ or po-something/. Should make it more useful with the GIMP
+
+2002-02-27  Kenneth Christiansen <kenneth@gnu.org>
+
 	* configure.in: Applied patch from Stefan Kost that fixes an issue
 	with the perl check that he and Carlos was seeing.
 
