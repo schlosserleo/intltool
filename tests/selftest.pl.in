@@ -141,4 +141,14 @@ $case = "extract8.glade";
 system("@PERL@ ../intltool-extract --type=gettext/glade --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
+print "13. Extract messages from an rfc822 style file:                      ";
+$case = "extract10.templates_";
+system("@PERL@ ../intltool-extract --type=gettext/rfc822deb --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
+print "14. Merge translations into an rfc822 style file:                    ";
+$case = "merge10.templates";
+system("@PERL@ ../intltool-merge -r --quiet cases cases/${case}_ cases/$case") == 0 or $failed = 1;
+check_merge_result($case);
+
 exit $failed;

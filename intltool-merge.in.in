@@ -39,6 +39,7 @@ my $VERSION = "@VERSION@";
 ## Loaded modules
 use strict; 
 use Getopt::Long;
+use Text::Wrap;
 
 ## Scalars used by the option stuff
 my $HELP_ARG = 0;
@@ -48,6 +49,7 @@ my $XML_STYLE_ARG = 0;
 my $KEYS_STYLE_ARG = 0;
 my $DESKTOP_STYLE_ARG = 0;
 my $SCHEMAS_STYLE_ARG = 0;
+my $RFC822DEB_STYLE_ARG = 0;
 my $QUIET_ARG = 0;
 my $PASS_THROUGH_ARG = 0;
 my $UTF8_ARG = 0;
@@ -65,6 +67,7 @@ GetOptions
  "keys-style|k" => \$KEYS_STYLE_ARG,
  "desktop-style|d" => \$DESKTOP_STYLE_ARG,
  "schemas-style|s" => \$SCHEMAS_STYLE_ARG,
+ "rfc822deb-style|r" => \$RFC822DEB_STYLE_ARG,
  "pass-through|p" => \$PASS_THROUGH_ARG,
  "utf8|u" => \$UTF8_ARG,
  "cache|c=s" => \$cache_file
@@ -116,6 +119,11 @@ if ($VERSION_ARG) {
         &print_message;
         &schemas_merge_translations;
 	&finalize;
+} elsif ($RFC822DEB_STYLE_ARG && @ARGV > 2) {
+        &preparation;
+        &print_message;
+        &rfc822deb_merge_translations;
+	&finalize;
 } else {
 	&print_help;
 }
@@ -144,6 +152,7 @@ sub print_help
     print "  -d, --desktop-style    includes translations in the desktop style\n";
     print "  -k, --keys-style       includes translations in the keys style\n";
     print "  -s, --schemas-style    includes translations in the schemas style\n";
+    print "  -r, --rfc822deb-style  includes translations in the RFC822 style\n";
     print "  -x, --xml-style        includes translations in the standard xml style\n";
     print "  -u, --utf8             convert all strings to UTF-8 before merging\n";
     print "  -p, --pass-through     use strings as found in .po files, without\n";
@@ -350,6 +359,7 @@ sub unescape_one_sequence
 
     return "\\" if $sequence eq "\\\\";
     return "\"" if $sequence eq "\\\"";
+    return "\n" if $sequence eq "\\n";
 
     # gettext also handles \n, \t, \b, \r, \f, \v, \a, \xxx (octal),
     # \xXX (hex) and has a comment saying they want to handle \u and \U.
@@ -655,3 +665,113 @@ sub schemas_merge_translations
 
     close OUTPUT;
 }
+
+sub rfc822deb_merge_translations
+{
+    my $source;
+
+    $Text::Wrap::huge = 'overflow';
+
+    {
+       local $/; # slurp mode
+       open INPUT, "<$FILE" or die "can't open $FILE: $!";
+       $source = <INPUT>;
+       close INPUT;
+    }
+
+    open OUTPUT, ">${OUTFILE}" or die;
+
+    while ($source =~ /(^|\n)(_)?([^:]+)(:\s*)(.*?)(?=\n[\S\n]|$)/sg) {
+	    my $sep = $1;
+	    my $non_translated_line = $3.$4;
+	    my $string = $5;
+	    my $is_translatable = defined($2);
+	    #  Remove [] dummy strings
+	    $string =~ s/\[\s[^\[\]]*\]$//;
+            $non_translated_line .= $string;
+
+            print OUTPUT $sep.$non_translated_line;
+            if ($is_translatable) {
+                for my $lang (sort keys %po_files_by_lang) {
+                    my @str_list = rfc822deb_split($string);
+                    my $is_translated = 1;
+                    my $str_translated = '';
+                    my $first = 1;
+                    for my $str (@str_list) {
+                        my $translation = $translations{$lang, $str};
+                        if (!$translation) {
+                            $is_translated = 0;
+                            last;
+                        }
+
+	                #  $translation may also contain [] dummy
+                        #  strings, mostly to indicate an empty string
+	                $translation =~ s/\[\s[^\[\]]*\]$//;
+                        if ($first) {
+                            $str_translated .=
+                                Text::Tabs::expand($translation) .
+                                "\n";
+                        } else {
+                            $str_translated .= Text::Tabs::expand(
+                                Text::Wrap::wrap(' ', ' ', $translation)) .
+                                "\n .\n";
+                        }
+                        $first = 0;
+
+                        #  To fix some problems with Text::Wrap::wrap
+                        $str_translated =~ s/(\n )+\n/\n .\n/g;
+                    }
+                    next unless $is_translated;
+
+                    $str_translated =~ s/\n \.\n$//;
+                    $str_translated =~ s/\s+$//;
+
+                    $_ = $non_translated_line;
+                    s/^(\w+):\s*.*/$sep${1}-$lang: $str_translated/s;
+                    print OUTPUT;
+                }
+            }
+    }
+
+    close OUTPUT;
+    close INPUT;
+}
+
+sub rfc822deb_split {
+    # Debian defines a special way to deal with rfc822-style files:
+    # when a value contain newlines, it consists of
+    #   1.  a short form (first line)
+    #   2.  a long description, all lines begin with a space,
+    #       and paragraphs are separated by a single dot on a line
+    # This routine returns an array of all paragraphs, and reformat
+    # them.
+    my $text = shift;
+    $text =~ s/^ //mg;
+    return ($text) if $text !~ /\n/;
+
+    $text =~ s/([^\n]*)\n//;
+    my @list = ($1);
+    my $str = '';
+    for my $line (split (/\n/, $text)) {
+        chomp $line;
+        $line =~ /\s+$/;
+        if ($line =~ /^\.$/) {
+            #  New paragraph
+            $str =~ s/\s*$//;
+            push(@list, $str);
+        } elsif ($line =~s/^\s(\s+.*)/$1/) {
+            #  Line which must not be reformatted
+            $str .= "\n" if length ($str) && $str !~ /\n$/;
+            $str .= $line."\n";
+        } else {
+            #  Continuation line, remove newline
+            $line =~ s/^\s+//;
+            $str .= " " if length ($str) && $str !~ /[\n ]$/;
+            $str .= $line;
+        }
+    }
+    $str =~ s/\s*$//;
+    push(@list, $str) if length ($str);
+    return @list;
+}
+

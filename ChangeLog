@@ -1,3 +1,8 @@
+2002-08-29  Kenneth Christiansen <kenneth@gnu.org>
+
+	* Applied patch from Denis Barbier to support the RTF822 format 
+	used by Debian.
+
 2002-08-18  Havoc Pennington  <hp@pobox.com>
 
 	* autogen.sh: hardcode aclocal-1.4/automake-1.4 so that users with
