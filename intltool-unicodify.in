@@ -98,6 +98,31 @@ sub print_help
     exit;
 }
 
+sub get_local_charset
+{
+    my ($encoding) = @_;
+    my $alias_file = $ENV{"G_CHARSET_ALIAS"} || "/usr/local/lib/charset.alias";
+
+    # seek character encoding aliases in charset.alias (glib)
+
+    if (open CHARSET_ALIAS, $alias_file) {
+
+        while (<CHARSET_ALIAS>) {
+            if (/([-a-zA-Z0-9]+)\s+$encoding/i) {
+                return $1;
+            }
+        }
+
+        close CHARSET_ALIAS;
+    }
+    else {
+        print "Warning: file $alias_file not found\n";
+    }
+
+    # if not found, return input string
+
+    return $encoding;
+}
 
 sub main
 {
@@ -115,10 +140,12 @@ sub main
     
     close IN;
     
+    $encoding_code_orig = get_local_charset($encoding_code_orig)
+
     print "Converting from $encoding_code_orig\n" if $VERBOSE;
     
-    my $extern_conv="iconv --from=$encoding_code_orig "
-	."--to=UTF-8 $LANG.po > $LANG.po-1";
+    my $extern_conv="iconv --f $encoding_code_orig "
+	."-t UTF-8 $LANG.po > $LANG.po-1";
     
     system ($extern_conv);
     

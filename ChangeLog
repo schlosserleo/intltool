@@ -1,3 +1,25 @@
+2002-08-29  Laurent Vivier  <laurent.vivier@bull.net>
+
+	intltool-merge uses iconv to convert charset but 
+	charset name is name used by linux. For instance, 
+	linux uses charset name "ISO8859-1", and for AIX
+	charset name is "ISO-8859-1". intltool-merge needs 
+	to convert the charset name to local charset name.
+	
+	glib provides a mecanisme in libcharset to convert 
+	correctly name according to local OS. A file 
+	(charset.alias) is installed on system by glib.
+
+	This commit uses this file to help intltool to convert 
+	charset name. If the file isn't found on system, 
+	intltool-merge works like before (use given charset name).
+
+	* intltool-merge.in.in: Add support for charset alias 
+	as defined in glib/libcharset
+	* intltool-unicodify.in: Ditto
+	* configure.in: Define pat hto find charset.alias (expand 
+	libdir in EXPANDED_LIBDIR)
+
 2002-08-31  Kenneth Christiansen <kenneth@gnu.org>
 
 	* intltool-extract.in.in:

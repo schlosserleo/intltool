@@ -206,6 +206,32 @@ sub gather_po_files
     }
 }
 
+sub get_local_charset
+{
+    my ($encoding) = @_;
+    my $alias_file = $ENV{"G_CHARSET_ALIAS"} || "@EXPANDED_LIBDIR@/charset.alias";
+
+    # seek character encoding aliases in charset.alias (glib)
+
+    if (open CHARSET_ALIAS, $alias_file) {
+
+        while (<CHARSET_ALIAS>) {
+            if (/([-a-zA-Z0-9]+)\s+$encoding/i) {
+                return $1;
+            }
+        }
+
+        close CHARSET_ALIAS;
+    }
+    else {
+        print "Warning: file $alias_file not found\n";
+    }
+
+    # if not found, return input string
+
+    return $encoding;
+}
+
 sub get_po_encoding
 {
     my ($in_po_file) = @_;
@@ -225,6 +251,9 @@ sub get_po_encoding
         print "Warning: no encoding found in $in_po_file. Assuming ISO-8859-1\n";
         $encoding = "ISO-8859-1";
     }
+
+    $encoding = get_local_charset($encoding);
+
     return $encoding
 }
 
