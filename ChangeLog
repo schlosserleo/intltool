@@ -6,6 +6,8 @@
 	the fix for bug #144715
 	Fix a typo (s/og/or/)
 
+	Fixes #79598
+
 2004-11-03  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.am (pkgdata_DATA): Add new Makefile.in.in and remove

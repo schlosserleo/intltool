@@ -1,5 +1,7 @@
+* Update I18N-HOWTO for the changes to use our own Makefile.in.in
+  -- bug #79598 (Rodney Dawes)
 * Allow use of either AM_GNU_GETTEXT or AM_GLIB_GNU_GETTEXT and use our
-  own Makefile.in.in instead of trying to patch one and update I18N-HOWTO
+  own Makefile.in.in instead of trying to patch one
   -- bug #144715 (Rodney Dawes)
 * Handle all supported gettext escape sequences in PO files
   -- bug #48489 (Danilo Segan)
