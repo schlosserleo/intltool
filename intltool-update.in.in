@@ -62,6 +62,7 @@ my %po_files_by_lang = ();
 my $xml_extension =
 "xml(\.in)*|".		# .in is not required
 "ui|".
+"lang|".
 "glade2?(\.in)*|".	# .in is not required
 "scm(\.in)*|".		# .in is not required
 "oaf(\.in)+|".
@@ -208,7 +209,7 @@ sub determine_type ($)
 
    # FIXME: Use $xml_extentions, and maybe do all this even nicer
    my $xml_regex = 
-       "(?:xml(\.in)*|ui|oaf(?:\.in)+|server(?:\.in)+|sheet(?:\.in)+|".
+       "(?:xml(\.in)*|ui|lang|oaf(?:\.in)+|server(?:\.in)+|sheet(?:\.in)+|".
        "pong(?:\.in)+|etspec|schemas(?:\.in)+)";
    my $ini_regex =
        "(?:desktop(?:\.in)+|theme(?:\.in)+|caves(?:\.in)+|directory(?:\.in)+|".
