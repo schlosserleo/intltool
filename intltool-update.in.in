@@ -571,9 +571,11 @@ sub GenerateHeaders
 sub GeneratePOTemplate
 {
     my $XGETTEXT = `which xgettext 2>/dev/null`;
+    my $XGETTEXT_ARGS = '';
     chomp $XGETTEXT;
 
     $XGETTEXT = $ENV{"XGETTEXT"} if $ENV{"XGETTEXT"};
+    $XGETTEXT_ARGS = $ENV{"XGETTEXT_ARGS"} if $ENV{"XGETTEXT_ARGS"};
 
     if (! -x $XGETTEXT)
     {
@@ -684,6 +686,7 @@ sub GeneratePOTemplate
 			   "--output\=$MODULE\.pot",
 			   "--files-from\=\.\/POTFILES\.in\.temp");
     push @xgettext_argument, "--from-code\=$encoding" if ($gettext_support_nonascii);
+    push @xgettext_argument, $XGETTEXT_ARGS if $XGETTEXT_ARGS;
     my $xgettext_command = join ' ', @xgettext_argument;
 
     # intercept xgettext error message
