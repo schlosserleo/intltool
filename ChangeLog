@@ -1,3 +1,9 @@
+2002-02-04  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in: More experimental cache work from
+	Kennth and some other small fixes.
+	* intltool-update.in.in: Lots of small tweaks by Kenneth.
+
 2002-01-31  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* intltoolize.in: populate $auxdir in a subshell, so

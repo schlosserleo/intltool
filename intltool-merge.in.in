@@ -3,13 +3,12 @@
 #
 #  The Intltool Message Merger
 #
-#  Copyright (C) 2000 Free Software Foundation.
+#  Copyright (C) 2000, 2002 Free Software Foundation.
 #  Copyright (C) 2000, 2001 Eazel, Inc
 #
 #  Intltool is free software; you can redistribute it and/or
-#  modify it under the terms of the GNU General Public License as
-#  published by the Free Software Foundation; either version 2 of the
-#  License, or (at your option) any later version.
+#  modify it under the terms of the GNU General Public License 
+#  version 2 published by the Free Software Foundation.
 #
 #  Intltool is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,7 +28,7 @@
 #            Kenneth Christiansen <kenneth@gnu.org>
 #            Darin Adler <darin@bentspoon.com>
 #
-#  Proper XML UTF-8ification written by Cyrille Chepelov <chepelov@calixo.net>
+#  Proper XML UTF-8'ification written by Cyrille Chepelov <chepelov@calixo.net>
 #
 
 ## Release information
@@ -44,15 +43,15 @@ use Getopt::Long;
 use File::stat;
 use Fcntl;      # For O_* constants
 
-my $use_cache = $ENV{"INTLTOOL_USE_CACHE"};
-if ($use_cache) {
+my $use_cache = $ENV{"INTLTOOL_USE_CACHE"} || 0;
+if ($use_cache == 1 || $use_cache == 2) {
 	require NDBM_File;
 }
 
 ## Scalars used by the option stuff
 my $HELP_ARG = 0;
 my $VERSION_ARG = 0;
-my $OAF_STYLE_ARG = 0;
+my $BA_STYLE_ARG = 0;
 my $XML_STYLE_ARG = 0;
 my $KEYS_STYLE_ARG = 0;
 my $DESKTOP_STYLE_ARG = 0;
@@ -61,17 +60,19 @@ my $PASS_THROUGH_ARG = 0;
 my $UTF8_ARG = 0;
 
 ## Handle options
-GetOptions (
-	    "help|h" => \$HELP_ARG,
-	    "version|v" => \$VERSION_ARG,
-            "quiet|q" => \$QUIET_ARG,
-	    "oaf-style|o" => \$OAF_STYLE_ARG,
-	    "xml-style|x" => \$XML_STYLE_ARG,
-	    "keys-style|k" => \$KEYS_STYLE_ARG,
-	    "desktop-style|d" => \$DESKTOP_STYLE_ARG,
-            "pass-through|p" => \$PASS_THROUGH_ARG,
-            "utf8|u" => \$UTF8_ARG
-	    ) or &error;
+GetOptions 
+(
+ "help" => \$HELP_ARG,
+ "version" => \$VERSION_ARG,
+ "quiet|q" => \$QUIET_ARG,
+ "oaf-style|o" => \$BA_STYLE_ARG, ## for compatibility
+ "ba-style|b" => \$BA_STYLE_ARG,
+ "xml-style|x" => \$XML_STYLE_ARG,
+ "keys-style|k" => \$KEYS_STYLE_ARG,
+ "desktop-style|d" => \$DESKTOP_STYLE_ARG,
+ "pass-through|p" => \$PASS_THROUGH_ARG,
+ "utf8|u" => \$UTF8_ARG
+ ) or &error;
 
 my $PO_DIR;
 my $FILE;
@@ -89,100 +90,80 @@ my $q = "[^\\\"]*";
 ## Check for options. 
 
 if ($VERSION_ARG) {
-	&version;
+	&print_version;
 } elsif ($HELP_ARG) {
-	&help;
-} elsif ($OAF_STYLE_ARG && @ARGV > 2) {
-	&place_normal;
+	&print_help;
+} elsif ($BA_STYLE_ARG && @ARGV > 2) {
 	&preparation;
-	&message;
-	&oaf_merge_translations;
+	&print_message;
+	&ba_merge_translations;
 	&finalize;
 } elsif ($XML_STYLE_ARG && @ARGV > 2) {
         &utf8_sanity_check;
-	&place_normal;
 	&preparation;
-	&message;
+	&print_message;
 	&xml_merge_translations;
 	&finalize;
 } elsif ($KEYS_STYLE_ARG && @ARGV > 2) {
         &utf8_sanity_check;
-        &place_normal;
         &preparation;
-        &message;
+        &print_message;
         &keys_merge_translations;
 	&finalize;
 } elsif ($DESKTOP_STYLE_ARG && @ARGV > 2) {
-        &place_normal;
-        &message;
+        &print_message;
         &preparation;
         &desktop_merge_translations;
 	&finalize;
 } else {
-	&help;
+	&print_help;
 }
 
 exit;
 
-sub utf8_sanity_check 
-{
-    if (!$UTF8_ARG) {
-        if (!$PASS_THROUGH_ARG) {
-            $PASS_THROUGH_ARG="1";
-        }
-    }
-}
-
-sub place_normal 
-{
-    $PO_DIR = $ARGV[0];
-    $FILE = $ARGV[1];
-    $OUTFILE = $ARGV[2];
-}
-
-
 ## Sub for printing release information
-sub version
+sub print_version
 {
     print "${PROGRAM} (${PACKAGE}) ${VERSION}\n";
-    print "Written by Maciej Stachowiak and Kenneth Christiansen, 2000-2002.\n\n";
+    print "Written by Maciej Stachowiak, Darin Adler and Kenneth Christiansen.\n\n";
     print "Copyright (C) 2000-2002 Free Software Foundation, Inc.\n";
-    print "Copyright (C) 2000, 2001 Eazel, Inc.\n";
+    print "Copyright (C) 2000-2001 Eazel, Inc.\n";
     print "This is free software; see the source for copying conditions.  There is NO\n";
     print "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n";
     exit;
 }
 
 ## Sub for printing usage information
-sub help
+sub print_help
 {
     print "Usage: ${PROGRAM} [OPTIONS] PO_DIRECTORY FILENAME OUTPUT_FILE\n";
-    print "Generates an xml file that includes translated versions of some attributes,\n";
-    print "from an untranslated source and a po directory that includes translations.\n";
-    print "  -v, --version                shows the version\n";
-    print "  -h, --help                   shows this help page\n";
-    print "  -q, --quiet                  quiet mode\n";
-    print "  -o, --oaf-style              includes translations in the oaf style\n";
-    print "  -x, --xml-style              includes translations in the xml style\n";
-    print "  -k, --keys-style             includes translations in the keys style\n";
-    print "  -d, --desktop-style          includes translations in the desktop style\n";
-    print "  -u, --utf8                   convert all strings to UTF-8 before merging\n";
-    print "  -p, --pass-through           use strings as found in .po files, without\n";
-    print "                               conversion (STRONGLY unrecommended with -x)\n";
-    print "\nReport bugs to bugzilla.gnome.org, module intltool or xml-i18n-tools-list\@gnome.org>\n";
+    print "Generates an output file that includes translated versions of some attributes,\n";
+    print "from an untranslated source and a po directory that includes translations.\n\n";
+    print "  -b, --ba-style         includes translations in the bonobo-activation style\n";
+    print "  -d, --desktop-style    includes translations in the desktop style\n";
+    print "  -k, --keys-style       includes translations in the keys style\n";
+    print "  -x, --xml-style        includes translations in the standard xml style\n";
+    print "  -u, --utf8             convert all strings to UTF-8 before merging\n";
+    print "  -p, --pass-through     use strings as found in .po files, without\n";
+    print "                         conversion (STRONGLY unrecommended with -x)\n";
+    print "  -q, --quiet            suppress most messages\n";
+    print "      --help             display this help and exit\n";
+    print "      --version          output version information and exit\n";
+    print "\nReport bugs to bugzilla.gnome.org, module intltool, or contact us through \n";
+    print "<xml-i18n-tools-list\@gnome.org>.\n";
     exit;
 }
 
 
 ## Sub for printing error messages
-sub error
+sub print_error
 {
     print "Try `${PROGRAM} --help' for more information.\n";
     exit;
 }
 
 
-sub message 
+sub print_message 
 {
     print "Merging translations into $OUTFILE.\n" unless $QUIET_ARG;
 }
@@ -190,6 +171,10 @@ sub message
 
 sub preparation 
 {
+    $PO_DIR = $ARGV[0];
+    $FILE = $ARGV[1];
+    $OUTFILE = $ARGV[2];
+
     &gather_po_files;
     &get_translation_database;
 }
@@ -232,13 +217,31 @@ sub get_po_encoding
     return $encoding
 }
 
+sub utf8_sanity_check 
+{
+    if (!$UTF8_ARG) {
+        if (!$PASS_THROUGH_ARG) {
+            $PASS_THROUGH_ARG="1";
+        }
+    }
+}
+
 sub get_translation_database
 {
-    if (!$use_cache) {
+    if ($use_cache == 1) {
+        &create_ndbm_cache_writeback;
+    } elsif ($use_cache == 2) {
+	&create_ndbm_cache_writethrough;
+    } elsif ($use_cache == 3) {
+	&create_text_cache;
+    } else {
         &create_translation_database;
-	return;
     }
+	
+}
 
+sub get_po_timestamp
+{
     my $timestamp = 0;
 
     foreach my $po_file (values %po_files_by_lang) {
@@ -246,7 +249,13 @@ sub get_translation_database
 	$timestamp = $time if $time > $timestamp;
     }
 
-    my $cached_translations = "$PO_DIR/.intltool-cache-$timestamp";	
+    return $timestamp;
+}
+
+sub create_ndbm_cache_writethrough
+{
+    my $timestamp = &get_po_timestamp;
+    my $cached_translations = "$PO_DIR/.intltool-cache-ndbm-writethrough-$timestamp";	
 
     if (-e "$cached_translations.db") {
 	print "Found cached translation database\n" unless $QUIET_ARG;
@@ -261,6 +270,70 @@ sub get_translation_database
 	&create_translation_database;
     }
 }
+
+sub create_ndbm_cache_writeback
+{
+    my $timestamp = &get_po_timestamp;
+    my $cached_translations = "$PO_DIR/.intltool-cache-ndbm-writeback-$timestamp";	
+
+    if (-e "$cached_translations.db") {
+	print "Found cached translation database\n" unless $QUIET_ARG;
+	tie (%translations, 'NDBM_File', $cached_translations, O_RDONLY, 0640);
+    }
+
+    else {
+	system ("rm -f $PO_DIR/.intltool-cache-*.db");
+	print "Generating and caching the translation database\n" unless $QUIET_ARG;
+
+	&create_translation_database;
+	my %new_translations = ();
+	tie (%new_translations, 'NDBM_File', $cached_translations, O_RDWR|O_CREAT, 0640);
+	
+	for my $key (keys %translations) {
+	    $new_translations{$key} = $translations{$key};
+	}
+    }
+}
+
+sub create_text_cache
+{
+    my $timestamp = &get_po_timestamp;
+    my $cached_translations = "$PO_DIR/.intltool-cache-text-$timestamp";	
+
+    if (-e "$cached_translations") {
+	print "Found cached translation database\n" unless $QUIET_ARG;
+	
+	my $key  = ""; 
+	my $last = 1; ## 1 = data, 0 = key
+	open CACHE, "$cached_translations";
+	foreach my $line (<CACHE>) {
+	    chomp $line;
+
+	    if ($last) {
+		$last = 0;
+		$key  = $line;
+	    }
+
+	    else {
+		$last = 1;
+		$translations{$key} = $line;
+	    }
+	}
+    }
+    else {
+	system ("rm -f $PO_DIR/.intltool-cache-*");
+	print "Generating and caching the translation database\n" unless $QUIET_ARG;
+
+	&create_translation_database;
+	
+	open CACHE, ">$cached_translations";
+	for my $key (keys %translations) {
+	    print CACHE "$key\n$translations{$key}\n"
+	}
+	close CACHE;
+    }
+}
+
 
 sub create_translation_database
 {
@@ -301,7 +374,10 @@ sub create_translation_database
 
 sub finalize
 {
-    untie %translations;
+    if ($use_cache == 1 || $use_cache == 2) {
+	# close database if used
+	untie %translations;
+    }
 }
 
 sub unescape_one_sequence
@@ -381,9 +457,9 @@ sub entity_encoded_translation
     return entity_encode ($translation);
 }
 
-## XML/OAF-specific merge code
+## XML (bonobo-activation specific) merge code
 
-sub oaf_merge_translations
+sub ba_merge_translations
 {
     my $source;
 
@@ -429,7 +505,7 @@ sub oaf_merge_translations
 }
 
 
-## XML (non-OAF) merge code
+## XML (non-bonobo-activation) merge code
 
 sub xml_merge_translations
 {
