@@ -1,5 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
+NULL=
+
 aclocal_macros = xml-i18n-tools.m4
 
 CLEANFILES = xml-i18n-toolize xml-i18n-extract xml-i18n-merge xml-i18n-update
