@@ -1,3 +1,13 @@
+2005-01-23  Rodney Dawes  <dobey@novell.com>
+
+	* HACKING: Update to have the right info for the Mailing List
+
+	* README: Update the Mailing List info and URL
+
+	* TODO: Update to not say "fix bugs", and remove some completed items
+
+	* USED: Removed this as per the TODO
+
 2005-01-20  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.in.in (MSGMERGE, GENPOT): Set srcdir for these two scripts
