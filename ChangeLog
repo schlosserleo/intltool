@@ -1,3 +1,9 @@
+2004-01-05  Morten Welinder  <terra@gnome.org>
+
+	* intltoolize.in (cur): Don't use "if ! ...".
+
+	* intltool.m4: Don't use "if ! ...".
+
 2004-01-05  Thomas Vander Stichele  <thomas at apestaart dot org>
 
         * intltool.m4: recommit patch from Chee Bin HOH (#129773)

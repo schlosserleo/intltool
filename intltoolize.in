@@ -245,7 +245,9 @@ for file in $files; do
 done
 
 if test ! -d intltool-modules; then
-  if ! $mkdir intltool-modules; then
+  if $mkdir intltool-modules; then
+    echo "$progname: created intltool-modules" 1>&2
+  else
     echo "$progname: unable to create 'intltool-modules' directory" 1>&2
     exit 1
   fi
