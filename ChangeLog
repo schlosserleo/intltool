@@ -1,5 +1,13 @@
 2004-11-03  Rodney Dawes  <dobey@novell.com>
 
+	* NEWS: Update for Makefile.in.in usage changes
+	
+	* doc/I18N-HOWTO: Update for the new Makefile.in.in behavior from
+	the fix for bug #144715
+	Fix a typo (s/og/or/)
+
+2004-11-03  Rodney Dawes  <dobey@novell.com>
+
 	* Makefile.am (pkgdata_DATA): Add new Makefile.in.in and remove
 	all of the patches that we used to maintain for Makefile.in.in from
 	glib-gettextize

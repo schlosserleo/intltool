@@ -1,3 +1,6 @@
+* Allow use of either AM_GNU_GETTEXT or AM_GLIB_GNU_GETTEXT and use our
+  own Makefile.in.in instead of trying to patch one and update I18N-HOWTO
+  -- bug #144715 (Rodney Dawes)
 * Handle all supported gettext escape sequences in PO files
   -- bug #48489 (Danilo Segan)
 * Fix Scheme string extraction, add support for translators' comments
