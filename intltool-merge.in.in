@@ -31,7 +31,7 @@ my $PACKAGE      = "@PACKAGE@";
 my $VERSION      = "@VERSION@";
 
 ## Script options - Enable by setting value to 1
-my $ENABLE_OAF   = "1";
+my $ENABLE_XML   = "1";
 
 ## Loaded modules
 use strict; 
@@ -41,7 +41,7 @@ use Getopt::Long;
 ## Scalars used by the option stuff
 my $HELP_ARG 	= "0";
 my $VERSION_ARG = "0";
-my $OAF_STYLE_ARG = "0";
+my $XML_STYLE_ARG = "0";
 my $KEYS_STYLE_ARG = "0";
 my $DESKTOP_STYLE_ARG = "0";
 
@@ -50,7 +50,7 @@ my $DESKTOP_STYLE_ARG = "0";
 GetOptions (
 	    "help|h|?"   => \$HELP_ARG,
 	    "version|v"  => \$VERSION_ARG,
-	    "oaf-style|o" => \$OAF_STYLE_ARG,
+	    "xml-style|o" => \$XML_STYLE_ARG,
 	    "keys-style|k" => \$KEYS_STYLE_ARG,
 	    "desktop-style|d" => \$DESKTOP_STYLE_ARG
 	    ) or &error;
@@ -77,11 +77,11 @@ sub split_on_argument {
 
     } elsif ($HELP_ARG) {
 	&help;
-    } elsif ($OAF_STYLE_ARG && @ARGV > 2) {
+    } elsif ($XML_STYLE_ARG && @ARGV > 2) {
 	&place_normal;
 	&message;
 	&preparation;
-	&oaf_merge_translations;
+	&xml_merge_translations;
     } elsif ($KEYS_STYLE_ARG && @ARGV > 2) {
         &place_normal;
         &message;
@@ -123,7 +123,7 @@ sub help{
     print "from an untranslated source and a po directory that includes translations.\n";
     print "  -V, --version                shows the version\n";
     print "  -H, --help                   shows this help page\n";
-    print "  -o, --oaf-style              includes translations in the oaf style\n";
+    print "  -o, --xml-style              includes translations in the xml style\n";
     print "  -k, --keys-style		  includes translations in the keys style\n";
     print "  -d, --desktop-style          includes translations in the desktop style\n";
     print "\nReport bugs to <mjs\@eazel.com>.\n";
@@ -267,29 +267,29 @@ sub entity_encode_int
 
 
 
-## OAF-specific merge code
+## OAF/XML-specific merge code
  
-sub oaf_merge_translations
+sub xml_merge_translations
 {
-    my $oaf_source; {
+    my $xml_source; {
        local (*INPUT);
        local $/; # slurp mode
-       open (INPUT, "<${FILE}") || die "can't open ${FILE}: $!";
-       $oaf_source = <INPUT>;
+       open (INPUT, "<$FILE") || die "can't open $FILE: $!";
+       $xml_source = <INPUT>;
     }
 
-    open OUTPUT, ">${OUTFILE}";
+    open OUTPUT, ">$OUTFILE";
 
-    while ($oaf_source =~ /^(.*<oaf_attribute[^<]*_value=\"[^\"]*\"[^<]*>)$/mg)  {
+    while ($xml_source =~ /^(.*<[^<]*\s_.*=\"[^\"]*\"[^<]*>)$/mg) {
         my $orig_node = $1;
         
         my $non_translated_line = $orig_node;
-        $non_translated_line =~ s/_value=\"/value=\"/;
+        $non_translated_line =~ s/_([^\s]*)=\"/$1=\"/;
             
-        my $new_node="${non_translated_line}\n";
+        my $new_node=$non_translated_line;
             
         my $value_str = $orig_node;
-        $value_str =~ s/.*_value=\"([^\"]*)\".*/$1/sg;
+        $value_str =~ s/.*_.*=\"([^\"]*)\".*/$1/sg;
             
         if ($value_str) {
             my %value_translation_map = entity_encode_translations
@@ -299,16 +299,16 @@ sub oaf_merge_translations
                 my $translation = $value_translation_map{$key};
                     
                 my $translated_line = $orig_node;
-                $translated_line =~ s/name=\"([^\"]*)\"/name=\"$1-${key}\"/g;
-                $translated_line =~ s/_value=\"[^\"]*\"/value=\"${translation}\"/g;
-                $new_node="$new_node${translated_line}\n";
+                $translated_line =~ s/name=\"([^\"]*)\"/name=\"$1-$key\"/g;
+                $translated_line =~ s/(\s*)_(.*)=\"[^\"]*\"/ $1$2=\"$translation\"/g;
+                $new_node="$new_node\n$translated_line";
             }
         }
 
-        $oaf_source =~ s/$orig_node/$new_node/;
+        $xml_source =~ s/$orig_node/$new_node/;
     }           
 
-    print OUTPUT $oaf_source;    
+    print OUTPUT $xml_source;    
 
     close OUTPUT;
     close INPUT;
