@@ -1,3 +1,10 @@
+2004-01-07  Denis Barbier  <barbier@linuxfr.org>
+
+       * intltool-merge.in.in: The XML::Parser Perl module is only
+	 needed to merge XML files, so do not require it when building
+	 other formats.
+
+
 2004-01-07  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-update.in.in: Fix (#130201, Danilo Segan)

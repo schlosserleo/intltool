@@ -42,11 +42,6 @@ use Getopt::Long;
 use Text::Wrap;
 use File::Basename;
 
-my $ret = eval 'require XML::Parser';
-if(!$ret) {
-    die "You must have XML::Parser installed to run $0\n\n";
-} 
-
 my $must_end_tag      = -1;
 my $last_depth        = -1;
 my $translation_depth = -1;
@@ -930,6 +925,10 @@ sub readXml
         die "ERROR Cannot find filename: $filename\n";
     }
 
+    my $ret = eval 'require XML::Parser';
+    if(!$ret) {
+        die "You must have XML::Parser installed to run $0\n\n";
+    } 
     my $xp = new XML::Parser(Style => 'Tree');
     $xp->setHandlers(Char => \&intltool_tree_char);
     $xp->setHandlers(Start => \&intltool_tree_start);
