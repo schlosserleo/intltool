@@ -1,5 +1,13 @@
 2002-01-16  Darin Adler  <darin@bentspoon.com>
 
+	* intltool-update.in.in:
+	Mostly changes by Kenneth Christiansen <kenneth@gnu.org>.
+	This is an attempt to fix a bug in intltool -M where it
+	doesn't find glade files containing translatable strings.
+	Some other miscellaneous cleanups too.
+
+2002-01-16  Darin Adler  <darin@bentspoon.com>
+
 	* TODO: New.
 	* intltool-update.in.in: Fix some typos.
 
