@@ -1,3 +1,17 @@
+2001-10-09  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-extract.in.in: Remove excess whitespace.
+	Still nowhere near real XML parsing, but better than
+	before for multi-line XML.
+
+	* tests/cases/.cvsignore:
+	* tests/cases/Makefile.am:
+	* tests/cases/extract7.xml:
+	* tests/results/Makefile.am:
+	* tests/results/extract7.xml.h:
+	* tests/selftest.pl.in:
+	Add a test for the above change.
+
 2001-10-05  Darin Adler  <darin@bentspoon.com>
 
 	* intltool.spec.in: Second try.

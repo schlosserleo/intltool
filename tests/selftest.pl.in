@@ -40,12 +40,15 @@ sub check_result($)
 {
     my ($testcase) = @_;
 
-    my $result =`cmp -s $srcdir/results/$testcase.h cases/$testcase.h`;
+    my $result =`diff -u $srcdir/results/$testcase.h cases/$testcase.h`;
     
     if ($? == 0 && $result eq "") { 
-        print "[OK]\n"; ## files were equal
+        print "[OK]\n"; ## diff was empty, ie. files were equal
     } else { 
         print "[FAILED] ($testcase)\n"; 
+        open OUT, ">>errors";
+        print OUT $result;
+        close OUT;
         $failed = 1;
     }
 }
@@ -78,60 +81,52 @@ unlink "errors";
 
 system("cp $srcdir/cases/*.* cases") if $srcdir ne ".";
 
-## 1. Extract/Simple desktop file
-
-print "1. Checking output from simple desktop file:                     ";
-
+print " 1. Checking output from simple desktop file:                     ";
 $case = "extract1.desktop";
 system("/usr/bin/perl ../intltool-extract --type=gettext/ini --quiet --update cases/$case") == 0 or $failed = 1;
 check_result($case);
 
-## 2. Extract/Simple desktop-like file
-
-print "2. Checking output from simple desktop-like file:                ";
-
+print " 2. Checking output from simple desktop-like file:                ";
 $case = "extract2.keyprop";
 system("/usr/bin/perl ../intltool-extract --type=gettext/ini --quiet --update cases/$case") == 0 or $failed = 1;
 check_result($case);
 
-## 3. Extract/Simple desktop-like file
-
-print "3. Checking output from simple xml-file:                         ";
-
+print " 3. Checking output from simple xml-file:                         ";
 $case = "merge1.xml";
 system("/usr/bin/perl ../intltool-merge -o -p --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
-print "4. Checking output from simple xml-file:                         ";
+print " 4. Checking output from multi-line xml-file:                     ";
+$case = "extract7.xml";
+system("/usr/bin/perl ../intltool-extract --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
+check_result($case);
 
+print " 5. Checking output from simple xml-file:                         ";
 $case = "extract3.xml.in";
 system("/usr/bin/perl ../intltool-extract --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_result($case);
 
-print "5. Checking output from simple pong style xml-file:              ";
-
+print " 6. Checking output from simple pong style xml-file:              ";
 $case = "merge4.xml";
 system("/usr/bin/perl ../intltool-merge -x -p --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
-print "6. Checking output from glade style xml-file:                    ";
-
+print " 7. Checking output from glade style xml-file:                    ";
 $case = "extract6.glade";
 system("/usr/bin/perl ../intltool-extract --type=gettext/glade --quiet --update cases/$case") == 0 or $failed = 1;
 check_result($case);
 
-print "7u. Checking output from dia sheet style xml-file:               ";
-
+print " 8. Checking output from dia sheet style xml-file:                ";
 $case = "merge5u.sheet";
 system("/usr/bin/perl ../intltool-merge -x -u --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
-print "7p. Checking output from dia sheet style xml-file [broken XML]:  ";
+print " 9. Checking output from dia sheet style xml-file [broken XML]:   ";
 $case = "merge5p.sheet";
 system("/usr/bin/perl ../intltool-merge -x -p --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
-print "8. Checking output from xml-file with escaped PO strings:        ";
+print "10. Checking output from xml-file with escaped PO strings:        ";
 $case = "merge6.xml";
 system("/usr/bin/perl ../intltool-merge -x -u --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_result_output($case);

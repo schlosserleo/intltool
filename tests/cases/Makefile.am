@@ -6,6 +6,7 @@ EXTRA_DIST =					\
 	extract2.keyprop			\
 	extract3.xml.in				\
 	extract6.glade				\
+	extract7.xml				\
 	fr_BE.po				\
 	fr_FR.po				\
 	merge1.xml.in				\
