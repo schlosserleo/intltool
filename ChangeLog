@@ -1,3 +1,9 @@
+2004-07-27  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS:
+	* configure.in: Update for 0.32
+	(AC_OUTPUT): Remove xml-i18n-toolize
+
 2004-11-04  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS: Update for bug fix

@@ -1,3 +1,5 @@
+Version 0.32
+
 * Check to avoid whining about {arch} and $PACKAGE-$VERSION dist directories
   when looking for files missing from POTFILES.in
   -- bug #157278 (Rodney Dawes)
