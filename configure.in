@@ -11,24 +11,25 @@ AC_SUBST(pkgdatadir) dnl automake does not need this, but libtoolize does
 aclocaldir='${datadir}'/aclocal
 AC_SUBST(aclocaldir)
 
-
 AC_PATH_PROG(PERL, perl)
 if test -z "$PERL"; then
    AC_MSG_ERROR([perl not found])
 fi
 if test -z "`$PERL -v | fgrep '5.' 2> /dev/null`"; then
-   AC_MSG_ERROR([perl 5.x required])
+   AC_MSG_ERROR([perl 5.x required for xml-i18n-tools])
 fi
 
 AC_OUTPUT([
 Makefile
 tests/Makefile
+tests/selftest.pl
 tests/cases/Makefile
 tests/results/Makefile
-xml-i18n-extract
-xml-i18n-merge
-xml-i18n-toolize
-xml-i18n-update
+xml-i18n-extract.in
+xml-i18n-merge.in
 xml-i18n-prepare
+xml-i18n-update.in
 xml-i18n-tools.spec
+xml-i18n-toolize
+xml-i18n-unicodify
 ])

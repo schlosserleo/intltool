@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!@PERL@ -w
         
 #
 #  The i18n Unicode Encoding Utility

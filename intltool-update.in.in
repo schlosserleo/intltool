@@ -1,4 +1,4 @@
-#!@PERL@ -w
+#!@XML_I18N_TOOLS_PERL@ -w
 
 #  The GNOME Translation Update Tool 
 #

@@ -1,5 +1,10 @@
 SUBDIRS = cases results
 
-EXTRA_DIST = selftest.pl
+EXTRA_DIST = selftest.pl.in
 
-TESTS=selftest.pl
+TESTS=selftest
+
+selftest: selftest.pl
+	cp $< $@
+	chmod +x $@
+

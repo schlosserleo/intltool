@@ -1,3 +1,36 @@
+2001-02-05  Maciej Stachowiak  <mjs@eazel.com>
+
+	reviewed by: George Lebl <jirka@eazel.com>
+	             Robin * Slomkowski <rslomkow@eazel.com>
+
+	Fixed bug 6199 (perl location is configured at xml-i18n-tools
+	configure time -- not the configure time for a package that uses
+	the tools) and 6250 (perl path hard-coded in selftest.pl). Also
+	made 'make distcheck' work.
+	
+	* tests/Makefile.am: Screw around a bit so the self test script
+	ends up executable after configure substitution.
+	* tests/cases/.cvsignore: Ignore a new file
+	* tests/cases/Makefile.am, tests/results/Makefile.am: Add missing
+	files to EXTRA_DIST.
+	* tests/selftest.pl.in: renamed from tests/selftest.pl, set perl
+	path at configure time.
+	* xml-i18n-unicodify.in: renamed from xml-i18n-unicodify, set perl
+	path at configure time.
+	* xml-i18n-extract.in.in, xml-i18n-merge.in.in,
+	xml-i18n-prepare.in.in, xml-i18n-update.in.in: Renamed to .in.in
+	from .in; substitute all variables except perl path at
+	xml-i18n-tools configure time, so .in versions can be copied into
+	modules when xml-i18n-toolizing.
+	* xml-i18n-toolize.in: copy .in versions of tools into module.
+	* xml-i18n-tools.Makefile.patch: don't change DISTFILES, this
+	broke with the new changes.
+	* xml-i18n-tools.m4: substitute xml-i18n-tools ; expect xml-i18n-*
+	to be in builddir.
+	* README: Updated instructions on how to use. 
+	* Makefile.am: Adjust what gets installed where. 
+	* configure.in: Adjust set of files being output.
+
 2001-02-01  Kenneth Christiansen <kenneth@gnu.org>
 
 	* tests/selftest.pl:

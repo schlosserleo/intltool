@@ -22,15 +22,6 @@
  
  DEFS = @DEFS@
  CFLAGS = @CFLAGS@
-@@ -49,7 +55,7 @@
- POFILES = @POFILES@
- GMOFILES = @GMOFILES@
- DISTFILES = ChangeLog Makefile.in.in POTFILES.in $(PACKAGE).pot \
--stamp-cat-id $(POFILES) $(GMOFILES) $(SOURCES)
-+stamp-cat-id $(POFILES) $(GMOFILES) $(SOURCES) $(XML_I18N_UPDATE) $(XML_I18N_EXTRACT)
- 
- POTFILES = \
- 
 @@ -85,12 +91,7 @@
  all-no:
  

@@ -22,9 +22,9 @@ To use xml-i18n-tools in your module, do the following:
  
 	AM_PROG_XML_I18N_TOOLS
 
- o  Add xml-i18n-extract, xml-i18n-merge and xml-i18n-update to
-    EXTRA_DIST in your top-level Makefile.am and also to the top-level
-    .cvsignore.
+ o  Add xml-i18n-extract.in, xml-i18n-merge.in and xml-i18n-update.in
+    to EXTRA_DIST in your top-level Makefile.am and also to the
+    top-level .cvsignore. Also add the non-.in versions to .cvsignore
  
  o  Add the .xml and .glade files you want translated to POTFILES.in
  
