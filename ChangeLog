@@ -1,3 +1,9 @@
+Sun Apr 04 21:03:00 2001  John Gotts <jgotts@linuxsavvy.com>
+
+	* xml-i18n-tools.spec.in: Should be a noarch.  Also added some missing
+	files.  Additionally, I think there was a problem generating the spec
+	file.
+
 Sun Mar 25 03:18:35 2001  George Lebl <jirka@5z.com>
 
 	* xml-i18n-extract.in.in (type_xml): The message is anything but <,

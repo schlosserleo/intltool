@@ -50,10 +50,12 @@ EXTRA_DIST =					\
 	xml-i18n-update.in.in			\
 	xml-i18n-prepare.in			\
 	xml-i18n-unicodify.in			\
-	xml-i18n-tools.spec			\
+	xml-i18n-tools.spec.in			\
 	$(pkgdata_DATA)				\
 	$(NULL)
 
+dist-hook:
+	cp xml-i18n-tools.spec $(distdir)
 
 xml-i18n-extract: xml-i18n-extract.in
 	sed -e "s:@XML_I18N_TOOLS_PERL@:$(PERL):;" < $< > $@
