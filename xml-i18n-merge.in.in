@@ -185,6 +185,7 @@ sub lookup_translations
 sub lookup_translation
 {
     my ($string, $lang) = @_;
+    $string =~ s/\+/\\+/g;
 
     my $po_file = $po_files_by_lang{$lang};
     
