@@ -173,16 +173,21 @@ system("$INTLTOOL_MERGE -s --quiet cases cases/$case.in cases/$case") == 0 or $f
 check_merge_result($case);
 
 print "17. Extract messages from a xml file using the xml:space attribute:  ";
-$case = "extract9.xml";
+$case = "extract9.xml.in";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "18. Merge translations into multiple files:                          ";
+print "18. Merge messages into xml file using the xml:space attribute:  ";
+$case = "extract9.xml";
+system("$INTLTOOL_MERGE -x -u --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
+check_merge_result($case);
+
+print "19. Merge translations into multiple files:                          ";
 $case = "merge6.xml";
 system("$INTLTOOL_MERGE -x -s --quiet --multiple-output cases cases/$case.in $case") == 0 or $failed = 1;
 check_multimerge_result($case, "merge6");
 
-print "19. Extract comments for translators from XML file:                  ";
+print "20. Extract comments for translators from XML file:                  ";
 $case = "extract-comments.xml";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);

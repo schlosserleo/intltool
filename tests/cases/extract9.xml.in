@@ -1,6 +1,5 @@
-<!-- This test cases tests the use of the xml:space attribute -->
-
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- This test cases tests the use of the xml:space attribute -->
 <gimp-tips>
   <tip level="start">
     <_welcome>
@@ -18,7 +17,7 @@
 
 
       Nearly all image operations are performed by right-clicking
-      on the image.  And don't worry, you can undo most mistakes...
+      on the image.  And don't worry, you can undo most mistakes.
 
 
 

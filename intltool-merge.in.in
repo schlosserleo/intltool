@@ -664,7 +664,7 @@ sub getXMLstring
 	    # We've got CDATA
 	    if ($content) {
 		# lets strip the whitespace here, and *ONLY* here
-		$content =~ s/\s+/ /gs;
+                $content =~ s/\s+/ /gs if (!((exists $attrs->{"xml:space"}) && ($attrs->{"xml:space"} =~ /^["']?preserve["']?$/)));
 		$result .= ($content);
 	    } else {
 		#print "no cdata content when expected it\n"; # is this possible, is this ok?
@@ -718,8 +718,10 @@ sub traverse
 	print $fh "<$nodename$outattr";
 	if ($translate) {
 	    $lookup = getXMLstring($content);
-	    $lookup =~ s/^\s+//s;
-	    $lookup =~ s/\s+$//s;
+            if (!((exists $attrs->{"xml:space"}) && ($attrs->{"xml:space"} =~ /^["']?preserve["']?$/)))
+                $lookup =~ s/^\s+//s;
+                $lookup =~ s/\s+$//s;
+            }
 
 	    if ($lookup) {
                 my $translation = $translations{$language, $lookup};

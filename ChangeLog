@@ -1,3 +1,21 @@
+2004-10-07  Danilo Šegan  <dsegan@gmx.net>
+
+	Fixes #151017.
+	
+	* NEWS: Document bugfix.
+
+	* intltool-merge.in.in (getXMLstring, traverse): Remove spacing
+	only for non xml:space=preserve tags in $content, $lookup.
+
+	* tests/selftest.pl.in: Add new testcase.
+	* tests/results/extract9.xml: Added.
+	* tests/results/extract9.xml.in.h: Renamed from extract9.xml.h and
+	updated.
+	* tests/cases/extract9.po: Added.
+	* tests/cases/extract9.xml.in: Renamed from extract9.xml.
+	Move xml declaration to the top (to make it valid).
+	Change one message.
+
 2004-09-29  Danilo Šegan  <dsegan@gmx.net>
 
 	* NEWS: Document bug fix.
