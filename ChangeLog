@@ -1,3 +1,7 @@
+2001-11-13  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* USED: gedit's HEAD use now intltool.
+
 2001-11-09  Darin Adler  <darin@bentspoon.com>
 
 	* NEWS: Updated for 0.12 release.
