@@ -608,7 +608,7 @@ sub getAttributeString
     my $do_translate = shift || 0;
     my $language = shift || "";
     my $result = "";
-    foreach my $e (reverse(keys %{ $sub })) {
+    foreach my $e (reverse(sort(keys %{ $sub }))) {
 	my $key    = $e;
 	my $string = $sub->{$e};
 	my $quote = '"';
