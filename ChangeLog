@@ -1,3 +1,8 @@
+2001-06-01  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* USED: added 10 new modules. The file loses its purpose as everyone
+	wants to use us :)
+
 2001-05-30  Maciej Stachowiak  <mjs@eazel.com>
 
 	* xml-i18n-tools.m4: One more change needed to work with autoconf
