@@ -1,5 +1,10 @@
 2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
 
+	* xml-i18n-tools.m4: s/keys/desktop/; some
+	places and replaced some spaces with tabs.
+
+2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
+
 	* xml-i18n-merge.in: 
 	* xml-i18n-tools.m4:
 	Added merging for *.desktop files.
