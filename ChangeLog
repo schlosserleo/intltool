@@ -1,3 +1,8 @@
+2002-02-26  Darin Adler  <darin@bentspoon.com>
+
+	* intltool.m4: Add missing AC_SUBST for .ui rule that Kenneth pointed
+	out to me.
+
 2002-02-25  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-merge.in.in: Write out a message to make it clear what's
