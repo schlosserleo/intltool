@@ -16,7 +16,6 @@ CLEANFILES =					\
 	intltool-merge				\
 	intltool-prepare			\
 	intltool-update				\
-	intltool-unicodify			\
 	*.gz					\
 	$(NULL)
 
@@ -50,7 +49,6 @@ bin_SCRIPTS =					\
 	intltool-merge				\
 	intltool-extract			\
 	intltool-prepare			\
-	intltool-unicodify			\
 	$(NULL)
 
 EXTRA_DIST =					\
@@ -61,7 +59,6 @@ EXTRA_DIST =					\
 	intltool-merge.in.in			\
 	intltool-update.in.in			\
 	intltool-prepare.in			\
-	intltool-unicodify.in			\
 	intltool.spec.in			\
 	$(pkgdata_DATA)				\
 	$(NULL)

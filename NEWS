@@ -1,3 +1,16 @@
+Version 0.27
+
+* Small scheme support fixes (Callum McKenzie)
+* Added support for .lang files (Gustavo Giraldez)
+* Added support for .xam files (Abel Cheung)
+* Updated I18N-HOWTO (Kenneth, Bruno Haible)
+* Updated all manual pages and command help (Abel Cheung)
+* Improved the package name detection code (Abel Cheung)
+* better .server files handling (Abel Cheung)
+* source code with non-ASCII chars support with
+GNU gettext 0.12 (bug #99005, Abel Cheung, Carlos Perelló)
+* intltool-unicodify is deprecated, please use msgconv (Abel Cheung
+
 Version 0.26
 
 * Handle no translations in get_newest_po_age (Rodney Dawes)
