@@ -1,3 +1,15 @@
+Version 0.30
+
+* added missing [] quotation macro name defined in AC_DEFUN() 
+ (Tomasz Kloczko)
+* Handle embedded newlines thereby avoiding the silent corruption of 
+  files. (Morten Welinder)
+* Now intltool-merge does not compress whitespace in attributes 
+  and CDATA. (Brian Cameron)
+* Now intltool-merge supports dashes in attribute names, and  supports 
+  attributes delimited by single quotes. (Brian Cameron)
+* Misc small fixes (Kenneth Chr., Danilo Segan)
+
 Version 0.29
 
 * Removed OrigTree in favor of more simply setting handlers directly

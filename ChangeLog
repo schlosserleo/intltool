@@ -1,3 +1,7 @@
+2004-02-03  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* NEWS, configure.in: update for new release.
+
 2004-01-31  Tomasz K³oczko <kloczek@pld.org.pl>
 
 	*xml-i18n-tools.m4, intltool.m4: added missing [] quotation
