@@ -1,5 +1,12 @@
 2002-04-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+	* doc/Makefile.am: Added I18N-HOWTO.
+	* doc/I18N-HOWTO: Added HOWTO on adding i18n support to an
+	application. Thanks to Thomas Vander Stichele for improving and
+	testing it!
+
+2002-04-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
 	* tests/selftest.pl.in: Made more portable (fixes #78594)
 
 2002-04-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
