@@ -1,3 +1,8 @@
+2002-05-20  Mark McLoughlin  <mark@skynet.ie>
+
+	* intltool.m4: use $srcdir when looking for
+	intltool-update.in
+
 2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
         * intltool-update.in.in: Made -m respect .schemas
