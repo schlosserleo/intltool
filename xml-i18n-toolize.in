@@ -232,6 +232,11 @@ done
 
 if grep GENPOT po/Makefile.in.in >/dev/null; then
   echo "no need for patching file \`Makefile.in.in'";
+
+# gettextize 4.x Standard
+elif grep '# Copyright (C) 1995-1997, 2000-2002' po/Makefile.in.in > /dev/null; then
+  patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-5
+
 elif grep builddir po/Makefile.in.in >/dev/null; then
   patch po/Makefile.in.in < $pkgdatadir/xml-i18n-po-Makefile.in.in-patch-2
 else

@@ -1,5 +1,10 @@
 2002-10-22  Kenneth Christiansen <kenneth@gnu.org>
 
+	* xml-i18n-toolize.in: I think it works with
+	gettextize 4.x now - please test.
+
+2002-10-22  Kenneth Christiansen <kenneth@gnu.org>
+
 	* intltool-po-Makefile.in.in-patch-5:
 	* intltool/Makefile.am:
 	* intltoolize.in:
