@@ -648,7 +648,7 @@ sub print_report
     foreach my $lang (@languages) 
     {
 	print "$lang: ";
-	&update_po_file ($lang);
+	&update_po_file ($lang, "");
     }
 
     print "\n\n * Current translation support in $MODULE \n\n";

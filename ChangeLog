@@ -1,3 +1,8 @@
+2003-03-12  Kenneth Christiansen <kenneth@gnu.org>
+
+	* intltool-update.in.in: Fix small buglet introduced my
+	Jamesh's patch that was added some time ago.
+
 2003-03-11  Kenneth Christiansen <kenneth@gnu.org>
 
 	* tests/selftest.pl.in: Cleaned up a bit.
