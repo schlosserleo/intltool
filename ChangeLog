@@ -1,3 +1,7 @@
+2001-09-25  Darin Adler  <darin@bentspoon.com>
+
+	* xml-i18n-merge.in.in: Added a comment.
+
 2001-09-24  Darin Adler  <darin@bentspoon.com>
 
 	* xml-i18n-tools.m4: Used % instead of \%. It turns out that

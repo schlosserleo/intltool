@@ -273,6 +273,9 @@ sub unescape_one_sequence
     return "\\" if $sequence eq "\\\\";
     return "\"" if $sequence eq "\\\"";
 
+    # gettext also handles \n, \t, \b, \r, \f, \v, \a, \xxx (octal),
+    # \xXX (hex) and has a comment saying they want to handle \u and \U.
+
     return $sequence;
 }
 
