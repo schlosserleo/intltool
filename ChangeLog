@@ -1,3 +1,7 @@
+2003-03-11  Kenneth Christiansen <kenneth@gnu.org>
+
+	* intltool.m4: fixed bug #98988
+
 2003-03-04  James Henstridge  <james@daa.com.au>
 
 	* intltool-po-Makefile.in.in-patch-7: the patch.
