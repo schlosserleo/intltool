@@ -43,7 +43,7 @@ To use intltool in your module, do the following:
 
  o Add this line to configure.in near the top
 
-	AC_PROG_INTLTOOL([minimum required version])
+	AC_PROG_INTLTOOL([minimum required version], [no-xml])
 
  o Add intltool-extract.in, intltool-merge.in, and intltool-update.in
    to EXTRA_DIST in your top-level Makefile.am and also to the top-level
@@ -64,9 +64,15 @@ Examples of packages that use intltool are listed in the USED file.
 Details of the AC_PROG_INTLTOOL macro
 -------------------------------------------
 
-The parameter indicates the minimum required version. The
-configure script will halt if the version is older than
-the parameter.
+The first parameter indicates the minimum required version. The
+configure script will halt if the version is older than the first
+parameter.
+
+The second parameter is to tell intltool that we don't need the
+extended xml parsing abilities provided by the XML::Parser perl
+module. If it is not provided, or is any value other than "no-xml",
+then XML::Parser will be checked for by the configure script. This
+feature is only available in intltool 0.31 or newer.
 
 Extra Steps for DESKTOP Files
 ..............................

@@ -1,5 +1,16 @@
 2004-06-12  Rodney Dawes  <dobey@novell.com>
 
+	* README: Document the changes to intltool.m4 for declaring that
+	an application does not need the XML processing features of intltool
+
+	* intltool.m4: Add the second option of [no-xml] to AC_PROG_INTLTOOL
+	so that applications can request to not use the XML processing features
+	of intltool that require the XML::Parser perl module
+
+	Fixes #130850
+
+2004-06-12  Rodney Dawes  <dobey@novell.com>
+
 	* intltool-update.in.in (SubstituteVariable, FindPackageName):
 	Strip the leading and trailing quotes from variable values
 
