@@ -1,3 +1,13 @@
+2003-03-04  James Henstridge  <james@daa.com.au>
+
+	* intltool-po-Makefile.in.in-patch-7: the patch.
+
+	* intltoolize.in (auxdirline): handle patch-7
+
+	* intltool-update.in.in (update_po_file): handle using a different
+	output file.
+	(print_status): if -o is specified, check its status.
+
 2003-02-27  Malcolm Tredinnick <malcolm@commsecure.com.au>
 	
 	* intltool-po-Makefile.in.in-patch-5: Correct the invocation of

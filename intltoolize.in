@@ -251,8 +251,9 @@ elif grep '# Copyright (C) 1995-1997, 2000-2002' po/Makefile.in.in > /dev/null; 
 
 # glib-gettextize
 elif grep '# POTFILES is created from POTFILES.in' po/Makefile.in.in > /dev/null; then
-  if grep 'XGETTEXT = @XGETTEXT@' po/Makefile.in.in > /dev/null;
-  then 
+  if grep 'lang.new.po' po/Makefile.in.in > /dev/null; then
+    patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-7
+  elif grep 'XGETTEXT = @XGETTEXT@' po/Makefile.in.in > /dev/null; then 
     patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-6
   else
     patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-4
