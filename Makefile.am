@@ -4,11 +4,10 @@ SUBDIRS = tests doc doc-i18n-tool
 
 NULL = 
 
-aclocal_macros = intltool.m4 xml-i18n-tools.m4
+aclocal_macros = intltool.m4
 
 CLEANFILES =					\
 	intltoolize				\
-	xml-i18n-toolize			\
 	intltool-extract.in			\
 	intltool-merge.in			\
 	intltool-update.in			\
@@ -19,7 +18,7 @@ CLEANFILES =					\
 	*.gz					\
 	$(NULL)
 
-# These are required by intltoolize and xml-i18n-toolize.
+# These are required by intltoolize and
 pkgdata_DATA =					\
 	Makefile.in.in				\
 	intltool-extract.in			\
@@ -35,7 +34,6 @@ aclocal_DATA = $(aclocal_macros)
 
 bin_SCRIPTS =					\
 	intltoolize				\
-	xml-i18n-toolize			\
 	intltool-update				\
 	intltool-merge				\
 	intltool-extract			\
@@ -45,7 +43,6 @@ bin_SCRIPTS =					\
 EXTRA_DIST =					\
 	$(aclocal_macros)			\
 	intltoolize.in				\
-	xml-i18n-toolize.in			\
 	intltool-extract.in.in			\
 	intltool-merge.in.in			\
 	intltool-update.in.in			\
