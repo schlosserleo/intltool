@@ -718,7 +718,7 @@ sub traverse
 	print $fh "<$nodename$outattr";
 	if ($translate) {
 	    $lookup = getXMLstring($content);
-            if (!((exists $attrs->{"xml:space"}) && ($attrs->{"xml:space"} =~ /^["']?preserve["']?$/)))
+            if (!((exists $attrs->{"xml:space"}) && ($attrs->{"xml:space"} =~ /^["']?preserve["']?$/))) {
                 $lookup =~ s/^\s+//s;
                 $lookup =~ s/\s+$//s;
             }

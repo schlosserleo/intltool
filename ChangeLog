@@ -1,5 +1,11 @@
 2004-10-07  Danilo Šegan  <dsegan@gmx.net>
 
+	* intltool-merge.in.in (traverse): Add missing "{".
+
+	* tests/selftest.pl.in: Add more spaces to align test 18 better.
+
+2004-10-07  Danilo Šegan  <dsegan@gmx.net>
+
 	Fixes #151017.
 	
 	* NEWS: Document bugfix.
