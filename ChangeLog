@@ -1,6 +1,10 @@
 2001-01-31  Kenneth Christiansen <kenneth@gnu.org>
 
-	* tests/: Started small test program.
+        * tests/selftest.pl: Cleaned up a bit.
+
+2001-01-31  Kenneth Christiansen <kenneth@gnu.org>
+
+	* tests/*: Started small test program.
 
 2001-01-31  Kenneth Christiansen <kenneth@gnu.org>
 
