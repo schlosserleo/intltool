@@ -1,3 +1,5 @@
+=== intltool 0.22 ===
+
 2002-06-04  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* tests/results/extract8.glade.h: Fixed test.
