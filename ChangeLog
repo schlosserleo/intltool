@@ -1,3 +1,8 @@
+2001-04-10  Christopher James Lahey  <clahey@ximian.com>
+
+	* xml-i18n-update.in.in: Added .etspec to the list of xml file
+	types.
+
 2001-04-06  Dietmar Maurer  <dietmar@ximian.com>
 
 	* xml-i18n-update.in.in: bug fix - the previous code to extract

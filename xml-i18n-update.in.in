@@ -48,7 +48,8 @@ my %po_files_by_lang = ();
 
 my $xml_extension = "xml|glade|desktop\.in|directory\.in|"
 		   ."soundlist\.in|keys\.in|oaf(\.in)+|"
-		   ."pong(\.in)+";
+		   ."pong(\.in)+|"
+		   ."etspec";
 
 my $PACKAGE = &find_package_name;
 
