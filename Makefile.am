@@ -21,20 +21,10 @@ CLEANFILES =					\
 
 # These are required by intltoolize and xml-i18n-toolize.
 pkgdata_DATA =					\
+	Makefile.in.in				\
 	intltool-extract.in			\
 	intltool-merge.in			\
 	intltool-update.in			\
-	intltool-po-Makefile.in.in-patch-1	\
-	intltool-po-Makefile.in.in-patch-2	\
-	intltool-po-Makefile.in.in-patch-3	\
-	intltool-po-Makefile.in.in-patch-4	\
-	intltool-po-Makefile.in.in-patch-5	\
-	intltool-po-Makefile.in.in-patch-6	\
-	intltool-po-Makefile.in.in-patch-7	\
-	intltool-po-Makefile.in.in-patch-8	\
-	xml-i18n-po-Makefile.in.in-patch-1	\
-	xml-i18n-po-Makefile.in.in-patch-2	\
-	xml-i18n-po-Makefile.in.in-patch-5	\
 	$(NULL)
 
 
