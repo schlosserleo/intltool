@@ -47,7 +47,7 @@ if(!$ret) {
 } 
 
 ## Add dir to own perl modules
-push @INC, "@INTLTOOL_PERL_MODULE_PATH@";
+push @INC, "@EXPANDED_DATADIR@/@PACKAGE@";
 push @INC, "./modules";
 
 $ret = eval 'require XML::Parser::Style::OrigTree';

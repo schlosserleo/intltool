@@ -54,6 +54,14 @@ EXPANDED_LIBDIR=`eval echo $LIBDIR_TMP`
 exec_prefix=$old_exec_prefix
 AC_SUBST(EXPANDED_LIBDIR)
 
+DATADIR_TMP="$datadir"
+old_exec_prefix=$exec_prefix
+exec_prefix=$REAL_PREFIX
+EXPANDED_DATADIR=`eval echo $DATADIR_TMP`
+exec_prefix=$old_exec_prefix
+AC_SUBST(EXPANDED_DATADIR)
+
+
 AC_OUTPUT([
 Makefile
 doc-i18n-tool/Makefile

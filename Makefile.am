@@ -67,5 +67,4 @@ dist-hook:
 	cp intltool.spec $(distdir)
 
 %: %.in Makefile
-	sed -e "s:@INTLTOOL_PERL@:$(PERL):;" \
-	    -e "s:@INTLTOOL_PERL_MODULE_PATH@:$(datadir)/intltool:;" < $< > $@
+	sed -e "s:@INTLTOOL_PERL@:$(PERL):;" < $< > $@
