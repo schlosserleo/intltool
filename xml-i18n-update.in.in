@@ -46,9 +46,17 @@ my $VERBOSE	   = "0";
 my @languages;
 my %po_files_by_lang = ();
 
-my $xml_extension = "xml(\.in)*|ui|glade|desktop\.in|directory\.in|"
-		   ."soundlist\.in|keys\.in|oaf(\.in)+|"
-		   ."etspec|pong(\.in)+";
+my $xml_extension = 
+"xml(\.in)*|".		# .in is not required
+"ui|".
+"glade(\.in)*|".	# .in is not required
+"desktop(\.in)+|".
+"directory(\.in)+|".
+"soundlist(\.in)+|".
+"keys(\.in)+|".
+"oaf(\.in)+|".
+"etspec|".
+"pong(\.in)+";
 
 my $PACKAGE = &find_package_name;
 
@@ -147,7 +155,7 @@ sub determine_type($) {
    elsif ($type =~ /(?:xml(\.in)*|ui|oaf(?:\.in)+|pong(?:\.in)+|etspec)$/) {
         $gettext_type="gettext\/xml";
    }
-   elsif ($type =~ /glade$/) {
+   elsif ($type =~ /glade(\.in)*$/) {
         $gettext_type="gettext\/glade";
    }
    elsif ($type =~ /desktop(\.in)+$/) {

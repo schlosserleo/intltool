@@ -1,3 +1,8 @@
+2001-05-16  Kenneth Christiansen <kenneth@gnu.org>
+
+	* xml-i18n-update.in.in: Fixed some file support
+	errors so it works with Ximian Setup Tools.
+
 2001-05-11  Laszlo Kovacs <laszlo.kovacs@sun.com>
 	patch reviewed by Kenneth Christiansen <kenneth@gnu.org>
 	* xml-i18n-update.in.in: added proper handling of files
