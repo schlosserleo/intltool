@@ -878,7 +878,7 @@ sub xml_merge_output
     print OUTPUT qq{<?xml version="1.0" encoding="UTF-8"?>\n};
     parseTree(\*OUTPUT, $tree, 0);
     close OUTPUT;
-    print "CREATED $OUTFILE\n";
+    print "CREATED $OUTFILE\n" unless $QUIET_ARG;
 }
 
 sub keys_merge_translations
