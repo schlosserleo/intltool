@@ -1,4 +1,5 @@
 #!@PERL@ -w 
+# -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 2  -*-
 
 #
 #  The XML Translation Extractor
@@ -54,11 +55,11 @@ $| = 1;
 
 ## Handle options
 GetOptions (
-	    "local|l"    => \$LOCAL_ARG,
-	    "help|h|?"   => \$HELP_ARG,
-	    "version|v"  => \$VERSION_ARG,
-	    "update"     => \$UPDATE_ARG,
-	   ) or &Error;
+            "local|l"    => \$LOCAL_ARG,
+            "help|h|?"   => \$HELP_ARG,
+            "version|v"  => \$VERSION_ARG,
+            "update"     => \$UPDATE_ARG,
+            ) or &Error;
 
 &SplitOnArgument;
 
@@ -69,11 +70,11 @@ GetOptions (
 sub SplitOnArgument {
 
     if ($VERSION_ARG) {
-	&Version;
+        &Version;
 
     } elsif ($HELP_ARG) {
 	&Help;
-   
+        
     } elsif ($LOCAL_ARG) {
         &PlaceLocal;
         &Extract;
@@ -101,17 +102,28 @@ sub PlaceNormal {
 sub PlaceLocal {
     $FILE	 = $ARGV[0];
     $OUTFILE     = fileparse($FILE, ());
-    if (!-e "tmp/") {
-    system("mkdir tmp/");
+    if (!-e "tmp/") { 
+        system("mkdir tmp/"); 
     }
     $OUTFILE     = "./tmp/$OUTFILE.h"
 }
 
-
 sub PreCheck {
-    if (! $ENABLE_XML)   { if ($FILE =~ /(xml|oaf\.in)$/sg) { exit; }}
-    if (! $ENABLE_GLADE) { if ($FILE =~ /glade$/sg) 	    { exit; }}
-    if (! $ENABLE_XP)    { if ($FILE =~ /\/xp\/(.*)\.h$/sg) { exit; }}
+    if (! $ENABLE_XML) { 
+        if ($FILE =~ /(xml|oaf\.in)$/sg) { 
+            exit; 
+        }
+    }
+    if (! $ENABLE_GLADE) { 
+        if ($FILE =~ /glade$/sg) { 
+            exit; 
+        }
+    }
+    if (! $ENABLE_XP) { 
+        if ($FILE =~ /\/xp\/(.*)\.h$/sg) { 
+            exit; 
+        }
+    }
 }  
 
 ## Sub for printing release information
@@ -169,75 +181,74 @@ sub Convert($) {
 	open (IN, "<$FILE") || die "can't open $FILE: $!";
 	$input = <IN>;
     }
- 
+    
     # This used to put a comment in $OUTFILE, but that comment
     # showed up all over the .pot file, so it should not be put
     # in there. The comment was more appropriate back when the
     # files went in the source tree rather than a /tmp directory..
 
-##################
-if ($ENABLE_XML) {
-##################
+    ##################
+    if ($ENABLE_XML) {
+    ##################
 
 	### For generic translatable XML files ###
- 
+        
         if ($FILE =~ /(xml|oaf\.in)$/sg){
 
-        while ($input =~ /[\t\n\s]_[a-zA-Z0-9_]+=\"([^\"]+)\"/sg) {
-	   	$messages{$1} = [];
-        }
+            while ($input =~ /[\t\n\s]_[a-zA-Z0-9_]+=\"([^\"]+)\"/sg) {
+                $messages{$1} = [];
+            }
 
-	while ($input =~ /<_[a-zA-Z0-9_]+>([^_]+)<\/_[a-zA-Z0-9_]+>/sg) {
-		$messages{$1} = [];
- 	}
+            while ($input =~ /<_[a-zA-Z0-9_]+>([^_]+)<\/_[a-zA-Z0-9_]+>/sg) {
+                $messages{$1} = [];
+            }
 
 	}
-}
+    }
 
-####################
-if ($ENABLE_GLADE) {
-####################
+    ####################
+    if ($ENABLE_GLADE) {
+    ####################
         
         ### For translatable Glade XML files ###
 
         if ($FILE =~ /glade$/sg){
 
-        my $translate = "label|title|text|format|copyright|comments|
-                         preview_text|tooltip";
+            my $translate = "label|title|text|format|copyright|comments|
+                             preview_text|tooltip";
 
-        while ($input =~ /<($translate)>([^<]+)<\/($translate)>/sg) {
+            while ($input =~ /<($translate)>([^<]+)<\/($translate)>/sg) {
 
-	    # Glade has some bugs, especially it uses translations tags to contain little
-	    # non-translatable content. We work around this, by not including these
-            # strings that only includes something like: label4, and window1
-	  if ($2 =~ /^(window|label)[0-9]$/g) {
-	  } else {
-                $messages{$2} = [];
+                # Glade has some bugs, especially it uses translations tags to contain little
+                # non-translatable content. We work around this, by not including these
+                # strings that only includes something like: label4, and window1
+                if ($2 !~ /^(window|label)[0-9]$/) {
+                    $messages{$2} = [];
+                }
             }
-        }
-        
-        while ($input =~ /<items>(..[^<]*)<\/items>/sg) {
-              my @items =  split (/\n/, $1);
-              for (my $n = 0; $n < @items; $n++) {
-                  $messages{$items[$n]} = [];
-              }
-        }
+            
+            while ($input =~ /<items>(..[^<]*)<\/items>/sg) {
+                my @items =  split (/\n/, $1);
+                for (my $n = 0; $n < @items; $n++) {
+                    $messages{$items[$n]} = [];
+                }
+            }
 
 	}
-}
+    }
 
-#################
-if ($ENABLE_XP) {
-#################
+    #################
+    if ($ENABLE_XP) {
+    #################
 
         ### For generic translatable XP header files ###
         
         if ($FILE =~ /\/xp\/(.*)\.h$/sg){
 
-        while ($input =~ /\((.*),(.+)\"(.*)\"/g) {
-               my $tag = $1;
-               $messages{$3} = [$tag];
-        }
+            while ($input =~ /\((.*),(.+)\"(.*)\"/g) {
+                my $tag = $1;
+                $messages{$3} = [$tag];
+            }
 
 	}
 
@@ -245,35 +256,37 @@ if ($ENABLE_XP) {
 }
 
 sub WriteMessages {
-  
-  foreach my $message (sort keys %messages) { 
     
-    my ($tag) = @{ $messages{$message} };
-    
-    # Replace XML entities for some special characters with
-    # the appropriate gettext syntax for those characters.
-    $message =~ s/&quot;/\\"/mg; # "
-    $message =~ s/&lt;/</mg;
-    $message =~ s/&gt;/>/mg;
-    
-    print OUT "/* xgettext:no-c-format */\n" if $message =~ /%/;
-    print OUT "/* $tag */\n" if $tag;
-    
-    my @lines = split (/\n/, $message);
-    for (my $n = 0; $n < @lines; $n++) {
-      if ($n == 0)  {
-	print OUT "char *s = N_(\"";
-      }	else {
-	print OUT "             \"";
-      }
-      print OUT $lines[$n];
-      if ($n < @lines - 1) {
-	print OUT "\\n\"\n";
-      } else {
-	print OUT "\");\n";
-      }
+    foreach my $message (sort keys %messages) { 
+        
+        my ($tag) = @{ $messages{$message} };
+        
+        # Replace XML entities for some special characters with
+        # the appropriate gettext syntax for those characters.
+     	$message =~ s/&quot;/\\"/mg; # "
+    	$message =~ s/&lt;/</mg;
+    	$message =~ s/&gt;/>/mg;
+        
+   	print OUT "/* xgettext:no-c-format */\n" if $message =~ /%/;
+    	print OUT "/* $tag */\n" if $tag;
+        
+    	my @lines = split (/\n/, $message);
+
+    	for (my $n = 0; $n < @lines; $n++) {
+
+            if ($n == 0) { 
+ 		print OUT "char *s = N_(\""; 
+            } else {  
+ 		print OUT "             \""; 
+	    }
+
+            print OUT $lines[$n];
+
+            if ($n < @lines - 1) { 
+		print OUT "\\n\"\n"; 
+ 	    } else { 
+		print OUT "\");\n";  
+	    }
+        }
     }
-
-  }
-
 }
