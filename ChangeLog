@@ -1,3 +1,13 @@
+2001-10-29  jacob berkman  <jacob@ximian.com>
+
+	* intltool-update.in.in: add support for a --gettext-package
+	argument
+
+	* intltoolize.in: apply new patch to new Makefile.in.in's
+
+	* intltool-po-Makefile.in.in-patch-3:
+	* Makefile.am (pkgdata_DATA): add glib-gettextize'd patch
+
 2001-10-26  Darin Adler  <darin@bentspoon.com>
 
 	* Makefile.am:

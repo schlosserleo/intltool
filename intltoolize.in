@@ -236,6 +236,8 @@ done
 
 if grep GENPOT po/Makefile.in.in >/dev/null; then
   echo "no need for patching file 'Makefile.in.in'";
+elif grep GETTEXT_PACKAGE po/Makefile.in.in >/dev/null; then
+  patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-3
 elif grep builddir po/Makefile.in.in >/dev/null; then
   patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-2
 else

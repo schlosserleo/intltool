@@ -47,6 +47,7 @@ my $HEADERS_ARG    = "0";
 my $MAINTAIN_ARG   = "0";
 my $REPORT_ARG     = "0";
 my $VERBOSE	   = "0";
+my $GETTEXT_PACKAGE = "";
 
 my @languages;
 my %po_files_by_lang = ();
@@ -66,8 +67,6 @@ my $xml_extension =
 "sheet(\.in)+|".
 "pong(\.in)+";
 
-my $PACKAGE = &find_package_name;
-
 ## Always print as the first thing
 $| = 1;
 
@@ -80,16 +79,18 @@ if (! $LANG){
 
 ## Handle options
 GetOptions (
-	    "help|h"	  	=> \$HELP_ARG,
-	    "version|v" 	=> \$VERSION_ARG,
-	    "dist|d"		=> \$DIST_ARG,
-	    "pot|p"		=> \$POT_ARG,
-	    "headers|s"		=> \$HEADERS_ARG,
-	    "maintain|m"	=> \$MAINTAIN_ARG,
-	    "report|r"		=> \$REPORT_ARG,
-	    "verbose|x"		=> \$VERBOSE
+	    "help|h"	  	  => \$HELP_ARG,
+	    "version|v" 	  => \$VERSION_ARG,
+	    "dist|d"		  => \$DIST_ARG,
+	    "pot|p"		  => \$POT_ARG,
+	    "headers|s"		  => \$HEADERS_ARG,
+	    "maintain|m"	  => \$MAINTAIN_ARG,
+	    "report|r"		  => \$REPORT_ARG,
+	    "verbose|x"		  => \$VERBOSE,
+	    "gettext-package|g=s" => \$GETTEXT_PACKAGE,
 	    ) or &invalid_option;
 
+my $PACKAGE = $GETTEXT_PACKAGE || &find_package_name;
 
 ## Use the supplied arguments
 ## Check for options.
