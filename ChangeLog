@@ -1,5 +1,10 @@
 2002-05-20  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+        * configure.in: Forgot to bump version.
+
+
+2002-05-20  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
         * NEWS: Updated.
 
 
