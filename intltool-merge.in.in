@@ -53,6 +53,7 @@ my $RFC822DEB_STYLE_ARG = 0;
 my $QUIET_ARG = 0;
 my $PASS_THROUGH_ARG = 0;
 my $UTF8_ARG = 0;
+my $MULTIPLE_OUTPUT = 0;
 my $cache_file;
 
 ## Handle options
@@ -70,6 +71,7 @@ GetOptions
  "rfc822deb-style|r" => \$RFC822DEB_STYLE_ARG,
  "pass-through|p" => \$PASS_THROUGH_ARG,
  "utf8|u" => \$UTF8_ARG,
+ "multiple-output|m" => \$MULTIPLE_OUTPUT,
  "cache|c=s" => \$cache_file
  ) or &error;
 
@@ -109,7 +111,16 @@ elsif ($XML_STYLE_ARG && @ARGV > 2)
         &utf8_sanity_check;
 	&preparation;
 	&print_message;
-	&xml_merge_translations;
+	
+	if ($MULTIPLE_OUTPUT)
+	{
+	    &xml_merge_multiple_output;
+	}
+	else
+	{
+	    &xml_merge_single_output;
+	}
+
 	&finalize;
 } 
 elsif ($KEYS_STYLE_ARG && @ARGV > 2) 
@@ -583,7 +594,64 @@ sub ba_merge_translations
 
 ## XML (non-bonobo-activation) merge code
 
-sub xml_merge_translations
+sub xml_merge_multiple_output
+{
+    my $source;
+
+    {
+       local $/; # slurp mode
+       open INPUT, "<$FILE" or die "can't open $FILE: $!";
+       $source = <INPUT>;
+       close INPUT;
+    }
+
+    # FIXME: support attribute translations
+
+    # Empty nodes never need translation, so unmark all of them.
+    # For example, <_foo/> is just replaced by <foo/>.
+    $source =~ s|<\s*_($w+)\s*/>|<$1/>|g;
+
+    for my $lang (sort keys %po_files_by_lang) 
+    {
+	my $source_copy = $source;
+
+	open OUTPUT, ">$OUTFILE-$lang" or die;     
+	
+	# Support for <_foo>blah</_foo> style translations.
+	while ($source_copy =~ s|^(.*?)([ \t]*)<\s*_($w+)\s*>(.*?)<\s*/_\3\s*>([ \t]*\n)?||s) 
+	{
+	    print OUTPUT $1;
+	    
+	    my $spaces = $2;
+	    my $tag = $3;
+	    my $string = $4;
+	    
+	    $string =~ s/\s+/ /g;
+	    $string =~ s/^ //;
+	    $string =~ s/ $//;
+	    $string = entity_decode($string);
+	    
+	    my $translation = $translations{$lang, $string};
+
+	    if (!$translation)
+	    {
+		print OUTPUT "$spaces<$tag>$string</$tag>\n";
+	    }
+	    else
+	    {
+		$translation = entity_encode($translation);
+		
+		print OUTPUT "$spaces<$tag>$translation</$tag>\n";
+	    }
+	}
+	print OUTPUT $source_copy;
+
+	print "CREATED $OUTFILE-$lang\n";
+	close OUTPUT;
+    }
+}
+
+sub xml_merge_single_output
 {
     my $source;
 

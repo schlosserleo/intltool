@@ -1,3 +1,11 @@
+2003-09-13  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* intltool-merge.in.in: Added --multiple-output
+	* test/selftest.pl.in: Added a still non-working test.
+
+	Sun/GOK guys, see if this is what you want - this should be a 
+	first cut anyway.
+
 2003-08-20  Abel Cheung  <maddog@linux.org.hk>
 
 	* intltool-update.in.in: Avoid bashism in xgettext version check.
@@ -13,7 +21,7 @@
 
 2003-08-11  Carlos Perelló Marín <carlos@gnome.org>
 
-	* intltoo-update.in.in: Fixed a small bug that brokes intltool-update
+	* intltool-update.in.in: Fixed a small bug that brokes intltool-update
 	when you don't specify an output file.
 	* NEWS: Updated
 	* configure.in: Version 0.27.1
