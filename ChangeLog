@@ -1,3 +1,10 @@
+2004-01-19  Danilo Šegan  <dsegan@gmx.net>
+
+	* intltool-update.in.in (FindPOTKeywords): Searches Makefile.in.in
+	for XGETTEXT_KEYWORDS.
+	(GeneratePOTemplate): Use FindPOTKeywords to get XGETTEXT_KEYWORDS.
+	Fixes bug #131885.
+
 2004-01-08  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-update.in.in: Added support for .kbd.in files.

@@ -681,11 +681,10 @@ sub GeneratePOTemplate
     my @xgettext_argument=("$XGETTEXT",
 			   "--add-comments",
 			   "--directory\=\.\.",
-			   "--keyword\=\_",
-			   "--keyword\=N\_",
-			   "--keyword\=U\_",
 			   "--output\=$MODULE\.pot",
 			   "--files-from\=\.\/POTFILES\.in\.temp");
+    my $XGETTEXT_KEYWORDS = &FindPOTKeywords;
+    push @xgettext_argument, $XGETTEXT_KEYWORDS;
     push @xgettext_argument, "--from-code\=$encoding" if ($gettext_support_nonascii);
     push @xgettext_argument, $XGETTEXT_ARGS if $XGETTEXT_ARGS;
     my $xgettext_command = join ' ', @xgettext_argument;
@@ -942,4 +941,24 @@ sub FindPackageName
     $name = SubstituteVariable ($name);
 
     return $name if $name;
+}
+
+
+sub FindPOTKeywords
+{
+
+    my $make_source; { 
+	local (*IN);
+	open (IN, "<Makefile.in.in") || die "can't open Makefile.in.in: $!";
+	seek (IN, 0, 0);
+	local $/; # slurp mode
+	$make_source = <IN>;
+	close IN;
+    }
+
+    my $keywords = "--keyword\=\_ --keyword\=N\_ --keyword\=U\_";
+    # \s makes this not work, why?
+    $keywords = $1 if $make_source =~ /^XGETTEXT_KEYWORDS[ ]*=\[?([^\n\]]+)/m;
+    
+    return $keywords;
 }
