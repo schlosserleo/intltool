@@ -24,6 +24,7 @@
 my $PROGRAM  = "selftest";
 my $VERSION  = "0.1";
 my $result;
+my $case;
 
 ## Loaded modules
 use strict;
@@ -31,9 +32,19 @@ use strict;
 ## Always print as the first thing
 $| = 1;
 
-###############
-## SELFTESTS ##
-###############
+sub check_result($)
+{
+    my $testcase = $_[0];
+    my $result =`diff results/$testcase.h cases/$testcase.h`;
+    
+    if (!$result) { 
+	print "[OK]\n"; ## diff was empty, ie. files were equal
+    } else { 
+	print "[FAILED]\n"; 
+    }
+}
+
+## SELFTESTS
 
 ## Welcome notice
 
@@ -44,16 +55,14 @@ print "Running selftest of the xml-i18n-tools module...\n\n";
 
 print "1. Checking output from simple desktop file:                  ";
 
-system("xml-i18n-extract", "--type=gettext/ini", 
-       "--quiet", "--update", "cases/extract1.desktop");
-$result=`diff results/extract1.desktop.h cases/extract1.desktop.h`;
-if (!$result) { print "[OK]\n"; } else { print "[FAILED]\n"; }
+$case = "extract1.desktop";
+`xml-i18n-extract --type=gettext/ini --quiet --update cases/$case`;
+check_result($case);
 
 ## 2. Extract/Simple desktop-like file
 
 print "1. Checking output from simple desktop-like file:             ";
 
-system("xml-i18n-extract", "--type=gettext/ini",
-       "--quiet", "--update", "cases/extract2.keyprop");
-$result=`diff results/extract2.keyprop.h cases/extract2.keyprop.h`;
-if (!$result) { print "[OK]\n"; } else { print "[FAILED]\n"; }
+$case = "extract2.keyprop";
+`xml-i18n-extract --type=gettext/ini --quiet --update cases/$case`;
+check_result($case);
