@@ -1,0 +1,251 @@
+#!/usr/bin/perl -w
+
+#  XML I18N Desktop File Prepare Tool
+#
+#  Copyright (C) 2001 Free Software Foundation.
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as
+#  published by the Free Software Foundation; either version 2 of the
+#  License, or (at your option) any later version.
+#
+#  This script is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this library; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#  Author(s): Gediminas Paulauskas <menesis@delfi.lt>
+
+#==================================================================
+#
+# read POTFILES.in, select interesting files
+#
+# find original file:
+#   *.desktop.in -> *.desktop
+#   *.directory.in -> *.directory
+#   *.keys.in -> *.keys
+#   *.soundlist.in -> *.soundlist
+#
+# from original extract definition, and all translations, write them to
+# separate $lang.po files in ./tmp/
+#
+# merge new po files with existing ones.
+#
+#==================================================================
+
+## Release information
+my $PROGRAM  = "xml-i18n-prepare";
+my $PACKAGE  = "xml-i18n-tools";
+my $VERSION  = "0.6";
+
+## Loaded modules
+# FIXME: use strict;
+use Getopt::Long;
+use File::Find;
+
+## Scalars used by the option stuff
+my $HELP_ARG    = "0";
+my $VERSION_ARG = "0";
+my $VERBOSE     = "0";
+
+my @languages;
+my @desktop_files;
+
+my $desktop_extension = "(desktop|soundlist|keys|directory)+";
+my $desktop_find_regex = ".*desktop\\|soundlist\\|keys\\|directory";
+
+## Always print as the first thing
+$| = 1;
+
+## Handle options
+GetOptions (
+            "help|h|?"          => \$HELP_ARG,
+            "version|v"         => \$VERSION_ARG,
+            "verbose|x"         => \$VERBOSE,
+            "empty|e"           => \$EMPTY_ARG
+            ) or &invalid_option;
+
+
+## Use the supplied arguments
+## Check for options.
+## This section will check for the different options.
+
+sub split_on_argument {
+
+    if ($VERSION_ARG) {
+        &version;
+
+    } elsif ($EMPTY_ARG) {
+        &generate_empty;
+
+    } elsif ($HELP_ARG) {
+        &help;
+
+    } else {
+        &main;
+    }
+}
+
+&split_on_argument;
+
+sub main
+{
+    print "Working, please wait...\n" if (! $VERBOSE);
+    &gather_po_files;
+    &find_desktop_files;
+    &perform_rescue;
+#    system "rm -rf $TEMP/";
+}
+
+sub version{
+
+    ## Print version information
+    print "${PROGRAM} ${PACKAGE} $VERSION\n";
+    print "Written by Kenneth Christiansen <kenneth\@gnome.org>, 2000.\n\n";
+    print "Copyright (C) 2000 Free Software Foundation, Inc.\n";
+    print "This is free software; see the source for copying conditions.  There is NO\n";
+    print "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n";
+    exit;
+}
+
+sub help
+{
+    ## Print usage information
+    print "Usage: ${PROGRAM} [OPTION]\n";
+    print "Updates pot files and merge them with the translations.\n\n";
+    print "  -H, --help                   shows this help page\n";
+    print "  -X, --verbose                show lots of feedback\n";
+    print "  -V, --version                shows the version\n";
+    print "Report bugs to <kenneth\@gnome.org>.\n";
+    exit;
+}
+
+sub invalid_option
+{
+    ## Handle invalid arguments
+    my $opt = $ARGV[0];
+    print "${PROGRAM}: invalid option -- $opt\n";
+    print "Try `${PROGRAM} --help' for more information.\n";
+    exit 1;
+}
+
+sub add_to_potfiles
+{
+    open FILE, ">>po/POTFILES.in";
+    print FILE "# files added by xml-i18n-prepare\n";
+    foreach $desktop (@desktop_files) {
+        print FILE "$desktop.in\n";
+    }
+    close FILE;
+}
+
+sub perform_rescue
+{
+    my $file;
+    foreach $file (@desktop_files) {
+        &rescue_file($file);
+    }
+}
+
+sub rescue_file
+{
+    my ($filename) = @_;
+    my ($msgid, $line, $lang);
+
+    print "Rescuing translations from $filename ...\n" if $VERBOSE;
+
+    open ORIG, "<$filename";
+    $line = 1;
+ENTRY:
+    while (<ORIG>) {
+        chomp;
+        $line++;
+	    $entry = $_;
+        if ($entry =~ /^(Name|Comment|\s*description)=(.*)$/) {
+            $msgid = $2;
+	        $msgid =~ s/\"/\\"/;
+            print "msgid=$msgid\n" if $VERBOSE;
+        } elsif (
+		         ($entry =~ /^(Name|Comment|description)\[(.*?)\]=(.*)$/) ||
+        	     ($entry =~ /^(\s*\[)(.*?)\]description=(.*)$/)
+		        ) {
+            $lang = $2;
+            next if (!-s "po/$lang.po");
+            print "Writing to po/$lang.po ...\n" if $VERBOSE;
+
+            $msgstr = $3;
+            $msgstr =~ s/"/\\"/g;
+
+            open POFILE, "<po/$lang.po";
+	        while (<POFILE>) {
+                next ENTRY if /^msgstr "$msgstr"$/;
+	        }
+	    
+            open POFILE, ">>po/$lang.po";
+
+            print POFILE "\n#: $filename:$line\n";
+            print POFILE "msgid \"$msgid\"\n";
+            print POFILE "msgstr \"$msgstr\"\n";
+
+            close POFILE;
+            $line--;
+        }
+    }
+    close ORIG;
+}
+
+sub generate_empty
+{
+    &find_desktop_files;
+    foreach $full (@desktop_files) {
+        $new = "$full.in";
+	print "Generating empty $new ...\n" if $VERBOSE;
+        open FULL, "<$full";
+        open NEW, ">$new";
+
+        while (<FULL>) {
+            unless (
+		            (/^(Name|Comment|description)\[.*?\]=.*$/) ||
+        	        (/^\s*\[(.*?)\]description=.*$/)
+		           ) {
+                if (/^(Name|Comment)=.*$/) {
+                    print NEW "_$_";
+                } elsif (/^(\s*)(description=.*)$/) {
+                    print NEW "$1_$2\n";
+                } else {
+                    print NEW;
+                }
+	        }
+        }
+
+        close FULL;
+        close NEW;
+    }
+}
+
+sub gather_po_files
+{
+    my @po_files = glob("./*.po");
+
+    @languages = map { s/^.*\/(.*)\.po$/$1/ } @po_files;
+}
+
+sub wanted
+{
+    if (/$desktop_extension$/) {
+        my $file = $File::Find::name;
+        $file =~ s/\.\///;
+        push @desktop_files, $file;
+    }
+}
+
+sub find_desktop_files
+{
+    find (\&wanted, '.');
+}
+
+# vim: ts=4 sw=4 expandtab

@@ -1,3 +1,9 @@
+2001-01-24  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* xml-i18n-prepare: initial version of utility which
+	helps convert apps to xml-i18n-tools and save
+	desktop entries into po files.
+	
 2001-01-23  Robin * Slomkowski  <rslomkow@rslomkow.org>
 
 	* xml-i18n-tools.spec.in: moved the doc dir
