@@ -6,6 +6,7 @@ bonobo
 bonobo-conf
 bug-buddy
 control-center	(only control-center-1-0, the HEAD is now gnome-control-center)
+dia
 eel
 eog
 evolution

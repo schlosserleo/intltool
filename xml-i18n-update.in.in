@@ -57,6 +57,7 @@ my $xml_extension =
 "oaf(\.in)+|".
 "server(\.in)+|".
 "etspec|".
+"sheet(\.in)+|".
 "pong(\.in)+";
 
 my $PACKAGE = &find_package_name;
@@ -153,7 +154,7 @@ sub determine_type($) {
    if ($type =~ /\[type: (gettext\/[^\]].*)]/) {
         $gettext_type=$1;
    }
-   elsif ($type =~ /(?:xml(\.in)*|ui|oaf(?:\.in)+|pong(?:\.in)+|etspec)$/) {
+   elsif ($type =~ /(?:xml(\.in)*|ui|oaf(?:\.in)+|sheet(?:\.in)+|pong(?:\.in)+|etspec)$/) {
         $gettext_type="gettext\/xml";
    }
    elsif ($type =~ /glade(\.in)*$/) {
