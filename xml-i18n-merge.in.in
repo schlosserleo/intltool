@@ -42,6 +42,7 @@ use Getopt::Long;
 ## Scalars used by the option stuff
 my $HELP_ARG 	= "0";
 my $VERSION_ARG = "0";
+my $OAF_STYLE_ARG = "0";
 my $XML_STYLE_ARG = "0";
 my $KEYS_STYLE_ARG = "0";
 my $DESKTOP_STYLE_ARG = "0";
@@ -53,7 +54,8 @@ GetOptions (
 	    "help|h|?" => \$HELP_ARG,
 	    "version|v" => \$VERSION_ARG,
             "quiet|q" => \$QUIET_ARG,
-	    "xml-style|o" => \$XML_STYLE_ARG,
+	    "oaf-style|o" => \$OAF_STYLE_ARG,
+	    "xml-style|x" => \$XML_STYLE_ARG,
 	    "keys-style|k" => \$KEYS_STYLE_ARG,
 	    "desktop-style|d" => \$DESKTOP_STYLE_ARG
 	    ) or &error;
@@ -80,6 +82,11 @@ sub split_on_argument {
 
     } elsif ($HELP_ARG) {
 	&help;
+    } elsif ($OAF_STYLE_ARG && @ARGV > 2) {
+	&place_normal;
+	&message;
+	&preparation;
+	&oaf_merge_translations;
     } elsif ($XML_STYLE_ARG && @ARGV > 2) {
 	&place_normal;
 	&message;
@@ -127,7 +134,8 @@ sub help{
     print "  -v, --version                shows the version\n";
     print "  -h, --help                   shows this help page\n";
     print "  -q, --quiet                  quiet mode\n";
-    print "  -o, --xml-style              includes translations in the xml style\n";
+    print "  -o, --oaf-style              includes translations in the oaf style\n";
+    print "  -x, --xml-style              includes translations in the xml style\n";
     print "  -k, --keys-style		  includes translations in the keys style\n";
     print "  -d, --desktop-style          includes translations in the desktop style\n";
     print "\nReport bugs to <mjs\@eazel.com>.\n";
@@ -268,12 +276,9 @@ sub entity_encode_int
 }
 
 
-
-
-
-## OAF/XML-specific merge code
+## XML/OAF-specific merge code
  
-sub xml_merge_translations
+sub oaf_merge_translations
 {
     my $xml_source; {
        local (*INPUT);
@@ -310,6 +315,59 @@ sub xml_merge_translations
                 $translated_line =~ s/(\s*)_(\w+)="[^"]*"/$1$2="$translation"/;
 
                 $new_node .= "\n$translated_line";
+            }
+        }
+
+	$xml_source = $new_node . $xml_source;
+    }
+
+    print OUTPUT $xml_source;
+
+    close OUTPUT;
+}
+
+
+## XML (non-OAF) merge code
+ 
+sub xml_merge_translations
+{
+    my $xml_source; {
+       local (*INPUT);
+       local $/; # slurp mode
+       open INPUT, "<$FILE" or die "can't open $FILE: $!";
+       $xml_source = <INPUT>;
+       close INPUT;
+    }
+
+    open OUTPUT, ">$OUTFILE";
+
+    # FIXME: support attribute translations
+
+    # First just unmark for translation all empty nodes
+    # for example <_foo/> is just replaced by <foo/>
+    $xml_source =~ s/<_(\w+)\/>/<$1\/>/mg;
+
+    # Support for XML <_foo>blah</_foo> style translations
+    while ($xml_source =~ /([ \t]*)<_(\w+)>([^<]+)<\/_\2>/m) {
+        print OUTPUT $`;
+	$xml_source = $';
+
+        my $spaces = $1;
+        my $tag_name = $2;
+        my $value_str = $3;
+
+        my $non_translated_line = "$spaces<$tag_name>$value_str</$tag_name>";
+            
+        my $new_node = $non_translated_line;
+
+        if ($value_str) {
+            my %value_translation_map = entity_encode_translations
+                (lookup_translations ($value_str));
+
+            foreach my $key (keys %value_translation_map) {
+                my $translation = $value_translation_map{$key};
+
+                $new_node .= "\n$spaces<$tag_name xml:lang=\"$key\">$translation</$tag_name>";
             }
         }
 

@@ -104,5 +104,11 @@ $case = "extract3.xml.in";
 system("/usr/bin/perl ../xml-i18n-extract --type=gettext/xml --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
 check_result($case);
 
+print "5. Checking output from simple pong style xml-file:           ";
+
+$case = "merge4.xml";
+system("/usr/bin/perl ../xml-i18n-merge -x --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
+check_result_output($case);
+
 exit $failed;
 

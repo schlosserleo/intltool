@@ -223,8 +223,8 @@ sub type_xml {
                 $messages{$1} = [];
             }
 
-            while ($input =~ /<_\w+>([^_]+)<\/_\w+>/sg) {
-                $messages{$1} = [];
+            while ($input =~ /<_(\w+)>([^<]+)<\/_\1>/sg) {
+                $messages{$2} = [];
             }
 
 	}

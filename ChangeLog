@@ -1,3 +1,29 @@
+Sun Mar 25 03:18:35 2001  George Lebl <jirka@5z.com>
+
+	* xml-i18n-extract.in.in (type_xml): The message is anything but <,
+	  not anything but _.  This fixes a bug where it would not extract
+	  messages which had underscores in them.
+
+	* xml-i18n-merge.in.in (xml_merge_translations)
+	  (oaf_merge_translations):  Rename the old xml mode to "oaf" mode
+	  as Maciej requested.  For XML files merge the pong style
+	  <_foo>bar</_foo> type messages.  These are already extracted along
+	  with the "pong" style messages.  The option to do this is -x as
+	  it's supposed to be the general XML style translation.
+
+	* xml-i18n-tools.m4:  Add a pong rule macro
+
+	* xml-i18n-update.in.in (determine_type):  Add .pong(.in)+ type files
+	  for the xml file types
+
+	* tests/selftest.pl.in, tests/cases/merge4.xml.in,
+	  tests/results/merge4.xml, tests/cases/test.po:  Add a simple message
+	  and test for the merging of pong style xml messages.  This is really
+	  the same as extract3.xml.in
+
+	* USED: add pong and grapevine, which are going to get things
+	  comitted very soon.
+
 2001-03-14  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* USED: added this file containing modules which use xml-i18n-tools.

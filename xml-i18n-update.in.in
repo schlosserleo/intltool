@@ -47,7 +47,8 @@ my @languages;
 my %po_files_by_lang = ();
 
 my $xml_extension = "xml|glade|desktop\.in|directory\.in|"
-		   ."soundlist\.in|keys\.in|oaf(\.in)+";
+		   ."soundlist\.in|keys\.in|oaf(\.in)+|"
+		   ."pong(\.in)+";
 
 my $PACKAGE = &find_package_name;
 
@@ -142,7 +143,7 @@ sub determine_type($) {
    if ($type =~ /\[type: (gettext\/[^\]].*)]/) {
         $gettext_type=$1;
    }
-   elsif ($type =~ /(?:xml|oaf(?:\.in)+)$/) {
+   elsif ($type =~ /(?:xml|oaf(?:\.in)+|pong(?:\.in)+)$/) {
         $gettext_type="gettext\/xml";
    }
    elsif ($type =~ /glade$/) {

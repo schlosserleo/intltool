@@ -110,6 +110,11 @@ msgstr "Zoom"
 msgid "font-bold-f.png"
 msgstr ""
 
+#: fake/file.h:123
+msgid "Fax"
+msgstr "Translated Fax"
+
+
 #~ msgid " Auto Update"
 #~ msgstr " Opdatér automatisk"
 

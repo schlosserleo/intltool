@@ -63,6 +63,13 @@ AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
 s%@XML_I18N_MERGE_SOUNDLIST_RULE@%[$]XML_I18N_MERGE_SOUNDLIST_RULE%g
 AC_DIVERT_POP()dnl
 
+dnl same deal
+XML_I18N_MERGE_PONG_RULE='\%.pong : \%.pong.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
+	$(top_builddir)/xml-i18n-merge -x $(top_srcdir)/po $< [$]*.pong'
+AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
+s%@XML_I18N_MERGE_PONG_RULE@%[$]XML_I18N_MERGE_PONG_RULE%g
+AC_DIVERT_POP()dnl
+
 # Always use our own xml-i18n-tools.
 XML_I18N_EXTRACT='$(top_builddir)/xml-i18n-extract'
 AC_SUBST(XML_I18N_EXTRACT)dnl
