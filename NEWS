@@ -1,11 +1,18 @@
 Version 0.31
 
+* Usage of [no-xml] option in AC_PROG_INTLTOOL to avoid requiring
+  XML::Parser Perl module. (Rodney Dawes)
+* Support for C#. (Rodney)
 * Support for running intltool-update without autoconf, or with
   po/Makevars file (as used in gettext). (Danilo Segan)
-* New XML merging (compatible with pre-0.27.2 intltool) - bug
-  #130802. (Danilo)
-* Entity decoding and encoding is not done anymore for XML (part of
-  fix for bug #130802). (Danilo)
+* New XML merging (compatible with pre-0.27.2 intltool) -- bug
+  #130802 -- entity decoding and encoding is not done anymore for
+  XML. (Danilo)
+* Multiple-output XML merging now produces simpler files, and sets
+  "xml:lang" only when translation is used -- bug #46650. (Danilo)
+* Support for passing comments to translators from XML and GConf
+  schema files. (Danilo)
+* Many bug fixes (Rodney, Danilo, Callum McKenzie)
 
 Version 0.30
 

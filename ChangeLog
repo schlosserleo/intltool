@@ -1,3 +1,11 @@
+2004-06-17  Danilo Šegan  <dsegan@gmx.net>
+
+	* NEWS: Mention multiple-output changes.
+	Mention Rodney's changes since the last release.
+
+	* intltool-merge.in.in (traverse): Output only single tag in
+	--multiple-output, setting "xml:lang" if there's a translation.
+
 2004-06-15  Danilo Šegan  <dsegan@gmx.net>
 
 	* intltool-merge.in.in (getAttributeString): Sort attributes when

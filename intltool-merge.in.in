@@ -722,7 +722,15 @@ sub traverse
 	    $lookup =~ s/\s+$//s;
 
 	    if ($lookup) {
-		print $fh ">$lookup</$nodename>";
+                my $translation = $translations{$language, $lookup};
+                if ($MULTIPLE_OUTPUT && $translation) {
+                    print $fh " xml:lang=\"", $language, "\"";
+                    print $fh ">", $translation, "</$nodename>";
+                    return; # this means there will be no same translation with xml:lang="$language"...
+                            # if we want them both, just remove this "return"
+                } else {
+                    print $fh ">$lookup</$nodename>";
+                }
 	    } else {
 		print $fh "/>";
 	    }
