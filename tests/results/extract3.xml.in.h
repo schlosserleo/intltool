@@ -1,3 +1,1 @@
-<sect>
-    <_title>Fax</_title>
-</sect>
+char *s = N_("Fax");

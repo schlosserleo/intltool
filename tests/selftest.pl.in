@@ -101,8 +101,8 @@ check_result_output($case);
 print "4. Checking output from simple xml-file:                      ";
 
 $case = "extract3.xml.in";
-system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
-check_result_output($case);
+system("/usr/bin/perl ../xml-i18n-extract --type=gettext/xml --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
+check_result($case);
 
 exit $failed;
 
