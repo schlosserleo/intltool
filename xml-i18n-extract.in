@@ -201,7 +201,7 @@ sub convert($) {
     
         if ($FILE =~ /\.desktop\.in$/){
     
-            while ($input =~ /^_.*=(.*)/sg) {
+            while ($input =~ /^_.*=(.*)$/mg) {
                 $messages{$1} = [];
             }
         }
