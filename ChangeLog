@@ -1,3 +1,8 @@
+2002-01-22  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in: Don't use NDBM_File unless the
+	environment variable tells us to.
+
 2002-01-21  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-merge.in.in: Kenneth implemented a cache to

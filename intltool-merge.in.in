@@ -42,8 +42,12 @@ use strict;
 use File::Basename;
 use Getopt::Long;
 use File::stat;
-use NDBM_File;
 use Fcntl;      # For O_* constants
+
+my $use_cache = $ENV{"INTLTOOL_USE_CACHE"};
+if ($use_cache) {
+	require NDBM_File;
+}
 
 ## Scalars used by the option stuff
 my $HELP_ARG = 0;
@@ -230,7 +234,7 @@ sub get_po_encoding
 
 sub get_translation_database
 {
-    if (!$ENV{"INTLTOOL_USE_CACHE"}) {
+    if (!$use_cache) {
         &create_translation_database;
 	return;
     }
