@@ -2,6 +2,7 @@ Version 0.18
 
 * Updated tests to use embedded markup in translatable messages. (Sven Neumann)
 * Made the version check more portable. (ERDI Gergo, Jacob Bergman)
+* Don not confuse a nonexistent file with age of 0. (nix@esperi.demon.co.uk)
 
 
 Version 0.17
