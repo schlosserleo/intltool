@@ -135,7 +135,7 @@ sub split_on_argument
     elsif ($REPORT_ARG) {
         &print_report;
     }
-    elsif ($LANG && $LANG !=~ /^-/) {
+    elsif ($LANG && $LANG !~ /^-/) {
 	&main;
     }
     else {

@@ -1,5 +1,12 @@
 2002-02-10  Darin Adler  <darin@bentspoon.com>
 
+	* intltool-update.in.in: Fixed !=~ that should have been a
+	!~. Damn, I'll probably have to do another release.
+
+=== intltool 0.15 ===
+
+2002-02-10  Darin Adler  <darin@bentspoon.com>
+
 	* NEWS: Updated for 0.15 release.
 
 2002-02-10  Darin Adler  <darin@bentspoon.com>
