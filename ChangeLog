@@ -1,3 +1,16 @@
+2004-08-22  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS: Document fix for #144725
+
+2004-08-22  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* intltool-update.in.in (FindPackageName): Correctly strip spaces
+	and brackets from the local $name and $version variables too.
+	(FindMakevarsDomain): Ignore make variable substitutions in the
+	assignment to DOMAIN, such as DOMAIN = $(PACKAGE).
+
+	Fixes #144725
+
 2004-08-22  Danilo Šegan  <dsegan@gmx.net>
 
 	* NEWS: Document additions.

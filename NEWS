@@ -1,5 +1,7 @@
-Version 0.32
+Version 0.31.2
 
+* Handle package name extraction better
+  -- bug #144725 (Daniel Elstner)
 * Support for comments before translatable attributes in XML files,
   support for translating both tag content and attributes 
   -- bug #143581. (Danilo Segan)
