@@ -1,8 +1,17 @@
+2002-05-23  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+        * intltool-extract.in.in: Made schemas extraction code more
+	bullet proof.
+
+
 2002-05-21  Abel Cheung  <maddog@linux.org.hk>
 
 	* intltool-update.in.in: Force intltool-update to exit if
 	POTFILES.in is not found. Add detection of glade2 files in
 	-m mode.
+
+
+=== intltool 0.21 ===
 
 2002-05-20  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
