@@ -1,7 +1,7 @@
 2003-08-03  Abel Cheung  <maddog@linux.org.hk>
 
 	* doc/*.8:
-	  Updated manpages to reflect current options.
+	  Updated manpages to reflect current options. (bug #61965)
 	* ChangeLog: convert to UTF-8.
 	* intltool-extract.in.in, intltool-merge.in.in,
 	* intltool-prepare.in, intltool-update.in.in:
