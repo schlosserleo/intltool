@@ -5,7 +5,7 @@
 %define rel		%{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
 
 Name:		%name
-Summary:	This module contains some scripts and assorted auto* magic for internationalizing various kinds of data files.
+Summary:	This module contains scripts and autoconf magic for internationalizing various kinds of data files.
 Version: 	%ver
 Release: 	%rel
 Copyright: 	GPL
@@ -15,7 +15,7 @@ URL: 		http://www.gnome.org/
 BuildRoot:	/var/tmp/%{name}-%{ver}-root
 BuildArch:      noarch
 Obsoletes:      xml-i18n-tools
-Provides:       xml-i18n-tools
+Provides:       xml-i18n-tools = 0.11
 
 %description
 ** Automatically extracts translatable strings from oaf, glade, bonobo

@@ -1,5 +1,9 @@
 2001-10-05  Darin Adler  <darin@bentspoon.com>
 
+	* intltool.spec.in: Second try.
+
+2001-10-05  Darin Adler  <darin@bentspoon.com>
+
 	* intltool.spec.in: A naive cut at adding "Provides"
 	so that RPMs can ask for xml-i18n-tools and get us and
 	be satisfied.
