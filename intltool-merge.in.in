@@ -63,6 +63,7 @@ my $last_depth        = -1;
 my $translation_depth = -1;
 my @tag_stack = ();
 my @entered_tag = ();
+my @translation_strings = ();
 my $leading_space = "";
 
 ## Scalars used by the option stuff
@@ -620,6 +621,7 @@ sub parseTree
     my $depth     = shift || 0;
     my $language  = shift || "";
     my $not_cdata = 0;
+    my $has_children;
 
     $entered_tag[$depth + 1] = 0;
 
@@ -642,8 +644,10 @@ sub parseTree
         if (ref $sub eq 'ARRAY') {
 
             # Process subnodes
+            #
+            $has_children = 0;
 
-            # Check to see if current tag has any elements that need to be translated
+            # Check to see if current tag has any elements that need to be translated.
             #
             if ($translation_depth == -1) {
                 foreach my $subsub (@{ $sub } ) {
@@ -653,12 +657,15 @@ sub parseTree
                                 $translation_depth = $depth;
                             }
                         }
+                    } elsif (ref $subsub eq 'ARRAY') {
+                        $has_children = 1;
                     }
                 }
             }
 
             my $current_tag = pop(@tag_stack);
             push @tag_stack, $current_tag;
+            @translation_strings = ();
 
             $must_end_tag = $depth;
             print $fh "<", $current_tag;
@@ -691,11 +698,35 @@ sub parseTree
             }
             $last_depth = $depth;
 
-            # If beginning a translation block, then process for each language
+            # If beginning a translation block, then process for each language.
             #
             if ($translation_depth == $depth) {
+                my $do_language;
 
+                # Skip languages that do not have translations.  Since we only
+                # do this check when $translation_depth == $depth, it will never
+                # happen for nodes inside a node with a translated element.
+                #
                 for my $lang (sort keys %po_files_by_lang) {
+                    if ($has_children == 1) {
+                        $do_language = 1;
+                    } else {
+                        # Skip this language if there is no translation
+                        #
+                        $do_language = 0;
+                        foreach my $trans (@translation_strings) {
+                            my $translation = $translations{$lang, $trans};
+                            if ($translation) {
+                                $do_language = 1;
+                                last;
+                            }
+                        }
+                    }
+
+                    if ($do_language == 0) {
+                       next;
+                    }
+
                     print $fh "\n";
                     $leading_space =~ s/.*\n//g;
                     print $fh $leading_space;
@@ -829,6 +860,8 @@ sub parseTree
                 $string =~ s/\s+/ /g;
                 $string =~ s/^ //;
                 $string =~ s/ $//;
+
+                push(@translation_strings, $string);
 
                 # Display CDATA
                 #

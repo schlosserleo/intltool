@@ -13,38 +13,7 @@
     <welcome>
       <big>Welcome to The GIMP !</big>
     </welcome>
-    <welcome xml:lang="az">
-      <big>Welcome to The GIMP !</big>
-    </welcome>
-    <welcome xml:lang="fr">
-      <big>Welcome to The GIMP !</big>
-    </welcome>
-    <welcome xml:lang="fr_BE">
-      <big>Welcome to The GIMP !</big>
-    </welcome>
-    <welcome xml:lang="fr_FR">
-      <big>Welcome to The GIMP !</big>
-    </welcome>
-    <welcome xml:lang="merge6">
-      <big>Welcome to The GIMP !</big>
-    </welcome>
-    <welcome xml:lang="schemasmerge1">
-      <big>Welcome to The GIMP !</big>
-    </welcome>
-    <welcome xml:lang="schemasmerge2">
-      <big>Welcome to The GIMP !</big>
-    </welcome>
-    <welcome xml:lang="test">
-      <big>Welcome to The GIMP !</big>
-    </welcome>
     <thetip>Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes...</thetip>
-    <thetip xml:lang="az">Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes...</thetip>
-    <thetip xml:lang="fr">Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes...</thetip>
-    <thetip xml:lang="fr_BE">Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes...</thetip>
-    <thetip xml:lang="fr_FR">Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes...</thetip>
-    <thetip xml:lang="merge6">Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes...</thetip>
-    <thetip xml:lang="schemasmerge1">Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes...</thetip>
-    <thetip xml:lang="schemasmerge2">Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes...</thetip>
     <thetip xml:lang="test">You are so very lucky to be using this excellent program.</thetip>   
   </tip>   
 
@@ -53,92 +22,33 @@
 
 
   <tip level="beginner">
-    <thetip>You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>
-    <thetip xml:lang="az">You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>
-    <thetip xml:lang="fr">You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>
-    <thetip xml:lang="fr_BE">You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>
-    <thetip xml:lang="fr_FR">You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>
-    <thetip xml:lang="merge6">You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>
-    <thetip xml:lang="schemasmerge1">You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>
-    <thetip xml:lang="schemasmerge2">You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>
-    <thetip xml:lang="test">You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>  
+    <thetip>You can get context-sensitive help for most of the GIMP's features by pressing the F1 key at any time. This also works inside the menus.</thetip>  
   </tip>   
   <tip level="beginner">
-    <thetip>The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>
-    <thetip xml:lang="az">The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>
-    <thetip xml:lang="fr">The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>
-    <thetip xml:lang="fr_BE">The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>
-    <thetip xml:lang="fr_FR">The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>
-    <thetip xml:lang="merge6">The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>
-    <thetip xml:lang="schemasmerge1">The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>
-    <thetip xml:lang="schemasmerge2">The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>
-    <thetip xml:lang="test">The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>  
+    <thetip>The GIMP uses layers to let you organize your image. Think of them as a stack of slides or filters, such that looking through them you see a composite of their contents.</thetip>  
   </tip>   
   <tip level="beginner">
-    <thetip>You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>
-    <thetip xml:lang="az">You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>
-    <thetip xml:lang="fr">You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>
-    <thetip xml:lang="fr_BE">You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>
-    <thetip xml:lang="fr_FR">You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>
-    <thetip xml:lang="merge6">You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>
-    <thetip xml:lang="schemasmerge1">You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>
-    <thetip xml:lang="schemasmerge2">You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>
-    <thetip xml:lang="test">You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>  
+    <thetip>You can perform many layer operations by right-clicking on the text label of a layer in the &quot;Layers, Channels and Paths&quot; dialog.</thetip>  
   </tip>   
   <tip level="beginner">
     <thetip><tt>.xcf</tt></).
     This preserves the layers and every aspect of your work-in-progress.
     Once a project is completed, you can save it as JPEG, PNG, GIF, ...
-    >
-<thetip xml:lang="az"><tt>.xcf</tt></thetip>
-<thetip xml:lang="fr"><tt>.xcf</tt></thetip>
-<thetip xml:lang="fr_BE"><tt>.xcf</tt></thetip>
-<thetip xml:lang="fr_FR"><tt>.xcf</tt></thetip>
-<thetip xml:lang="merge6"><tt>.xcf</tt></thetip>
-<thetip xml:lang="schemasmerge1"><tt>.xcf</tt></thetip>
-<thetip xml:lang="schemasmerge2"><tt>.xcf</tt></thetip>
-<thetip xml:lang="test"><tt>.xcf</tt></thetip>  
-  </).
-    This preserves the layers and every aspect of your work-in-progress.
-    Once a project is completed, you can save it as JPEG, PNG, GIF, ...
-    >   
+    >  
+  </
+    When you save an image to work on it again later, try using XCF,
+    the GIMP's native file format (use the file extension >   
   <tip level="beginner">
-    <thetip>The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>
-    <thetip xml:lang="az">The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>
-    <thetip xml:lang="fr">The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>
-    <thetip xml:lang="fr_BE">The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>
-    <thetip xml:lang="fr_FR">The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>
-    <thetip xml:lang="merge6">The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>
-    <thetip xml:lang="schemasmerge1">The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>
-    <thetip xml:lang="schemasmerge2">The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>
-    <thetip xml:lang="test">The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>  
+    <thetip>The layer named &quot;Background&quot; it special because it lacks transparency. This prevents you from adding a layer mask or moving the layer up in the stack. You may add transparency to it by right-clicking in the &quot;Layers, Channels and Paths&quot; dialog and selecting &quot;Add Alpha Channel&quot;.</thetip>  
   </tip>   
   <tip level="beginner">
-    <thetip>Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>
-    <thetip xml:lang="az">Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>
-    <thetip xml:lang="fr">Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>
-    <thetip xml:lang="fr_BE">Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>
-    <thetip xml:lang="fr_FR">Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>
-    <thetip xml:lang="merge6">Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>
-    <thetip xml:lang="schemasmerge1">Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>
-    <thetip xml:lang="schemasmerge2">Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>
-    <thetip xml:lang="test">Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>  
+    <thetip>Most plug-ins work on the current layer of the current image. In some cases, you will have to merge all layers (Layers-&gt;Flatten Image) if you want the plug-in to work on the whole image.</thetip>  
   </tip>   
   <tip level="beginner">
-    <thetip>Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>
-    <thetip xml:lang="az">Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>
-    <thetip xml:lang="fr">Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>
-    <thetip xml:lang="fr_BE">Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>
-    <thetip xml:lang="fr_FR">Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>
-    <thetip xml:lang="merge6">Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>
-    <thetip xml:lang="schemasmerge1">Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>
-    <thetip xml:lang="schemasmerge2">Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>
-    <thetip xml:lang="test">Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>  
+    <thetip>Not all effects can be applied to all kinds of images. This is indicated by a grayed-out menu-entry. You may need to change the image mode to RGB (Image-&gt;Mode-&gt;RGB), add an alpha-channel (Layers-&gt;Add Alpha Channel) or flatten it (Layers-&gt;Flatten Image).</thetip>  
   </tip>   
    
 
 
 
-</
-    When you save an image to work on it again later, try using XCF,
-    the GIMP's native file format (use the file extension >
+</thetip>

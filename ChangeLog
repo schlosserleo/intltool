@@ -1,3 +1,16 @@
+2003-12-11  Brian Cameron <brian.cameron@sun.com>
+
+        * intltool-merge.in.in
+        * tests/results/merge4.xml
+        * tests/results/merge5p.sheet
+        * tests/results/merge5u.shee
+        * tests/results/merge6.xml
+        * tests/results/merge7.xml
+        Avoid including translations for languages where no
+        translation exists, except for child nodes of a
+        tag with a translated element (e.g. inside a tag
+        of the following form <tag _element="value">).
+
 2003-12-08  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* modules/Makefile.am: Fixing for upcoming release.
