@@ -1,3 +1,15 @@
+Version 0.13
+
+* Handle desktop file entries with regexp metacharacters (Darin)
+* Add support for .caves files (Juan Pablo Mendoza)
+* Fix intl-prepare bug [missing chomp] (Edgar Luna)
+* Escape backslashes in output of intl-prepare (Frederic Crozat)
+* Look for both POTFILES.skip and POTFILES.ignore (Darin)
+* Fix bug in intltool -M where it doesn't find glade files (Kenneth)
+* Implement trial version of a cache (Kenneth)
+* Remove file type tags from POTFILES (ERDI Gergo)
+
+
 Version 0.12
 
 * Handle whitespace properly in XML (Darin)

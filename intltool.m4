@@ -66,8 +66,8 @@ if test -z "`$INTLTOOL_PERL -v | fgrep '5.' 2> /dev/null`"; then
    AC_MSG_ERROR([perl 5.x required for intltool])
 fi
 
-dnl Remove Intltool [] tags from po/POTFILES
-dnl
+# Remove file type tags (using []) from po/POTFILES.
+
 AC_DIVERT_PUSH(AC_DIVERSION_ICMDS)
     changequote(,)
     mv -f po/POTFILES po/POTFILES.tmp
