@@ -66,7 +66,8 @@ if test -z "`$INTLTOOL_PERL -v | fgrep '5.' 2> /dev/null`"; then
    AC_MSG_ERROR([perl 5.x required for intltool])
 fi
 
-# Remove Intltool [] tags from po/POTFILES
+# Remove file type tags (using []) from po/POTFILES.
+
 AC_OUTPUT_COMMANDS_PRE([
 	changequote(,)
 	mv -f po/POTFILES po/POTFILES.tmp
@@ -75,7 +76,7 @@ AC_OUTPUT_COMMANDS_PRE([
 	changequote([,])
 ])
 
-dnl manually sed perl in so people don't have to put the intltool scripts in AC_OUTPUT
+# Manually sed perl in so people don't have to put the intltool scripts in AC_OUTPUT.
 
 AC_OUTPUT_COMMANDS([
 
