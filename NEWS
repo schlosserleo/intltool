@@ -1,3 +1,11 @@
+Version 0.29
+
+* Removed OrigTree in favor of more simply setting handlers directly
+  in intltool-merge (Brian Cameron)
+
+
+---
+
 Version 0.28 
 "...Jeg har aldrig rigtig brudt mig om glögg, det smager lidt ligesom 
  Sverige lugter (From Jul på Vesterbro)"
@@ -13,9 +21,6 @@ and thanks goes to Malcolm for picking up Scrollkeeper hacking and keeping
 an eye on intltool at the same time.
 
 Thanks guys!
-
-* Removed OrigTree in favor of more simply setting handlers directly
-  in intltool-merge (Brian Cameron)
 
 * made intltool-merge use XML::Parser (#116526 and others) [Brian Cameron]
 
@@ -35,11 +40,15 @@ Thanks guys!
 * Handle standard GNU gettext 0.12 and 0.13 installations (Malcolm Tredinnick)
 * Fix the running of test 18 (multiple output test) (Malcolm Tredinnick)
 
+---
+
 Version 0.27.2
 
 * Fixed the source code encoding mark at POTFILES.in support (Abel Cheung).
 * Fixed the intltool.spec file so it can build RPMs with this release (it was
   only a package issue (Carlos Perelló Marín)
+
+---
 
 Version 0.27.1
 
@@ -47,6 +56,8 @@ Version 0.27.1
 * Fixed intltool-update, it's not usable with 0.27 :-(  (Carlos Perelló Marín)
 * intltool-update -m tells you about files that are at POTFILES.in but does not
 exists anymore (Abel Cheung)
+
+---
 
 Version 0.27
 
@@ -60,6 +71,8 @@ Version 0.27
 * source code with non-ASCII chars support with
 GNU gettext 0.12 (bug #99005, Abel Cheung, Carlos Perelló Marín)
 * intltool-unicodify is deprecated, please use msgconv (Abel Cheung)
+
+---
 
 Version 0.26
 
@@ -79,10 +92,14 @@ Version 0.26
 * Make it work when running an UTF-8 locale (Kenneth)
 * Fix some iconv/charset issues (bug #113121, Morten Welinder)
 
+---
+
 Version 0.25
 
 * support latest version of Makefile.in.in from glib-gettextize
   from glib >= 2.1.5 (Frederic Crozat)
+
+---
 
 Version 0.24
  
@@ -93,6 +110,8 @@ Version 0.24
 * Fix xml-i18n-tools part to work with new gettext 4 (Yanko Kaneti)
 * Fixed #96169  (Kenneth, Laurent Vivier and Morten Welinder)
 * Added a new .theme.in -> .theme rule (Jonathan Blandford, Glynn Foster)
+
+---
 
 Version 0.23
 
@@ -109,6 +128,8 @@ Version 0.23
   and 1.4 installed get the right automake. (Havoc).
 * Other bugfixes (Kjartan Maraas).
 
+---
+
 Version 0.22
 
 * Added support for translation of descriptions used by ATK in glade files
@@ -117,13 +138,19 @@ Version 0.22
 * Force intltool-update to exit if POTFILES.in is not found (Abel Cheung).
 * Add detection of glade2 files in -m mode (Abel Cheung).
 
+---
+
 Version 0.21
 
 * Use $srcdir in the version check (Mark McLoughlin)
 
+---
+
 Version 0.20
 
 * Added support for .schemas files (Kenneth)
+
+---
 
 Version 0.19
 
@@ -136,6 +163,7 @@ Version 0.19
 * Fixed Glade XML decoding. (Kenneth)
 * Better error reporting (Kenneth)
 
+---
 
 Version 0.18
 
@@ -143,6 +171,7 @@ Version 0.18
 * Made the version check more portable. (ERDI Gergo, Jacob Bergman)
 * Don not confuse a nonexistent file with age of 0. (nix@esperi.demon.co.uk)
 
+---
 
 Version 0.17
 
@@ -158,6 +187,7 @@ Version 0.17
 * Handle XML tags inside translatable messages extracted from XML files
  (Sven Neumann)
 
+---
 
 Version 0.16
 
@@ -168,6 +198,7 @@ Version 0.16
 * Fixed intltool-update bugs introduced in 0.15 (Darin)
 * Handle strange package names without screwing up (Ole Laursen)
 
+---
 
 Version 0.15
 
@@ -179,11 +210,13 @@ Version 0.15
 * Fix to work well with the newest glib-gettextize (ERDI Gergo)
 * Remove unneeded C code parts of configure.in (Darin)
 
+---
 
 Version 0.14
 
 * Fix to work well with both new and old autoconf (ERDI Gergo)
 
+---
 
 Version 0.13
 
@@ -196,6 +229,7 @@ Version 0.13
 * Implement trial version of a cache (Kenneth)
 * Remove file type tags from POTFILES (ERDI Gergo)
 
+---
 
 Version 0.12
 
@@ -206,6 +240,7 @@ Version 0.12
 * Fixes to spec file (Toralf Lund, Darin)
 * Fix bug in intltool-prepare if string has regex metacharacters in it (Darin)
 
+---
 
 Version 0.11
 
@@ -218,6 +253,7 @@ Version 0.11
 * Remove "-?" option for compatibility with old Perl (Darin)
 * Fix longstanding undefined variable problem in *ize scripts (Peter Williams)
 
+---
 
 Version 0.9.5
 
@@ -245,6 +281,7 @@ Version 0.9.5
 
 Please see the README for more information on these new features.
 
+---
 
 Version 0.9
 
@@ -255,6 +292,7 @@ Version 0.9
 * Support for .xml files (Laszlo Kovacs)
 * Build fixes (Darin)
 
+---
 
 Version 0.8.4
 
