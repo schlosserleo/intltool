@@ -4,17 +4,25 @@ NULL=
 
 aclocal_macros = xml-i18n-tools.m4
 
-CLEANFILES = xml-i18n-toolize xml-i18n-extract xml-i18n-merge xml-i18n-update
+CLEANFILES = \
+	xml-i18n-toolize xml-i18n-extract \
+	xml-i18n-merge xml-i18n-update \
+	xml-i18n-prepare *.gz
 
 # These are required by xml-i18n-toolize.
-pkgdata_SCRIPTS = xml-i18n-extract xml-i18n-merge xml-i18n-update
+pkgdata_SCRIPTS = \
+	xml-i18n-extract xml-i18n-merge \
+	xml-i18n-update xml-i18n-prepare
+
 pkgdata_DATA = xml-i18n-tools.Makefile.patch
 
 # This macro file should be visible to Automake's aclocal.
 aclocal_DATA = $(aclocal_macros)
 
 # The  xml-i18n-tools distributor.
-bin_SCRIPTS = xml-i18n-toolize xml-i18n-update xml-i18n-extract
+bin_SCRIPTS = \
+	xml-i18n-toolize xml-i18n-update \
+	xml-i18n-extract xml-i18n-prepare
 
 EXTRA_DIST = \
 	$(aclocal_macros) \
@@ -22,6 +30,8 @@ EXTRA_DIST = \
 	xml-i18n-extract.in \
 	xml-i18n-merge.in \
 	xml-i18n-update.in \
+	xml-i18n-prepare.in \
+	xml-i18n-unicodify \
 	xml-i18n-tools.spec \
 	$(pkgdata_DATA) \
 	$(NULL)

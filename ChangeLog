@@ -1,3 +1,9 @@
+2001-01-29  Kenneth Christiansen <kenneth@gnu.org>
+
+	* xml-i18n-prepare.in: Made it be generated.
+	* Makefile.am: Reflect changes.
+	* configure.in: Reflect changes.
+
 2001-01-26  Darin Adler  <darin@eazel.com>
 
 	* README: Mention the need to have at least one .po file in the
@@ -16,7 +22,7 @@
 
 2001-01-24  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* xml-i18n-*.in: use ${PROGRAM} instead of directly specifying
+	* xml-i18n-*.in: use $PROGRAM instead of directly specifying
 	name. Also recognize *.directory files.
 	* xml-i18n-prepare: now generates <desktop>.in files, adds them
 	to POTFILES.in, and <desktop> -- to .cvsignore. Add only if that
