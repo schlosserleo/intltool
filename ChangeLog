@@ -1,3 +1,7 @@
+2003-03-15  Rodney Dawes  <dobey@free.fr>
+
+	* intltool-merge.in.in: Handle no translations in get_newest_po_age
+
 2003-03-12  Kenneth Christiansen <kenneth@gnu.org>
 
 	* intltool-update.in.in: Fix small buglet introduced my
