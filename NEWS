@@ -1,3 +1,15 @@
+Version 0.19
+
+* A few .m4 fixes (Jacob Berkman)
+* Now works with configure.ac (Kenneth, Abel Cheung)
+* Perform variable substitutions when determining package name (Abel Cheung)
+* We look also at AC_INIT to get the package name. (Carlos Marín)
+* Added HOWTO on adding i18n support to an application. (Kenneth, Thomas Vander Stichele)
+* Made the selftest more portable (Kenneth).
+* Fixed Glade XML decoding. (Kenneth)
+* Better error reporting (Kenneth)
+
+
 Version 0.18
 
 * Updated tests to use embedded markup in translatable messages. (Sven Neumann)
