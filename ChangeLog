@@ -1,3 +1,9 @@
+2001-01-09  Kenneth Christiansen <kenneth@gnu.org>
+
+        * xml-i18n-update.in: Changed die to print, and added exit; 
+ 	instead. Getting a "error occured on line 408" is not very
+	user friendly.
+
 2001-01-08  Maciej Stachowiak  <mjs@eazel.com>
 
 	Fix bug 5454 (Translators have to run ./autogen.sh in each module
