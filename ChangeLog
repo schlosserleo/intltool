@@ -1,5 +1,13 @@
 2001-09-19  Carlos Perelló Marín <carlos@gnome-db.org>
 
+	* xml-i18n-tools.spec.in: fixes from jgotts@linuxsavvy.com
+	(kenneth sended me this patch)
+	* xml-i18n-update.in.in
+	* xml-i18n-extract.in.in: Added .scm support from old intltool code
+	from kenneth and scripts from gimp.
+
+2001-09-19  Carlos Perelló Marín <carlos@gnome-db.org>
+
 	* Added the changes from kenneth (intltool rel 0.9.5)
 
 2001-09-18  Darin Adler  <darin@bentspoon.com>

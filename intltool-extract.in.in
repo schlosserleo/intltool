@@ -30,10 +30,11 @@ my $PACKAGE      = "@PACKAGE@";
 my $VERSION      = "@VERSION@";
 
 ## Script options - Enable by setting value to 1
-my $ENABLE_INI   = "1"; ## desktop and alike files
-my $ENABLE_KEYS  = "1"; ## mimetype descriptions
-my $ENABLE_GLADE = "1"; ## glade files
-my $ENABLE_XML 	 = "1"; ## generic xml files
+my $ENABLE_INI    = "1"; ## desktop and alike files
+my $ENABLE_KEYS   = "1"; ## mimetype descriptions
+my $ENABLE_GLADE  = "1"; ## glade files
+my $ENABLE_XML 	  = "1"; ## generic xml files
+my $ENABLE_SCHEME = "1"; ## scheme files
 
 ## Loaded modules
 use strict; 
@@ -183,6 +184,7 @@ sub convert($) {
     &type_keys;
     &type_xml;
     &type_glade;
+    &type_scheme;
 }
 
 sub type_ini {
@@ -265,6 +267,21 @@ sub type_glade {
 	}
     }
 
+}
+
+sub type_scheme {
+
+    if ($ENABLE_SCHEME) {
+
+	### For translatable scheme files ###
+
+	if ($gettext_type eq "scheme"){
+
+	    while ($input =~ /_\(?"((?:[^"\\]+|\\.)*)"\)?/sg) {
+		$messages{$1} = [];
+	    }
+	}
+    }
 }
 
 sub msg_write {

@@ -11,9 +11,10 @@ Release: 	%rel
 Copyright: 	GPL
 Group:		Development/Tools
 Source: 	%{name}-%{ver}.tar.gz
-URL: 		ftp://ftp.gnome.org
+URL: 		http://www.gnome.org/
 BuildRoot:	/var/tmp/%{name}-%{ver}-root
 BuildArch:      noarch
+Obsoletes:      xml-i18n-tools
 
 %description
 ** Automatically extracts translatable strings from oaf, glade, bonobo
@@ -23,19 +24,12 @@ BuildArch:      noarch
   (encoding to be 7-bit clean). I can also extend this merging
   mechanism to support other types of XML files.
 
-%package devel
-Summary:	Libraries and include files for developing Ammonite clients
-Group:		Development/Libraries
-Requires:	%name = %{PACKAGE_VERSION}
-Obsoletes:	%{name}-devel
-
-%description devel
-This package provides the necessary development libraries and include
-files to allow you to develop components that make use of the Ammonite authentication
-services.  You will need to install this package if you intend to build Nautilus
-from source code.
-
 %changelog
+* Wed Sep 19 2001 John Gotts <jgotts@linuxsavvy.com>
+- Improved the URL.  Added the appropriate Obsoletes:.  Removed the incorrect
+  and preliminary development package stuff.  The datadir changed names and the
+  files shouldn't be executable.  Added the man pages to the build.
+
 * Sun Feb 18 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
 - Changes to make the spec file more portable across RPM based
   systems.  Changes mainly consisted of using macros better, and
@@ -86,10 +80,10 @@ done
 %files
 
 %defattr(0555, bin, bin)
-%doc AUTHORS COPYING ChangeLog NEWS README
 %{_bindir}/*
-%{_datadir}/xml-i18n-tools/*
 
 %defattr (0444, bin, bin)
-# Should go in a devel package.
-%{_datadir}/aclocal/*.m4
+%doc AUTHORS COPYING ChangeLog NEWS README
+%{_mandir}/man8/*
+%{_datadir}/aclocal/*
+%{_datadir}/intltool/*
