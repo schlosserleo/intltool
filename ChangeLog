@@ -1,3 +1,7 @@
+2003-08-11  Abel Cheung  <maddog@linux.org.hk>
+
+	* intltool.m4: Fix broken support of .xam makefile rule.
+
 === intltool 0.27 ===
 
 2003-05-17  Carlos Perelló Marín <carlos@gnome.org>
