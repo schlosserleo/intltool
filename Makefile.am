@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = . tests doc doc-i18n-tool
+SUBDIRS = . tests doc doc-i18n-tool modules
 
 NULL = 
 
@@ -67,4 +67,5 @@ dist-hook:
 	cp intltool.spec $(distdir)
 
 %: %.in Makefile
-	sed -e "s:@INTLTOOL_PERL@:$(PERL):;" < $< > $@
+	sed -e "s:@INTLTOOL_PERL@:$(PERL):;" \
+	    -e "s:@INTLTOOL_PERL_MODULE_PATH@:$(datadir)/intltool:;" < $< > $@

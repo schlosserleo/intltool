@@ -1,3 +1,13 @@
+2003-11-26  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* Makefile.am:
+	* configure.in:
+	* intltool-merge.in.in:
+	* modules/Makefile.am:
+	* modules/XML/Parser/Style/OrigTree.pm:
+
+	Added Brian's OrigTree module.
+
 2003-11-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* NEWS: Updated

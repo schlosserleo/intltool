@@ -58,6 +58,7 @@ AC_OUTPUT([
 Makefile
 doc-i18n-tool/Makefile
 doc/Makefile
+modules/Makefile
 intltool-extract.in
 intltool-merge.in
 intltool-prepare
