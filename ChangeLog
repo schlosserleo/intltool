@@ -1,3 +1,15 @@
+2004-06-13  Danilo Šegan  <dsegan@gmx.net>
+
+	* intltool-merge.in.in (getAttributeString): Separate out a
+	function for getting string with attributes.
+	(getXMLstring): Recursive function to extract translatable messages.
+	(traverse): Function to traverse the XML::Parser tree.
+	(parseTree): Complete rewrite to use traverse(), $depth parameter
+	removed.
+	(xml_merge_output): Adjust calls to parseTree().
+
+	Fixes bug #130802.
+
 2004-06-12  Rodney Dawes  <dobey@novell.com>
 
 	* tests/selftest.pl.in: Fix the alignment of the output text for
