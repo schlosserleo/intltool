@@ -1,5 +1,12 @@
 2001-10-02  Darin Adler  <darin@bentspoon.com>
 
+	* doc/intltool-extract.8:
+	* doc/intltool-merge.8:
+	* doc/intltool-prepare.8:
+	Fix mailing list address.
+
+2001-10-02  Darin Adler  <darin@bentspoon.com>
+
 	* NEWS: Put some things in to prepare for a 0.10 release.
 	* README: Fix some grammar, and make more things right for the new
 	intltool world.
