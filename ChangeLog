@@ -1,3 +1,8 @@
+2005-02-28  Stepan Kasal  <kasal@ucw.cz>
+
+	* Makefile.in.in (.po.pox): Don't hardwire the name of the
+	  directory, fix a typo.
+
 2005-02-01  Rodney Dawes  <dobey@novell.com>
 
 	* intltool-update.in.in (Console_Write_TranslationStatus):
