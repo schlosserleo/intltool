@@ -12,7 +12,7 @@
 	case for XML where attribute names and values are separated with
 	spaces arount the equal;
 
-Fri Feb 14 09:51:01 2003  Hidetoshi Tajima  <hidetoshi.tajima@sun.com>
+2003-02-14  Hidetoshi Tajima  <hidetoshi.tajima@sun.com>
 
 	* intltool-unicodify.in: Fix bug #105181. use iconv -f, instead of
 	iconv --f.
