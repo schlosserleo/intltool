@@ -1,3 +1,10 @@
+2004-05-29  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-update.in.in: Add "cs" to the list of source extensions
+	that are natively handled by gettext
+	(FindLeftoutFiles): Add check for .GetString () call so that -m
+	works properly for detecting C# files
+
 2004-05-27  Rodney Dawes  <dobey@novell.com>
 
 	* configure.in: Add check for XML::Parser at configure time (#129009)
