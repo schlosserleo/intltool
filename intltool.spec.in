@@ -5,7 +5,7 @@
 %define rel		%{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
 
 Name:		%name
-Summary:	This module contains some utility scripts and assorted auto* magic for internationalizing various kinds of XML files.
+Summary:	This module contains some scripts and assorted auto* magic for internationalizing various kinds of data files.
 Version: 	%ver
 Release: 	%rel
 Copyright: 	GPL
@@ -18,11 +18,10 @@ Obsoletes:      xml-i18n-tools
 
 %description
 ** Automatically extracts translatable strings from oaf, glade, bonobo
-  ui, nautilus theme and other XML files into the po files.
+   ui, nautilus theme and other files into the po files.
 
 ** Automatically merges translations from po files back into .oaf files
-  (encoding to be 7-bit clean). I can also extend this merging
-  mechanism to support other types of XML files.
+  (encoding to be 7-bit clean). Also merges into other kinds of files.
 
 %changelog
 * Wed Sep 19 2001 John Gotts <jgotts@linuxsavvy.com>

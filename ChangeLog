@@ -1,5 +1,17 @@
 2001-10-04  Darin Adler  <darin@bentspoon.com>
 
+	* intltool-extract.in.in:
+	* intltool-merge.in.in:
+	* intltool-update.in.in:
+	* intltool.m4:
+	* intltool.spec.in:
+	* intltoolize.in:
+	* xml-i18n-toolize.in:
+	* xml-i18n-tools.m4:
+	More license tweaking, and some updates of email addresses.
+
+2001-10-04  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-prepare.in: Missed a bit.
 
 2001-10-04  Darin Adler  <darin@bentspoon.com>

@@ -1,6 +1,6 @@
 ## xml-i18n-tools.m4 - Configure xml-i18n-tools for the target system. -*-Shell-script-*-
 ## Copyright (C) 2001 Eazel, Inc.
-## Author: Maciej Stachowiak <mjs@eazel.com>
+## Author: Maciej Stachowiak <mjs@noisehavoc.org>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
