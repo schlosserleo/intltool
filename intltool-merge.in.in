@@ -1162,9 +1162,15 @@ sub schemas_merge_translations
 
 sub rfc822deb_merge_translations
 {
+    my %encodings = ();
+    for my $lang (keys %po_files_by_lang) {
+        $encodings{$lang} = ($UTF8_ARG ? 'UTF-8' : get_po_encoding($po_files_by_lang{$lang}));
+    }
+
     my $source;
 
     $Text::Wrap::huge = 'overflow';
+    $Text::Wrap::break = qr/\n|\s(?=\S)/;
 
     {
        local $/; # slurp mode
@@ -1175,22 +1181,25 @@ sub rfc822deb_merge_translations
 
     open OUTPUT, ">${OUTFILE}" or die;
 
-    while ($source =~ /(^|\n+)(_)?([^:_\n]+)(:\s*)(.*?)(?=\n[\S\n]|$)/sg) 
+    while ($source =~ /(^|\n+)(_*)([^:\s]+)(:[ \t]*)(.*?)(?=\n[\S\n]|$)/sg)
     {
 	    my $sep = $1;
 	    my $non_translated_line = $3.$4;
 	    my $string = $5;
-	    my $is_translatable = defined($2);
+	    my $underscore = length($2);
+	    next if $underscore eq 0 && $non_translated_line =~ /^#/;
 	    #  Remove [] dummy strings
-	    $string =~ s/\[\s[^\[\]]*\]$//;
-            $non_translated_line .= $string;
+	    my $stripped = $string;
+	    $stripped =~ s/\[\s[^\[\]]*\],/,/g if $underscore eq 2;
+	    $stripped =~ s/\[\s[^\[\]]*\]$//;
+	    $non_translated_line .= $stripped;
 
-            print OUTPUT $sep.$non_translated_line;
+	    print OUTPUT $sep.$non_translated_line;
     
-            if ($is_translatable) 
-            {
-                my @str_list = rfc822deb_split($string);
-           
+	    if ($underscore) 
+	    {
+	        my @str_list = rfc822deb_split($underscore, $string);
+
 	        for my $lang (sort keys %po_files_by_lang) 
                 {
                     my $is_translated = 1;
@@ -1213,15 +1222,29 @@ sub rfc822deb_merge_translations
                         
                         if ($first) 
                         {
-                            $str_translated .=
-                                Text::Tabs::expand($translation) .
-                                "\n";
+                            if ($underscore eq 2)
+                            {
+                                $str_translated .= $translation;
+                            }
+                            else
+                            {
+                                $str_translated .=
+                                    Text::Tabs::expand($translation) .
+                                    "\n";
+                            }
                         } 
                         else 
                         {
-                            $str_translated .= Text::Tabs::expand(
-                                Text::Wrap::wrap(' ', ' ', $translation)) .
-                                "\n .\n";
+                            if ($underscore eq 2)
+                            {
+                                $str_translated .= ', ' . $translation;
+                            }
+                            else
+                            {
+                                $str_translated .= Text::Tabs::expand(
+                                    Text::Wrap::wrap(' ', ' ', $translation)) .
+                                    "\n .\n";
+                            }
                         }
                         $first = 0;
 
@@ -1234,10 +1257,10 @@ sub rfc822deb_merge_translations
                     $str_translated =~ s/\s+$//;
 
                     $_ = $non_translated_line;
-                    s/^(\w+):\s*.*/$sep${1}-$lang: $str_translated/s;
+                    s/^(\w+):\s*.*/$sep${1}-$lang.$encodings{$lang}: $str_translated/s;
                     print OUTPUT;
                 }
-            }
+	    }
     }
     print OUTPUT "\n";
 
@@ -1254,8 +1277,12 @@ sub rfc822deb_split
     #       and paragraphs are separated by a single dot on a line
     # This routine returns an array of all paragraphs, and reformat
     # them.
+    # When first argument is 2, the string is a comma separated list of
+    # values.
+    my $type = shift;
     my $text = shift;
-    $text =~ s/^ //mg;
+    $text =~ s/^[ \t]//mg;
+    return (split(/, */, $text, 0)) if $type ne 1;
     return ($text) if $text !~ /\n/;
 
     $text =~ s/([^\n]*)\n//;
@@ -1265,9 +1292,7 @@ sub rfc822deb_split
     for my $line (split (/\n/, $text)) 
     {
         chomp $line;
-        $line =~ /\s+$/;
-    
-        if ($line =~ /^\.$/) 
+        if ($line =~ /^\.\s*$/)
         {
             #  New paragraph
             $str =~ s/\s*$//;
@@ -1278,12 +1303,13 @@ sub rfc822deb_split
         {
             #  Line which must not be reformatted
             $str .= "\n" if length ($str) && $str !~ /\n$/;
+            $line =~ s/\s+$//;
             $str .= $line."\n";
         } 
         else 
         {
             #  Continuation line, remove newline
-            $str .= " " if length ($str) && $str !~ /[\n ]$/;
+            $str .= " " if length ($str) && $str !~ /\n$/;
             $str .= $line;
         }
     }

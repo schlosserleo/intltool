@@ -1,3 +1,9 @@
+2004-01-06  Denis Barbier  <barbier@linuxfr.org>
+
+	* intltool-extract.in.in, intltool-merge.in.in,
+	  tests/results/merge10.templates:  Apply changes to rfc822deb
+	  formatted files to match current Debian usage.
+
 2004-01-06  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* HACKING: Added a tiny bit of information.

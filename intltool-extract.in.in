@@ -300,8 +300,8 @@ sub type_schemas {
 sub type_rfc822deb {
     ### For rfc822-style Debian configuration files ###
 
-    while ($input =~ /(?:^|\n)_[^:]+:\s*(.*?)(?=\n\S|$)/sg) {
-        my @str_list = rfc822deb_split($1);
+    while ($input =~ /(?:^|\n)(_+)[^:]+:\s*(.*?)(?=\n\S|$)/sg) {
+        my @str_list = rfc822deb_split(length($1), $2);
         for my $str (@str_list) {
             #   As rfc822deb is for configuration files, duplicates
             #   should never happen.  Developers must use the
@@ -321,8 +321,12 @@ sub rfc822deb_split {
     #       and paragraphs are separated by a single dot on a line
     # This routine returns an array of all paragraphs, and reformat
     # them.
+    # When first argument is 2, the string is a comma separated list of
+    # values.
+    my $type = shift;
     my $text = shift;
-    $text =~ s/^ //mg;
+    $text =~ s/^[ \t]//mg;
+    return (split(/, */, $text, 0)) if $type ne 1;
     return ($text) if $text !~ /\n/;
 
     $text =~ s/([^\n]*)\n//;
@@ -330,8 +334,7 @@ sub rfc822deb_split {
     my $str = '';
     for my $line (split (/\n/, $text)) {
         chomp $line;
-        $line =~ /\s+$/;
-        if ($line =~ /^\.$/) {
+        if ($line =~ /^\.\s*$/) {
             #  New paragraph
             $str =~ s/\s*$//;
             push(@list, $str);
@@ -339,10 +342,11 @@ sub rfc822deb_split {
         } elsif ($line =~ /^\s/) {
             #  Line which must not be reformatted
             $str .= "\n" if length ($str) && $str !~ /\n$/;
+            $line =~ s/\s+$//;
             $str .= $line."\n";
         } else {
             #  Continuation line, remove newline
-            $str .= " " if length ($str) && $str !~ /[\n ]$/;
+            $str .= " " if length ($str) && $str !~ /\n$/;
             $str .= $line;
         }
     }
