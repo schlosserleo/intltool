@@ -1,3 +1,9 @@
+2002-02-25  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in: Don't merge fuzzy translations in.
+	* tests/results/merge1.xml: Correct test results to reflect fuzzy
+	translations.
+
 === intltool 0.16 ===
 
 2002-02-25  Darin Adler  <darin@bentspoon.com>

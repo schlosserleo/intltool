@@ -36,9 +36,6 @@
 	    <menuitem name="ViewZoom" verb=""
 		label="_Zoom..."
 		tip="Zoom the spreadsheet in or out"/>
-	    <menuitem name="ViewZoom-test" verb=""
-		label="Zoom"
-		tip="Zoom the spreadsheet in or out"/>
 
 	    <menuitem name="ViewNewShared" verb=""
 		label="New _Shared"
@@ -87,7 +84,7 @@
 	<toolitem name="PrintPreview-test"
 	    pixtype="file" pixname="font-bold-f.png"
 	    label="Vis udskrift"
-	    tip="Eksempel"
+	    tip="Print preview"
 	    verb="FilePrintPreview"/>
 
 	<separator/>

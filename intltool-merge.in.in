@@ -260,7 +260,7 @@ sub load_cache
     open CACHE, "<$cache_file" || die;
     {
         local $/;
-        $contents = <CACHE>
+        $contents = <CACHE>;
     }
     close CACHE;
     %translations = split "\x01", $contents;
@@ -294,16 +294,26 @@ sub create_translation_database
             open PO_FILE, "<$po_file";	
         }
 
+	my $nextfuzzy = 0;
 	my $inmsgid = 0;
 	my $inmsgstr = 0;
 	my $msgid = "";
 	my $msgstr = "";
         while (<PO_FILE>) {
+	    $nextfuzzy = 1 if /^#, fuzzy/;
             if (/^msgid "((\\.|[^\\])*)"/ ) {
-		$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgstr;
-		$msgid = unescape_po_string($1);
-		$inmsgid = 1;
+		$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgid && $msgstr;
+		$msgid = "";
+		$msgstr = "";
+
+		if ($nextfuzzy) {
+		    $inmsgid = 0;
+		} else {
+		    $msgid = unescape_po_string($1);
+		    $inmsgid = 1;
+		}
 		$inmsgstr = 0;
+		$nextfuzzy = 0;
 	    }
 	    if (/^msgstr "((\\.|[^\\])*)"/) {
 	        $msgstr = unescape_po_string($1);
@@ -315,7 +325,7 @@ sub create_translation_database
 	        $msgstr .= unescape_po_string($1) if $inmsgstr;
 	    }
 	}
-	$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgstr;
+	$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgid && $msgstr;
     }
 }
 
