@@ -20,3 +20,7 @@ intltool-update
 intltool-update.in
 intltoolize
 xml-i18n-toolize
+install-sh
+missing
+*.tar.gz
+

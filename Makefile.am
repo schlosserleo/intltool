@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = tests doc doc-i18n-tool
+SUBDIRS = tests doc
 
 NULL = 
 
@@ -15,7 +15,6 @@ CLEANFILES =					\
 	intltool-merge				\
 	intltool-prepare			\
 	intltool-update				\
-	*.gz					\
 	$(NULL)
 
 # These are required by intltoolize and
@@ -48,11 +47,9 @@ EXTRA_DIST =					\
 	intltool-update.in.in			\
 	intltool-prepare.in			\
 	intltool.spec.in			\
+	intltool.spec				\
 	$(pkgdata_DATA)				\
 	$(NULL)
-
-dist-hook:
-	cp intltool.spec $(distdir)
 
 %: %.in Makefile
 	sed -e "s#@INTLTOOL_PERL@#$(PERL)#g" \

@@ -1,5 +1,26 @@
 2005-01-23  Rodney Dawes  <dobey@novell.com>
 
+	* INSTALL: Remove this automake generated file from CVS
+
+	* Makefile.am (SUBDIRS): Remove doc-i18n-tool
+	(CLEANFILES): Remove the *.gz glob
+	(EXTRA_DIST): Put intltool.spec in here (for now) and get rid of
+	the dist-hook rule
+
+	* configure.in: Remove the large dnl section for doc-i18n-tool
+	Remove doc-i18n-tool/Makefile from AC_OUTPUT
+
+	* tests/selftest.pl.in: Fix the spacing for test 24
+	Clean up after ourselves so we pass distcheck
+
+	* tests/cases/Makefile.am (EXTRA_DIST): Add extract12.xml.in
+	(CLEANFILES): Add the list of generated files here, so that we
+	clean up after ourselves when builddir == srcdir
+
+	* tests/results/Makefile.am (EXTRA_DIST): Add extract12.xml.in.h
+
+2005-01-23  Rodney Dawes  <dobey@novell.com>
+
 	* HACKING: Update to have the right info for the Mailing List
 
 	* README: Update the Mailing List info and URL

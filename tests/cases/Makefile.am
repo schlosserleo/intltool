@@ -1,4 +1,4 @@
-NULL = 
+NULL =
 
 EXTRA_DIST =					\
 	az.po					\
@@ -11,6 +11,7 @@ EXTRA_DIST =					\
 	extract8.glade				\
 	extract9.po				\
 	extract9.xml.in				\
+	extract12.xml.in			\
 	fr.po					\
 	fr_BE.po				\
 	fr_FR.po				\
@@ -30,4 +31,18 @@ EXTRA_DIST =					\
 	test.po 				\
 	test.schemas.in				\
 	test.scm				\
+	$(NULL)
+
+CLEANFILES =					\
+	extract-comments.xml.h			\
+	extract10.templates_.h			\
+	extract12.xml.in.h			\
+	extract9.xml				\
+	extract9.xml.in.h			\
+	merge-cdata.xml				\
+	merge-deepattr.xml			\
+	merge10.templates			\
+	test.schemas				\
+	test.schemas.in.h			\
+	test.scm.h				\
 	$(NULL)

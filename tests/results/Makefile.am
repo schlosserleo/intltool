@@ -10,6 +10,7 @@ EXTRA_DIST =					\
 	extract8.glade.h			\
 	extract9.xml				\
 	extract9.xml.in.h			\
+	extract12.xml.in.h			\
 	merge-cdata.xml				\
 	merge-deepattr.xml			\
 	merge1.xml				\
