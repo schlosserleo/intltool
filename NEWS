@@ -6,7 +6,6 @@ Version 0.12
 * Add doc-i18n-tool [disabled in Makefile for the moment] (Jonathan)
 * Fixes to spec file (Toralf Lund, Darin)
 * Fix bug in intltool-prepare if string has regex metacharacters in it (Darin)
-* Fix bug in intltool-merge for desktop file with regex metacharacters (Darin)
 
 
 Version 0.11

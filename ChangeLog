@@ -1,5 +1,10 @@
 2001-12-31  Darin Adler  <darin@bentspoon.com>
 
+	* NEWS: Oops, 0.12 already went out.
+	* configure.in: Bump to 0.13.
+
+2001-12-31  Darin Adler  <darin@bentspoon.com>
+
 	* NEWS: 0.12, this time for sure.
 
 2001-12-04  Darin Adler  <darin@bentspoon.com>
@@ -10,6 +15,8 @@
 2001-11-13  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* USED: gedit's HEAD use now intltool.
+
+=== intltool 0.12 ===
 
 2001-11-09  Darin Adler  <darin@bentspoon.com>
 
