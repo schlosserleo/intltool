@@ -135,7 +135,7 @@ ifdef([AC_DIVERSION_ICMDS],[
 
 AC_CONFIG_COMMANDS([intltool], [
 
-intltool_edit="-e 's:@INTLTOOL_EXTRACT@:${INTLTOOL_EXTRACT}:g' \
+intltool_edit="-e 's:@INTLTOOL_EXTRACT@:`pwd`/intltool-extract:g' \
                -e 's:@INTLTOOL_ICONV@:${ICONV}:g' \
                -e 's:@INTLTOOL_MSGFMT@:${MSGFMT}:g' \
                -e 's:@INTLTOOL_MSGMERGE@:${MSGMERGE}:g' \
