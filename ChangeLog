@@ -1,3 +1,12 @@
+2002-02-27  Kenneth Christiansen <kenneth@gnu.org>
+
+	* doc/intltool-extract.8: Link to intltool-update.8
+        * doc/intltool-merge.8: Link to intltool-update.8
+        * doc/intltool-prepare.8: Link to intltool-update.8  
+        * doc/intltool-update.8: New manual page from Stefan Kost
+          <kost@imn.htwk-leipzig.de>.
+	* doc/Makefile.am: Updated.
+
 2002-02-27  Sven Neumann  <sven@gimp.org>
 
 	* intltool-extract.in.in: don't decode < and > entities and allow
