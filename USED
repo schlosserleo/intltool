@@ -2,6 +2,7 @@ This is the list of modules which use xml-i18n-tools. If some fundamental change
 occurs for the tools, these modules should be revised and tested again.
 
 bonobo
+bug-buddy
 control-center	(only control-center-1-0)
 eog
 evolution
