@@ -918,15 +918,14 @@ sub FindPackageName
     if ($conf_source =~ /^AM_INIT_AUTOMAKE\(([^,\)]+),([^,\)]+)/m)
     {
 	($name, $version) = ($1, $2);
-	$name =~ s/[\[\]\s]//g;
+	($varhash{"AC_PACKAGE_NAME"} = $name) =~ s/[\[\]\s]//g;
 	($varhash{"AC_PACKAGE_VERSION"} = $version) =~ s/[\[\]\s]//g;
     }
     
     if ($conf_source =~ /^AC_INIT\(([^,\)]+),([^,\)]+)/m) 
     {
 	($name, $version) = ($1, $2);
-	$name=~ s/[\[\]\s]//g;
-	$varhash{"AC_PACKAGE_NAME"} = $name;
+	($varhash{"AC_PACKAGE_NAME"} = $name) =~ s/[\[\]\s]//g;
 	($varhash{"AC_PACKAGE_VERSION"} = $version) =~ s/[\[\]\s]//g;
     }
 
