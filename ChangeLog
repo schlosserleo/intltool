@@ -1,5 +1,10 @@
 2001-02-06  Maciej Stachowiak  <mjs@eazel.com>
 
+	* .cvsignore: Updated.
+	* xml-i18n-prepare.in: Removed.
+
+2001-02-06  Maciej Stachowiak  <mjs@eazel.com>
+
 	* xml-i18n-prepare.in: REsurrected this accidentally deleted file.
 
 2001-02-06  Maciej Stachowiak  <mjs@eazel.com>
