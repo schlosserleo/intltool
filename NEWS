@@ -1,3 +1,9 @@
+Version 0.32
+
+* Support for comments before translatable attributes in XML files,
+  support for translating both tag content and attributes 
+  -- bug #143581. (Danilo Segan)
+
 Version 0.31.1
 
 * Switch to gnome-common for autogen.sh so we can detect automake

@@ -1,3 +1,19 @@
+2004-08-22  Danilo Šegan  <dsegan@gmx.net>
+
+	* NEWS: Document additions.
+
+	* intltool-extract.in.in (type_xml): Adjust re to allow for
+	translating both content and attributes (i.e. 
+	<_t _name="ah">content</_t>).
+
+	* intltool-extract.in.in (type_xml): Add support for comments
+	before translatable attributes.
+	* tests/cases/extract-comments.xml: Add testcases for comments
+	around attributes.
+	* tests/results/extract-comments.xml.h: Updated results.
+
+	Fixes bug #143581.
+
 2004-07-27  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.am (SUBDIRS): "." is not a subdir

@@ -20,4 +20,12 @@
 sign in it, but the following string isn't -->
 <_translate>Dum-dee-dum</_translate>
 
+<tagnotmarked _markedattribute="attribute without comment">some content</tagnotmarked>
+
+<!-- This comment will appear if attributes can be commented about -->
+<tagnotmarked _markedattribute="attribute with comment">more content</tagnotmarked>
+
+<!-- Comment for *both* attributes and content -->
+<_translate _markedattribute="attribute value">even more content</_translate>
+
 </dummy>
