@@ -442,8 +442,8 @@ sub keys_merge_translations
     open OUTPUT, ">${OUTFILE}" or die;
 
     while (<INPUT>) {
-        if (s/^\s*_(\w+=(.*))/$1/)  {
-	    my $string = $2;
+        if (s/^(\s*)_(\w+=(.*))/$1$2/)  {
+	    my $string = $3;
 
             print OUTPUT;
 
@@ -454,7 +454,7 @@ sub keys_merge_translations
                 next if !$translation;
 
                 $_ = $non_translated_line;
-		s/^(\w+)=.*/[$lang]$1=$translation/;
+		s/(\w+)=.*/[$lang]$1=$translation/;
                 print OUTPUT;
             }
 	} else {
@@ -472,8 +472,8 @@ sub desktop_merge_translations
     open OUTPUT, ">${OUTFILE}" or die;
 
     while (<INPUT>) {
-        if (s/^\s*_(\w+=(.*))/$1/)  {
-	    my $string = $2;
+        if (s/^(\s*)_(\w+=(.*))/$1$2/)  {
+	    my $string = $3;
 
             print OUTPUT;
 
@@ -484,7 +484,7 @@ sub desktop_merge_translations
                 next if !$translation;
 
                 $_ = $non_translated_line;
-                s/^(\w+)=$string/${1}[$lang]=$translation/;
+                s/(\w+)=$string/${1}[$lang]=$translation/;
                 print OUTPUT;
             }
 	} else {

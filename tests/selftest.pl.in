@@ -116,7 +116,7 @@ $case = "extract6.glade";
 system("/usr/bin/perl ../intltool-extract --type=gettext/glade --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print " 8. Merge translations nto a dia sheet style XML file:               ";
+print " 8. Merge translations into a dia sheet style XML file:              ";
 $case = "merge5u.sheet";
 system("/usr/bin/perl ../intltool-merge -x -u --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
@@ -129,6 +129,11 @@ check_merge_result($case);
 print "10. Merge translations that include escaped .po strings:             ";
 $case = "merge6.xml";
 system("/usr/bin/perl ../intltool-merge -x -u --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
+check_merge_result($case);
+
+print "11. Merge translations into a .keys file:                            ";
+$case = "merge8.keys";
+system("/usr/bin/perl ../intltool-merge -k -u --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
 exit $failed;

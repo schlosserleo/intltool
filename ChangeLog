@@ -1,5 +1,17 @@
 2001-11-06  Darin Adler  <darin@bentspoon.com>
 
+	* intltool-merge.in.in: Fix whitespace chomping bug for keys
+	and desktop files I introduced when I did the rewrite.
+
+	* tests/cases/.cvsignore:
+	* tests/cases/merge8.keys.in:
+	* tests/cases/test.po:
+	* tests/results/merge8.keys:
+	* tests/selftest.pl.in:
+	Add a test case for .keys file merging.
+
+2001-11-06  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-update.in.in: Get package name from GETTEXT_PACKAGE
 	if present.
 
