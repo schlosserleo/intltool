@@ -111,6 +111,7 @@ elsif ($HELP_ARG)
 } 
 elsif ($BA_STYLE_ARG && @ARGV > 2) 
 {
+	&utf8_sanity_check;
 	&preparation;
 	&print_message;
 	&ba_merge_translations;
@@ -118,41 +119,41 @@ elsif ($BA_STYLE_ARG && @ARGV > 2)
 } 
 elsif ($XML_STYLE_ARG && @ARGV > 2) 
 {
-        &utf8_sanity_check;
+	&utf8_sanity_check;
 	&preparation;
 	&print_message;
-	
-    &xml_merge_output;
-
+	&xml_merge_output;
 	&finalize;
 } 
 elsif ($KEYS_STYLE_ARG && @ARGV > 2) 
 {
-        &utf8_sanity_check;
-        &preparation;
-        &print_message;
-        &keys_merge_translations;
+	&utf8_sanity_check;
+	&preparation;
+	&print_message;
+	&keys_merge_translations;
 	&finalize;
 } 
 elsif ($DESKTOP_STYLE_ARG && @ARGV > 2) 
 {
-        &preparation;
-        &print_message;
-        &desktop_merge_translations;
+	&utf8_sanity_check;
+	&preparation;
+	&print_message;
+	&desktop_merge_translations;
 	&finalize;
 } 
 elsif ($SCHEMAS_STYLE_ARG && @ARGV > 2) 
 {
-        &preparation;
-        &print_message;
-        &schemas_merge_translations;
+	&utf8_sanity_check;
+	&preparation;
+	&print_message;
+	&schemas_merge_translations;
 	&finalize;
 } 
 elsif ($RFC822DEB_STYLE_ARG && @ARGV > 2) 
 {
-        &preparation;
-        &print_message;
-        &rfc822deb_merge_translations;
+	&preparation;
+	&print_message;
+	&rfc822deb_merge_translations;
 	&finalize;
 } 
 else 
@@ -194,9 +195,9 @@ Mandatory options: (exactly one must be specified)
   -x, --xml-style        includes translations in the standard xml style
 
 Other options:
-  -u, --utf8             convert all strings to UTF-8 before merging
-  -p, --pass-through     use strings as found in .po files, without
-                         conversion (STRONGLY unrecommended with -x)
+  -u, --utf8             convert all strings to UTF-8 before merging 
+                         (default for everything except RFC822 style)
+  -p, --pass-through     deprecated, does nothing and issues a warning
   -m, --multiple-output  output one localized file per locale, instead of 
 	                 a single file containing all localized elements
   -c, --cache=FILE       specify cache file name
@@ -308,13 +309,8 @@ sub get_po_encoding
 
 sub utf8_sanity_check 
 {
-    if (!$UTF8_ARG) 
-    {
-        if (!$PASS_THROUGH_ARG) 
-        {
-            $PASS_THROUGH_ARG="1";
-        }
-    }
+    print STDERR "Warning: option --pass-through has been removed.\n" if $PASS_THROUGH_ARG;
+    $UTF8_ARG = 1;
 }
 
 sub get_translation_database
@@ -502,8 +498,7 @@ sub entity_decode
  
 # entity_encode: (string)
 #
-# Encode the given string to XML format (encode '<' etc). It also 
-# encodes high bit if not in UTF-8 mode.
+# Encode the given string to XML format (encode '<' etc).
 
 sub entity_encode
 {
@@ -511,15 +506,8 @@ sub entity_encode
 
     my @list_of_chars = unpack ('C*', $pre_encoded);
 
-    if ($PASS_THROUGH_ARG) 
-    {
-        return join ('', map (&entity_encode_int_even_high_bit, @list_of_chars));
-    } 
-    else 
-    {
-	# with UTF-8 we only encode minimalistic
-        return join ('', map (&entity_encode_int_minimalist, @list_of_chars));
-    }
+    # with UTF-8 we only encode minimalistic
+    return join ('', map (&entity_encode_int_minimalist, @list_of_chars));
 }
 
 sub entity_encode_int_minimalist
@@ -529,19 +517,6 @@ sub entity_encode_int_minimalist
     return "&apos;" if $_ == 39;
     return "&lt;" if $_ == 60;
     return chr $_;
-}
-
-sub entity_encode_int_even_high_bit
-{
-    if ($_ > 127 || $_ == 34 || $_ == 38 || $_ == 39 || $_ == 60) 
-    {
-        # the ($_ > 127) should probably be removed
-	return "&#" . $_ . ";"; 
-    } 
-    else 
-    {
-	return chr $_;
-    }
 }
 
 sub entity_encoded_translation
@@ -728,7 +703,7 @@ sub traverse
 	    $nodename =~ s/^_//;
 	}
 	my $lookup = '';
-	print $fh "<$nodename$outattr";
+	print $fh "<$nodename", $outattr;
 	if ($translate) {
 	    $lookup = getXMLstring($content);
             if (!((exists $attrs->{"xml:space"}) && ($attrs->{"xml:space"} =~ /^["']?preserve["']?$/))) {

@@ -1,3 +1,6 @@
+* Deprecate --pass-through option, default to UTF-8 for anything
+  except RFC822 files
+  -- bug #145017 (Danilo Segan)
 * Add support for .icon files
   -- bug #157412 (Takao Fujiwara, Rodney Dawes)
 

@@ -1,3 +1,21 @@
+2004-11-06  Danilo Šegan  <dsegan@gmx.net>
+ 
+	Fixes #145017.
+	
+	* NEWS: Document changes.
+
+	* tests/selftest.pl.in (check_multimerge_result): Removed "-p" and
+	"-u" options.
+
+	* tests/results/merge1.xml: Updated test result.
+	
+	* intltool-merge.in.in (print_help): modify -p, -u help messages.
+	(utf8_sanity_check): default to UTF-8.
+	(entity_encode): only minimalistic encoding.
+	(entity_encode_int_even_high_bit): removed.
+	Added utf8_sanity_check for all styles except RFC822.
+	(traverse): s/"<$nodename$outattr"/"<$nodename", $outattr/.
+
 2004-11-05  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS: Update for bug fix
