@@ -1,5 +1,10 @@
 2002-02-27  Darin Adler  <darin@bentspoon.com>
 
+	* intltool-update.in.in: Check for illegal combinations of arguments.
+	Check for good language code only when language code is needed.
+
+2002-02-27  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-update.in.in: Fix bug so that language code does not
 	have to be on the command line before any options.
 

@@ -91,59 +91,46 @@ GetOptions
  "gettext-package|g=s" => \$GETTEXT_PACKAGE,
  ) or &print_error_invalid_option;
 
-my $LANG     	   = $ARGV[0];
-my $MODULE;
+&print_help if $HELP_ARG;
+&print_version if $VERSION_ARG;
 
-# Use the supplied arguments
-# This section will check for the different options.
+my $arg_count = ($DIST_ARG > 0)
+    + ($POT_ARG > 0)
+    + ($HEADERS_ARG > 0)
+    + ($MAINTAIN_ARG > 0)
+    + ($REPORT_ARG > 0);
+&print_help if $arg_count > 1;
 
-sub split_on_argument
-{
-    if ($VERSION_ARG) {
-	&print_version;
-    }
-    elsif ($HELP_ARG) {
-	&print_help;
-    }
+# --version and --help don't require a module name
+my $MODULE = $GETTEXT_PACKAGE || &find_package_name;
 
-    ## Give error if script is run without an argument
-    if (! $LANG){
-	print "${PROGRAM}:  missing file arguments\n";
-	print "Try `${PROGRAM} --help' for more information.\n";
-	exit;
+if ($DIST_ARG) {
+    if ($ARGV[0] =~ /^[a-z]/){
+        &update_po_file ($ARGV[0]);
+        &print_status ($ARGV[0]);
+    } else {
+        &print_help;
     }
-
-    # --version and --help doesn't require us to be in /po, so
-    # first do this here.
-    $MODULE = $GETTEXT_PACKAGE || &find_package_name;
-
-    if ($DIST_ARG) {
-        &update_po_file ($LANG);
-        &print_status;
-    }
-    elsif ($POT_ARG) {
-        &generate_headers;
-        &generate_po_template;
-    }
-    elsif ($HEADERS_ARG) {
-        &generate_headers;
-        exit;
-    }
-    elsif ($MAINTAIN_ARG) {
-        &find_leftout_files;
-    }
-    elsif ($REPORT_ARG) {
-        &print_report;
-    }
-    elsif ($LANG && $LANG !~ /^-/) {
-	&main;
-    }
-    else {
-	&print_help;
+} elsif ($POT_ARG) {
+    &generate_headers;
+    &generate_po_template;
+} elsif ($HEADERS_ARG) {
+    &generate_headers;
+} elsif ($MAINTAIN_ARG) {
+    &find_leftout_files;
+} elsif ($REPORT_ARG) {
+    &print_report;
+} else {
+    if ($ARGV[0] =~ /^[a-z]/) {
+        &main ($ARGV[0]);
+    } else {
+        &print_help;
     }
 }
 
-&split_on_argument;
+exit;
+
+#########
 
 sub print_version
 {
@@ -177,15 +164,17 @@ sub print_help
 
 sub main
 {
+    my ($lang) = @_;
+
     ## Report error if the language file supplied
     ## to the command line is non-existent
-    &print_error_not_existing if !(-s "$LANG.po");
+    &print_error_not_existing("$lang.po") if ! -s "$lang.po";
 
     print "Working, please wait..." unless $VERBOSE;
     &generate_headers;
     &generate_po_template;
-    &update_po_file ($LANG);
-    &print_status;
+    &update_po_file ($lang);
+    &print_status ($lang);
 }
 
 sub determine_type ($) 
@@ -393,7 +382,6 @@ sub find_leftout_files
 sub print_error_invalid_option
 {
     ## Handle invalid arguments
-    print "${PROGRAM}: invalid option -- $LANG\n";
     print "Try `${PROGRAM} --help' for more information.\n";
     exit 1;
 }
@@ -504,9 +492,11 @@ sub update_po_file
 
 sub print_error_not_existing
 {
+    my ($file) = @_;
+
     ## Report error if supplied language file is non-existing
-    print "$PROGRAM:  sorry, $LANG.po does not exist!\n";
-    print "Try `$PROGRAM --help' for more information.\n";
+    print "$PROGRAM: $file does not exist!\n";
+    print "Try '$PROGRAM --help' for more information.\n";
     exit;
 }
 
@@ -530,7 +520,9 @@ sub po_file2lang ($)
 
 sub print_status
 {
-    system ("msgfmt", "--statistics", "$LANG.po");
+    my ($lang) = @_;
+
+    system ("msgfmt", "--statistics", "$lang.po");
     print "\n";
 }
 
