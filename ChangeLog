@@ -1,5 +1,10 @@
 2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
 
+	* configure.in: Changed version to 0.6
+	Ready for new release.
+
+2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
+
         * xml-i18n-tools.m4: Corrected one missing
 	keys.
 
