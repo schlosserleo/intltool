@@ -110,15 +110,24 @@ int main (void) {
     )
 
     AC_PROG_INTLTOOL checks if a good enough intltool is available.
+    Please require the latest intltool that exists. Intltool releases
+    are pretty stable and often only contains bugfixes.
+
     AM_WITH_NLS adds native language support to automake, together
     with a compile option.
+
     AM_GLIB_GNU_GETTEXT will check for additional required functions and
     programs and will finally create po/POTFILES during configure.
 
+    Instead of using AM_GLIB_GNU_GETTEXT you can do the following:
+
+    [sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile] 
+
     The text domain is identified by PACKAGE.  We will need to add a few
     functions later on to helloworld.c that will use this #define'd variable.
-    Also, this will be the base filename for all
-    your translation files, so make sure you choose a unique one.
+
+    Also, this will be the base filename for all your translation files, 
+    so make sure you choose a unique one.
 
 13.  Run 
        aclocal 
@@ -135,39 +144,67 @@ int main (void) {
 
 16. And fill it up with contents :
 
-    /*
-     *  i18n-support.h: Internationalization support
-     *
-     *  Shamelessly stolen from gnome-libs and elsewhere.
-     *  [license cut away]
-     */
+/*
+ * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
+ * All rights reserved.
+ *
+ * The program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this program; see the file COPYING.LIB.  If not,
+ * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+/*
+  @NOTATION@
+ */
 
-     #include <config.h>
+/*
+ * Handles all of the internationalization configuration options.
+ * Author: Tom Tromey <tromey@creche.cygnus.com>
+ */
+
+#ifndef __I18N_SUPPORT_H__
+#define __I18N_SUPPORT_H__
+
+#include <config.h>
 
 #ifdef ENABLE_NLS
-     #    include <libintl.h>
-#    undef _
-     #    define _(String) dgettext (PACKAGE, String)
-     #    ifdef gettext_noop
-     #        define N_(String) gettext_noop (String)
-     #    else
-     #        define N_(String) (String)
-     #    endif
-     #else
-     /* Stubs that do something close enough.  */
-     #    define textdomain(String) (String)
-     #    define gettext(String) (String)
-     #    define dgettext(Domain,Message) (Message)
-     #    define dcgettext(Domain,Message,Type) (Message)
-     #    define bindtextdomain(Domain,Directory) (Domain)
-     #    define _(String) (String)
-     #    define N_(String) (String)
-     #endif
+#    include <libintl.h>
+#    ifdef EXPLICIT_TRANSLATION_DOMAIN
+#        undef _
+#        define _(String) dgettext (EXPLICIT_TRANSLATION_DOMAIN, String)
+#    else 
+#        define _(String) gettext (String)
+#    endif
+#    ifdef gettext_noop
+#        define N_(String) gettext_noop (String)
+#    else
+#        define N_(String) (String)
+#    endif
+#else
+/* Stubs that do something close enough.  */
+#    define textdomain(String) (String)
+#    define gettext(String) (String)
+#    define dgettext(Domain,Message) (Message)
+#    define dcgettext(Domain,Message,Type) (Message)
+#    define bindtextdomain(Domain,Directory) (Domain)
+#    define _(String) (String)
+#    define N_(String) (String)
+#endif
+
+#endif /* __I18N_SUPPORT_H__ */
 
 17. Now add the following to helloworld.c
 
-    #include <locale.h> /* this is the right order */
-    #include <config.h> 
     #include <i18n-support.h>
 /* includes used by original program here */    
 
@@ -182,13 +219,13 @@ int main (void) {
              */
     }
 
+    If you use GNOME og GTK+ the setlocale sentence shouldn't be needed
+
     We also substitute all strings we want to be translated with 
     _("original string") to make sure that gettext is run on the strings.
     So the printf now looks like
 
       printf (_("Hello, world!\n"));
-
-    FIXME: why do we need a second set of () around the string ? where should \n go ?
 
 18. We create src/Makefile.am (from which Makefile.in and Makefile will be
     generated)
