@@ -1,3 +1,7 @@
+2003-01-11  Kenneth Christiansen <kenneth@gnu.org>
+
+	* intltool-merge.in.in: Added some warnings.
+
 2003-01-09  Jordi Mallach  <jordi@sindominio.net>
 
 	* intltool-update: patch from Gregory Stark, call msgmerge with
