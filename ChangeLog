@@ -1,3 +1,10 @@
+2001-10-26  Darin Adler  <darin@bentspoon.com>
+
+	* Makefile.am: Turn off compiling of doc-i18n-tool as an
+	interim measure so people using eazel-hacking can build.
+	Soon, we can make this a configure-time option and change
+	eazel-hacking to use that.
+
 2001-10-24  Darin Adler  <darin@bentspoon.com>
 
 	* intltool.spec.in: Set up mandir (thansk Toralf Lund)
