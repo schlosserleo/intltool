@@ -1,3 +1,18 @@
+2004-10-23  Danilo Šegan  <dsegan@gmx.net>
+
+	Fixes #155843.
+	
+	* NEWS: Updated.
+
+	* intltool-merge (getXMLstring): Use @{$content}[0] instead of
+	top-level $attrs for each tag.
+	(traverse): Add \$translate to getAttributeString calls. Use
+	untranslated text for tag content if only attributes need
+	translation.
+	(getAttributeString): Set $translate = 2 if some attribute is
+	translated, otherwise $translate = 1 if translation might be
+	needed.
+
 2004-10-14  Danilo Šegan  <dsegan@gmx.net>
 
 	* intltool-extract.in.in (type_glade): Ignore "dialog[0-9]+"

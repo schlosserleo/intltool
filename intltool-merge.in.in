@@ -608,6 +608,7 @@ sub getAttributeString
     my $do_translate = shift || 0;
     my $language = shift || "";
     my $result = "";
+    my $translate = shift;
     foreach my $e (reverse(sort(keys %{ $sub }))) {
 	my $key    = $e;
 	my $string = $sub->{$e};
@@ -657,6 +658,7 @@ sub getXMLstring
     my $count = scalar(@list);
     my $attrs = $list[0];
     my $index = 1;
+
     while ($index < $count) {
 	my $type = $list[$index];
 	my $content = $list[$index+1];
@@ -674,7 +676,7 @@ sub getXMLstring
 	} else {
 	    # We've got another element
 	    $result .= "<$type";
-	    $result .= getAttributeString($attrs, 0); # no nested translatable elements
+	    $result .= getAttributeString(@{$content}[0], 0); # no nested translatable elements
 	    if ($content) {
 		my $subresult = getXMLstring($content);
 		if ($subresult) {
@@ -707,8 +709,8 @@ sub traverse
 	# element
 	my @all = @{ $content };
 	my $attrs = shift @all;
-	my $outattr = getAttributeString($attrs, 1, $language);
 	my $translate = 0;
+	my $outattr = getAttributeString($attrs, 1, $language, \$translate);
 
 	if ($nodename =~ /^_/) {
 	    $translate = 1;
@@ -723,9 +725,10 @@ sub traverse
                 $lookup =~ s/\s+$//s;
             }
 
-	    if ($lookup) {
+	    if ($lookup || $translate == 2) {
                 my $translation = $translations{$language, $lookup};
-                if ($MULTIPLE_OUTPUT && $translation) {
+                if ($MULTIPLE_OUTPUT && ($translation || $translate == 2)) {
+                    $translation = $lookup if (!$translation);
                     print $fh " xml:lang=\"", $language, "\"";
                     print $fh ">", $translation, "</$nodename>";
                     return; # this means there will be no same translation with xml:lang="$language"...
@@ -736,20 +739,22 @@ sub traverse
 	    } else {
 		print $fh "/>";
 	    }
-	    
- 
+
 	    for my $lang (sort keys %po_files_by_lang) {
                     if ($MULTIPLE_OUTPUT && $lang ne "$language") {
                         next;
                     }
 		    if ($lang) {
-
                         # Handle translation
                         #
-			my $localattrs = getAttributeString($attrs, 1, $lang);
-                        my $decode_string = ($lookup); #entity_decode($lookup);
-                        my $translation = $translations{$lang, $decode_string};
-                        if ($translation) {
+                        my $translate = 0;
+                        my $localattrs = getAttributeString($attrs, 1, $lang, \$translate);
+                        my $translation = $translations{$lang, $lookup};
+                        if ($translate && !$translation) {
+                            $translation = $lookup;
+                        }
+
+                        if ($translation || $translate) {
                             $translation = ($translation);
 			    print $fh "\n";
 			    $leading_space =~ s/.*\n//g;

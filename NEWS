@@ -1,3 +1,5 @@
+* Fix translations of attributes of XML elements
+  -- bug #155843 (Danilo Segan)
 * Support for translators' comments in Glade files
   -- bug #155294 (Danilo Segan)
 * Fix paths and quoting for intltool script variables in intltool.m4
