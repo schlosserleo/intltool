@@ -1,3 +1,8 @@
+2001-01-08  Darin Adler  <darin@eazel.com>
+
+	* xml-i18n-extract.in: Remove comment at the top of each
+	generated C file. It just clutters the .pot and .po files.
+
 2001-01-08  Almer S. Tigelaar  <almer1@dds.nl>
 
 	* autogen.sh: Change message to advise to "make install" as there
@@ -60,8 +65,8 @@
 	* AUTHORS: Added Darin since he did a lot of the design and
 	implementation work.
 	
-	* xml-i18n-tools.Makefile.patch: New version based on
-	Darin's Nautilus-customized version, which avoids the .headerlock mess and
+	* xml-i18n-tools.Makefile.patch: New version based on Darin's
+	Nautilus-customized version, which avoids the .headerlock mess and
 	simplifies things.
 
 2001-01-03  Maciej Stachowiak  <mjs@eazel.com>
