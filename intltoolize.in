@@ -211,6 +211,7 @@ fi
 
 
 # Change to the auxiliary directory.
+(
 if test "$auxdir" != .; then
   test -z "$automake" && echo "Putting files in AC_CONFIG_AUX_DIR, '$auxdir'."
   cd $auxdir || exit 1
@@ -230,6 +231,7 @@ for file in $files; do
     status=1
   fi
 done
+)
 
 # FIXME: This probably does not work w/ builddir != srcdir because it
 # gets at source files relative to the current directory.
