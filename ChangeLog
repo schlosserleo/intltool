@@ -1,5 +1,7 @@
 2002-05-06  jacob berkman  <jacob@ximian.com>
 
+	* revert previous commit
+
 	* intltool.m4 (INTLTOOL_UPDATE): 
 	* xml-i18n-tools.m4 (XML_I18N_UPDATE): s/srcdir/top_srcdir/
 
