@@ -1,3 +1,8 @@
+2003-08-07  Abel Cheung  <maddog@linux.org.hk>
+
+	* intltool-update.in.in (find_leftout_file): Fix detection of
+	  translatable generic XML file.
+
 2003-08-03  Abel Cheung  <maddog@linux.org.hk>
 
 	* doc/*.8:

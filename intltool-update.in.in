@@ -298,7 +298,7 @@ sub find_leftout_files
     foreach (@buf_potfiles) {
 	s/^\[.*]\s*//;
     }
-			    
+
     print "Searching for missing translatable files...\n" if $VERBOSE;
 
     ## Check if we should ignore some found files, when
@@ -335,21 +335,21 @@ sub find_leftout_files
 		next unless s-.*\*/--;
 		$in_comment = 0;
 	    }
-	    
+
 	    # Handle continued macro.
 	    if ($in_macro)
 	    {
 		$in_macro = 0 unless /\\$/;
 		next;
 	    }
-	    
+
 	    # Handle start of macro (or any preprocessor directive).
 	    if (/^\s*\#/)
 	    {
 		$in_macro = 1 if /^([^\\]|\\.)*\\$/;
 		next;
 	    }
-	    
+
 	    # Handle comments and quoted text.
 	    while (m-(/\*|//|\'|\")-) # \' and \" keep emacs perl mode happy
 	    {
@@ -375,7 +375,7 @@ sub find_leftout_files
 		    }
 		}
 	    }	    
-	    
+
 	    if (/_\(QUOTEDTEXT/)
 	    {
 		## Remove the first 3 chars and add newline
@@ -385,19 +385,21 @@ sub find_leftout_files
 	}
 	close FILE;
     }
-	    
+
     foreach my $file (@buf_i18n_xml) 
     {
 	open FILE, "<$file";
 	
 	while (<FILE>) 
 	{
-	    if (/\s_(.*)=\"/ || /translatable=\"yes\"/)
+	    # FIXME: share the pattern matching code with intltool-extract
+	    if (/\s_(.*)=\"/ || /<_[^>]+>/ || /translatable=\"yes\"/)
 	    {
 		push @buf_allfiles, unpack("x3 A*", $file) . "\n";
 		last;
 	    }
 	}
+	close FILE;
     }
 
     foreach my $file (@buf_i18n_ini)
@@ -540,7 +542,7 @@ sub generate_po_template
 	    print OUTFILE "$_\n";
 	}
     }
-    
+
     close OUTFILE;
     close INFILE;
 
@@ -722,27 +724,27 @@ sub open_CONF_handle
 	else 
 	{
 	    my $makefile_source;
-	    
+
 	    local (*IN);
 	    open IN, "<Makefile" || die "can't open Makefile: $!";
-	    
+
 	    while (<IN>) 
 	    {
 		if (/^top_srcdir[ \t]*=/) 
 		{
 		    $src_dir = $_;		    
 		    $src_dir =~ s/^top_srcdir[ \t]*=[ \t]*([^ \t\n\r]*)/$1/;
-		    
+
 		    chomp $src_dir;
 		    $conf_in = "$src_dir" . "/configure.in" . "\n";
-		
+
 		    last;
 		}
 	    }
-	    
+
 	    $conf_file || die "Cannot find top_srcdir in Makefile.";
 	}
-	
+
 	$conf_file = $conf_in;
 	open (CONF, "<$conf_in") || die "can't open $conf_in: $!";
     }
@@ -757,7 +759,7 @@ sub open_CONF_handle
 sub find_package_name
 {
     &open_CONF_handle;
-    
+
     my $conf_source; {
 	local (*IN);
 	open (IN, "<$conf_file") || die "can't open $conf_file: $!";
@@ -783,9 +785,9 @@ sub find_package_name
 
     # \s makes this not work, why?
     $name = $1 if $conf_source =~ /^GETTEXT_PACKAGE=\[?([^\n\]]+)/m;
-    
+
     $name = "\$AC_PACKAGE_NAME" if "$name" eq "AC_PACKAGE_NAME";
-    
+
     $name = substitute_var ($name);
 
     return $name if $name;
