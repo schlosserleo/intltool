@@ -1,3 +1,7 @@
+2001-01-15  Darin Adler  <darin@eazel.com>
+
+	* xml-i18n-tools.spec.in: Oops. One too many.
+
 2001-01-15  Kenneth Christiansen <kenneth@gnu.org>
 
         * xml-i18n-update.in: Some name change.

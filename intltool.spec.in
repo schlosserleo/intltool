@@ -84,7 +84,6 @@ done
 
 %defattr(0555, bin, bin)
 %{prefix}/bin/xml-i18n-extract
-%{prefix}/bin/xml-i18n-merge
 %{prefix}/bin/xml-i18n-toolize
 %{prefix}/bin/xml-i18n-update
 %{prefix}/share/xml-i18n-tools/*
