@@ -144,7 +144,7 @@ sub determine_type($) {
    if ($type =~ /\[type: (gettext\/[^\]].*)]/) {
         $gettext_type=$1;
    }
-   elsif ($type =~ /(?:xml|oaf(?:\.in)+|pong(?:\.in)+)$/) {
+   elsif ($type =~ /(?:xml|oaf(?:\.in)+|pong(?:\.in)+|etspec)$/) {
         $gettext_type="gettext\/xml";
    }
    elsif ($type =~ /glade$/) {
