@@ -1,10 +1,10 @@
-intltool (README)
+intltool README
 =======================
 
-The intltool collection will do this steps:
+The intltool collection can be used to do these things:
 
  o Extract translatable strings from various source files (.xml.in,
-   .glade, .desktop.in, oaf.in).
+   .glade, .desktop.in, .server.in, .oaf.in).
 
  o Collect the extracted strings together with messages from traditional
    source files (.c, .h) in po/$(PACKAGE).pot.
@@ -13,8 +13,8 @@ The intltool collection will do this steps:
    .oaf files.  This merge step will happen at build resp. installation
    time.
 
-intltool has a script intltoolize which copies the various
-scripts and does the other magic to your module, so users building
+The intltool package has a script, intltoolize, which copies the various
+scripts and does the other magic to your module. So users building
 from tarballs don't need intltool, only folks building from cvs.
 (This is modeled on gettextize.)
 
@@ -30,7 +30,7 @@ To use intltool in your module, do the following:
 	export ACLOCAL_FLAGS='-I /usr/local/share/aclocal' 
 
  o Add these lines to autogen.sh, after the call to gettextize:
-  
+
 	echo "Running intltoolize"
 	intltoolize --copy --force --automake
 
@@ -43,17 +43,16 @@ To use intltool in your module, do the following:
    top-level .cvsignore. Also add the non-.in versions to .cvsignore
 
  o Remove po/desk.pl and po/update.* scripts.  intltool-update will take
-   over their funtionallity.
+   over their functionality.
 
 At this point, translatable strings will be automatically extracted to
-the .po files, if you'll make use of the following special
-recommendations.
+the .po files, if you make use of the following recommendations.
 
-intltool-prepare will help you to prepare the package.  This script will
+The intltool-prepare script will help you to prepare the package. It will
 try to extract translations from existing .desktop files which will
 become obsolete after intltoolization has taken place.
 
-Examples are listed in the USED file.
+Examples of packages that use intltool are listed in the USED file.
 
 Details of the AC_PROG_INTLTOOL macro
 -------------------------------------------
@@ -85,7 +84,7 @@ This step also applies for similar files (.directory, .soundlist).
         utilsdir = $(datadir)/gnome/apps/Utilities
         utils_in_files = bug-buddy.desktop.in
         utils_DATA = $(utils_in_files:.desktop.in=.desktop)
-        @INTLTOOL_MERGE_DESKTOP_RULE@
+        @INTLTOOL_DESKTOP_RULE@
 
 	--- end ----
 
@@ -115,18 +114,16 @@ Extra Steps for GLADE Files
    them from POTFILES.in
 
 
-Extra Steps for OAFINFO Files
+Extra Steps for SERVER Files (formerly .oafinfo or .oaf)
 .............................
 
-To get oaf translation extraction and merging requires a few more steps:
+To get server translation extraction and merging requires a few more steps:
 
- o Rename your .oafinfo (or .oaf) files to .oaf.in and put an
-   underscore before every value property for string attributes
-   that should be localized.
+ o Rename your .oafinfo (or .oaf) files to .oaf.in or .server.in and put an
+   underscore before every value property for string attributes that should
+   be localized.
 
- o Make sure you have at least one .po file in the "po" directory.
-
- o Add the .oaf.in files to POTFILES.in.
+ o Add the new .oaf.in or .server.in files to POTFILES.in.
 
  o Put lines like these in every Makefile.am that installs oaf files:
  
@@ -137,12 +134,12 @@ To get oaf translation extraction and merging requires a few more steps:
 	oaf_in_files = My_OAF_info_file.oaf.in
 	oaf_DATA = $(oaf_in_files:.oaf.in=.oaf)
  
-	@INTLTOOL_MERGE_OAF_RULE@
+	@INTLTOOL_OAF_RULE@
  
 	EXTRA_DIST=$(oaf_in_files) $(oaf_DATA)
  
 	--- end ----
- 
+
 At this point, your oaf translations will be extracted and
 merged. Also, so long as you are renaming the .oafinfo files to
 .oaf.in, you should take the opportunity to rename them to the new base
@@ -161,8 +158,6 @@ and merging requires these steps:
  o Rename your .xml files to .xml.in and put an underscore before 
    every element that should be localized.
 
- o Make sure you have at least one .po file in the "po" directory.
-
  o Add the .xml.in files to POTFILES.in.
 
  o Put lines like these in every Makefile.am that installs xml files:
@@ -174,8 +169,7 @@ and merging requires these steps:
         xml_in_files = My_xml_file.xml.in
         xml_DATA = $(xml_in_files:.xml.in=.xml)
 
-        INTLTOOL_XML_KIND=--utf8
-        @INTLTOOL_MERGE_XML_RULE@
+        @INTLTOOL_XML_RULE@
 
         EXTRA_DIST=$(xml_in_files) $(xml_DATA)
 
@@ -187,19 +181,13 @@ resulting XML file will have a UTF-8 effective encoding (you should
 make sure that the encoding="..." declaration in the .xml.in file is
 either absent or actually specifies UTF-8).
 
-Previous versions of intltool-generated XML files whose contents
+Previous versions of intltool generated XML files whose contents
 were made of the contents of the .po files, without paying attention
 to the encodings used. A single "XML" file could thus have strings in
-different encodings. This broken behavior can be asked for by setting
-INTLTOOL_XML_KIND=--pass-through in the above snippet.
-
-Setting the INTLTOOL_XML_KIND has no effect if the string [G2] has
-been given as the second parameter of the AC_PROG_INTLTOOL
-macro. In that case, --utf8 is always assumed.
+different encodings. This broken behavior can be requested only by
+using the old xml-i18n-tools API instead of the intltool one. See old
+versions of xml-i18n-tools for documentation on how the old API worked.
 
 ---
 
 XXX: add section for KEYS files. Works almost like XML files .
-The XML_UTF8_KEYS_KIND Makefile.am variable controls the kind of files
-output (--pass-through for GNOME1, --utf8 for GNOME2), and is
-overriden as --utf8 if [G2] has been specified.

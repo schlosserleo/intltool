@@ -1,5 +1,11 @@
 2001-10-02  Darin Adler  <darin@bentspoon.com>
 
+	* NEWS: Put some things in to prepare for a 0.10 release.
+	* README: Fix some grammar, and make more things right for the new
+	intltool world.
+
+2001-10-02  Darin Adler  <darin@bentspoon.com>
+
 	* intltool.m4:
 	* xml-i18n-tools.m4:
 	Fix mistake where the whitespace screws up the macros.

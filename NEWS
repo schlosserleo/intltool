@@ -1,3 +1,13 @@
+Version 0.10
+
+* Rename to intltool (Darin)
+* Fix split line bug (Darin)
+* Fix "no .po files" bug (Darin)
+* Add .scm support (Kenneth, Carlos)
+* Get rid of "\n" -> "n" escaping logic (Darin)
+* Make update ignore comment lines in POTFILES.in (Darin)
+* Remove "-?" option for compatibility with old Perl (Darin)
+
 Version 0.9.5
 
 * Fix .server support (Carlos)
@@ -41,21 +51,13 @@ Version 0.8.4
 * Backport of changes in branches to HEAD (Darin)
 * Better XML support (George)
 * More tests (Darin)
-* Handling of more extensions (Clahey, Laszlo, me) 
+* Handling of more extensions (Clahey, Laszlo, Kenneth) 
 * Spec file cleanup (Arik)
 * Updated documentation (Laszlo)
-* Misc bugfixes (Darin, Maciej, Laszlo, me)
+* Misc bugfixes (Darin, Maciej, Laszlo, Kenneth)
 * New translations: hrm, this is a translation tool, why should it 
   support translation - what a concept :)
 
-======================================================================
-
-BACK TO HEAD
-____________
-
-All users of xml-i18n-tools from CVS should now get sources from HEAD.
-The stable branch is being retired. There weren't really two branches
-of development.
 
 INITIAL ANNOUNCEMENT
 ____________________
