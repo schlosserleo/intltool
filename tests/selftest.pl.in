@@ -36,11 +36,13 @@ my $failed = 0;
 
 my $srcdir = $ENV{"srcdir"} || ".";
 
-sub check_extract_result($)
-{
-    my ($testcase) = @_;
 
-    my $result =`diff -u $srcdir/results/$testcase.h cases/$testcase.h`;
+sub check_command_result
+{
+    my ($command) = shift;
+    my ($testcase) = shift;
+
+    my $result =`$command`;
     
     if ($? == 0 && $result eq "") { 
         print "[OK]\n"; ## diff was empty, ie. files were equal
@@ -53,22 +55,28 @@ sub check_extract_result($)
     }
 }
 
+sub check_extract_result($)
+{
+    my ($testcase) = @_;
+    check_command_result("diff -u $srcdir/results/$testcase.h cases/$testcase.h", $testcase);
+}
+
 sub check_merge_result($)
 {
     my ($testcase) = @_;
 
     $testcase =~ s/\.in$//;
-    my $result =`diff -u $srcdir/results/$testcase cases/$testcase`;
+    check_command_result("diff -u $srcdir/results/$testcase cases/$testcase", $testcase);
+}
 
-    if ($? == 0 && $result eq "") {
-        print "[OK]\n"; ## diff was empty, ie. files were equal
-    } else {
-        print "[FAILED] ($testcase)\n";
-        open OUT, ">>errors";
-        print OUT $result;
-        close OUT;
-        $failed = 1;
-    }
+
+sub check_multimerge_result
+{
+    my ($testcase) = shift;
+    my ($language) = shift;
+
+    $testcase =~ s/\.in$//;
+    check_command_result("diff -u $srcdir/results/multi.$testcase $language/$testcase", $testcase);
 }
 
 
@@ -172,7 +180,7 @@ check_extract_result($case);
 print "18. Merge translations into multiple files:                          ";
 $case = "merge6.xml";
 system("$INTLTOOL_MERGE -x -s --quiet --multiple-output cases cases/$case.in $case") == 0 or $failed = 1;
-check_merge_result($case);
+check_multimerge_result($case, "merge6");
 
 print "19. Extract comments for translators from XML file:                  ";
 $case = "extract-comments.xml";

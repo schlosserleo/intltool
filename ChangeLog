@@ -1,5 +1,16 @@
 2004-06-17  Danilo Šegan  <dsegan@gmx.net>
 
+	* tests/results/multi.merge6.xml: New file for test 18.
+
+	* tests/selftest.pl.in (check_extract_result)
+	(check_merge_result, check_command_result): Combine general
+	functionality from check_extract_result and check_merge_result
+	into check_command_result. 
+	(check_multimerge_result): New function.
+	Adjust test 18. for checking multiple-output XML merging.
+
+2004-06-17  Danilo Šegan  <dsegan@gmx.net>
+
 	* NEWS: Mention multiple-output changes.
 	Mention Rodney's changes since the last release.
 
