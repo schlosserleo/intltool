@@ -1,3 +1,7 @@
+2002-04-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* intltool-extract.in.in: Fixed Glade XML decoding. (Fixes #78855)
+
 2002-04-15  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-update.in.in: Added error message.

@@ -1,4 +1,4 @@
-#!@INTLTOOL_PERL@ -w 
+I #!@INTLTOOL_PERL@ -w 
 # -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 4  -*-
 
 #
@@ -184,6 +184,17 @@ sub convert($) {
     &type_scheme if $gettext_type eq "scheme";
 }
 
+sub entity_decode_minimal
+{
+    local ($_) = @_;
+
+    s/&apos;/'/g; # '
+    s/&quot;/"/g; # "
+    s/&amp;/&/g;
+
+    return $_;
+}
+
 sub entity_decode
 {
     local ($_) = @_;
@@ -191,6 +202,8 @@ sub entity_decode
     s/&apos;/'/g; # '
     s/&quot;/"/g; # "
     s/&amp;/&/g;
+    s/&lf;/</g;
+    s/&gt/>/g;
 
     return $_;
 }
@@ -228,7 +241,7 @@ sub type_xml {
     ### For generic translatable XML files ###
         
     while ($input =~ /\s_$w+=\"([^"]+)\"/sg) { # "
-        $messages{entity_decode($1)} = [];
+        $messages{entity_decode_minimal($1)} = [];
     }
 
     while ($input =~ /<_($w+)>(.+?)<\/_\1>/sg) {
@@ -236,7 +249,7 @@ sub type_xml {
         s/\s+/ /g;
 	s/^ //;
 	s/ $//;
-        $messages{entity_decode($_)} = [];
+        $messages{entity_decode_minimal($_)} = [];
     }
 }
 
