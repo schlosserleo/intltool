@@ -1,3 +1,10 @@
+2002-02-16  Daniel Veillard <daniel@veilard.com>
+
+	* doc-i18n-tool/doc-i18n-tool.c: added the capacity to ignore
+	  presentation element (not cascading though), currently only
+	  "accel" is part of the list, edit and add it to the presentation
+	  element list. Asked by jdub.
+
 2002-02-14  Darin Adler  <darin@bentspoon.com>
 
 	* doc/intltool-merge.8: Update by Stefan Kost

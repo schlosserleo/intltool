@@ -52,6 +52,17 @@ struct poptOption options [] =
     { NULL, '\0', 0, NULL, 0}
   };
  
+/*
+ * Null terminated list of elements which should be considered
+ * presentational and should not break strings.
+ *
+ * Add elements names as needed.
+ */
+const char *presentation_elements[] = {
+    "accel",
+    NULL
+};
+
 
 xmlChar *
 processString (const xmlChar *value,
@@ -125,6 +136,51 @@ processNode (xmlNodePtr  node,
 	  xmlFree (node->content);
 	  node->content = res;
 	}
+    }
+  else if (node->type == XML_ELEMENT_NODE)
+    {
+      int pres;
+      xmlNodePtr children = node->children;
+      const xmlChar *name;
+      const char **tst;
+
+      if (children == NULL)
+	  return;
+
+      pres = 1;
+      /* check to see if all children are only text or presentation elements */
+      while ((children != NULL) && (pres != 0)) {
+	  if (children->type == XML_ELEMENT_NODE) {
+	      name = children->name;
+	      tst = presentation_elements;
+	      while (*tst != NULL) {
+		  if (!xmlStrcmp((const xmlChar *)*tst, name))
+		      break;
+		  tst++;
+	      }
+	      if (*tst == NULL) {
+		  pres = 0;
+		  break;
+	      }
+	  }
+	  children = children->next;
+      }
+      if (pres == 1) {
+	  xmlChar *content;
+
+	  /*
+	   * get the value, scrap the node list, replace with 
+	   * the modified text content. Let the tree walking
+	   * process the text node at the next step.
+	   */
+	  content = xmlNodeGetContent(node);
+	  children = node->children;
+	  node->last = node->children = NULL;
+	  xmlFreeNodeList(children);
+	  children = xmlNewDocText(node->doc, content);
+	  xmlAddChild(node, children);
+	  xmlFree(content);
+      }
     }
 }
 
