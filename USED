@@ -6,7 +6,7 @@ battstat	(not in GNOME CVS)
 bonobo
 bonobo-conf
 bug-buddy
-control-center	(only control-center-1-0, the HEAD is now gnome-control-center)
+control-center
 dia
 eel
 eog
@@ -22,7 +22,7 @@ ggv
 glade
 gnoetry
 gnome-applets
-gnome-core	(not yet committed)
+gnome-core
 gnome-control-center
 gnome-db
 gnome-vfs

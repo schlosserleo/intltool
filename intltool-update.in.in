@@ -234,15 +234,17 @@ sub maintain
 
     ## Check if we should ignore some found files, when
     ## comparing with POTFILES.in
-    if (-s "POTFILES.skip"){
-        open FILE, "POTFILES.skip";
-        while (<FILE>) {
-            if (/^[^#]/){
-                push @buf_potfiles_ignore, $_;
+    foreach my $ignore ("POTFILES.skip", "POTFILES.ignore") {
+        if (-s $ignore) {
+            open FILE, $ignore;
+            while (<FILE>) {
+                if (/^[^#]/){
+                    push @buf_potfiles_ignore, $_;
+                }
             }
+            print "Found $ignore: Ignoring files...\n";
+            @buf_potfiles = (@buf_potfiles_ignore, @buf_potfiles);
         }
-        print "Found POTFILES.skip: Ignoring files...\n";
-        @buf_potfiles = (@buf_potfiles_ignore, @buf_potfiles);
     }
 
     foreach my $file (@buf_i18n_plain){

@@ -305,7 +305,7 @@ sub contains
     my ($name, $str) = @_;
     open CONT, "<$name";
     while (<CONT>) {
-         chomp $_;
+         chomp;
          return 1 if $_ eq $str;
     }
     return 0;
