@@ -1,3 +1,11 @@
+2001-01-16  Darin Adler  <darin@eazel.com>
+
+	* xml-i18n-extract.in:
+	* xml-i18n-update.in:
+	Support .oaf.in.in as a hack for Bonobo. Maybe we
+	can come up with a better solution when Maciej
+	returns from his vacation.
+
 2001-01-16  Kenneth Christiansen <kenneth@gnu.org>
 
         * xml-i18n-update.in: GNU license at top. 

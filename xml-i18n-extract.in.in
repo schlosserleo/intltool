@@ -110,17 +110,17 @@ sub place_local {
 
 sub precheck {
     if (! $ENABLE_XML) { 
-        if ($FILE =~ /(xml|oaf\.in)$/sg) { 
+        if ($FILE =~ /(xml|oaf(\.in)+)$/) { 
             exit; 
         }
     }
     if (! $ENABLE_GLADE) { 
-        if ($FILE =~ /glade$/sg) { 
+        if ($FILE =~ /glade$/) { 
             exit; 
         }
     }
     if (! $ENABLE_XP) { 
-        if ($FILE =~ /\/xp\/(.*)\.h$/sg) { 
+        if ($FILE =~ /\/xp\/.*\.h$/) { 
             exit; 
         }
     }
@@ -193,7 +193,7 @@ sub convert($) {
 
 	### For generic translatable XML files ###
         
-        if ($FILE =~ /(xml|oaf\.in)$/sg){
+        if ($FILE =~ /(xml|oaf(\.in)+)$/){
 
             while ($input =~ /[\t\n\s]_[a-zA-Z0-9_]+=\"([^\"]+)\"/sg) {
                 $messages{$1} = [];
@@ -212,7 +212,7 @@ sub convert($) {
         
         ### For translatable Glade XML files ###
 
-        if ($FILE =~ /glade$/sg){
+        if ($FILE =~ /glade$/){
 
             my $translate = "label|title|text|format|copyright|comments|
                              preview_text|tooltip";
@@ -243,7 +243,7 @@ sub convert($) {
 
         ### For generic translatable XP header files ###
         
-        if ($FILE =~ /\/xp\/(.*)\.h$/sg){
+        if ($FILE =~ /\/xp\/.*\.h$/){
 
             while ($input =~ /\((.*),(.+)\"(.*)\"/g) {
                 my $tag = $1;

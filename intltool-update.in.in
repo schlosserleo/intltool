@@ -154,7 +154,7 @@ sub maintain
 {   
     ## Search and find all translatable files
     $list_i18n_plain = "find ../ -print | egrep '.*\\.(c|y|cc|c++|h|gob)\$' ";
-    $list_i18n_xml   = "find ../ -print | egrep '.*\\.(xml|glade|oaf\.in)\$' ";
+    $list_i18n_xml   = "find ../ -print | egrep '.*\\.(xml|glade|oaf(\.in)+)\$' ";
 
     open(BUF3, "POTFILES.in") || die "${PROGRAM}:  there's no POTFILES.in!!!\n";
     
@@ -172,7 +172,7 @@ sub maintain
     if (-s "POTFILES.skip"){
         open FILE, "POTFILES.skip";
         while (<FILE>) {
-            if ($_=~/^[^#]/o){
+            if (/^[^#]/){
                 push @buf_potfiles_ignore, $_;
             }
         }
@@ -183,7 +183,7 @@ sub maintain
     foreach my $file (@buf_i18n_plain){
         open FILE, "<$file";
         while (<FILE>) {
-            if ($_=~/_\(\"/o){
+            if (/_\("/){
                 $file = unpack("x3 A*",$file) . "\n";
                 push @buf_allfiles, $file;
                 last;
@@ -194,7 +194,7 @@ sub maintain
     foreach my $file (@buf_i18n_xml){ 
         open FILE, "<$file";
         while (<FILE>) {
-            if ($_=~/\s_(.*)\=\"/o){
+            if (/\s_(.*)="/){
                 $file = unpack("x3 A*",$file) . "\n";
                 push @buf_allfiles, $file;
                 last;
@@ -251,7 +251,7 @@ sub gen_headers
     if (! -s $XML_I18N_EXTRACT)
     {
 	print "\n *** The xml-i18n-extract script wasn't found!"
-	     ."\n *** Without this xml-i18n-update might not generate correct files.";
+	     ."\n *** Without this xml-i18n-update can not generate files.";
 	exit;
     } 
     else 
@@ -259,28 +259,28 @@ sub gen_headers
         open FILE, "<POTFILES.in";
         while (<FILE>) {
 
-           ## Find .xml.h files in POTFILES.in and generate the
+           ## Find .xml files in POTFILES.in and generate the
            ## files with help from the xml-i18n-extract script
 
-           if ($_=~ /(.*)(\.xml)/o){
-              $filename = "../$1.xml";
+           if (/\.xml$/){
+              $filename = "../$_";
               system($XML_I18N_EXTRACT, "--update", $filename);
            }
       
-           ## Find .glade.h files in POTFILES.in and generate
+           ## Find .glade files in POTFILES.in and generate
            ## the files with help from the xml-i18n-extract script
 
-           elsif ($_=~ /(.*)(\.glade)/o){
-              $filename = "../$1.glade";
+           elsif (/\.glade$/) {
+              $filename = "../$_";
               $xmlfiles="$XML_I18N_EXTRACT --update $filename";
               system($XML_I18N_EXTRACT, "--update", $filename);
            }
 
-           ## Find .oaf.in.h files in POTFILES.in and generate
+           ## Find .oaf.in files in POTFILES.in and generate
            ## the files with help from the xml-i18n-extract script
 
-           elsif ($_=~ /(.*)(\.oaf\.in)/o){
-              $filename = "../$1.oaf.in";
+           elsif (/\.oaf(\.in)+/){
+              $filename = "../$_";
               $xmlfiles="$XML_I18N_EXTRACT --update $filename";
               system($XML_I18N_EXTRACT, "--update", $filename);
            }
@@ -300,9 +300,7 @@ sub generate_pot
     open INFILE, "<POTFILES.in.old";
     open OUTFILE, ">POTFILES.in";
     while (<INFILE>) {
-        s/\.glade$/\.glade\.h/;
-        s/\.xml$/\.xml\.h/;
-        s/\.oaf\.in$/\.oaf\.in\.h/;
+        s/\.(glade|xml|oaf(\.in)+)$/$&.h/;
         print OUTFILE $_;        
     }
     close OUTFILE;
@@ -324,29 +322,7 @@ sub generate_pot
     open FILE, "<POTFILES.in";
     while (<FILE>) 
     {
-        # Delete header files coming from xml files
-        #------------------------------------------
-        if ($_=~ /(.*)(\.xml)/o)
-        {
-            $filename = "../$1.xml.h";
-            unlink($filename);
-        }
-
-        # Delete header files coming from glade files
-        #--------------------------------------------
-        elsif ($_=~ /(.*)(\.glade)/o)
-        {
-            $filename = "../$1.glade.h";
-            unlink($filename);
-        }
-
-        # Delete header files coming from oaf files
-        #--------------------------------------------
-        elsif ($_=~ /(.*)(\.oaf\.in)/o)
-        {
-            $filename = "../$1.oaf.in.h";
-            unlink($filename);
-        }
+        unlink "../$_.h" if /\.(glade|xml|oaf(\.in)+)$/;
     }
     close FILE;
     print "done\n";
