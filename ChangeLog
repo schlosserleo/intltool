@@ -1,3 +1,11 @@
+2002-03-01  Kenneth Christiansen <kenneth@gnu.org>
+
+        * NEWS: Added news items
+	* tests/results/extract7.xml.h: Fixed test to reflect Sven's changes
+	* tests/results/merge6.xml: The same
+
+	Version is bumped, no need to do that.
+	
 2002-02-27  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-update.in.in: Check for illegal combinations of arguments.

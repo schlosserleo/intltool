@@ -1,9 +1,18 @@
+
 Version 0.17
 
+* Improved the option checking code and fixed some bugs at the same time  (Darin)
+* Treat directories starting with po- as being translation directories (Kenneth) 
+* Improved the Perl version check (Stefan Kost)
+* Made it possible to depend on specific intltool releases (Kenneth, ERDI Gergo, Frank Belew)
+* Updated manual pages, plus added a new one for intltool-update (Stefan Kost, Kenneth)
+* Fixed the rule for ".ui" files, that was only half done (Darin, Kenneth)
+* Better error messages when we encounter an old cache file (Darin)
 * Handle C comments in intltool-update --maintain (Darin)
 * Don't merge fuzzy translations (Darin)
 * Handle XML tags inside translatable messages extracted from XML files
-  (Sven Neumann)
+ (Sven Neumann)
+
 
 Version 0.16
 
