@@ -302,10 +302,10 @@ sub fix_makefiles
 
 sub contains
 {
-    my ($name, $expr) = @_;
+    my ($name, $str) = @_;
     open CONT, "<$name";
     while (<CONT>) {
-         return 1 if /^$expr$/;
+         return 1 if $_ eq $str;
     }
     return 0;
 }
