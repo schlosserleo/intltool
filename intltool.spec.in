@@ -87,5 +87,5 @@ done
 %{prefix}/xml-i18n-tools/*
 
 %defattr (0444, bin, bin)
-%doc AUTHORS COPYING COPYING.LIB ChangeLog NEWS README
+%doc AUTHORS COPYING ChangeLog NEWS README
 %{prefix}/share/aclocal/*.m4

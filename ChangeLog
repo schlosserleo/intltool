@@ -1,5 +1,10 @@
 2001-01-04  Robin * Slomkowski  <rslomkow@eazel.com>
 
+	* Makefile.am: added specfile to EXTRA_DISTS
+	* xml-i18n-tools.spec.in: removed COPYING.LIB
+
+2001-01-04  Robin * Slomkowski  <rslomkow@eazel.com>
+
 	* Makefile.am: added Makefile.patch to EXTRA_DISTS
 
 2001-01-04  Robin * Slomkowski  <rslomkow@eazel.com>
