@@ -1,3 +1,13 @@
+Version 0.9
+
+* Self test fixes (Darin)
+* Merge translations in sorted order (Darin)
+* Autoconf 2.50 support (Maciej)
+* Bug fixes (Karl Eichwalder)
+* Support for .xml files (Laszlo Kovacs)
+* Build fixes (Darin)
+
+
 Version 0.8.4
 
 * Support for the new gettext 0.10.36 (Darin, Stanislav Brabec)
