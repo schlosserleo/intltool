@@ -263,40 +263,44 @@ sub entity_encode_int
  
 sub oaf_merge_translations
 {
-    open INPUT, "<${FILE}";
+    my $oaf_source; {
+       local (*INPUT);
+       local $/; # slurp mode
+       open (INPUT, "<${FILE}") || die "can't open ${FILE}: $!";
+       $oaf_source = <INPUT>;
+    }
 
     open OUTPUT, ">${OUTFILE}";
-    
-    while (<INPUT>) {
-	chomp;
-	if (/.*<oaf_attribute.*_value=\"[^\"]*\".*>.*/)  {
-	    my $orig_line = $_;
-	    
-	    my $non_translated_line = $orig_line;
-	    $non_translated_line =~ s/_value=\"/value=\"/;
-	    
-	    print OUTPUT "${non_translated_line}\n";
-	    
-	    my $value_str = $orig_line;
-	    $value_str =~ s/.*_value=\"([^\"]*)\".*/$1/;
-	    
-	    if ($value_str) {
-		my %value_translation_map = entity_encode_translations
-		    (lookup_translations ($value_str));
-		
-		foreach my $key (keys %value_translation_map) {
-		    my $translation = $value_translation_map{$key};
-		    
-		    my $translated_line = $orig_line;
-		    $translated_line =~ s/name=\"([^\"]*)\"/name=\"$1-${key}\"/;
-	            $translated_line =~ s/_value=\"[^\"]*\"/value=\"${translation}\"/;
-	            print OUTPUT "${translated_line}\n";
-	        }
-	    }  
-	} else {
-	    print OUTPUT "$_\n";
-	}
-    }
+
+    while ($oaf_source =~ /^(.*<oaf_attribute[^<]*_value=\"[^\"]*\"[^<]*>)$/mg)  {
+        my $orig_node = $1;
+        
+        my $non_translated_line = $orig_node;
+        $non_translated_line =~ s/_value=\"/value=\"/;
+            
+        my $new_node="${non_translated_line}\n";
+            
+        my $value_str = $orig_node;
+        $value_str =~ s/.*_value=\"([^\"]*)\".*/$1/sg;
+            
+        if ($value_str) {
+            my %value_translation_map = entity_encode_translations
+                (lookup_translations ($value_str));
+
+            foreach my $key (keys %value_translation_map) {
+                my $translation = $value_translation_map{$key};
+                    
+                my $translated_line = $orig_node;
+                $translated_line =~ s/name=\"([^\"]*)\"/name=\"$1-${key}\"/g;
+                $translated_line =~ s/_value=\"[^\"]*\"/value=\"${translation}\"/g;
+                $new_node="$new_node${translated_line}\n";
+            }
+        }
+
+        $oaf_source =~ s/$orig_node/$new_node/;
+    }           
+
+    print OUTPUT $oaf_source;    
 
     close OUTPUT;
     close INPUT;
