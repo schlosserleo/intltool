@@ -1,3 +1,14 @@
+2005-01-27  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.in.in: Update comment header block to include notification
+	of modifications for intltool, and for the "INTLTOOL_MAKEFILE" string
+
+	* intltoolize.in: Remove all of the patching and replace it with a
+	check for the "INTLTOOL_MAKEFILE" string in Makefile.in.in, and an
+	error message for when that fails
+
+	Fixes #165066
+
 2005-01-23  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS:
