@@ -1,3 +1,7 @@
+2001-07-14  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* USED: Added procman && gturing
+
 2001-07-12  Darin Adler  <darin@bentspoon.com>
 
 	* tests/selftest.pl.in: Fix an "or" that should be "||".
