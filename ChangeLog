@@ -1,10 +1,10 @@
 2003-12-03  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
-	* intltoolize.in: Handle standard GNU gettext 0.12
+	* intltoolize.in: Handle standard GNU gettext 0.12 and 0.13
 	installations.
 
 	* intltool-po-Makefile.in.in-patch-8: Makefile.in.in patch for
-	gettext 0.12.
+	gettext 0.12 and 0.13.
 
 	* Makefile.am: Distribute intltool-po-Makefile.in.in-patch-8.
 
