@@ -1,5 +1,10 @@
 2002-02-27  Kenneth Christiansen <kenneth@gnu.org>
 
+	* configure.in: Applied patch from Stefan Kost that fixes an issue
+	with the perl check that he and Carlos was seeing.
+
+2002-02-27  Kenneth Christiansen <kenneth@gnu.org>
+
 	* intltool.m4: Made version check work. Thanks to Cactus for
 	helping me out with the escaping, and frb for beautifying the
 	awk code.
