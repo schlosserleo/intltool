@@ -1,3 +1,8 @@
+2001-01-25  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* xml-i18n-prepare: compare msgids when appending to po file, not
+	msgstrs. Fix line counting.
+
 2001-01-24  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* xml-i18n-*.in: use ${PROGRAM} instead of directly specifying

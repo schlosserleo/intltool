@@ -163,16 +163,16 @@ sub rescue_file
             $msgstr = $3;
             $msgstr =~ s/"/\\"/g;
 	    
-            next if contains("po/$lang.po", "msgstr \"$msgstr\"");
+            $line--;
+            next if contains("po/$lang.po", "msgid \"$msgid\"");
             
             open POFILE, ">>po/$lang.po";
 
-            print POFILE "\n#: $filename:$line\n";
+            print POFILE "\n#: $filename.in:$line\n";
             print POFILE "msgid \"$msgid\"\n";
             print POFILE "msgstr \"$msgstr\"\n";
 
             close POFILE;
-            $line--;
         }
     }
 }
