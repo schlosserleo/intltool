@@ -1,3 +1,11 @@
+2001-01-17  Kenneth Christiansen <kenneth@gnu.org>
+
+        * xml-i18n-merge: Made script handle fuzzy's
+
+2001-01-17  Kenneth Christiansen <kenneth@gnu.org>
+
+	* configure.in: Made release
+
 2001-01-17  Darin Adler  <darin@eazel.com>
 
 	* xml-i18n-tools.m4: Rebuild oaf files when the

@@ -183,6 +183,9 @@ sub lookup_translation
     open PO_FILE, "<${po_file}";
 
     while (<PO_FILE>) {
+	if (/^#,.*fuzzy/) { 
+	    $_ = <PO_FILE>; next;
+	} 
         if (/^msgid "${string}"/ ) {
 	    $_ = <PO_FILE>;
 	    return $1 if /^msgstr "(([^"\\]|\\.)*)"/;
