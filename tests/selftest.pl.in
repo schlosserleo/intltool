@@ -126,7 +126,7 @@ check_merge_result($case);
 
 print " 9. Merge translations into a dia sheet style XML file [broken XML]: ";
 $case = "merge5p.sheet";
-system("$INTLTOOL_MERGE -x -p --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
+system("$INTLTOOL_MERGE -x -u -p --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
 print "10. Merge translations that include escaped .po strings:             ";

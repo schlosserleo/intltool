@@ -1,5 +1,12 @@
 2004-06-14  Danilo Šegan  <dsegan@gmx.net>
 
+	* tests/results/merge5p.sheet: Make it correct UTF-8.
+	* tests/selftest.pl.in (check_merge_result): Use "-u" in test 8.
+
+	Fixes bug #138512.
+
+2004-06-14  Danilo Šegan  <dsegan@gmx.net>
+
 	* NEWS: Document recent changes of XML merging/extracting.
 
 2004-06-14  Danilo Šegan  <dsegan@gmx.net>
