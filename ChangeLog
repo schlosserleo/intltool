@@ -1,5 +1,9 @@
 2004-10-14  Danilo Šegan  <dsegan@gmx.net>
 
+	* NEWS: Document fix for #155294.
+
+2004-10-14  Danilo Šegan  <dsegan@gmx.net>
+
 	Fixes #155294.
 	
 	* tests/cases/extract8.glade: Update Glade test.

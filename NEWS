@@ -1,3 +1,5 @@
+* Support for translators' comments in Glade files
+  -- bug #155294 (Danilo Segan)
 * Fix paths and quoting for intltool script variables in intltool.m4
   -- bug #154717 (James Henstridge, Rodney Dawes)
 * Fix merging of xml:space="preserve" tags
