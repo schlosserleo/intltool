@@ -221,7 +221,7 @@ sub get_po_encoding
     
     while (<IN_PO_FILE>) {
         ## example: "Content-Type: text/plain; charset=ISO-8859-1\n"
-        if (/Content-Type\:.*charset=(.*)\\n/) {
+        if (/Content-Type\:.*charset=([-a-zA-Z0-9]*)\\n/) {
             $encoding = $1; 
             last;
         }
