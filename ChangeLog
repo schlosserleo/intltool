@@ -1,3 +1,8 @@
+2001-10-03  Darin Adler  <darin@bentspoon.com>
+
+	* COPYING.LIB: Maciej says that switching to LGPL was a mistake.
+	I'll remove this, and he'll fix the licenses in the source files.
+
 2001-10-02  Kenneth Christiansen  <kenneth@gnu.org>
 
 	* intltool-*: Changed license, and s/xml-i18n-tools/intltool/;
