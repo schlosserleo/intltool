@@ -363,8 +363,6 @@ sub entity_decode
     local ($_) = @_;
 
     s/&apos;/'/g; # '
-    s/&gt;/>/g;
-    s/&lt;/</g;
     s/&quot;/"/g; # "
     s/&amp;/&/g;
 
@@ -389,14 +387,12 @@ sub entity_encode_int_minimalist
     return "&quot;" if $_ == 34;
     return "&amp;" if $_ == 38;
     return "&apos;" if $_ == 39;
-    return "&lt;" if $_ == 60;
-    return "&gt;" if $_ == 62;
     return chr $_;
 }
 
 sub entity_encode_int_even_high_bit
 {
-    if ($_ > 127 || $_ == 34 || $_ == 38 || $_ == 39 || $_ == 60 || $_ == 62) {
+    if ($_ > 127 || $_ == 34 || $_ == 38 || $_ == 39) {
         # the ($_ > 127) should probably be removed
 	return "&#" . $_ . ";"; 
     } else {

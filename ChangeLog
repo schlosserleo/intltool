@@ -1,3 +1,10 @@
+2002-02-27  Sven Neumann  <sven@gimp.org>
+
+	* intltool-extract.in.in: don't decode < and > entities and allow
+	XML tags in the translatable messages (e.g. for text markup).
+	
+	* intltool-merge.in.in: don't encode or decode < and > entities.
+
 2002-02-26  Darin Adler  <darin@bentspoon.com>
 
 	* intltool.m4: Add missing AC_SUBST for .ui rule that Kenneth pointed

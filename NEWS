@@ -2,7 +2,8 @@ Version 0.17
 
 * Handle C comments in intltool-update --maintain (Darin)
 * Don't merge fuzzy translations (Darin)
-
+* Handle XML tags inside translatable messages extracted from XML files
+  (Sven Neumann)
 
 Version 0.16
 

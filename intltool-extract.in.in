@@ -189,8 +189,6 @@ sub entity_decode
     local ($_) = @_;
 
     s/&apos;/'/g; # '
-    s/&gt;/>/g;
-    s/&lt;/</g;
     s/&quot;/"/g; # "
     s/&amp;/&/g;
 
@@ -233,7 +231,7 @@ sub type_xml {
         $messages{entity_decode($1)} = [];
     }
 
-    while ($input =~ /<_($w+)>([^<]+)<\/_\1>/sg) {
+    while ($input =~ /<_($w+)>(.+?)<\/_\1>/sg) {
         $_ = $2;
         s/\s+/ /g;
 	s/^ //;
