@@ -1,3 +1,20 @@
+2004-11-25  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.am: Fix sed rule for intltool scripts to use # as the
+	separator, and prefix the gettext program name variables with INTLTOOL
+
+	* NEWS: Document bug fix, and previous commit
+	
+	* configure.in: Prefix gettext program name variables with INTLTOOL
+
+	* intltool-po-Makefile.in.in-patch-?: These patches are no longer used
+
+	* intltool.m4: Fix sed rule for intltool script creation to use # as
+	the separator, and prefix the gettext program name variables with
+	INTLTOOL
+
+	Fixes #156454
+	
 2004-11-21  Rodney Dawes  <dobey@novell.com>
 
 	* intltool.m4: Update serial for IT_PROG_INTLTOOL to 2

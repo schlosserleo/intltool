@@ -1,3 +1,7 @@
+* Use # as sed separator and prefix gettext variable names with INTLTOOL
+  -- bug #156454 (Rodney Dawes)
+* Update serial and serial comparison check for IT_PROG_INTLTOOL to 2
+  (Rodney Dawes)
 * Support CDATA sections in XML files
   -- bug #157718 (Danilo Segan, Rodney Dawes)
 

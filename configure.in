@@ -40,10 +40,10 @@ else
    AC_MSG_ERROR([XML::Parser perl module is required for intltool])
 fi
 
-AC_PATH_PROG(ICONV, iconv, iconv)
-AC_PATH_PROG(MSGFMT, msgfmt, msgfmt)
-AC_PATH_PROG(MSGMERGE, msgmerge, msgmerge)
-AC_PATH_PROG(XGETTEXT, xgettext, xgettext)
+AC_PATH_PROG(INTLTOOL_ICONV, iconv, iconv)
+AC_PATH_PROG(INTLTOOL_MSGFMT, msgfmt, msgfmt)
+AC_PATH_PROG(INTLTOOL_MSGMERGE, msgmerge, msgmerge)
+AC_PATH_PROG(INTLTOOL_XGETTEXT, xgettext, xgettext)
 
 # find the actual value for $prefix that we'll end up with
 # i think there's a better way to do this...
