@@ -1,3 +1,13 @@
+2004-10-14  Danilo Šegan  <dsegan@gmx.net>
+
+	Fixes #155294.
+	
+	* tests/cases/extract8.glade: Update Glade test.
+	* tests/results/extract8.glade.h: Update test result.
+
+	* intltool-extract.in.in (type_glade): Support "comments"
+	attribute on property and atkproperty tags.
+
 2004-10-12  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS: Document fixes for #154717
