@@ -1,3 +1,11 @@
+2005-03-01  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.in.in (DISTFILES): Remove $(GMOFILES) from here
+	(distclean): Remove $(GMOFILES) here instead of maintainer-clean
+	(maintainer-clean): Remove Makefile.in.in here
+
+	Fixes #166724
+
 2005-02-28  Stepan Kasal  <kasal@ucw.cz>
 
 	* Makefile.in.in (.po.pox): Don't hardwire the name of the
