@@ -270,11 +270,10 @@ sub unescape_po_string
 {
     my ($value) = @_;
 
-    # this is likely to be both inefficient and incomplete. 
+    # this is likely to be quite incomplete. 
     # I suck at encoding thought as perl noi^W. -- CC
     my $retval = $value;
-    $retval =~ s/\\n/\n/g;
-    $retval =~ s/\\\"/\"/g;
+    $retval =~ s/\\([n\"\\])/$1/g;
 
     return $retval;
 }
@@ -328,7 +327,6 @@ sub entity_encode
 {
     my ($pre_encoded) = @_;
 
-    $pre_encoded =~ s/\\(.)/$1/g;
     my @list_of_chars = unpack ('C*', $pre_encoded);
 
     if ($PASS_THROUGH_ARG) {

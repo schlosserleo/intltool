@@ -19,3 +19,8 @@ msgid "This is a &quot; test"
 msgstr "This is a \" test --> is this a success ?"
 
 
+#: po/merge6.sheet.h:2
+msgid "This is another ' test"
+msgstr "This is ' another \\ test, and a \0123uccess."
+
+

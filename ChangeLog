@@ -1,3 +1,15 @@
+2001-08-19  Cyrille Chepelov  <chepelov@calixo.net>
+
+	* xml-i18n-merge.in.in: (get_po_encoding): more resilient regex as
+	advised by Darin. (unescape_po_string): unescaped \\ too.
+	Refactored the regex. (entity_encode): removed the \ handling.
+		
+	* tests/selftest.pl.in: re-aligned the [OK] notices and put them a
+	bit further on the right side.
+
+	* tests/cases/merge6.(xml.in|po):
+	* tests/results/merge6.xml: included more tests on escapes.
+	
 2001-08-18  Cyrille Chepelov  <chepelov@calixo.net>
 
 	* xml-i18n-merge.in.in: (get_po_encoding): put a warning and a
