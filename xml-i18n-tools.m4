@@ -86,15 +86,15 @@ fi
 dnl  manually sed perl in so people don't have to put the xml-i18n-tools scripts in their 
 dnl  AC_OUTPUT
 AC_OUTPUT_COMMANDS([
-sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${ac_given_srcdir}/xml-i18n-extract.in > xml-i18n-extract;
+sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${srcdir}/xml-i18n-extract.in > xml-i18n-extract;
 chmod ugo+x xml-i18n-extract;
 chmod u+w xml-i18n-extract;
 
-sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${ac_given_srcdir}/xml-i18n-merge.in > xml-i18n-merge;
+sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${srcdir}/xml-i18n-merge.in > xml-i18n-merge;
 chmod ugo+x xml-i18n-merge;
 chmod u+w xml-i18n-merge;
 
-sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${ac_given_srcdir}/xml-i18n-update.in > xml-i18n-update;
+sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${srcdir}/xml-i18n-update.in > xml-i18n-update;
 chmod ugo+x xml-i18n-update;
 chmod u+w xml-i18n-update;
 ], XML_I18N_TOOLS_PERL=${XML_I18N_TOOLS_PERL})
