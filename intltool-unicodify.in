@@ -23,23 +23,22 @@
 #
 
 ## Release information
-my $PROGRAM = "intltool-update";
-my $VERSION = "0.15";
-my $PACKAGE = "intltool";
+my $PROGRAM = "intltool-unicodify";
+my $VERSION = "@VERSION@";
+my $PACKAGE = "@PACKAGE@";
 
 ## Loaded modules
 use strict;
 use Getopt::Long;
 use Cwd;
 use File::Copy;
-use File::Find;
 
 ## Scalars used by the option stuff
 my $LANG     	   = $ARGV[0];
 my $HELP_ARG 	   = 0;
 my $VERSION_ARG    = 0;
 my $OVERWRITE_ARG  = 0;
-my $VERBOSE="1";
+my $VERBOSE        = 0;
 
 ## Always print as the first thing
 $| = 1;
@@ -49,6 +48,7 @@ GetOptions
 (
  "help" 	       => \$HELP_ARG,
  "version" 	       => \$VERSION_ARG,
+ "verbose|v"           => \$VERBOSE,
  "overwrite|o"         => \$OVERWRITE_ARG,
  ) or &print_error_invalid_option;
 
@@ -93,7 +93,7 @@ sub print_help
     print "      --help             display this help and exit\n";
     print "      --version          output version information and exit\n";
     print "\nExamples of use:\n";
-    print "${PROGRAM} da       ports da.po to UTF8 and saves as da.po-1\n\n";
+    print "${PROGRAM} da    ports da.po to UTF8 and saves as da.po-1\n\n";
     print "Report bugs to bugzilla.gnome.org, module 'intltool'.\n";
     exit;
 }
@@ -139,7 +139,7 @@ sub main
     close OUT;
 
     if ($OVERWRITE_ARG) {
-	system ("cp $LANG.po-1 $LANG.po");
+	copy ("$LANG.po-1", "$LANG.po");
 	system ("rm -rf $LANG.po-1");
     }
 }

@@ -1,5 +1,9 @@
 2002-02-08  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+        * intltool-unicodify.in: Fixed some small stupidities.
+
+2002-02-08  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
 	* intltool-unicodify.in: Updated to be much more 
 	useful. Hopefully people will use it and report
 	bugs.
