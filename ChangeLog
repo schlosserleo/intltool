@@ -1,5 +1,12 @@
 2001-01-09  Kenneth Christiansen <kenneth@gnu.org>
 
+        * xml-i18n-update.in: Modified "get package_name" code so 
+	that it handles AM_INIT_AUTOMAKE($SOMETHING, $SOMETHING).
+	With this change the script how works fine for evolution
+	aswell.
+
+2001-01-09  Kenneth Christiansen <kenneth@gnu.org>
+
 	* xml-i18n-extract.in: Modified a no-c-format patch from
 	Jody Goldberg and applied it.
 

@@ -15,8 +15,8 @@
 
 # Declare global variables
 #-------------------------
-my $PROGRAM = "xml-i18n-update";
-my $VERSION = "@VERSION@";
+my $PROGRAM  = "xml-i18n-update";
+my $VERSION  = "@VERSION@";
 my $_PACKAGE = "@PACKAGE@";
 
 my $LANG    = $ARGV[0];
@@ -387,19 +387,32 @@ sub FindPackageName {
     my $conf_in = "";
 
     if ($base_dirname eq "po") {
-	if (-f "../configure.in") {
-	    $conf_in = "../configure.in";
-	} else {
-	    my $srcdir = `grep '^top_srcdir[ \t]*=' ./Makefile`;
-	    $srcdir =~ s/top_srcdir[ \t]*=[ \t]*([^ \t\n\r]*)/$1/;
-	    chomp $srcdir;
-	    $conf_in = "${srcdir}" . "/configure.in" . "\n";
-	}
+        if (-f "../configure.in") {
+            $conf_in = "../configure.in";
+        } else {
+            my $srcdir = `grep '^top_srcdir[ \t]*=' ./Makefile`;
+            $srcdir =~ s/top_srcdir[ \t]*=[ \t]*([^ \t\n\r]*)/$1/;
+            chomp $srcdir;
+            $conf_in = "${srcdir}" . "/configure.in" . "\n";
+        }
 
-	$package_name = `grep AM_INIT_AUTOMAKE ${conf_in}`;
-	chomp $package_name;
-	$package_name =~ s/AM_INIT_AUTOMAKE\(([^,]*),.*/$1/;
-	return $package_name;
+        my $conf_source; {
+           local (*IN);
+           local $/; # slurp mode
+           open (IN, "<$conf_in") || die "can't open $conf_in: $!";
+           $conf_source = <IN>;
+        }
+
+        if ($conf_source =~ /AM_INIT_AUTOMAKE\(([^,]*),(.*)/) {
+            $package_name = $1;
+            print $package_name;
+            if ($package_name =~ /^[\$](.*)/){
+                if ($conf_source =~ /$1=(.*)/) {
+                    $package_name = $1;
+                }
+            }
+        }
+        return $package_name;
     }
     
     print "$PROGRAM: Unable to determine package name.\n" .  
