@@ -60,7 +60,7 @@ dnl AC_SUBST itself to avoid automake putting
 dnl XML_I18N_MERGE_DESKTOP_RULE = @XML_I18N_MERGE_DESKTOP_RULE@
 dnl in all the Makefile.in's
 XML_I18N_MERGE_DESKTOP_RULE='\%.desktop : \%.desktop.in $(top_srcdir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_srcdir)/xml-i18n-merge -d $(top_srcdir)/po $< [$]*.keys'
+	$(top_srcdir)/xml-i18n-merge -d $(top_srcdir)/po $< [$]*.desktop'
 AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
 s%@XML_I18N_MERGE_DESKTOP_RULE@%[$]XML_I18N_MERGE_DESKTOP_RULE%g
 AC_DIVERT_POP()dnl
