@@ -1,4 +1,4 @@
-I #!@INTLTOOL_PERL@ -w 
+#!@INTLTOOL_PERL@ -w 
 # -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 4  -*-
 
 #
