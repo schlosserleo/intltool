@@ -484,7 +484,7 @@ sub desktop_merge_translations
                 next if !$translation;
 
                 $_ = $non_translated_line;
-                s/^(\w+)=$string/$1[$lang]=$translation/;
+                s/^(\w+)=$string/${1}[$lang]=$translation/;
                 print OUTPUT;
             }
 	} else {

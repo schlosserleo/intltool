@@ -1,3 +1,8 @@
+2001-10-31  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in: Fix another regular expression problem,
+	where something looks like an array dereference.
+
 2001-10-29  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-extract.in.in: Some simplifications.
