@@ -26,6 +26,23 @@ dnl AC_PROG_INTLTOOL([MINIMUM-VERSION])
 AC_DEFUN(AC_PROG_INTLTOOL,
 [
 
+if test -n "$1"; then
+    AC_MSG_CHECKING(for intltool >= $1)
+
+    INTLTOOL_REQUIRED_VERSION_AS_INT=$(echo $1 | awk -F. '{ printf "%d", $[1] * 100 + $[2]; }')
+    INTLTOOL_APPLIED_VERSION=$(awk -F\" '/\$VERSION / { printf $[2]; }'  < intltool-update.in)
+    changequote({{,}})
+    INTLTOOL_APPLIED_VERSION_AS_INT=$(awk -F\" '/\$VERSION / { split(${{2}}, VERSION, "."); printf "%d\n", VERSION[1] * 100 + VERSION[2];}' < intltool-update.in)
+    changequote([,])
+
+    if test "$INTLTOOL_APPLIED_VERSION_AS_INT" -ge "$INTLTOOL_REQUIRED_VERSION_AS_INT"; then
+	AC_MSG_RESULT([$INTLTOOL_APPLIED_VERSION found])
+    else
+	AC_MSG_RESULT([$INTLTOOL_APPLIED_VERSION found. Your intltool is too old.  You need intltool $1 or later.])
+	exit 1
+    fi
+fi
+
   INTLTOOL_DESKTOP_RULE='%.desktop:   %.desktop.in   $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< [$]@ -d -u -c $(top_builddir)/po/.intltool-merge-cache'
 INTLTOOL_DIRECTORY_RULE='%.directory: %.directory.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< [$]@ -d -u -c $(top_builddir)/po/.intltool-merge-cache'
      INTLTOOL_KEYS_RULE='%.keys:      %.keys.in      $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< [$]@ -k -u -c $(top_builddir)/po/.intltool-merge-cache'
