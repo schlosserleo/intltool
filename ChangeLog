@@ -1,3 +1,7 @@
+2002-02-23  Sven Neumann  <sven@gimp.org>
+
+	* USED: gimp uses intltool now
+
 2002-02-23  James Henstridge  <james@daa.com.au>
 
 	* tests/selftest.pl.in (check_merge_result($)): add test case for
