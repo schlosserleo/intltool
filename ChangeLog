@@ -1,3 +1,7 @@
+Mon Oct 22 19:39:39 2001  Jonathan Blandford  <jrb@redhat.com>
+
+	* autogen.sh: fix message now that we compile.
+
 Mon Oct 22 17:31:26 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* doc-i18n-tool/doc-i18n-tool.c: add doc-i18n-tool to cvs.

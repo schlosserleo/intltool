@@ -57,4 +57,4 @@ cd $ORIGDIR
 $srcdir/configure --enable-maintainer-mode "$@"
 
 echo 
-echo "Now type 'make install' to install $PROJECT (no compiling required)."
+echo "Now type 'make' to build $PROJECT."
