@@ -73,7 +73,7 @@ unlink "errors";
 print "1. Checking output from simple desktop file:                  ";
 
 $case = "extract1.desktop";
-`xml-i18n-extract --type=gettext/ini --quiet --update cases/$case`;
+`/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update cases/$case`;
 check_result($case);
 
 ## 2. Extract/Simple desktop-like file
@@ -81,7 +81,7 @@ check_result($case);
 print "2. Checking output from simple desktop-like file:             ";
 
 $case = "extract2.keyprop";
-`xml-i18n-extract --type=gettext/ini --quiet --update cases/$case`;
+`/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update cases/$case`;
 check_result($case);
 
 ## 3. Extract/Simple desktop-like file
@@ -89,6 +89,6 @@ check_result($case);
 print "3. Checking output from simple xml-file:                      ";
 
 $case = "merge1.xml";
-`../xml-i18n-merge -o cases/ cases/$case.in cases/$case`;
+`/usr/bin/perl ../xml-i18n-merge -o cases/ cases/$case.in cases/$case`;
 check_result_output($case);
 

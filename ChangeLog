@@ -1,5 +1,19 @@
 2001-01-31  Darin Adler  <darin@eazel.com>
 
+	* xml-i18n-merge.in: Fix regular expressions to be
+	a little better and change XML parsing logic so it
+	doesn't get confused by "*" and other metacharacters
+	in the input file.
+
+	* Makefile.am: Whitespace tweak.
+	* .cvsignore: Ignore generated xml-i18n-prepare.
+	* tests/cases/.cvsignore: Ignore test results.
+	* tests/cases/test.po: Added file needed for tests.
+	* tests/selftest.pl: Invoke the scripts in a way
+	that does not require installing first.
+
+2001-01-31  Darin Adler  <darin@eazel.com>
+
 	* xml-i18n-prepare: Remove this file, since it's
 	now generated.
 

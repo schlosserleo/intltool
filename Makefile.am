@@ -19,7 +19,7 @@ pkgdata_DATA = xml-i18n-tools.Makefile.patch
 # This macro file should be visible to Automake's aclocal.
 aclocal_DATA = $(aclocal_macros)
 
-# The  xml-i18n-tools distributor.
+# The xml-i18n-tools distributor.
 bin_SCRIPTS = \
 	xml-i18n-toolize xml-i18n-update \
 	xml-i18n-extract xml-i18n-prepare

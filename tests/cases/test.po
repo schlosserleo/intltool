@@ -1,0 +1,5 @@
+msgid "Writing error when attempting to save %s"
+msgstr "Kunne ikke skrive til filen %s."
+
+msgid "Error while attempting to save %s: could not construct exporter"
+msgstr "Kunne ikke skrive til filen %s."
