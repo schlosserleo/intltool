@@ -1,3 +1,11 @@
+2005-01-20  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-update.in.in (echo_n): Add new method to implement the
+	echo -n functionality which is not available on all platforms
+	(SubstituteVariable): Use echo_n () instead of `echo -n`
+
+	Fixes #162027
+	
 2005-01-13  Jeremy Katz  <katzj@redhat.com>
 
 	* intltool-extract.in.in (place_local): Fix local mode (#163981)

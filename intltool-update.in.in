@@ -212,6 +212,16 @@ _EOF_
     exit;
 }
 
+sub echo_n
+{
+    my $str = shift;
+    my $ret = `echo "$str"`;
+
+    $ret =~ s/\n$//; # do we need the "s" flag?
+
+    return $ret;
+}
+
 sub POFile_DetermineType ($) 
 {
    my $type = $_;
@@ -867,7 +877,7 @@ sub SubstituteVariable
     
     # We're using Perl backticks ` and "echo -n" here in order to 
     # expand any shell escapes (such as backticks themselves) in every variable
-    return `echo -n "$str"`;
+    return echo_n ($str);
 }
 
 sub CONF_Handle_Open
