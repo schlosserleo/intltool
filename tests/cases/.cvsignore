@@ -1,7 +1,6 @@
 Makefile
 Makefile.in
 extract1.desktop.h
-extract2.keyprop.h
 merge1.xml
 extract7.xml.h
 extract3.xml.in.h
@@ -10,3 +9,4 @@ extract6.glade.h
 merge5u.sheet
 merge5p.sheet
 merge6.xml
+merge7.xml

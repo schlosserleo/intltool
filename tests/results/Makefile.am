@@ -2,7 +2,6 @@ NULL =
 
 EXTRA_DIST =					\
 	extract1.desktop.h			\
-	extract2.keyprop.h			\
 	extract3.xml.in.h			\
 	extract6.glade.h			\
 	extract7.xml.h				\
@@ -11,4 +10,5 @@ EXTRA_DIST =					\
 	merge5p.sheet				\
 	merge5u.sheet				\
 	merge6.xml				\
+	merge7.xml				\
 	$(NULL)

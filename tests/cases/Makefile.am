@@ -3,7 +3,6 @@ NULL =
 EXTRA_DIST =					\
 	az.po					\
 	extract1.desktop			\
-	extract2.keyprop			\
 	extract3.xml.in				\
 	extract6.glade				\
 	extract7.xml				\
@@ -15,5 +14,6 @@ EXTRA_DIST =					\
 	merge5u.sheet.in			\
 	merge6.po				\
 	merge6.xml.in				\
+	merge7.xml.in				\
 	test.po 				\
 	$(NULL)

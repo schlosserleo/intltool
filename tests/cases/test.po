@@ -114,6 +114,8 @@ msgstr ""
 msgid "Fax"
 msgstr "Translated Fax"
 
+msgid "Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes..."
+msgstr "You are so very lucky to be using this excellent program."
 
 #~ msgid " Auto Update"
 #~ msgstr " Opdatér automatisk"

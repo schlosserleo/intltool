@@ -46,7 +46,7 @@ use File::Basename;
 use Getopt::Long;
 
 ## Scalars used by the option stuff
-my $HELP_ARG 	= "0";
+my $HELP_ARG = "0";
 my $VERSION_ARG = "0";
 my $OAF_STYLE_ARG = "0";
 my $XML_STYLE_ARG = "0";
@@ -162,7 +162,7 @@ sub help{
     print "  -u, --utf8                   convert all strings to UTF-8 before merging\n";
     print "  -p, --pass-through           use strings as found in .po files, without\n";
     print "                               conversion (STRONGLY unrecommended with -x)\n";
-    print "\nReport bugs to bugzilla.gnome.org, module xml-i18n-tools or xml-i18n-tools-list\@gnome.org>\n";
+    print "\nReport bugs to bugzilla.gnome.org, module intltool or xml-i18n-tools-list\@gnome.org>\n";
     exit;
 }
 
@@ -430,22 +430,25 @@ sub xml_merge_translations
 
     # First just unmark for translation all empty nodes
     # for example <_foo/> is just replaced by <foo/>
-    $xml_source =~ s/<_($w+)\/>/<$1\/>/mg;
+    $xml_source =~ s|<_($w+)/>|<$1/>|mg;
 
-    # Support for XML <_foo>blah</_foo> style translations
-    while ($xml_source =~ /([ \t]*)<_($w+)>([^<]+)<\/_\2>/m) {
+    # Support for <_foo>blah</_foo> style translations
+    while ($xml_source =~ m|([ \t]*)<_($w+)>(.*?)</_\2>|s) {
         print OUTPUT $`;
-	$xml_source = $'; #'
+	my $remainder = $'; #'
 
         my $spaces = $1;
         my $tag_name = $2;
         my $value_str = $3;
 
         my $non_translated_line = "$spaces<$tag_name>$value_str</$tag_name>";
-            
         my $new_node = $non_translated_line;
 
         if ($value_str) {
+	    $value_str =~ s/\s+/ /g;
+            $value_str =~ s/^ //;
+            $value_str =~ s/ $//;
+
             my %value_translation_map = entity_encode_translations
                 (lookup_translations ($value_str));
 
@@ -456,7 +459,7 @@ sub xml_merge_translations
             }
         }
 
-	$xml_source = $new_node . $xml_source;
+	$xml_source = $new_node . $remainder;
     }
 
     print OUTPUT $xml_source;
@@ -506,7 +509,6 @@ sub keys_merge_translations
 sub desktop_merge_translations
 {
     open INPUT, "<${FILE}";
-
     open OUTPUT, ">${OUTFILE}";
 
     while (<INPUT>) {

@@ -1,3 +1,23 @@
+2001-10-16  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in: Remove whitespace in a way that
+	matches what intltool-extract does.
+
+	* intltool-extract.in.in:
+
+	* tests/cases/.cvsignore:
+	* tests/cases/Makefile.am:
+	* tests/cases/merge7.xml.in:
+	* tests/cases/test.po:
+	* tests/results/Makefile.am:
+	* tests/results/merge7.xml:
+	* tests/selftest.pl.in:
+	Added a test for the above change.
+
+	* tests/cases/extract2.keyprop:
+	* tests/results/extract2.keyprop.h:
+	Removed a redundant test.
+
 2001-10-09  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-extract.in.in: Remove excess whitespace.
