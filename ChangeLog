@@ -1,3 +1,15 @@
+2002-05-01  Abel Cheung  <maddog@linux.org.hk>
+
+	* intltool-update.in.in:
+	- Attempt to read configure.ac if configure.in is not found.
+	- Perform variable substitutions when determining package name.
+	(fixes #66155 and #78926)
+
+2002-03-13  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* intltool-update.in.in: We look also at AC_INIT to get the package
+	name.
+
 2002-04-20  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* doc/I18N-HOWTO: Updated.

@@ -560,6 +560,8 @@ sub find_package_name
     if ($base_dirname =~ /^po(-.+)?$/) {
         if (-f "../configure.in") {
             $conf_in = "../configure.in";
+	} elsif (-f "../configure.ac") {
+	    $conf_in = "../configure.ac";
         } else {
 	    my $makefile_source;
 	    local (*IN);
@@ -580,19 +582,33 @@ sub find_package_name
 	    $conf_in || die "Cannot find top_srcdir in Makefile."
         }
 
+	my %varhash = ();
         my $conf_source; {
            local (*IN);
-           local $/; # slurp mode
            open (IN, "<$conf_in") || die "can't open $conf_in: $!";
+           while (<IN>) {
+              if (/^(\w+)=(\S+)/) { $varhash{$1} = $2 };
+           }
+           seek (IN, 0, 0);
+           local $/; # slurp mode
            $conf_source = <IN>;
         }
 
 	my $name = "";
-	$name = $1 if $conf_source =~ /^AM_INIT_AUTOMAKE\(([^,\)]+)/m;
-	$name = $1 if $conf_source =~ /^GETTEXT_PACKAGE=(\S+)/m;
-	if ($name =~ /^[\$](\S+)/) {
-            return $1 if $conf_source =~ /^\s*$1=(\S*)/m;
-        }
+	$name = $1 if $conf_source =~ /^AM_INIT_AUTOMAKE\(\[?([\$\w]+)/m;
+	if ($conf_source =~ /^AC_INIT\(\[?([\$\w]+)\]?\s*,/m) {
+	    $name = $1;
+	    $varhash{"AC_PACKAGE_NAME"} = $1;
+	}
+	$name = $1 if $conf_source =~ /^GETTEXT_PACKAGE=([\$\w]+)/m;
+
+	$name = "\$AC_PACKAGE_NAME" if "$name" eq "AC_PACKAGE_NAME";
+
+	while ($name =~ /[\$](\w+)/) {
+	    if (exists $varhash{$1}) {
+		$name =~ s/[\$](\w+)/$varhash{$1}/;
+	    }
+	}
 	return $name if $name;
     }
 
