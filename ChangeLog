@@ -1,3 +1,9 @@
+2001-01-31  Kenneth Christiansen <kenneth@gnu.org>
+
+        * tests/cases/test.po: Changed, and made clear
+	that people should not touch that file. Fuzzies,
+	etc has to be there for the test.
+
 2001-01-31  Darin Adler  <darin@eazel.com>
 
 	* xml-i18n-merge.in: Fix regular expressions to be
