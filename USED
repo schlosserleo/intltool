@@ -11,6 +11,7 @@ gal
 gedit		(only gedit-1-0)
 gnome-applets
 gnome-core	(not yet committed)
+gnome-db
 gnome-vfs
 gnumeric
 gtkhtml
