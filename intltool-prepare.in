@@ -169,11 +169,10 @@ sub rescue_file
         if (($entry =~ /^($keywords)=(.*)$/) ||
             ($entry =~ /^(\s*description)=(.*)$/)) {
             $msgid = $2;
-	    $msgid =~ s/\"/\\"/;
+	    $msgid =~ s/\"/\\"/g;
         } elsif (($entry =~ /^($keywords)\[(.*?)\]=(.*)$/) ||
                  ($entry =~ /^(\s*\[)(.*?)\]description=(.*)$/)) {
             $lang = $2;
-            next if (!-s "po/$lang.po");
 
             my $msgstr = $3;
             $msgstr =~ s/"/\\"/g;
@@ -285,7 +284,8 @@ sub fix_makefiles
                     $line .= "$name\_DATA = \$($name\_in_files:.$1.in=.$1)\n";
                     if ($basename eq 'keys') {
                         if (!contains($makefile, '@XML_I18N_MERGE_KEYS_RULE@')) {
-                        $line .= "\@XML_I18N_MERGE_KEYS_RULE\@\n";
+                            $line .= "\@XML_I18N_MERGE_KEYS_RULE\@\n";
+                        }
                     }
                     elsif (!contains($makefile, '@XML_I18N_MERGE_DESKTOP_RULE@')) {
                         $line .= "\@XML_I18N_MERGE_DESKTOP_RULE\@\n";

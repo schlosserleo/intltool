@@ -1,3 +1,10 @@
+2001-02-19  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* xml-i18n-prepare.in: escape "'s in msgid also. fixes #6757. added
+	missing }, and removed check for existance of LL.po file -- to rescue
+	all translations from .desktop files -- newly created files should be
+	added to cvs.
+
 2001-02-15  Darin Adler  <darin@eazel.com>
 
 	* configure.in: Rolling back to 0.7. The 0.8.1 verson is
