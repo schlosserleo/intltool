@@ -1,3 +1,9 @@
+2001-11-03  Darin Adler  <darin@bentspoon.com>
+
+	* NEWS:
+	* configure.in:
+	Prepare for 0.12 release.
+
 2001-10-31  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-merge.in.in: Fix another regular expression problem,
@@ -63,7 +69,7 @@
 
 2001-10-24  Darin Adler  <darin@bentspoon.com>
 
-	* intltool.spec.in: Set up mandir (thansk Toralf Lund)
+	* intltool.spec.in: Set up mandir (thanks Toralf Lund)
 
 Mon Oct 22 19:39:39 2001  Jonathan Blandford  <jrb@redhat.com>
 
