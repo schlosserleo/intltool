@@ -98,7 +98,7 @@ ifdef([AC_DIVERSION_ICMDS],[
 dnl  manually sed perl in so people don't have to put the xml-i18n-tools scripts in their 
 dnl  AC_OUTPUT
 AC_OUTPUT_COMMANDS([
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/xml-i18n-extract.in > xml-i18n-extract.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${top_srcdir}/xml-i18n-extract.in > xml-i18n-extract.out
 if cmp -s xml-i18n-extract xml-i18n-extract.out 2>/dev/null; then
   rm -f xml-i18n-extract.out
 else
@@ -107,7 +107,7 @@ fi
 chmod ugo+x xml-i18n-extract
 chmod u+w xml-i18n-extract
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/xml-i18n-merge.in > xml-i18n-merge.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${top_srcdir}/xml-i18n-merge.in > xml-i18n-merge.out
 if cmp -s xml-i18n-merge xml-i18n-merge.out 2>/dev/null; then
   rm -f xml-i18n-merge.out
 else
@@ -116,7 +116,7 @@ fi
 chmod ugo+x xml-i18n-merge
 chmod u+w xml-i18n-merge
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/xml-i18n-update.in > xml-i18n-update.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${top_srcdir}/xml-i18n-update.in > xml-i18n-update.out
 if cmp -s xml-i18n-update xml-i18n-update.out 2>/dev/null; then
   rm -f xml-i18n-update.out
 else
