@@ -35,7 +35,7 @@ $| = 1;
 sub check_result($)
 {
     my $testcase = $_[0];
-    my $result =`diff results/$testcase.h cases/$testcase.h`;
+    my $result =`diff -Nup results/$testcase.h cases/$testcase.h`;
     
     if (!$result) { 
 	print "[OK]\n"; ## diff was empty, ie. files were equal
@@ -48,7 +48,7 @@ sub check_result_output($)
 {
     my $testcase = $_[0];
     $testcase =~ s/\.in//;
-    my $result =`diff results/$testcase cases/$testcase`;
+    my $result =`diff -Nup results/$testcase cases/$testcase`;
 
     if (!$result) {
         print "[OK]\n"; ## diff was empty, ie. files were equal
@@ -66,7 +66,7 @@ sub check_result_output($)
 ## Welcome notice
 
 print "Running selftest of the xml-i18n-tools module...\n\n";
-
+unlink "errors";
 
 ## 1. Extract/Simple desktop file
 
@@ -89,6 +89,6 @@ check_result($case);
 print "3. Checking output from simple xml-file:                      ";
 
 $case = "merge1.xml";
-`~/share/xml-i18n-tools/xml-i18n-merge -o cases/ cases/$case.in cases/$case`;
+`../xml-i18n-merge -o cases/ cases/$case.in cases/$case`;
 check_result_output($case);
 
