@@ -42,36 +42,35 @@ if (! $LANG){
 #---------------------------
 if ($LANG=~/^-(.)*/){
 
-    if ("$LANG" eq "--version"   || "$LANG" eq "-V"){
+    if ("$LANG" eq "--version" || "$LANG" eq "-V")
+    {
         &version;
     }
-    elsif ($LANG eq "--help"     || "$LANG" eq "-H"){
+    elsif ($LANG eq "--help" || "$LANG" eq "-H")
+    {
 	&help;
     }
-    elsif ($LANG eq "--dist"     || "$LANG" eq "-D"){
+    elsif ($LANG eq "--dist" || "$LANG" eq "-D")
+    {
         &merging;
 	&status;
     }
-    elsif ($LANG eq "--pot"      || "$LANG" eq "-P"){
-
- 	# Check for .headerlock file, so the Makefile
-        # will not generate the header files twise 
-	#--------------------------------------------
-	if (-e ".headerlock"){
-   	&generate_pot;
-	}else{
-        &gen_headers;
-	&generate_pot;}
-        exit;
-    }
-    elsif ($LANG eq "--headers"  || "$LANG" eq "-S"){
+    elsif ($LANG eq "--pot" || "$LANG" eq "-P")
+    {
         &gen_headers;
         exit;
     }
-    elsif ($LANG eq "--maintain" || "$LANG" eq "-M"){
+    elsif ($LANG eq "--headers"  || "$LANG" eq "-S")
+    {
+        &gen_headers;
+        exit;
+    }
+    elsif ($LANG eq "--maintain" || "$LANG" eq "-M")
+    {
         &maintain;
     }
-    elsif ($LANG eq "--statuslist" || "$LANG" eq "-L"){
+    elsif ($LANG eq "--statuslist" || "$LANG" eq "-L")
+    {
 	&show_status;
     }
     else {
@@ -119,6 +118,7 @@ sub help
     print "  -P, --pot                    generate the pot file only\n";
     print "  -S, --headers                generate the XML headerfiles in POTFILES.in\n";
     print "  -M, --maintain               search for missing files in POTFILES.in\n";
+    print "  -L, --statuslist		  creates a statusreport for the module.\n";
     print "  -V, --version                shows the version\n";
     print "\nExamples of use:\n";
     print "update.sh --pot    just creates a new pot file from the source\n";
@@ -269,13 +269,6 @@ sub gen_headers
            }
        }
        close FILE;
-
-       # Create .headerlock file, so the script will know 
-       # that we already passed this section. This is required 
-       # since the individual sections can be reaced at different
-       # times by the Makefile
-       #--------------------------------------------------------- 
-       system("touch .headerlock");
    }
 }
 
@@ -310,44 +303,36 @@ sub generate_pot
     print "Wrote $PACKAGE.pot\n";
     system("mv POTFILES.in.old POTFILES.in");
 
-    # If .headerlock file is found, it means that the potfiles
-    # already has been generated. If so delete the generated 
-    # .h header files. The reason for this approach with a 
-    # file as a marker is due to that the Makefile runs the
-    # scripts in turns
-    #---------------------------------------------------------
+    print "Removing generated header (.h) files...";
 
-    if(-e ".headerlock"){
-        unlink(".headerlock");
+    open FILE, "<POTFILES.in";
+    while (<FILE>) 
+    {
+        # Delete header files coming from xml files
+        #------------------------------------------
+        if ($_=~ /(.*)(\.xml)/o)
+        {
+            $filename = "../$1.xml.h";
+            unlink($filename);
+        }
 
-        print "Removing generated header (.h) files...";
+        # Delete header files coming from glade files
+        #--------------------------------------------
+        elsif ($_=~ /(.*)(\.glade)/o)
+        {
+            $filename = "../$1.glade.h";
+            unlink($filename);
+        }
 
-        open FILE, "<POTFILES.in";
-        while (<FILE>) {
-
-           # Delete header files coming from xml files
-           #------------------------------------------
-           if ($_=~ /(.*)(\.xml)/o){
-               $filename = "../$1.xml.h";
-    	       unlink($filename);
-           }
-
-           # Delete header files coming from glade files
-           #--------------------------------------------
-           elsif ($_=~ /(.*)(\.glade)/o){
-               $filename = "../$1.glade.h";
-               unlink($filename);
-           }
-
-           # Delete header files coming from oaf files
-           #--------------------------------------------
-           elsif ($_=~ /(.*)(\.oaf\.in)/o){
-               $filename = "../$1.oaf.in.h";
-               unlink($filename);
-           }
-       }
-       close FILE;
+        # Delete header files coming from oaf files
+        #--------------------------------------------
+        elsif ($_=~ /(.*)(\.oaf\.in)/o)
+        {
+            $filename = "../$1.oaf.in.h";
+            unlink($filename);
+        }
     }
+    close FILE;
     print "done\n";
 }
 
@@ -427,7 +412,7 @@ sub show_status
 	&perform_merge($lang);
     }
   
-    print "\n\n << Status table for $PACKAGE >>\n\n";
+    print "\n\n * Current translation support in $PACKAGE \n\n";
 
     foreach my $lang (@languages){
         print "$lang: ";

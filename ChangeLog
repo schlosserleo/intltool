@@ -1,5 +1,10 @@
 2001-01-16  Kenneth Christiansen <kenneth@gnu.org>
 
+        * xml-i18n-update.in: Removed obsolete code, made
+	status stuff a little better.
+
+2001-01-16  Kenneth Christiansen <kenneth@gnu.org>
+
         * xml-i18n-update.in: Added new --statuslist option
 	Changed parts of the scripts to make it cleaner. It 
 	still need a major cleanup.
