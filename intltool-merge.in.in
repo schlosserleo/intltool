@@ -50,6 +50,11 @@ if(!$ret) {
 push @INC, "@INTLTOOL_PERL_MODULE_PATH@";
 push @INC, "./modules";
 
+$ret = eval 'require XML::Parser::Style::OrigTree';
+if(!$ret) {
+    die "The OrigTree module doesn't seem to be properly installed $0\n\n";
+}
+
 my $must_end_tag      = -1;
 my $last_depth        = -1;
 my $translation_depth = -1;
@@ -849,7 +854,7 @@ sub readXml
         die "ERROR Cannot find filename: $filename\n";
     }
 
-    my $xp = new XML::Parser(Style => 'Tree');
+    my $xp = new XML::Parser(Style => 'XML::Parser::Style::OrigTree');
     my $tree = $xp->parsefile($filename);
 
 # <foo><head id="a">Hello <em>there</em></head><bar>Howdy<ref/></bar>do</foo>

@@ -1,7 +1,8 @@
 2003-12-01  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-merge.in.in: Remove some changes committed by accident.
-
+	Added OrigStyle as the default Style.
+	
 2003-11-30  Abel Cheung  <maddog@linux.org.hk>
 
 	* modules/Makefile.am: Add missing DESTDIR.
