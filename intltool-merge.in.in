@@ -312,11 +312,11 @@ sub entity_encode
 
 sub entity_encode_int_minimalist
 {
-    if ($_ == 34) { return "&quot;" }
-    elsif ($_ == 38) { return "&amp;" }
-    elsif ($_ == 39) { return "&apos;" }
-    elsif ($_ == 60) { return "&lt;" }
-    elsif ($_ == 62) { return "&gt;" }
+    return "&quot;" if $_ == 34;
+    return "&amp;" if $_ == 38;
+    return "&apos;" if $_ == 39;
+    return "&lt;" if $_ == 60;
+    return "&gt;" if $_ == 62;
     return chr $_;
 }
 
@@ -454,7 +454,7 @@ sub keys_merge_translations
                 next if !$translation;
 
                 $_ = $non_translated_line;
-		s/^(\w+)=\Q$string\E/[$lang]$1=$translation/;
+		s/^(\w+)=.*/[$lang]$1=$translation/;
                 print OUTPUT;
             }
 	} else {
