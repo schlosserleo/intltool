@@ -100,7 +100,7 @@ ifdef([AC_DIVERSION_ICMDS],[
   AC_DIVERT_PUSH(AC_DIVERSION_ICMDS)
       changequote(,)
       mv -f po/POTFILES po/POTFILES.tmp
-      sed -e 's/\[.*\] *//' < po/POTFILES.tmp > po/POTFILES
+      sed -e '/\[encoding.*\]/d' -e 's/\[.*\] *//' < po/POTFILES.tmp > po/POTFILES
       rm -f po/POTFILES.tmp
       changequote([,])
   AC_DIVERT_POP()
@@ -109,7 +109,7 @@ ifdef([AC_DIVERSION_ICMDS],[
     AC_CONFIG_COMMANDS_PRE([
         changequote(,)
         mv -f po/POTFILES po/POTFILES.tmp
-        sed -e 's/\[.*\] *//' < po/POTFILES.tmp > po/POTFILES
+        sed -e '/\[encoding.*\]/d' -e 's/\[.*\] *//' < po/POTFILES.tmp > po/POTFILES
         rm -f po/POTFILES.tmp
         changequote([,])
     ])

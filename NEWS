@@ -1,3 +1,9 @@
+Version 0.27.2
+
+* Fixed the source code encoding mark at POTFILES.in support (Abel Cheung).
+* Fixed the intltool.spec file so it can build RPMs with this release (it was
+  only a package issue (Carlos Perelló Marín)
+
 Version 0.27.1
 
 * Fixed .xam support (Abel Cheung)

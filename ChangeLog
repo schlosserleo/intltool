@@ -1,3 +1,9 @@
+=== intltool 0.27.2 ===
+
+2003-08-12  Abel Cheung  <maddog@linux.org.hk>
+
+	* intltool.m4: Fix brokeness for the [encoding: *] tag I introduced.
+
 === intltool 0.27.1 ===
 
 2003-08-11  Carlos Perelló Marín <carlos@gnome.org>
