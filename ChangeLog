@@ -1,3 +1,11 @@
+2001-02-26  Maciej Stachowiak  <mjs@eazel.com>
+
+	reviewed by: Robey Pointer  <robey@eazel.com>
+
+	* xml-i18n-tools.m4: Set sed substituted files to be writable by
+	the user to fix bug 7025 (xml-i18n-extract, merge, update created
+	with improper permissions).
+
 2001-02-25  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* xml-i18n-tools.m4: added macros for .directory and .soundlist files.
