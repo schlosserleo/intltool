@@ -1,3 +1,10 @@
+2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
+
+        * xml-i18n-merge.in: Implimented the lookup
+	mechanism differently, and speeded up the
+	merge process approx. 200 times. Now it's
+	fast!
+
 2001-01-18  Kenneth Christiansen <kenneth@gnu.org>
 
         * xml-i18n-merge.in: Added fix for ++ in

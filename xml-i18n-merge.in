@@ -60,7 +60,7 @@ my $OUTFILE;
 
 my @languages;
 my %po_files_by_lang = ();
-
+my %translations = ();
 
 &split_on_argument;
 
@@ -139,6 +139,7 @@ sub message {
 
 sub preparation {
    &gather_po_files;
+   &create_translation_database;   
 }
 
 
@@ -164,18 +165,44 @@ sub po_file2lang
 }
 
 
-sub lookup_translations
+sub create_translation_database
+{
+    foreach my $lang (@languages) {
+
+    	my $po_file = $po_files_by_lang{$lang};
+
+    	open PO_FILE, "<$po_file";	
+
+        while (<PO_FILE>) {
+            if (/^#,.*fuzzy/) {
+                $_ = <PO_FILE>; next;
+            }
+            if (/^msgid "(.*)"/ ) {
+		my $msgid = $1;
+                $_ = <PO_FILE>;
+		
+		if (/^msgstr "(.+)"/) {
+		    my $msgstr = $1;
+		    $translations{$lang . "|" . $msgid} = $msgstr; 
+		    # print "[$lang]$msgstr\n";
+		}
+	    }            
+        }
+    }
+}
+
+sub lookup_translations 
 {
     my ($value) = @_;
-
+ 
     my %transmap = ();
 
     foreach my $lang (@languages) {
-	my $translation = lookup_translation ($value, $lang);
-
-	if ($translation) {
-	    $transmap{$lang} = $translation;
-	}
+        my $translation = lookup_translation ($value, $lang);
+            
+        if ($translation) {
+            $transmap{$lang} = $translation;
+        }
     }
 
     return %transmap;
@@ -186,21 +213,13 @@ sub lookup_translation
 {
     my ($string, $lang) = @_;
     $string =~ s/\+/\\+/g;
-
-    my $po_file = $po_files_by_lang{$lang};
-    
-    open PO_FILE, "<${po_file}";
-
-    while (<PO_FILE>) {
-	if (/^#,.*fuzzy/) { 
-	    $_ = <PO_FILE>; next;
-	} 
-        if (/^msgid "${string}"/ ) {
-	    $_ = <PO_FILE>;
-	    return $1 if /^msgstr "(([^"\\]|\\.)*)"/;
-        }
+  
+    my $salt = "$lang|$string";
+      
+    if ($translations{$salt}) {
+        return $translations{$salt};
     }
-
+  
     return "";
 }
 
