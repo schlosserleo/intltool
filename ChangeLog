@@ -1,3 +1,7 @@
+2001-07-12  Darin Adler  <darin@bentspoon.com>
+
+	* autogen.sh: Don't run autoheader because we have no headers.
+
 2001-06-07  Darin Adler  <darin@bentspoon.com>
 
 	* xml-i18n-merge.in.in: Merge translations in sorted order rather
