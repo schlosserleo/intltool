@@ -1,5 +1,10 @@
 2002-02-25  Darin Adler  <darin@bentspoon.com>
 
+	* NEWS: Notes.
+	* configure.in: Bump version.
+
+2002-02-25  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-update.in.in: Handle C comments when reading files for
 	"--maintain".
 
