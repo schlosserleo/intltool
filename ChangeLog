@@ -1,5 +1,10 @@
 2004-06-12  Rodney Dawes  <dobey@novell.com>
 
+	* tests/selftest.pl.in: Fix the alignment of the output text for
+	test number 18
+
+2004-06-12  Rodney Dawes  <dobey@novell.com>
+
 	* intltool-merge.in.in:
 	* intltool-prepare.in:
 	* intltool-update.in.in:
