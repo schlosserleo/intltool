@@ -1,6 +1,12 @@
 2002-11-21  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-merge.in.in:
+
+	Fixed #98988 with help from Sergey V. Udaltsov.
+
+2002-11-21  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* intltool-merge.in.in:
 	* intltool-unicodify.in:
 
 	Fixed #96169 with help from Laurent Vivier and Morten Welinder.

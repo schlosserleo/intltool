@@ -461,7 +461,7 @@ sub entity_encode
 {
     my ($pre_encoded) = @_;
 
-    my @list_of_chars = unpack ('C*', $pre_encoded);
+    my @list_of_chars = unpack ('U*', $pre_encoded);
 
     if ($PASS_THROUGH_ARG) 
     {
