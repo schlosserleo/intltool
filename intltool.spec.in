@@ -15,6 +15,7 @@ URL: 		http://www.gnome.org/
 BuildRoot:	/var/tmp/%{name}-%{ver}-root
 BuildArch:      noarch
 Obsoletes:      xml-i18n-tools
+Provides:       xml-i18n-tools
 
 %description
 ** Automatically extracts translatable strings from oaf, glade, bonobo
