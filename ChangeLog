@@ -1,3 +1,11 @@
+Mon Oct 22 17:31:26 2001  Jonathan Blandford  <jrb@redhat.com>
+
+	* doc-i18n-tool/doc-i18n-tool.c: add doc-i18n-tool to cvs.
+	* doc-i18n-tool/.cvsignore:
+	* doc-i18n-tool/Makefile.am:
+	* configure.in:
+	* Makefile.am: add build support for it
+	
 2001-10-16  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-merge.in.in: Remove whitespace in a way that
