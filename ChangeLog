@@ -1,3 +1,7 @@
+2003-12-08  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* modules/Makefile.am: Fixing for upcoming release.
+
 2003-12-06  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* intltoolize.in: Install OrigTree.pm in the distribution tree.
