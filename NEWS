@@ -2,7 +2,16 @@ Version 0.29
 
 * Removed OrigTree in favor of more simply setting handlers directly
   in intltool-merge (Brian Cameron)
-
+* Work correctly with AC_CONFIG_AUX_DIR (Thomas Vander Stichele, 
+  Chee Bin HOH and Kees Cook)
+* Make intltoolize return a correct exit status (Thomas Vander Stichele)
+* Fix usage of a bash-ism (Morten Welinder, Jonathan Blandford)
+* Translate GenericName in .desktop files (Kenneth Rohde Christiansen)
+* Framework to allow each format have inline comments (Denis Barbier)
+* Add $XGETTEXT_ARGS to allow passing extra args to xgettext (Danilo Segan)
+* Added support for .kbd files (Kenneth Rohde Christiansen)
+* Add $XGETTEXT_KEYWORDS to allow the use of other keywords (Danilo Segan)
+* Misc bug fixes (Noah Levitt, Tommi Komulainen)
 
 ---
 
