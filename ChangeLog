@@ -1,3 +1,9 @@
+2004-01-31  Tomasz K³oczko <kloczek@pld.org.pl>
+
+	*xml-i18n-tools.m4, intltool.m4: added missing [] quotation
+	macro name defined in AC_DEFUN() (neccessary for aclocal from
+	automake 1.8.2 and backward compatible with older auto tools).
+
 2004-01-30  Morten Welinder  <terra@gnome.org>
 
 	* intltool-merge.in.in (intltool_tree_start): Handle embedded
