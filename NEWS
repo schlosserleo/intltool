@@ -1,3 +1,12 @@
+Version 0.16
+
+* Add INTLTOOL_ICONV environment variable to specify which iconv executable (Darin)
+* Put translations in the database even when msgstr is identical to msgid (Darin)
+* Add glade2 support (James Henstridge)
+* Update intltool-merge man page (Stefan Kost)
+* Fixed intltool-update bugs introduced in 0.15 (Darin)
+
+
 Version 0.15
 
 * Made production version of cache, makes merges much faster (Darin, Kenneth)

@@ -6,6 +6,7 @@ EXTRA_DIST =					\
 	extract3.xml.in				\
 	extract6.glade				\
 	extract7.xml				\
+	extract8.glade				\
 	fr_BE.po				\
 	fr_FR.po				\
 	merge1.xml.in				\

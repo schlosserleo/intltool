@@ -1,5 +1,14 @@
 2002-02-25  Darin Adler  <darin@bentspoon.com>
 
+	* NEWS: Notes for 0.16 release.
+	* configure.in: Bump version.
+
+	* tests/cases/Makefile.am:
+	* tests/results/Makefile.am:
+	Add new test cases so they end up in the tarball.
+
+2002-02-25  Darin Adler  <darin@bentspoon.com>
+
 	* TODO: Mention gettext 0.11 issue.
 	* configure.in: Strengthen perl version check.
 
