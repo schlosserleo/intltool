@@ -1,5 +1,9 @@
 2002-10-02  Yanko Kaneti  <yaneti@declera.com>
 
+	* intltool-merge.in.in: add a short comment on the "<", ">" handling.
+
+2002-10-02  Yanko Kaneti  <yaneti@declera.com>
+
 	* intltool-merge.in.in: Encode/decode "<"/"&lt;" in translations. 
 	Fixes bug 84738.
 

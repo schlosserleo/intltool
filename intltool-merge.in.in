@@ -402,6 +402,8 @@ sub unescape_po_string
     return $string;
 }
 
+## NOTE: deal with < - &lt; but not > - &gt;  because it seems its ok to have 
+## > in the entity. For further info please look at #84738.
 sub entity_decode
 {
     local ($_) = @_;
