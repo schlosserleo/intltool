@@ -1,5 +1,11 @@
 2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+        * configure.in: Bump version, so people can require
+	intltool 0.20 if they use schemas support.
+
+
+2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
 	* intltool-update.in.in:
 	* intltool-extrace.in.in:
 	* intltool-merge.in.in: We don't need to mark strings. We always
@@ -11,6 +17,8 @@
         * intltool.m4:
 	* intltool-update.in.in:
 	* intltool-merge.in.in: Added support for .schemas files.
+
+=== intltool 0.19 ===
 
 2002-05-17  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
