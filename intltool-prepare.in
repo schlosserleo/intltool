@@ -168,12 +168,14 @@ ENTRY: while (<ORIG>) {
         if (($entry =~ /^($keywords)=(.*)$/) ||
             ($entry =~ /^(\s*description)=(.*)$/)) {
             $msgid = $2;
+            $msgid =~ s/\\/\\\\/g;
 	    $msgid =~ s/\"/\\"/g;
         } elsif (($entry =~ /^($keywords)\[(.*?)\]=(.*)$/) ||
                  ($entry =~ /^(\s*\[)(.*?)\]description=(.*)$/)) {
             $lang = $2;
 
             my $msgstr = $3;
+            $msgstr =~ s/\\/\\\\/g;
             $msgstr =~ s/"/\\"/g;
 	    
             $line--;
