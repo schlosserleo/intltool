@@ -1,4 +1,4 @@
-.TH INTLTOOL-MERGE 8 "February 04, 2002" "intltool"
+.TH INTLTOOL-MERGE 8 "February 14, 2002" "intltool"
 
 .SH NAME
 intltool-merge \- merge translated strings into various file 
@@ -7,23 +7,23 @@ types such as XML
 .SH SYNOPSIS
 .B "intltool-merge"
 [
-.BR \-b | --ba-style
+.BR \-v | --version
+] [
+.BR \-h | --help
+] [
+.BR \-q | --quiet
 ] [
 .BR \-d | --desktop-style
 ] [
 .BR \-k | --keys-style
+] [
+.BR \-o | --oaf-style
 ] [
 .BR \-x | --xml-style
 ] [
 .BR \-u | --utf8
 ] [
 .BR \-p | --pass-through
-] [
-.BR \-q | --quiet
-] [
-.BR --help
-] [
-.BR --version
 ]
 .IR PO_DIRECTORY
 .IR FILENAME
@@ -35,39 +35,46 @@ Merge translated strings in po files in \fIPO_DIRECTORY\fP
 with the original application file \fIFILENAME\fP, 
 and output the file \fIOUTPUT_FILE\fP containing both the original
 and the localized strings.
+.br
+Afterwards the application xml file will contain repeated xml-nodes
+where each one contains one of all translations and a xml:lang
+attribute.
 
 
 .SH OPTIONS
 .TP
-.B \-b, \--ba-style
-Includes translations in the bonobo-activation style
+.B \-v, \--version
+Show version information.
 .TP
-.B \-d, \--desktop-style
-Includes translations in the desktop style
-.TP
-.B \-k, \--keys-style
-Includes translations in the keys style
-.TP
-.B \-k, \--xml-style
-Includes translations in the standard xml style
-.TP
-.B \-u, \--utf8
-Convert all strings to UTF-8 before merging
-.TP
-.B \-p, \--pass-through
-Use strings as found in .po files, without conversion (STRONGLY unrecommended with -x)
+.B \-h, \--help
+Show usage and basic help information.
 .TP
 .B \-q, \--quiet
-Suppress most messages
+Be quiet while running.
 .TP
-.B \--help
-Display this help and exit
+.B \-d, \--desktop-style
+Merge files in desktop style, which is similar to
+the Windows .ini file format.
 .TP
-.B \--version
-Output version information and exit
+.B \-k, \--keys-style
+Merge files in the keys style, which is used for metadata.
+.TP
+.B \-x, \--oaf-style
+Merge files in the oaf style.
+.TP
+.B \-x, \--xml-style
+Merge files in the XML style, both as attributes and as
+raw pcdata.
+.TP
+.B \-u, \--utf8
+Convert all strings to UTF-8 before merging.
+.TP
+.B \-p, \--pass-through
+Use strings as found in .po files, without conversion
+(STRONGLY unrecommended with -x).
 
 .SH REPORTING BUGS
-Report bugs to http://bugzilla.gnome.org, module intltool, or by sending email
+Report bugs to http://bugzilla.gnome.org or by sending email
 to xml-i18n-tools@gnome.org.
 
 .SH AUTHOR

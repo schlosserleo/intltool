@@ -1,3 +1,8 @@
+2002-02-14  Darin Adler  <darin@bentspoon.com>
+
+	* doc/intltool-merge.8: Update by Stefan Kost
+	<kost@imn.htwk-leipzig.de>.
+
 2002-02-10  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-update.in.in: Fixed !=~ that should have been a
