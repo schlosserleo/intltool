@@ -1,3 +1,8 @@
+2003-01-18  Kenneth Christiansen <kenneth@gnu.org>
+                                                                                
+        * README: Added small section for packages not 
+	using the aufo* tools.
+
 2003-01-11  Kenneth Christiansen <kenneth@gnu.org>
 
 	* intltool-merge.in.in: Added some warnings.
