@@ -55,6 +55,7 @@ my $xml_extension =
 "soundlist(\.in)+|".
 "keys(\.in)+|".
 "oaf(\.in)+|".
+"server(\.in)+|".
 "etspec|".
 "pong(\.in)+";
 

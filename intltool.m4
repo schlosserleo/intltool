@@ -35,6 +35,10 @@ XML_I18N_MERGE_OAF_RULE='\%.oaf : \%.oaf.in $(top_builddir)/xml-i18n-merge $(top
 	$(top_builddir)/xml-i18n-merge -o $(top_srcdir)/po $< [$]*.oaf'
 HACK_SUBST(XML_I18N_MERGE_OAF_RULE)
 
+XML_I18N_MERGE_SERVER_RULE='\%.server : \%.server.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
+	$(top_builddir)/xml-i18n-merge -o $(top_srcdir)/po $< [$]*.server'
+HACK_SUBST(XML_I18N_MERGE_SERVER_RULE)
+
 dnl same deal
 XML_I18N_MERGE_KEYS_RULE='\%.keys : \%.keys.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
 	$(top_builddir)/xml-i18n-merge -k $(top_srcdir)/po $< [$]*.keys'
