@@ -125,16 +125,19 @@ sub maintain{
    
     # Search and fine, all translatable files
     # ---------------------------------------
-    $i18nfiles="find ../ -print | egrep '.*\\.(c|y|cc|c++|h|gob)' ";
+    $list_i18n_plain = "find ../ -print | egrep '.*\\.(c|y|cc|c++|h|gob)\$' ";
+    $list_i18n_xml   = "find ../ -print | egrep '.*\\.(xml|glade|oaf\.in)\$' ";
 
-    open(BUF2, "POTFILES.in") || die "${PROGRAM}:  there's no POTFILES.in!!!\n";
+    open(BUF3, "POTFILES.in") || die "${PROGRAM}:  there's no POTFILES.in!!!\n";
     
     print "Searching for missing _(\" \") entries...\n";
     
-    open(BUF1, "$i18nfiles|");
+    open(BUF1, "$list_i18n_plain|");
+    open(BUF2, "$list_i18n_xml|");
 
-    @buf1_1 = <BUF1>;
-    @buf1_2 = <BUF2>;
+    @buf_i18n_plain 	= <BUF1>;
+    @buf_i18n_xml 	= <BUF2>;
+    @buf_potfiles	= <BUF3>;
 
     # Check if we should ignore some found files, when 
     # comparing with POTFILES.in
@@ -143,33 +146,44 @@ sub maintain{
         open FILE, ".potignore";
         while (<FILE>) {
             if ($_=~/^[^#]/o){
-                push @bup, $_;
+                push @buf_potfiles_ignore, $_;
             }
         }
         print "Found .potignore: Ignoring files...\n";
-        @buf1_2 = (@bup, @buf1_2);
+        @buf_potfiles = (@buf_potfiles_ignore, @buf_potfiles);
     }
 
-    foreach my $file (@buf1_1){
+    foreach my $file (@buf_i18n_plain){
         open FILE, "<$file";
         while (<FILE>) {
             if ($_=~/_\(\"/o){
                 $file = unpack("x3 A*",$file) . "\n";
-                push @buf2_1, $file;
+                push @buf_allfiles, $file;
                 last;
             }
         }
     }
 
-    @buf3_1 = sort (@buf2_1);
-    @buf3_2 = sort (@buf1_2);
+    foreach my $file (@buf_i18n_xml){ 
+        open FILE, "<$file";
+        while (<FILE>) {
+            if ($_=~/_(.*)\=\"/o){
+                $file = unpack("x3 A*",$file) . "\n";
+                push @buf_allfiles, $file;
+                last;
+            }
+        }
+    }
+
+    @buf_allfiles_sorted = sort (@buf_allfiles);
+    @buf_potfiles_sorted = sort (@buf_potfiles);
 
     my %in2;
-    foreach (@buf3_2) {
+    foreach (@buf_potfiles_sorted) {
         $in2{$_} = 1;
     }
 
-    foreach (@buf3_1){
+    foreach (@buf_allfiles_sorted){
         if (!exists($in2{$_})){
             push @result, $_ 
         }
