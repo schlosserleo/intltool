@@ -1,5 +1,9 @@
 2002-02-04  Darin Adler  <darin@bentspoon.com>
 
+	* intltool.m4: Add a rule for ".ui" files.
+
+2002-02-04  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-merge.in.in: Fix uninitialized variable problem.
 
 2002-02-04  Darin Adler  <darin@bentspoon.com>
