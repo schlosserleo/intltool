@@ -416,8 +416,47 @@ sub type_glade {
 }
 
 sub type_scheme {
-    while ($input =~ /_\w*\(?"((?:[^"\\]+|\\.)*)"\)?/sg) {
-	$messages{$1} = [];
+    my ($line, $i, $state, $str, $trcomment, $char);
+    for $line (split(/\n/, $input)) {
+        $i = 0;
+        $state = 0; # 0 - nothing, 1 - string, 2 - translatable string
+        while ($i < length($line)) {
+            if (substr($line,$i,1) eq "\"") {
+                if ($state == 2) {
+                    $comments{$str} = $trcomment if ($trcomment);
+                    $messages{$str} = [];
+                    $str = '';
+                    $state = 0; $trcomment = "";
+                } elsif ($state == 1) {
+                    $str = '';
+                    $state = 0; $trcomment = "";
+                } else {
+                    $state = 1;
+                    $str = '';
+                    if ($i>0 && substr($line,$i-1,1) eq '_') {
+                        $state = 2;
+                    }
+                }
+            } elsif (!$state) {
+                if (substr($line,$i,1) eq ";") {
+                    $trcomment = substr($line,$i+1);
+                    $trcomment =~ s/^;*\s*//;
+                    $i = length($line);
+                } elsif ($trcomment && substr($line,$i,1) !~ /\s|\(|\)|_/) {
+                    $trcomment = "";
+                }
+            } else {
+                if (substr($line,$i,1) eq "\\") {
+                    $char = substr($line,$i+1,1);
+                    if ($char ne "\"" && $char ne "\\") {
+                       $str = $str . "\\";
+                    }
+                    $i++;
+                }
+                $str = $str . substr($line,$i,1);
+            }
+            $i++;
+        }
     }
 }
 

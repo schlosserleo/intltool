@@ -1,5 +1,19 @@
 2004-10-23  Danilo Šegan  <dsegan@gmx.net>
 
+	Fixes #137029.
+
+	* NEWS: Updated.
+	
+	* intltool-extract.in.in (type_scheme): Rewrite.
+
+	* tests/results/Makefile.am: Add test.scm.h to EXTRA_DIST.
+	* tests/cases/Makefile.am: Add test.scm to EXTRA_DIST.
+	* tests/selftest.pl.in: Add test.scm as test 21.
+	* tests/cases/test.scm: Added Scheme test case.
+	* tests/results/test.scm.h: Added Scheme test result.
+
+2004-10-23  Danilo Šegan  <dsegan@gmx.net>
+
 	Fixes #155843.
 	
 	* NEWS: Updated.

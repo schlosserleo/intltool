@@ -192,4 +192,9 @@ $case = "extract-comments.xml";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
+print "21. Extract messages from Scheme file:                               ";
+$case = "test.scm";
+system("$INTLTOOL_EXTRACT --type=gettext/scheme --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
 exit $failed;

@@ -27,4 +27,5 @@ EXTRA_DIST =					\
 	schemasmerge2.po			\
 	test.po 				\
 	test.schemas.in				\
+	test.scm				\
 	$(NULL)

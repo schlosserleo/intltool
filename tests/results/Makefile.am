@@ -21,4 +21,5 @@ EXTRA_DIST =					\
 	merge10.templates			\
 	test.schemas				\
 	test.schemas.in.h			\
+	test.scm.h				\
 	$(NULL)
