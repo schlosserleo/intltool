@@ -64,6 +64,7 @@ my $xml_extension =
 "oaf(\.in)+|".
 "etspec|".
 "sheet(\.in)+|".
+"schemas(\.in)+|".
 "pong(\.in)+";
 
 my $ini_extension =
@@ -185,7 +186,7 @@ sub determine_type ($)
    # FIXME: Use $xml_extentions, and maybe do all this even nicer
    my $xml_regex = 
        "(?:xml(\.in)*|ui|oaf(?:\.in)+|server(?:\.in)+|sheet(?:\.in)+|".
-       "pong(?:\.in)+|etspec)";
+       "pong(?:\.in)+|etspec|schemas(?:\.in)+)";
    my $ini_regex =
        "(?:desktop(?:\.in)+|caves(?:\.in)+|directory(?:\.in)+|".
        "soundlist(?:\.in)+)";
