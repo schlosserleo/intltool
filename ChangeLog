@@ -1,5 +1,11 @@
 2001-01-30  Kenneth Christiansen <kenneth@gnu.org>
 
+        * xml-i18n-extract.in:
+	* xml-i18n-update.in:
+	Fixed some stupid errors	
+
+2001-01-30  Kenneth Christiansen <kenneth@gnu.org>
+
         * xml-i18n-update.in:
 	* xml-i18n-extract.in:
 	Added support for a new POTFILES.in syntax

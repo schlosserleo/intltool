@@ -200,7 +200,7 @@ sub maintain
     foreach my $file (@buf_i18n_plain){
         open FILE, "<$file";
         while (<FILE>) {
-            if (/_\("/){
+            if (/_\(\"/){
 		## Remove the first 3 chars and add newline
 		push @buf_allfiles, unpack("x3 A*", $file) . "\n";
                 last;
@@ -281,7 +281,7 @@ sub gen_headers
            ## Find xml files in POTFILES.in and generate the
            ## files with help from the xml-i18n-extract script
            
-           my $gettext_type;
+           my $gettext_type="";
 
 	   if (/^(\[type: gettext\/[^\[].*])/) {
 	       $gettext_type=$1;

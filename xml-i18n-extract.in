@@ -50,7 +50,7 @@ my $QUIET_ARG   = "0";
 my $FILE;
 my $OUTFILE;
 
-my $gettext_type;
+my $gettext_type = "";
 my %messages = ();
 
 ## Always print first
