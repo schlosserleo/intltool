@@ -1,3 +1,10 @@
+2002-11-21  Yanko Kaneti  <yaneti@declera.com>
+
+	* xml-i18n-po-Makefile.in.in-patch-5 (added):
+	* Makefile.am:
+	* xml-i18n-toolize.in: use a different patch for gettextize 4 and 
+	older programs still using xml-i18n-tools macros.
+
 2002-11-21  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-merge.in.in:
