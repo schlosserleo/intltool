@@ -111,8 +111,8 @@ if ($VERSION_ARG) {
         &keys_merge_translations;
 	&finalize;
 } elsif ($DESKTOP_STYLE_ARG && @ARGV > 2) {
-        &print_message;
         &preparation;
+        &print_message;
         &desktop_merge_translations;
 	&finalize;
 } else {

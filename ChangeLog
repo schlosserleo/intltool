@@ -1,5 +1,9 @@
 2002-02-04  Darin Adler  <darin@bentspoon.com>
 
+	* intltool-merge.in.in: Fix uninitialized variable problem.
+
+2002-02-04  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-merge.in.in: More experimental cache work from
 	Kennth and some other small fixes.
 	* intltool-update.in.in: Lots of small tweaks by Kenneth.
