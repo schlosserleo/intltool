@@ -61,5 +61,5 @@ merged. Also, so long as you are renaming the .oafinfo files to
 .oaf.in, you should take the opportunity to rename them to the new base
 naming convention, with namespacing, for example:
 
-	nautilus.oafinfo --> Nautilus_shell.oaf.in
-	nautilus-rpm-view.oafinfo --> Nautilus_View_rpm.oaf.in
+	foo.oafinfo --> GNOME_Foo.oaf.in
+	foo-baa.oafinfo --> GNOME_Foo_baa.oaf.in

@@ -1,3 +1,9 @@
+2001-01-26  Darin Adler  <darin@eazel.com>
+
+	* README: Use a GNOME namespace example instead of the Nautilus
+	namespace one to emphasize that Michael wants people to put as
+	much as possible inside the GNOME namespace.
+
 2001-01-25  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* xml-i18n-prepare: compare msgids when appending to po file, not
