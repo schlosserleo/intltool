@@ -1,3 +1,8 @@
+2003-12-16  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* intltool.m4: Changed to work with auxdir. 
+	Patch from Kees Cook (#116362).
+
 2003-12-11  Brian Cameron <brian.cameron@sun.com>
 
         * intltool-merge.in.in
