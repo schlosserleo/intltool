@@ -619,9 +619,14 @@ sub getAttributeString
 		    $translation = entity_encode($translation);
 		    $string = $translation;
                     $$translate = 2;
-		}
+		} else {
+                    $$translate = 2; # we still want translations for deep nesting (FIXME: this will cause
+                                     # problems since we might get untranslated duplicated entries, but with xml:lang set)
+                    # Fix would be to set it here to eg. 3, and do a check in traverse() to see if any of the containing tags
+                    # really need translation, and only emit "translation" if there is (this means parsing same data twice)
+                }
             } else {
-                 $$translate = 1 if ($translate && (!$$translate)); # watch not to "overwrite" if $translate == 2
+                 $$translate = 2 if ($translate && (!$$translate)); # watch not to "overwrite" if $translate == 2
             }
 	}
 	
@@ -679,6 +684,33 @@ sub getXMLstring
     return $result;
 }
 
+# Translate list of nodes if necessary
+sub translate_subnodes
+{
+    my $fh = shift;
+    my $content = shift;
+    my $language = shift || "";
+    my $singlelang = shift || 0;
+
+    my @nodes = @{ $content };
+
+    my $count = scalar(@nodes);
+    my $index = 0;
+    while ($index < $count) {
+        my $type = $nodes[$index];
+        my $rest = $nodes[$index+1];
+        if ($singlelang) {
+            my $oldMO = $MULTIPLE_OUTPUT;
+            $MULTIPLE_OUTPUT = 1;
+            traverse($fh, $type, $rest, $language);
+            $MULTIPLE_OUTPUT = $oldMO;
+        } else {
+            traverse($fh, $type, $rest, $language);
+        }
+        $index += 2;
+    }
+}
+
 sub traverse
 {
     my $fh = shift; 
@@ -715,12 +747,25 @@ sub traverse
                 my $translation = $translations{$language, $lookup};
                 if ($MULTIPLE_OUTPUT && ($translation || $translate == 2)) {
                     $translation = $lookup if (!$translation);
-                    print $fh " xml:lang=\"", $language, "\"";
-                    print $fh ">", $translation, "</$nodename>";
+                    print $fh " xml:lang=\"", $language, "\"" if $language;
+                    print $fh ">";
+                    if ($translate == 2) {
+                        translate_subnodes($fh, \@all, $language, 1);
+                    } else {
+                        print $fh $translation;
+                    }
+                    print $fh "</$nodename>";
+
                     return; # this means there will be no same translation with xml:lang="$language"...
                             # if we want them both, just remove this "return"
                 } else {
-                    print $fh ">", $lookup, "</$nodename>";
+                    print $fh ">";
+                    if ($translate == 2) {
+                        translate_subnodes($fh, \@all, $language, 1);
+                    } else {
+                        print $fh $lookup;
+                    }
+                    print $fh "</$nodename>";
                 }
 	    } else {
 		print $fh "/>";
@@ -741,12 +786,16 @@ sub traverse
                         }
 
                         if ($translation || $translate) {
-                            $translation = ($translation);
 			    print $fh "\n";
 			    $leading_space =~ s/.*\n//g;
 			    print $fh $leading_space;
- 			    print $fh "<", $nodename, " xml:lang=\"", $lang, "\"", $localattrs;
-			    print $fh ">", $translation , "</$nodename>";
+ 			    print $fh "<", $nodename, " xml:lang=\"", $lang, "\"", $localattrs, ">";
+                            if ($translate == 2) {
+                               translate_subnodes($fh, \@all, $lang, 1);
+                            } else {
+                                print $fh $translation;
+                            }
+                            print $fh "</$nodename>";
 			}
                     }
 	    }
@@ -755,18 +804,16 @@ sub traverse
 	    my $count = scalar(@all);
 	    if ($count > 0) {
 		print $fh ">";
+                my $index = 0;
+                while ($index < $count) {
+                    my $type = $all[$index];
+                    my $rest = $all[$index+1];
+                    traverse($fh, $type, $rest, $language);
+                    $index += 2;
+                }
+		print $fh "</$nodename>";
 	    } else {
 		print $fh "/>";
-	    }
-	    my $index = 0;
-	    while ($index < $count) {
-		my $type = $all[$index];
-		my $rest = $all[$index+1];
-		traverse($fh, $type, $rest, $language);
-		$index += 2;
-	    }
-	    if ($count > 0) {
-		print $fh "</$nodename>";
 	    }
 	}
     }

@@ -1,3 +1,18 @@
+2004-12-02  Danilo Šegan  <dsegan@gmx.net>
+
+	Fix #159511.
+	
+	* tests/selftest.pl.in (check_multimerge_result): Added
+	merge-deepattr.xml test case as test 23. 
+	* tests/cases/Makefile.am (EXTRA_DIST): Added merge-deepattr.xml.in.
+	* tests/results/Makefile.am (EXTRA_DIST): Added merge-deepattr.xml.
+	* tests/results/merge-deepattr.xml: Added.
+	* tests/cases/merge-deepattr.xml.in: Added.
+
+	* intltool-merge.in.in (translate_subnodes): Added.
+	(traverse): Use translate_subnodes where appropriate.
+	(getAttributeString): $$translate == 2 if attributes need translation.
+
 2004-11-25  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.am: Fix sed rule for intltool scripts to use # as the

@@ -202,4 +202,9 @@ $case = "merge-cdata.xml";
 system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
+print "23. Merge into XML file with deep translation/attribute nesting:     ";
+$case = "merge-deepattr.xml";
+system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
+check_merge_result($case);
+
 exit $failed;

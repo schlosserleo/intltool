@@ -11,6 +11,7 @@ EXTRA_DIST =					\
 	extract9.xml				\
 	extract9.xml.in.h			\
 	merge-cdata.xml				\
+	merge-deepattr.xml			\
 	merge1.xml				\
 	merge10.templates			\
 	merge4.xml				\

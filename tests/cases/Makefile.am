@@ -14,6 +14,8 @@ EXTRA_DIST =					\
 	fr.po					\
 	fr_BE.po				\
 	fr_FR.po				\
+	merge-cdata.xml.in			\
+	merge-deepattr.xml.in			\
 	merge1.xml.in				\
 	merge10.templates_			\
 	merge4.xml.in				\
@@ -28,5 +30,4 @@ EXTRA_DIST =					\
 	test.po 				\
 	test.schemas.in				\
 	test.scm				\
-	merge-cdata.xml.in			\
 	$(NULL)
