@@ -1,3 +1,12 @@
+2001-09-24  Darin Adler  <darin@bentspoon.com>
+
+	* xml-i18n-tools.m4: Used % instead of \%. It turns out that
+	the reason the backslash was needed before was a subtle consequence
+	of using two lines in our macro expansions. Now that we have single
+	lines, we don't need the \ any more. Took me a long time to figure
+	that one out. Also use plain old AC_SUBST -- the HACK_SUBST is not
+	needed any more now that we have 1-line expansions.
+
 2001-09-23  Darin Adler  <darin@bentspoon.com>
 
 	* xml-i18n-extract.in.in:
