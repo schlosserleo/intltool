@@ -907,21 +907,21 @@ sub intltool_tree_start
 
     # Remove leading tag.
     #
-    $source =~ s|^[ \t]*<[ \t]*(\S+)||s;
+    $source =~ s|^\s*<\s*(\S+)||s;
 
     # Grab attribute key/value pairs and push onto @origlist array.
     #
     while ($source)
     {
-       if ($source =~ /^[ \t]*([\w:-]+)[ \t]*[=][ \t]*["]/)
+       if ($source =~ /^\s*([\w:-]+)\s*[=]\s*["]/)
        {
-           $source =~ s|^[ \t]*([\w:-]+)[ \t]*[=][ \t]*["]([^"]*)["]||s;
+           $source =~ s|^\s*([\w:-]+)\s*[=]\s*["]([^"]*)["]||s;
            push @origlist, $1;
            push @origlist, '"' . $2 . '"';
        }
-       elsif ($source =~ /^[ \t]*([\w:-]+)[ \t]*[=][ \t]*[']/)
+       elsif ($source =~ /^\s*([\w:-]+)\s*[=]\s*[']/)
        {
-           $source =~ s|^[ \t]*([\w:-]+)[ \t]*[=][ \t]*[']([^']*)[']||s;
+           $source =~ s|^\s*([\w:-]+)\s*[=]\s*[']([^']*)[']||s;
            push @origlist, $1;
            push @origlist, "'" . $2 . "'";
        }

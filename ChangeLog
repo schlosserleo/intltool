@@ -1,3 +1,9 @@
+2004-01-30  Morten Welinder  <terra@gnome.org>
+
+	* intltool-merge.in.in (intltool_tree_start): Handle embedded
+	newlines thereby avoiding the silent corruption of files.
+	(See http://bugzilla.gnome.org/show_bug.cgi?id=132909)
+
 2004-01-22  Brian Cameron <brian.cameron@sun.com>
 
 	* intltool-merge.in.in, tests/cases/merge6.xml.in,
