@@ -130,10 +130,6 @@ sub message {
 
 
 sub preparation {
-   if (-s "$OUTFILE"){
-	unlink "$OUTFILE";
-   }
-
    &gather_po_files;
 }
 
@@ -162,7 +158,7 @@ sub po_file2lang
 
 sub lookup_translations
 {
-    my $value = shift @_;
+    my ($value) = @_;
 
     my %transmap = ();
 
@@ -180,39 +176,26 @@ sub lookup_translations
 
 sub lookup_translation
 {
-    my $string = shift @_;
-    my $lang = shift @_;
-
-    my $translation = "";
+    my ($string, $lang) = @_;
 
     my $po_file = $po_files_by_lang{$lang};
     
     open PO_FILE, "<${po_file}";
 
-  LOOP: while (<PO_FILE>) {
-      chomp;
-      
-      if ( /msgid \"${string}\".*/ ) {
-	  $_ = <PO_FILE>;
-	  chomp;
-	  
-	  if (my @msgstr = /msgstr \"([^\"]*)\"/) {
-	      s/^msgstr \"([^\"]*)\".*$/$1/;
-      	      $translation = $_;
+    while (<PO_FILE>) {
+        if (/^msgid "${string}"/ ) {
+	    $_ = <PO_FILE>;
+	    return $1 if /^msgstr "(([^"\\]|\\.)*)"/;
+        }
+    }
 
-	      last LOOP;
-	  }
-      }
-  }
-
-    return $translation;
+    return "";
 }
 
 
 sub entity_encode_translations
 {
     my %transmap = @_;
-    my %retval = ();
 
     foreach my $key (keys %transmap) {
 	$transmap{$key} = entity_encode ($transmap{$key});
