@@ -284,16 +284,10 @@ sub find_leftout_files
 
     ## Search and find all translatable files
     find sub { 
-	push @buf_i18n_plain, "$File::Find::name" if /\.(c|y|cc|cpp|c\+\+|h|gob)$/ 
-	}, "..";
-    find sub {
-	push @buf_i18n_xml, "$File::Find::name" if /\.($xml_extension)$/ 
-	}, "..";
-    find sub {
-	push @buf_i18n_ini, "$File::Find::name" if /\.($ini_extension)$/ 
-	}, "..";
-    find sub {
-	push @buf_i18n_xml_unmarked, "$File::Find::name" if /\.(schemas(\.in)+)$/
+	push @buf_i18n_plain,        "$File::Find::name" if /\.(c|y|cc|cpp|c\+\+|h|gob)$/;
+	push @buf_i18n_xml,          "$File::Find::name" if /\.($xml_extension)$/;
+	push @buf_i18n_ini,          "$File::Find::name" if /\.($ini_extension)$/;
+	push @buf_i18n_xml_unmarked, "$File::Find::name" if /\.(schemas(\.in)+)$/;
 	}, "..";
 
 
@@ -451,20 +445,47 @@ sub find_leftout_files
 	}
     }
 
+    my @buf_potfiles_notexist;
+
+    foreach (@buf_potfiles_sorted)
+    {
+	chomp (my $dummy = $_);
+	if ("$dummy" ne "" and ! -f "../$dummy")
+	{
+	    push @buf_potfiles_notexist, $_;
+	}
+    }
+
     ## Save file with information about the files missing
     ## if any, and give information about this procedure.
-    if (@result) 
+    if (@result + @buf_potfiles_notexist > 0)
     {
-	print "\n" if $VERBOSE;
-	unlink "missing";
-	open OUT, ">missing";
-	print OUT @result;
-	print STDERR "The following files contain translations and are currently not in use. Please\n";
-	print STDERR "consider adding these to the POTFILES.in file, located in the po/ directory.\n\n";
-	print STDERR @result, "\n";
-	print STDERR "If some of these files are left out on purpose then please add them to\n";
-	print STDERR "POTFILES.skip instead of POTFILES.in. A file 'missing' containing this list\n";
-	print STDERR "of left out files has been written in the current directory.\n";
+	if (@result) 
+	{
+	    print "\n" if $VERBOSE;
+	    unlink "missing";
+	    open OUT, ">missing";
+	    print OUT @result;
+	    close OUT;
+	    warn "\e[1mThe following files contain translations and are currently not in use. Please\e[0m\n".
+	         "\e[1mconsider adding these to the POTFILES.in file, located in the po/ directory.\e[0m\n\n";
+	    print STDERR @result, "\n";
+	    warn "If some of these files are left out on purpose then please add them to\n".
+		 "POTFILES.skip instead of POTFILES.in. A file \e[1m'missing'\e[0m containing this list\n".
+		 "of left out files has been written in the current directory.\n";
+	}
+	if (@buf_potfiles_notexist)
+	{
+	    unlink "notexist";
+	    open OUT, ">notexist";
+	    print OUT @buf_potfiles_notexist;
+	    close OUT;
+	    warn "\n" if ($VERBOSE or @result);
+	    warn "\e[1mThe following files do not exist anymore:\e[0m\n\n";
+	    warn @buf_potfiles_notexist, "\n";
+	    warn "Please remove them from POTFILES.in or POTFILES.skip. A file \e[1m'notexist'\e[0m\n".
+		 "containing this list of absent files has been written in the current directory.\n";
+	}
     }
 
     ## If there is nothing to complain about, notify the user
@@ -708,7 +729,7 @@ sub update_po_file
     print "Merging $lang.po with $MODULE.pot..." if $VERBOSE;
 
     my $infile = "$lang.po";
-    $outfile = "$lang.po" if (! defined $outfile);
+    $outfile = "$lang.po" if ($outfile eq "");
 
     # I think msgmerge won't overwrite old file if merge is not successful
     system ("msgmerge", "-o", $outfile, $infile, "$MODULE.pot");
@@ -746,7 +767,7 @@ sub print_status
 {
     my ($lang, $output_file) = @_;
 
-    $output_file = "$lang.po" if (! defined $output_file);
+    $output_file = "$lang.po" if ($output_file eq "");
 
     system ("msgfmt", "-o", "/dev/null", "--statistics", $output_file);
 }
@@ -807,13 +828,13 @@ sub open_CONF_handle
 
     if ($base_dirname =~ /^po(-.+)?$/) 
     {
-	if (-f "../configure.in") 
-	{
-	    $conf_in = "../configure.in";
-	} 
-	elsif (-f "../configure.ac") 
+	if (-f "../configure.ac") 
 	{
 	    $conf_in = "../configure.ac";
+	} 
+	elsif (-f "../configure.in") 
+	{
+	    $conf_in = "../configure.in";
 	} 
 	else 
 	{
@@ -860,6 +881,7 @@ sub find_package_name
 	seek (IN, 0, 0);
 	local $/; # slurp mode
 	$conf_source = <IN>;
+	close IN;
     }
 
     my $name = "untitled";

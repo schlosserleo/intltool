@@ -1,3 +1,21 @@
+=== intltool 0.27.1 ===
+
+2003-08-11  Carlos Perelló Marín <carlos@gnome.org>
+
+	* intltoo-update.in.in: Fixed a small bug that brokes intltool-update
+	when you don't specify an output file.
+	* NEWS: Updated
+	* configure.in: Version 0.27.1
+
+2003-08-11  Abel Cheung  <maddog@linux.org.hk>
+
+	* intltool-update.in.in:
+	Warn users if files in POTFILES.* do not exist, and write the file
+	list to `./notexist'.
+	Don't traverse source directory several times in "find sub{}".
+	Prefer configure.ac to configure.in when searching for autoconf file,
+	since the majority of people has been moving to autoconf 2.5x.
+
 2003-08-11  Abel Cheung  <maddog@linux.org.hk>
 
 	* intltool.m4: Fix broken support of .xam makefile rule.

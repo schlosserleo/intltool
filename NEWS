@@ -1,3 +1,10 @@
+Version 0.27.1
+
+* Fixed .xam support (Abel Cheung)
+* Fixed intltool-update, it's not usable with 0.27 :-(  (Carlos Perelló Marín)
+* intltool-update -m tells you about files that are at POTFILES.in but does not
+exists anymore (Abel Cheung)
+
 Version 0.27
 
 * Small scheme support fixes (Callum McKenzie)
