@@ -5,6 +5,10 @@
 	*.kbd.in -> *.kbd using the XML mechanism.
 	Fix for bug 127237.
 
+	* configure.in:
+	Incremented version to 0.27.3, so that clients of
+	internationalized XML attributes can depend on this new rev.	
+
 2003-11-05  Brian Cameron <Brian.Cameron@sun.com>
 
 	* intltool-merge.in.in
