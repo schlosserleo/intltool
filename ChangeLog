@@ -1,3 +1,8 @@
+2002-02-27  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-update.in.in: Fix bug so that language code does not
+	have to be on the command line before any options.
+
 2002-02-27  Kenneth Christiansen <kenneth@gnu.org>
 
         * configure.in: Fixed small bug that I missed.

@@ -40,7 +40,6 @@ use File::Copy;
 use File::Find;
 
 ## Scalars used by the option stuff
-my $LANG     	   = $ARGV[0];
 my $HELP_ARG 	   = 0;
 my $VERSION_ARG    = 0;
 my $DIST_ARG	   = 0;
@@ -92,6 +91,7 @@ GetOptions
  "gettext-package|g=s" => \$GETTEXT_PACKAGE,
  ) or &print_error_invalid_option;
 
+my $LANG     	   = $ARGV[0];
 my $MODULE;
 
 # Use the supplied arguments
