@@ -1,21 +1,25 @@
 dnl Process this file with autoconf to create configure.
 AC_INIT(intltoolize.in)
-INTLTOOL_VERSION=0.14
+INTLTOOL_VERSION=0.15
 
 AM_INIT_AUTOMAKE(intltool, $INTLTOOL_VERSION)
 
-AC_PROG_CC
-AC_STDC_HEADERS
-AC_ARG_PROGRAM
-AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
-intltool. You can download the latest version from ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.0.x/]))
-
-LIBXML_REQUIRED=2.2.8
-
-PKG_CHECK_MODULES(DOC_I18N_TOOL, libxml-2.0 >= $LIBXML_REQUIRED, build_xml=yes, build_xml=no)
-AC_SUBST(DOC_I18N_TOOL_CFLAGS)
-AC_SUBST(DOC_I18N_TOOL_LIBS)
-AM_CONDITIONAL(HAVE_LIBXML, test "x$build_xml" = "xyes")
+dnl Put this back if we re-add doc-i18n-tool, but we need a popt check that works
+dnl even if popt is not in the standard place.
+dnl
+dnl AC_PROG_CC
+dnl AC_STDC_HEADERS
+dnl AC_ARG_PROGRAM
+dnl
+dnl AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
+dnl intltool. You can download the latest version from ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.0.x/]))
+dnl
+dnl LIBXML_REQUIRED=2.2.8
+dnl
+dnl PKG_CHECK_MODULES(DOC_I18N_TOOL, libxml-2.0 >= $LIBXML_REQUIRED, build_xml=yes, build_xml=no)
+dnl AC_SUBST(DOC_I18N_TOOL_CFLAGS)
+dnl AC_SUBST(DOC_I18N_TOOL_LIBS)
+dnl AM_CONDITIONAL(HAVE_LIBXML, test "x$build_xml" = "xyes")
 
 pkgdatadir='${datadir}'"/${PACKAGE}"
 AC_SUBST(pkgdatadir) dnl automake does not need this, but libtoolize does

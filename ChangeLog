@@ -1,7 +1,15 @@
+2002-01-31  Darin Adler  <darin@bentspoon.com>
+
+	* configure.in: Turn off the part of this file that deals
+	with doc-i18n-tool, since it has some small problems and
+	doc-i18n-tool is currently turned off. Also bump version.
+
 2002-01-31  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* intltoolize.in: use po/Makefile.in.in patch #4 if latest
 	Makefile.in.in (from glib-gettextize) is detected
+
+=== intltool 0.14 ===
 
 2002-01-29  Darin Adler  <darin@bentspoon.com>
 
