@@ -182,6 +182,7 @@ sub convert($) {
     &type_xml if $gettext_type eq "xml";
     &type_glade if $gettext_type eq "glade";
     &type_scheme if $gettext_type eq "scheme";
+    &type_schemas  if $gettext_type eq "schemas";
 }
 
 sub entity_decode_minimal
@@ -245,6 +246,18 @@ sub type_xml {
     }
 
     while ($input =~ /<_($w+)>(.+?)<\/_\1>/sg) {
+        $_ = $2;
+        s/\s+/ /g;
+	s/^ //;
+	s/ $//;
+        $messages{entity_decode_minimal($_)} = [];
+    }
+}
+
+sub type_schemas {
+    ### For schemas XML files ###
+        
+    while ($input =~ /<(short|long)>(.+?)<\/\1>/sg) {
         $_ = $2;
         s/\s+/ /g;
 	s/^ //;

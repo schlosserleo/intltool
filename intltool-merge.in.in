@@ -596,8 +596,8 @@ sub schemas_merge_translations
     # Support for <_foo>blah</_foo> style translations.
 
     my $regex_start = "^(.*?)([ \t]*)<locale name=\"C\">";
-    my $regex_short = "([ \t\n]*)<_short>(.*?)</_short>";
-    my $regex_long  = "([ \t\n]*)<_long>(.*?)</_long>";
+    my $regex_short = "([ \t\n]*)<short>(.*?)</short>";
+    my $regex_long  = "([ \t\n]*)<long>(.*?)</long>";
     my $regex_end   = "([ \t\n]*)</locale>";
 
     while ($source =~ s|$regex_start$regex_short$regex_long$regex_end||s) {

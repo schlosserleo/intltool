@@ -194,6 +194,9 @@ sub determine_type ($)
    if ($type =~ /\[type: gettext\/([^\]].*)]/) {
         $gettext_type=$1;
    }
+   elsif ($type =~ /schemas(\.in)+$/) {
+        $gettext_type="schemas";
+   }
    elsif ($type =~ /$xml_regex$/) {
         $gettext_type="xml";
    }

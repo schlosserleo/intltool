@@ -1,5 +1,13 @@
 2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+	* intltool-update.in.in:
+	* intltool-extrace.in.in:
+	* intltool-merge.in.in: We don't need to mark strings. We always
+	translates.schemas files.
+
+	
+2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
         * intltool.m4:
 	* intltool-update.in.in:
 	* intltool-merge.in.in: Added support for .schemas files.
