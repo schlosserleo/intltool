@@ -242,7 +242,7 @@ sub type_keys {
 sub type_xml {
     ### For generic translatable XML files ###
         
-    while ($input =~ /\s_$w+=\"([^"]+)\"/sg) { # "
+    while ($input =~ /\s_$w+\s*=\s*\"([^"]+)\"/sg) { # "
         $messages{entity_decode_minimal($1)} = [];
     }
 

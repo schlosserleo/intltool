@@ -1,3 +1,12 @@
+2003-02-25  Alberto Manuel Brandão Simões  <albie@alfarrabio.di.uminho.pt>
+
+	* intltool-extract.in.in (type_xml): Extract attributes when there
+	are spaces arount the equal sign;
+
+	* tests/cases/extract11.xml, tests/results/extract11.xml.h: Added
+	case for XML where attribute names and values are separated with
+	spaces arount the equal;
+
 Fri Feb 14 09:51:01 2003  Hidetoshi Tajima  <hidetoshi.tajima@sun.com>
 
 	* intltool-unicodify.in: Fix bug #105181. use iconv -f, instead of
