@@ -1,5 +1,12 @@
 2004-06-17  Danilo Šegan  <dsegan@gmx.net>
 
+	* tests/cases/Makefile.am (EXTRA_DIST): Add extract-comments.xml.
+
+	* tests/results/Makefile.am (EXTRA_DIST): Add
+	extract-comments.xml.h, multi.merge6.xml.
+
+2004-06-17  Danilo Šegan  <dsegan@gmx.net>
+
 	* tests/results/multi.merge6.xml: New file for test 18.
 
 	* tests/selftest.pl.in (check_extract_result)
