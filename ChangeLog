@@ -1,5 +1,7 @@
 2004-01-06  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+	* HACKING: Added a tiny bit of information.
+
 	* intltool-prepare.in: Fix bug #129793
 
 2004-01-06  Morten Welinder  <terra@gnome.org>
