@@ -133,14 +133,14 @@ ifdef([AC_DIVERSION_ICMDS],[
 
 # Manually sed perl in so people don't have to put the intltool scripts in AC_OUTPUT.
 
-AC_OUTPUT_COMMANDS([
+AC_CONFIG_COMMANDS([intltool], [
 
-intltool_edit="-e \"s:@INTLTOOL_EXTRACT@:${INTLTOOL_EXTRACT}:g\" \
-               -e \"s:@INTLTOOL_ICONV@:${ICONV}:g\" \
-               -e \"s:@INTLTOOL_MSGFMT@:${MSGFMT}:g\" \
-               -e \"s:@INTLTOOL_MSGMERGE@:${MSGMERGE}:g\" \
-               -e \"s:@INTLTOOL_XGETTEXT@:${XGETTEXT}:g\" \
-               -e \"s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:g\""
+intltool_edit="-e 's:@INTLTOOL_EXTRACT@:${INTLTOOL_EXTRACT}:g' \
+               -e 's:@INTLTOOL_ICONV@:${ICONV}:g' \
+               -e 's:@INTLTOOL_MSGFMT@:${MSGFMT}:g' \
+               -e 's:@INTLTOOL_MSGMERGE@:${MSGMERGE}:g' \
+               -e 's:@INTLTOOL_XGETTEXT@:${XGETTEXT}:g' \
+               -e 's:@INTLTOOL_PERL@:${INTLTOOL_PERL}:g'"
 
 eval sed ${intltool_edit} < ${ac_aux_dir}/intltool-extract.in \
   > intltool-extract.out
@@ -172,8 +172,8 @@ fi
 chmod ugo+x intltool-update
 chmod u+w intltool-update
 
-], INTLTOOL_PERL=${INTLTOOL_PERL} ac_aux_dir=${ac_aux_dir}
-INTLTOOL_EXTRACT=${INTLTOOL_EXTRACT} ICONV=${ICONV}
-MSGFMT=${MSGFMT} MSGMERGE=${MSGMERGE} XGETTEXT=${XGETTEXT})
+], INTLTOOL_PERL='${INTLTOOL_PERL}' ac_aux_dir=${ac_aux_dir}
+INTLTOOL_EXTRACT='${INTLTOOL_EXTRACT}' ICONV='${ICONV}'
+MSGFMT='${MSGFMT}' MSGMERGE='${MSGMERGE}' XGETTEXT='${XGETTEXT}')
 
 ])

@@ -1,3 +1,12 @@
+2004-10-07  James Henstridge  <james@jamesh.id.au>
+
+	Fixes bug #154717:
+
+	* intltool.m4: quote the variables so that the shell doesn't try
+	to interpret the $() in $INTLTOOL_EXTRACT.
+	Use the AC_CONFIG_COMMNANDS() macro instead of the deprecated
+	AC_OUTPUT_COMMANDS() macro.
+
 2004-10-07  Danilo Šegan  <dsegan@gmx.net>
 
 	* tests/cases/Makefile.am (EXTRA_DIST): 
