@@ -1,5 +1,9 @@
 2002-04-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+        * intltool-extract.in.in: Fixed a typo.
+
+2002-04-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
         * intltool-extract.in.in: Fixed accidently key press,
 	 that made it not compile :(
 
