@@ -1,5 +1,8 @@
 2004-10-14  Danilo Šegan  <dsegan@gmx.net>
 
+	* intltool-extract.in.in (type_glade): Ignore "dialog[0-9]+"
+	messages as well, as suggested by Rodney in #155294.
+
 	* NEWS: Document fix for #155294.
 
 2004-10-14  Danilo Šegan  <dsegan@gmx.net>
