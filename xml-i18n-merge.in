@@ -42,13 +42,15 @@ use Getopt::Long;
 my $HELP_ARG 	= "0";
 my $VERSION_ARG = "0";
 my $OAF_STYLE_ARG = "0";
+my $KEYS_STYLE_ARG = "0";
 
 
 ## Handle options
 GetOptions (
 	    "help|h|?"   => \$HELP_ARG,
 	    "version|v"  => \$VERSION_ARG,
-	    "oaf-style|o" => \$OAF_STYLE_ARG
+	    "oaf-style|o" => \$OAF_STYLE_ARG,
+	    "keys-style|k" => \$KEYS_STYLE_ARG
 	    ) or &error;
 
 
@@ -78,6 +80,11 @@ sub split_on_argument {
 	&message;
 	&preparation;
 	&oaf_merge_translations;
+    } elsif ($KEYS_STYLE_ARG && @ARGV > 2) {
+        &place_normal;
+        &message;
+        &preparation;
+        &keys_merge_translations;
     } else {
 	&help;
     }  
@@ -110,6 +117,7 @@ sub help{
     print "  -V, --version                shows the version\n";
     print "  -H, --help                   shows this help page\n";
     print "  -o, --oaf-style              includes translations in the oaf style\n";
+    print "  -k, --keys-style		  includes translations in the keys style\n";
     print "\nReport bugs to <mjs\@eazel.com>.\n";
     exit;
 }
@@ -273,3 +281,43 @@ sub oaf_merge_translations
     close OUTPUT;
     close INPUT;
 }
+
+sub keys_merge_translations
+{       
+    open INPUT, "<${FILE}";
+
+    open OUTPUT, ">${OUTFILE}";
+
+    while (<INPUT>) {
+        chomp;
+        if (/^\s*_.*=.*/)  {
+            my $orig_line = $_;
+    
+            my $non_translated_line = $orig_line;
+            $non_translated_line =~ s/_(.*)=/$1=/;
+            
+            print OUTPUT "${non_translated_line}\n";
+            
+            my $value_str = $orig_line;
+            $value_str =~ s/.*_.*=(.*)/$1/;
+            
+            if ($value_str) {
+                my %value_translation_map = lookup_translations ($value_str);
+            
+                foreach my $key (keys %value_translation_map) {
+                    my $translation = $value_translation_map{$key};
+
+                    my $translated_line = $orig_line;  
+                    $translated_line =~ s/_(.*)=([^\n]*)/\[$key]$1=$translation/;
+                    print OUTPUT "$translated_line\n";
+                }
+            }
+        } else {
+            print OUTPUT "$_\n";
+        }
+    }
+                 
+    close OUTPUT;
+    close INPUT;
+}
+

@@ -30,6 +30,8 @@ my $PACKAGE      = "@PACKAGE@";
 my $VERSION      = "@VERSION@";
 
 ## Script options - Enable by setting value to 1
+my $ENABLE_DESKTOP = "1";
+my $ENABLE_KEYS  = "1";
 my $ENABLE_GLADE = "1";
 my $ENABLE_XML 	 = "1";
 my $ENABLE_XP    = "0";
@@ -185,11 +187,39 @@ sub convert($) {
 	open (IN, "<$FILE") || die "can't open $FILE: $!";
 	$input = <IN>;
     }
-    
-    # This used to put a comment in $OUTFILE, but that comment
+
+    # This used to put a comment in $OUTFILE, but that comment 
     # showed up all over the .pot file, so it should not be put
     # in there. The comment was more appropriate back when the
     # files went in the source tree rather than a /tmp directory..
+
+    ######################
+    if ($ENABLE_DESKTOP) { 
+    ######################
+        
+        ### For generic translatable desktop files ###
+    
+        if ($FILE =~ /\.desktop\.in$/){
+    
+            while ($input =~ /^_.*=(.*)/sg) {
+                $messages{$1} = [];
+            }
+        }
+    }
+    
+    ###################
+    if ($ENABLE_KEYS) {
+    ###################
+    
+        ### For generic translatable mime/keys files ###
+
+        if ($FILE =~ /\.keys\.in$/){
+            while ($input =~ /^\s*_\w+=(.*)$/mg) {
+                $messages{$1} = [];
+            }
+        }
+    }
+
 
     ##################
     if ($ENABLE_XML) {
@@ -197,13 +227,13 @@ sub convert($) {
 
 	### For generic translatable XML files ###
         
-        if ($FILE =~ /(xml|oaf(\.in)+)$/){
+        if ($FILE =~ /\.(xml|oaf(\.in)+)$/){
 
-            while ($input =~ /[\t\n\s]_[a-zA-Z0-9_]+=\"([^\"]+)\"/sg) {
+            while ($input =~ /[\t\n\s]_\w+=\"([^\"]+)\"/sg) {
                 $messages{$1} = [];
             }
 
-            while ($input =~ /<_[a-zA-Z0-9_]+>([^_]+)<\/_[a-zA-Z0-9_]+>/sg) {
+            while ($input =~ /<_\w+>([^_]+)<\/_\w+>/sg) {
                 $messages{$1} = [];
             }
 
@@ -295,3 +325,5 @@ sub msg_write {
         }
     }
 }
+
+

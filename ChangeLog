@@ -1,3 +1,13 @@
+2001-01-18  Kenneth Christiansen <kenneth@gnu.org>
+
+	* xml-i18n-merge:
+	* xml-i18n-tools.m4:
+	* xml-i18n-update:
+	* xml-i18n-extract:
+	Support .keys.in files for translation of
+	MIME data used by gnome-vfs. This is a pretty
+	major change, so please inform me of any bugs.
+
 2001-01-17  Kenneth Christiansen <kenneth@gnu.org>
 
         * xml-i18n-merge: Made script handle fuzzy's

@@ -43,6 +43,10 @@ my $VERBOSE	   = "0";
 my @languages;
 my %po_files_by_lang = ();
 
+my $xml_extension = "xml|glade|desktop\.in|soundlist\.in|keys\.in|oaf(\.in)+";
+my $xml_extension_extern = $xml_extension;
+$xml_extension_extern =~ s/\\/\\\\/g;
+
 my $PACKAGE = &find_package_name;
 
 ## Always print as the first thing
@@ -163,7 +167,7 @@ sub maintain
 {   
     ## Search and find all translatable files
     $list_i18n_plain = "find ../ -print | egrep '.*\\.(c|y|cc|c++|h|gob)\$' ";
-    $list_i18n_xml   = "find ../ -print | egrep '.*\\.(xml|glade|oaf(\.in)+)\$' ";
+    $list_i18n_xml   = "find ../ -print | egrep '.*\\.($xml_extension_extern)\$' ";
 
     open(BUF3, "POTFILES.in") || die "${PROGRAM}:  there's no POTFILES.in!!!\n";
     
@@ -273,7 +277,7 @@ sub gen_headers
            ## Find xml files in POTFILES.in and generate the
            ## files with help from the xml-i18n-extract script
 
-           if (/\.(xml|glade|oaf(\.in)+)$/){
+           if (/\.($xml_extension)$/){
               $filename = "../$_";
               if ($VERBOSE){
                  system($XML_I18N_EXTRACT, "--update", $filename);
@@ -297,7 +301,7 @@ sub generate_pot
     open INFILE, "<POTFILES.in.old";
     open OUTFILE, ">POTFILES.in";
     while (<INFILE>) {
-        s/\.(glade|xml|oaf(\.in)+)$/$&.h/;
+        s/\.($xml_extension)$/$&.h/;
         print OUTFILE $_;        
     }
     close OUTFILE;
@@ -320,7 +324,7 @@ sub generate_pot
     while (<FILE>) 
     {
         chomp;
-        unlink "../$_.h" if /\.(glade|xml|oaf(\.in)+)$/;
+        unlink "../$_.h" if /\.($xml_extension)$/;
     }
     close FILE;
     print "done\n" if $VERBOSE;
