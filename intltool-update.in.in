@@ -249,6 +249,9 @@ sub find_leftout_files
     open POTFILES, "POTFILES.in" or die "$PROGRAM:  there's no POTFILES.in!\n";
 
     @buf_potfiles = grep /^[^#]/, <POTFILES>;
+    foreach (@buf_potfiles) {
+        s/^\[.*]\s*//;
+    }
 			    
     print "Searching for missing translatable files...\n" if $VERBOSE;
 

@@ -1,3 +1,7 @@
+2002-11-28  Yanko Kaneti  <yaneti@declera.com>
+
+	* intltool-update.in.in: strip the hints from POTFILES.in in -M mode.
+
 2002-11-27  Yanko Kaneti  <yaneti@declera.com>
 
 	* intltool-update.in.in: when the line in POTFILES.in is not an xml or
