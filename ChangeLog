@@ -1,3 +1,11 @@
+2001-02-09  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* xml-i18n-prepare.in: new added fix_makefiles, which does changes in
+	Makefile.am to distribute only .desktop.in files and generate
+	.desktop ones. So it does everything for
+	desktop/keys/directory/soundlist files now.
+	* xml-i18n-merge.in.in: sort by language code when writing.
+
 2001-02-06  Maciej Stachowiak  <mjs@eazel.com>
 
 	* .cvsignore: Updated.

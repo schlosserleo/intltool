@@ -343,7 +343,7 @@ sub keys_merge_translations
             if ($value_str) {
                 my %value_translation_map = lookup_translations ($value_str);
             
-                foreach my $key (keys %value_translation_map) {
+                foreach my $key (sort keys %value_translation_map) {
                     my $translation = $value_translation_map{$key};
 
                     my $translated_line = $orig_line;  
@@ -382,7 +382,7 @@ sub desktop_merge_translations
             if ($value_str) {
                 my %value_translation_map = lookup_translations ($value_str);
 
-                foreach my $key (keys %value_translation_map) {
+                foreach my $key (sort keys %value_translation_map) {
                     my $translation = $value_translation_map{$key};
 
                     my $translated_line = $orig_line;

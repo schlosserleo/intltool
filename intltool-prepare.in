@@ -85,6 +85,7 @@ sub main
     &add_to_potfiles;
     &perform_rescue;
     &add_to_cvsignore;
+    &fix_makefiles;
     &generate_empty;
 }
 
@@ -246,6 +247,55 @@ sub add_to_cvsignore
     unless ($all eq ' ') {
         print "*** Please remove files from CVS by following command: ***\n"
             . "cvs remove -f$all\n";
+    }
+}
+
+sub fix_makefiles
+{
+    my $file;
+    foreach $file (@desktop_files) {
+        my ($makefile, $line);
+
+        $file =~ /^(.*\/)*(.*?\.$desktop_extension$)$/;
+        if ($1) {
+            $makefile = "$1Makefile.am";
+        } else {
+            $makefile = "Makefile.am";
+        }
+        my $basename = $2;
+        print "Fixing $basename entry in $makefile\n" if $VERBOSE;
+
+        open MAKE, $makefile;
+        open NEWMAKE, ">$makefile.new";
+        my $extra = 0;
+        while ($line = <MAKE>) {
+            $extra = 1 if $line =~ /^EXTRA_DIST/;
+            if ($extra) {
+                if (($line =~ /$basename/) &&
+                    !($line =~ /$basename\.in/)) {
+                    $line =~ s/$basename/$basename\.in/;
+                }
+                $extra = 0 unless $line =~ /\\\s*$/
+            } else {
+                if ($line =~ /^(\w+)_DATA\s*=\s*$basename\s*$/) {
+                    my $name = $1;
+                    $line =~ s/^$name\_DATA/$name\_in_files/;
+                    $line =~ s/$basename/$basename\.in/;
+                    $basename =~ /.*\.($desktop_extension)$/;
+                    $line .= "$name\_DATA = \$($name\_in_files:.$1.in=.$1)\n";
+                    if ($basename eq 'keys') {
+                        if (!contains($makefile, '@XML_I18N_MERGE_KEYS_RULE@')) {
+                        $line .= "\@XML_I18N_MERGE_KEYS_RULE\@\n";
+                    }
+                    elsif (!contains($makefile, '@XML_I18N_MERGE_DESKTOP_RULE@')) {
+                        $line .= "\@XML_I18N_MERGE_DESKTOP_RULE\@\n";
+                    }
+                }
+            }
+            print NEWMAKE $line;
+        }
+        close NEWMAKE;
+        rename "$makefile.new", $makefile;
     }
 }
 
