@@ -13,7 +13,6 @@ Group:		Development/Tools
 Source: 	%{name}-%{ver}.tar.gz
 URL: 		http://nautilus.eazel.com/
 BuildRoot:	/var/tmp/%{name}-%{ver}-root
-Docdir: 	%{prefix}/doc
 BuildArch:      noarch
 
 %description

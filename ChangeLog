@@ -1,5 +1,10 @@
 2001-05-09  Darin Adler  <darin@eazel.com>
 
+	* xml-i18n-tools.spec.in: Fixed broken DocDir line that was
+	causing problems with Tinderbox.
+
+2001-05-09  Darin Adler  <darin@eazel.com>
+
 	* Makefile.am: SUBDIRS included "." for a good reason. That's
 	the only way to make sure the scripts are built before the
 	tests directory. The problem was actually a bug in automake
