@@ -1,3 +1,9 @@
+2001-01-23  Robin * Slomkowski  <rslomkow@rslomkow.org>
+
+	* xml-i18n-tools.spec.in: moved the doc dir
+	to the executable stanza so people can read
+	the docs.
+
 2001-01-20  Kenneth Christiansen <kenneth@gnu.org>
 
 	* configure.in: Changed version to 0.6

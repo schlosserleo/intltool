@@ -83,11 +83,11 @@ done
 %files
 
 %defattr(0555, bin, bin)
+%doc AUTHORS COPYING ChangeLog NEWS README
 %{prefix}/bin/xml-i18n-extract
 %{prefix}/bin/xml-i18n-toolize
 %{prefix}/bin/xml-i18n-update
 %{prefix}/share/xml-i18n-tools/*
 
 %defattr (0444, bin, bin)
-%doc AUTHORS COPYING ChangeLog NEWS README
 %{prefix}/share/aclocal/*.m4
