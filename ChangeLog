@@ -1,3 +1,11 @@
+2001-09-18  Darin Adler  <darin@bentspoon.com>
+
+	* xml-i18n-tools.m4: Fixed the long-standing "split line"
+	bug by just using semicolons instead of newlines. I have
+	no idea why we didn't think of this before.
+
+=== xml-i18n-tools 0.10 ===
+
 2001-09-15  Darin Adler  <darin@bentspoon.com>
 
 	* doc/xml-i18n-extract.8:
@@ -49,7 +57,7 @@
 
 2001-08-19  Maciej Stachowiak  <mjs@noisehavoc.org>
 
-	* xml-i18n-tools.m4: REmove buggy check for xml-i18n-tools 0.9 or
+	* xml-i18n-tools.m4: Remove buggy check for xml-i18n-tools 0.9 or
 	greater. First of all, ./xml-i18n-merge is not generated until
 	after configure runs, so running it inside configure is not a good
 	idea. The check won't do much anyway since if you have the version
