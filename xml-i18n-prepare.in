@@ -291,6 +291,7 @@ sub fix_makefiles
                     $ext =~ tr/a-z/A-Z/;
                     if (!contains($makefile, "\@XML_I18N_MERGE_$ext\_RULE\@")) {
                         $line .= "\@XML_I18N_MERGE_$ext\_RULE\@\n";
+                    }
                     elsif (!contains($makefile, '@XML_I18N_MERGE_DESKTOP_RULE@')) {
                         $line .= "\@XML_I18N_MERGE_DESKTOP_RULE\@\n";
                     }
