@@ -1,5 +1,5 @@
 #!@PERL@ -w 
-# -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 2  -*-
+# -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 4  -*-
 
 #
 #  The XML Translation Extractor
@@ -30,11 +30,10 @@ my $PACKAGE      = "@PACKAGE@";
 my $VERSION      = "@VERSION@";
 
 ## Script options - Enable by setting value to 1
-my $ENABLE_DESKTOP = "1";
-my $ENABLE_KEYS  = "1";
-my $ENABLE_GLADE = "1";
-my $ENABLE_XML 	 = "1";
-my $ENABLE_XP    = "0";
+my $ENABLE_INI   = "1"; ## desktop and alike files
+my $ENABLE_KEYS  = "1"; ## mimetype descriptions
+my $ENABLE_GLADE = "1"; ## glade files
+my $ENABLE_XML 	 = "1"; ## generic xml files
 
 ## Loaded modules
 use strict; 
@@ -51,6 +50,7 @@ my $QUIET_ARG   = "0";
 my $FILE;
 my $OUTFILE;
 
+my $gettext_type;
 my %messages = ();
 
 ## Always print first
@@ -104,7 +104,6 @@ sub place_normal {
 }   
 
 sub place_local {
-    $FILE	 = $ARGV[0];
     $OUTFILE     = fileparse($FILE, ());
     if (!-e "tmp/") { 
         system("mkdir tmp/"); 
@@ -112,23 +111,25 @@ sub place_local {
     $OUTFILE     = "./tmp/$OUTFILE.h"
 }
 
-sub precheck {
-    if (! $ENABLE_XML) { 
-        if ($FILE =~ /(xml|oaf(\.in)+)$/) { 
-            exit; 
-        }
-    }
-    if (! $ENABLE_GLADE) { 
-        if ($FILE =~ /glade$/) { 
-            exit; 
-        }
-    }
-    if (! $ENABLE_XP) { 
-        if ($FILE =~ /\/xp\/.*\.h$/) { 
-            exit; 
-        }
-    }
-}  
+sub determine_type {
+   if ($FILE =~ /\[type: gettext\/([^\]].*)]/) {
+	$gettext_type=$1;
+        $FILE =~ s/\[[^\]].*]\s*//;
+        $OUTFILE =~ s/\[[^\]].*]\s*//;
+   }
+   elsif ($FILE =~ /(xml|oaf(\.in)+)$/) {
+	$gettext_type="xml";
+   }
+   elsif ($FILE =~ /glade$/) {
+        $gettext_type="glade";
+   }
+   elsif ($FILE =~ /desktop$/) {
+	$gettext_type="init";
+   }
+   elsif ($FILE =~ /keys$/) {
+	$gettext_type="keys";
+   }
+}
 
 ## Sub for printing release information
 sub version{
@@ -166,7 +167,7 @@ sub message {
 }
 
 sub extract {
-    &precheck;
+    &determine_type;
 
     &convert ($FILE);
 
@@ -193,13 +194,13 @@ sub convert($) {
     # in there. The comment was more appropriate back when the
     # files went in the source tree rather than a /tmp directory..
 
-    ######################
-    if ($ENABLE_DESKTOP) { 
-    ######################
+    ##################
+    if ($ENABLE_INI) { 
+    ##################
         
         ### For generic translatable desktop files ###
     
-        if ($FILE =~ /\.desktop\.in$/){
+        if ($gettext_type eq "ini"){
     
             while ($input =~ /^_.*=(.*)$/mg) {
                 $messages{$1} = [];
@@ -213,7 +214,7 @@ sub convert($) {
     
         ### For generic translatable mime/keys files ###
 
-        if ($FILE =~ /\.keys\.in$/){
+        if ($gettext_type eq "keys"){
             while ($input =~ /^\s*_\w+=(.*)$/mg) {
                 $messages{$1} = [];
             }
@@ -227,7 +228,7 @@ sub convert($) {
 
 	### For generic translatable XML files ###
         
-        if ($FILE =~ /\.(xml|oaf(\.in)+)$/){
+        if ($gettext_type eq "xml"){
 
             while ($input =~ /[\t\n\s]_\w+=\"([^\"]+)\"/sg) {
                 $messages{$1} = [];
@@ -246,7 +247,7 @@ sub convert($) {
         
         ### For translatable Glade XML files ###
 
-        if ($FILE =~ /glade$/){
+        if ($gettext_type eq "glade"){
 
             my $translate = "label|title|text|format|copyright|comments|
                              preview_text|tooltip";
@@ -271,22 +272,6 @@ sub convert($) {
 	}
     }
 
-    #################
-    if ($ENABLE_XP) {
-    #################
-
-        ### For generic translatable XP header files ###
-        
-        if ($FILE =~ /\/xp\/.*\.h$/){
-
-            while ($input =~ /\((.*),(.+)\"(.*)\"/g) {
-                my $tag = $1;
-                $messages{$3} = [$tag];
-            }
-
-	}
-
-    }
 }
 
 sub msg_write {

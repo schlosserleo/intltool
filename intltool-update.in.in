@@ -280,14 +280,21 @@ sub gen_headers
 
            ## Find xml files in POTFILES.in and generate the
            ## files with help from the xml-i18n-extract script
+           
+           my $gettext_type;
 
-           if (/\.($xml_extension)$/){
-              $filename = "../$_";
-              if ($VERBOSE){
-                 system($XML_I18N_EXTRACT, "--update", $filename);
-              } else {
-		 system($XML_I18N_EXTRACT, "--update", "--quiet", $filename);
-              }
+	   if (/^(\[type: gettext\/[^\[].*])/) {
+	       $gettext_type=$1;
+           }
+           if (/\.($xml_extension)$/ || /^\[/){
+	       $_ =~ s/^\[[^\[].*]\s*//;
+               $filename = "$gettext_type../$_";
+
+               if ($VERBOSE){
+                   system($XML_I18N_EXTRACT, "--update", $filename);
+               } else {
+	 	   system($XML_I18N_EXTRACT, "--update", "--quiet", $filename);
+               }
            }
        }
        close FILE;
@@ -306,6 +313,7 @@ sub generate_pot
     open OUTFILE, ">POTFILES.in";
     while (<INFILE>) {
         s/\.($xml_extension)$/$&.h/;
+        s/^\[.*]\s*(.*)/$1.h/;
         print OUTFILE $_;        
     }
     close OUTFILE;
