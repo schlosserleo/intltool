@@ -44,6 +44,7 @@ my $LOCAL_ARG	= "0";
 my $HELP_ARG 	= "0";
 my $VERSION_ARG = "0";
 my $UPDATE_ARG  = "0";
+my $QUIET_ARG   = "0";
 
 my $FILE;
 my $OUTFILE;
@@ -59,6 +60,7 @@ GetOptions (
             "help|h|?"   => \$HELP_ARG,
             "version|v"  => \$VERSION_ARG,
             "update"     => \$UPDATE_ARG,
+	    "quiet|q"    => \$QUIET_ARG,
             ) or &Error;
 
 &split_on_argument;
@@ -82,7 +84,7 @@ sub split_on_argument {
     } elsif ($UPDATE_ARG) {
 	&place_normal;
 	&extract;
-	
+
     } elsif (@ARGV > 0) {
 	&place_normal;
 	&message;
@@ -168,7 +170,9 @@ sub extract {
     &msg_write;
     close OUT;
 
+    if (! $QUIET_ARG) {
     print "Wrote $OUTFILE\n";
+    }
 }
 
 sub convert($) {

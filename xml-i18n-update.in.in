@@ -20,16 +20,17 @@
 #
 #  Author(s): Kenneth Christiansen
 
-use Getopt::Long;
-
-## Declare global variables
+## Release information
 my $PROGRAM  = "xml-i18n-update";
 my $VERSION  = "@VERSION@";
 my $_PACKAGE = "@PACKAGE@";
 
-my $LANG     = $ARGV[0];
+## Loaded modules
+# FIXME: use strict;
+use Getopt::Long;
 
 ## Scalars used by the option stuff
+my $LANG     	   = $ARGV[0];
 my $HELP_ARG 	   = "0";
 my $VERSION_ARG    = "0";
 my $DIST_ARG	   = "0";
@@ -37,6 +38,7 @@ my $POT_ARG	   = "0";
 my $HEADERS_ARG    = "0";
 my $MAINTAIN_ARG   = "0";
 my $STATUSLIST_ARG = "0";
+my $QUIET_ARG	   = "0";
 
 my @languages;
 my %po_files_by_lang = ();
@@ -61,7 +63,8 @@ GetOptions (
 	    "pot|p"		=> \$POT_ARG,
 	    "headers|s"		=> \$HEADERS_ARG,
 	    "maintain|m"	=> \$MAINTAIN_ARG,
-	    "statuslist|l"	=> \$STATUSLIST_ARG
+	    "statuslist|l"	=> \$STATUSLIST_ARG,
+	    "quiet|q"		=> \$QUIET_ARG
 	    ) or &invalid_option;
 
 
@@ -95,18 +98,22 @@ sub split_on_argument {
     } elsif ($STATUSLIST_ARG) {
         &show_status;
 
+    } elsif ($LANG) {
+	if ($LANG =~ /^--/){ ## not an option
+	    &help;
+	} else {
+	    &main;
+ 	}
+
     } else {
 	&help;
     }  
 } 
 
-if ($LANG=~/^-(.)*/)
-{
-    &split_on_argument;
+&split_on_argument;
 
-} else {
-   
-   ## Run standard procedure
+sub main 
+{
    if(-s "$LANG.po"){
         &gen_headers; 
 	&generate_pot;
@@ -260,30 +267,16 @@ sub gen_headers
         while (<FILE>) {
            chomp;
 
-           ## Find .xml files in POTFILES.in and generate the
+           ## Find xml files in POTFILES.in and generate the
            ## files with help from the xml-i18n-extract script
 
-           if (/\.xml$/){
+           if (/\.(xml|glade|oaf(\.in)+)$/){
               $filename = "../$_";
-              system($XML_I18N_EXTRACT, "--update", $filename);
-           }
-      
-           ## Find .glade files in POTFILES.in and generate
-           ## the files with help from the xml-i18n-extract script
-
-           elsif (/\.glade$/) {
-              $filename = "../$_";
-              $xmlfiles="$XML_I18N_EXTRACT --update $filename";
-              system($XML_I18N_EXTRACT, "--update", $filename);
-           }
-
-           ## Find .oaf.in files in POTFILES.in and generate
-           ## the files with help from the xml-i18n-extract script
-
-           elsif (/\.oaf(\.in)+/){
-              $filename = "../$_";
-              $xmlfiles="$XML_I18N_EXTRACT --update $filename";
-              system($XML_I18N_EXTRACT, "--update", $filename);
+              if ($QUIET_ARG){
+                 system($XML_I18N_EXTRACT, "--update", "--quiet", $filename);
+              } else {
+		 system($XML_I18N_EXTRACT, "--update", $filename);
+              }
            }
        }
        close FILE;
