@@ -33,28 +33,28 @@
 #
 
 ## Release information
-my $PROGRAM      = "intltool-merge";
-my $PACKAGE      = "@PACKAGE@";
-my $VERSION      = "@VERSION@";
-
-## Script options - Enable by setting value to 1
-my $ENABLE_XML   = "1";
+my $PROGRAM = "intltool-merge";
+my $PACKAGE = "@PACKAGE@";
+my $VERSION = "@VERSION@";
 
 ## Loaded modules
 use strict; 
 use File::Basename;
 use Getopt::Long;
+use File::stat;
+use NDBM_File;
+use Fcntl;      # For O_* constants
 
 ## Scalars used by the option stuff
-my $HELP_ARG = "0";
-my $VERSION_ARG = "0";
-my $OAF_STYLE_ARG = "0";
-my $XML_STYLE_ARG = "0";
-my $KEYS_STYLE_ARG = "0";
-my $DESKTOP_STYLE_ARG = "0";
-my $QUIET_ARG = "0";
-my $PASS_THROUGH_ARG = "0";
-my $UTF8_ARG = "0";
+my $HELP_ARG = 0;
+my $VERSION_ARG = 0;
+my $OAF_STYLE_ARG = 0;
+my $XML_STYLE_ARG = 0;
+my $KEYS_STYLE_ARG = 0;
+my $DESKTOP_STYLE_ARG = 0;
+my $QUIET_ARG = 0;
+my $PASS_THROUGH_ARG = 0;
+my $UTF8_ARG = 0;
 
 ## Handle options
 GetOptions (
@@ -69,7 +69,6 @@ GetOptions (
             "utf8|u" => \$UTF8_ARG
 	    ) or &error;
 
-
 my $PO_DIR;
 my $FILE;
 my $OUTFILE;
@@ -83,46 +82,46 @@ my $w = "[-A-Za-z0-9._:]";
 # XML quoted string contents
 my $q = "[^\\\"]*";
 
-&split_on_argument;
-
-
 ## Check for options. 
-## This section will check for the different options.
 
-sub split_on_argument {
-
-    if ($VERSION_ARG) {
+if ($VERSION_ARG) {
 	&version;
-    } elsif ($HELP_ARG) {
+} elsif ($HELP_ARG) {
 	&help;
-    } elsif ($OAF_STYLE_ARG && @ARGV > 2) {
+} elsif ($OAF_STYLE_ARG && @ARGV > 2) {
 	&place_normal;
-	&message;
 	&preparation;
+	&message;
 	&oaf_merge_translations;
-    } elsif ($XML_STYLE_ARG && @ARGV > 2) {
+	&finalize;
+} elsif ($XML_STYLE_ARG && @ARGV > 2) {
         &utf8_sanity_check;
 	&place_normal;
-	&message;
 	&preparation;
+	&message;
 	&xml_merge_translations;
-    } elsif ($KEYS_STYLE_ARG && @ARGV > 2) {
+	&finalize;
+} elsif ($KEYS_STYLE_ARG && @ARGV > 2) {
         &utf8_sanity_check;
         &place_normal;
-        &message;
         &preparation;
+        &message;
         &keys_merge_translations;
-    } elsif ($DESKTOP_STYLE_ARG && @ARGV > 2) {
+	&finalize;
+} elsif ($DESKTOP_STYLE_ARG && @ARGV > 2) {
         &place_normal;
         &message;
         &preparation;
         &desktop_merge_translations;
-    } else {
+	&finalize;
+} else {
 	&help;
-    }
 }
 
-sub utf8_sanity_check {
+exit;
+
+sub utf8_sanity_check 
+{
     if (!$UTF8_ARG) {
         if (!$PASS_THROUGH_ARG) {
             $PASS_THROUGH_ARG="1";
@@ -130,7 +129,8 @@ sub utf8_sanity_check {
     }
 }
 
-sub place_normal {
+sub place_normal 
+{
     $PO_DIR = $ARGV[0];
     $FILE = $ARGV[1];
     $OUTFILE = $ARGV[2];
@@ -138,10 +138,11 @@ sub place_normal {
 
 
 ## Sub for printing release information
-sub version{
+sub version
+{
     print "${PROGRAM} (${PACKAGE}) ${VERSION}\n";
-    print "Written by Maciej Stachowiak and Kenneth Christiansen, 2000.\n\n";
-    print "Copyright (C) 2000 Free Software Foundation, Inc.\n";
+    print "Written by Maciej Stachowiak and Kenneth Christiansen, 2000-2002.\n\n";
+    print "Copyright (C) 2000-2002 Free Software Foundation, Inc.\n";
     print "Copyright (C) 2000, 2001 Eazel, Inc.\n";
     print "This is free software; see the source for copying conditions.  There is NO\n";
     print "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n";
@@ -149,7 +150,8 @@ sub version{
 }
 
 ## Sub for printing usage information
-sub help{
+sub help
+{
     print "Usage: ${PROGRAM} [OPTIONS] PO_DIRECTORY FILENAME OUTPUT_FILE\n";
     print "Generates an xml file that includes translated versions of some attributes,\n";
     print "from an untranslated source and a po directory that includes translations.\n";
@@ -169,38 +171,39 @@ sub help{
 
 
 ## Sub for printing error messages
-sub error{
+sub error
+{
     print "Try `${PROGRAM} --help' for more information.\n";
     exit;
 }
 
 
-sub message {
+sub message 
+{
     print "Merging translations into $OUTFILE.\n" unless $QUIET_ARG;
 }
 
 
-sub preparation {
-   &gather_po_files;
-   &create_translation_database;
+sub preparation 
+{
+    &gather_po_files;
+    &get_translation_database;
 }
 
 # General-purpose code for looking up translations in .po files
 
-sub gather_po_files
-{
-    my @po_files = glob("${PO_DIR}/*.po");
-    my @languages = map &po_file2lang, @po_files;
-    for my $lang (@languages) {
-	$po_files_by_lang{$lang} = shift (@po_files);
-    }
-}
-
 sub po_file2lang
 {
-    my $tmp = $_; 
+    my ($tmp) = @_; 
     $tmp =~ s/^.*\/(.*)\.po$/$1/; 
     return $tmp; 
+}
+
+sub gather_po_files
+{
+    for my $po_file (glob "$PO_DIR/*.po") {
+	$po_files_by_lang{po_file2lang($po_file)} = $po_file;
+    }
 }
 
 sub get_po_encoding
@@ -225,13 +228,43 @@ sub get_po_encoding
     return $encoding
 }
 
+sub get_translation_database
+{
+    if (!$ENV{"INTLTOOL_USE_CACHE"}) {
+        &create_translation_database;
+	return;
+    }
+
+    my $timestamp = 0;
+
+    foreach my $po_file (values %po_files_by_lang) {
+	my $time = stat ($po_file)->ctime;
+	$timestamp = $time if $time > $timestamp;
+    }
+
+    my $cached_translations = "$PO_DIR/.intltool-cache-$timestamp";	
+
+    if (-e "$cached_translations.db") {
+	print "Found cached translation database\n" unless $QUIET_ARG;
+	tie (%translations, 'NDBM_File', $cached_translations, O_RDONLY, 0640);
+    }
+
+    else {
+	system ("rm -f $PO_DIR/.intltool-cache-*.db");
+	print "Generating and caching the translation database\n" unless $QUIET_ARG;
+	tie (%translations, 'NDBM_File', $cached_translations, O_RDWR|O_CREAT, 0640);
+
+	&create_translation_database;
+    }
+}
+
 sub create_translation_database
 {
     for my $lang (keys %po_files_by_lang) {
     	my $po_file = $po_files_by_lang{$lang};
 
         if ($UTF8_ARG) {
-            my $encoding = get_po_encoding($po_file);
+            my $encoding = get_po_encoding ($po_file);
             open PO_FILE, "iconv -f $encoding -t UTF-8 $po_file|";	
         } else {
             open PO_FILE, "<$po_file";	
@@ -243,7 +276,7 @@ sub create_translation_database
 	my $msgstr = "";
         while (<PO_FILE>) {
             if (/^msgid "((\\.|[^\\])*)"/ ) {
-		$translations{$lang}{$msgid} = $msgstr if $inmsgstr && $msgstr && $msgstr ne $msgid;
+		$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgstr && $msgstr ne $msgid;
 		$msgid = unescape_po_string($1);
 		$inmsgid = 1;
 		$inmsgstr = 0;
@@ -258,8 +291,13 @@ sub create_translation_database
 	        $msgstr .= unescape_po_string($1) if $inmsgstr;
 	    }
 	}
-	$translations{$lang}{$msgid} = $msgstr if $inmsgstr && $msgstr && $msgstr ne $msgid;
+	$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgstr && $msgstr ne $msgid;
     }
+}
+
+sub finalize
+{
+    untie %translations;
 }
 
 sub unescape_one_sequence
@@ -334,9 +372,9 @@ sub entity_encoded_translation
 {
     my ($lang, $string) = @_;
 
-    my $translation = $translations{$lang}{$string};
+    my $translation = $translations{$lang, $string};
     return $string if !$translation;
-    return entity_encode($translation);
+    return entity_encode ($translation);
 }
 
 ## XML/OAF-specific merge code
@@ -368,8 +406,8 @@ sub oaf_merge_translations
 
 	my %langs;
 	for my $string (@strings) {
-	    for my $lang (keys %translations) {
-                $langs{$lang} = 1 if $translations{$lang}{$string};
+	    for my $lang (keys %po_files_by_lang) {
+                $langs{$lang} = 1 if $translations{$lang, $string};
 	    }
 	}
 	
@@ -423,8 +461,8 @@ sub xml_merge_translations
 	$string =~ s/ $//;
 	$string = entity_decode($string);
 
-	for my $lang (sort keys %translations) {
-	    my $translation = $translations{$lang}{$string};
+	for my $lang (sort keys %po_files_by_lang) {
+	    my $translation = $translations{$lang, $string};
 	    next if !$translation;
 	    $translation = entity_encode($translation);
 	    print OUTPUT "$spaces<$tag xml:lang=\"$lang\">$translation</$tag>\n";
@@ -449,8 +487,8 @@ sub keys_merge_translations
 
 	    my $non_translated_line = $_;
 
-            for my $lang (sort keys %translations) {
-                my $translation = $translations{$lang}{$string};
+            for my $lang (sort keys %po_files_by_lang) {
+		my $translation = $translations{$lang, $string};
                 next if !$translation;
 
                 $_ = $non_translated_line;
@@ -479,8 +517,8 @@ sub desktop_merge_translations
 
 	    my $non_translated_line = $_;
 
-            for my $lang (sort keys %translations) {
-                my $translation = $translations{$lang}{$string};
+            for my $lang (sort keys %po_files_by_lang) {
+                my $translation = $translations{$lang, $string};
                 next if !$translation;
 
                 $_ = $non_translated_line;

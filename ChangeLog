@@ -1,3 +1,13 @@
+2002-01-21  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in: Kenneth implemented a cache to
+	make merging much faster. But we don't have a complete
+	solution about where to put the cache. For now, you can
+	turn on the cache by setting the environment variable
+	INTLTOOL_USE_CACHE.
+
+	* intltool-update.in.in: Formatting tweak.
+
 2002-01-16  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-update.in.in:

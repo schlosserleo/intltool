@@ -39,14 +39,14 @@ use File::Find;
 
 ## Scalars used by the option stuff
 my $LANG     	   = $ARGV[0];
-my $HELP_ARG 	   = "0";
-my $VERSION_ARG    = "0";
-my $DIST_ARG	   = "0";
-my $POT_ARG	   = "0";
-my $HEADERS_ARG    = "0";
-my $MAINTAIN_ARG   = "0";
-my $REPORT_ARG     = "0";
-my $VERBOSE	   = "0";
+my $HELP_ARG 	   = 0;
+my $VERSION_ARG    = 0;
+my $DIST_ARG	   = 0;
+my $POT_ARG	   = 0;
+my $HEADERS_ARG    = 0;
+my $MAINTAIN_ARG   = 0;
+my $REPORT_ARG     = 0;
+my $VERBOSE	   = 0;
 my $GETTEXT_PACKAGE = "";
 
 my @languages;
