@@ -13,8 +13,7 @@
 #  used within.
 
 
-# Declare global variables
-#-------------------------
+## Declare global variables
 my $PROGRAM  = "xml-i18n-update";
 my $VERSION  = "@VERSION@";
 my $_PACKAGE = "@PACKAGE@";
@@ -26,20 +25,17 @@ my %po_files_by_lang = ();
 
 my $PACKAGE = &find_package_name;
 
-# Always print as the first thing
-#--------------------------------
+## Always print as the first thing
 $| = 1;
 
-# Give error if script is run without an argument
-#------------------------------------------------
+## Give error if script is run without an argument
 if (! $LANG){
     print "${PROGRAM}:  missing file arguments\n";
     print "Try `${PROGRAM} --help' for more information.\n";
     exit;
 }
 
-# Use the supplied arguments
-#---------------------------
+## Use the supplied arguments
 if ($LANG=~/^-(.)*/){
 
     if ("$LANG" eq "--version" || "$LANG" eq "-V")
@@ -79,8 +75,7 @@ if ($LANG=~/^-(.)*/){
 
 } else {
    
-   # Run standard procedure
-   #-----------------------
+   ## Run standard procedure
    if(-s "$LANG.po"){
         &gen_headers; 
 	&generate_pot;
@@ -88,9 +83,8 @@ if ($LANG=~/^-(.)*/){
 	&status;
    }  
 
-   # Report error if the language file supplied
-   # to the command line is non-existent
-   #-------------------------------------------
+   ## Report error if the language file supplied
+   ## to the command line is non-existent
    else {
 	&not_existing;       
    }
@@ -98,8 +92,7 @@ if ($LANG=~/^-(.)*/){
 
 sub version{
 
-    # Print version information
-    #--------------------------
+    ## Print version information
     print "${PROGRAM} ${_PACKAGE} $VERSION\n";
     print "Written by Kenneth Christiansen <kenneth\@gnome.org>, 2000.\n\n";
     print "Copyright (C) 2000 Free Software Foundation, Inc.\n";
@@ -110,8 +103,7 @@ sub version{
 
 sub help
 {
-    # Print usage information
-    #------------------------
+    ## Print usage information
     print "Usage: ./${PROGRAM} [OPTIONS] ...LANGCODE\n";
     print "Updates pot files and merge them with the translations.\n\n";
     print "  -H, --help                   shows this help page\n";
@@ -129,8 +121,7 @@ sub help
 
 sub maintain
 {   
-    # Search and find all translatable files
-    # ---------------------------------------
+    ## Search and find all translatable files
     $list_i18n_plain = "find ../ -print | egrep '.*\\.(c|y|cc|c++|h|gob)\$' ";
     $list_i18n_xml   = "find ../ -print | egrep '.*\\.(xml|glade|oaf\.in)\$' ";
 
@@ -145,9 +136,8 @@ sub maintain
     @buf_i18n_xml 	= <BUF2>;
     @buf_potfiles	= <BUF3>;
 
-    # Check if we should ignore some found files, when 
-    # comparing with POTFILES.in
-    #-------------------------------------------------
+    ## Check if we should ignore some found files, when 
+    ## comparing with POTFILES.in
     if (-s "POTFILES.skip"){
         open FILE, "POTFILES.skip";
         while (<FILE>) {
@@ -195,9 +185,8 @@ sub maintain
         }
     }
 
-    # Save file with information about the files missing
-    # if any, and give information about this proceedier
-    #---------------------------------------------------
+    ## Save file with information about the files missing
+    ## if any, and give information about this proceedier
     if(@result){
         open OUT, ">missing";
         print OUT @result;
@@ -206,8 +195,7 @@ sub maintain
         print "Files supposed to be ignored should be placed in \"POTFILES.skip\"\n";
     }
 
-    # If there is nothing to complain about, notice the user
-    #-------------------------------------------------------
+    ## If there is nothing to complain about, notice the user
     else{
         print "\nWell, it's all perfect! Congratulation!\n";
     }         
@@ -215,8 +203,7 @@ sub maintain
 
 sub invalid_option
 {
-    # Handle invalid arguments
-    #-------------------------
+    ## Handle invalid arguments
     print "${PROGRAM}: invalid option -- $LANG\n";
     print "Try `${PROGRAM} --help' for more information.\n";
 }
@@ -228,9 +215,8 @@ sub gen_headers
  
     $XML_I18N_EXTRACT = $ENV{"XML_I18N_EXTRACT"} if $ENV{"XML_I18N_EXTRACT"};
  
-    # Generate the .h header files, so we can allow glade and
-    # xml translation support
-    #--------------------------------------------------------
+    ## Generate the .h header files, so we can allow glade and
+    ## xml translation support
     if (! -s $XML_I18N_EXTRACT)
     {
 	print "\n *** The xml-i18n-extract script wasn't found!"
@@ -242,26 +228,26 @@ sub gen_headers
         open FILE, "<POTFILES.in";
         while (<FILE>) {
 
-           # Find .xml.h files in POTFILES.in and generate the
-           # files with help from the xml-i18n-extract script
-           #--------------------------------------------------
+           ## Find .xml.h files in POTFILES.in and generate the
+           ## files with help from the xml-i18n-extract script
+
            if ($_=~ /(.*)(\.xml)/o){
               $filename = "../$1.xml";
               system($XML_I18N_EXTRACT, "--update", $filename);
            }
       
-           # Find .glade.h files in POTFILES.in and generate
-           # the files with help from the xml-i18n-extract script
-           #--------------------------------------------------
+           ## Find .glade.h files in POTFILES.in and generate
+           ## the files with help from the xml-i18n-extract script
+
            elsif ($_=~ /(.*)(\.glade)/o){
               $filename = "../$1.glade";
               $xmlfiles="$XML_I18N_EXTRACT --update $filename";
               system($XML_I18N_EXTRACT, "--update", $filename);
            }
 
-           # Find .oaf.in.h files in POTFILES.in and generate
-           # the files with help from the xml-i18n-extract script
-           #--------------------------------------------------
+           ## Find .oaf.in.h files in POTFILES.in and generate
+           ## the files with help from the xml-i18n-extract script
+
            elsif ($_=~ /(.*)(\.oaf\.in)/o){
               $filename = "../$1.oaf.in";
               $xmlfiles="$XML_I18N_EXTRACT --update $filename";
@@ -274,8 +260,7 @@ sub gen_headers
 
 sub generate_pot
 {
-    # Generate the potfiles from the POTFILES.in file
-    #------------------------------------------------
+    ## Generate the potfiles from the POTFILES.in file
 
     print "Building the $PACKAGE.pot...\n";
 
@@ -359,17 +344,15 @@ sub perform_merge
 
     system($MERGE);
     
-    # Remove the "messages" trash file generated
-    # by gettext, aswell as the backup file
-    #-------------------------------------------
+    ## Remove the "messages" trash file generated
+    ## by gettext, aswell as the backup file
     unlink "messages";
     unlink "$LANG.po.old";
 }
 
 sub not_existing
 {
-    # Report error if supplied language file is non-existing
-    #-------------------------------------------------------
+    ## Report error if supplied language file is non-existing
     print "${PROGRAM}:  sorry, $LANG.po does not exist!\n";
     print "Try `${PROGRAM} --help' for more information.\n";    
     exit;
