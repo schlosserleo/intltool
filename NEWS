@@ -2,9 +2,10 @@ Version 0.12
 
 * Handle whitespace properly in XML (Darin)
 * Add support for multiline msgids and msgstrs, including test cases (Darin)
-* Add support for glib-getttextize (Jacob)
+* Add support for glib-getttextize (Jacob, Darin)
 * Add doc-i18n-tool [disabled in Makefile for the moment] (Jonathan)
 * Fixes to spec file (Toralf Lund, Darin)
+* Fix bug in intltool-prepare if string has regex metacharacters in it (Darin)
 
 
 Version 0.11

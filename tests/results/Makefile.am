@@ -11,4 +11,5 @@ EXTRA_DIST =					\
 	merge5u.sheet				\
 	merge6.xml				\
 	merge7.xml				\
+	merge8.keys				\
 	$(NULL)
