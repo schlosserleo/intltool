@@ -38,10 +38,7 @@ my $VERSION = "@VERSION@";
 
 ## Loaded modules
 use strict; 
-use File::Basename;
 use Getopt::Long;
-use File::stat;
-use Fcntl;      # For O_* constants
 
 ## Scalars used by the option stuff
 my $HELP_ARG = 0;
@@ -232,16 +229,16 @@ sub get_translation_database
     }
 }
 
-sub get_po_timestamp
+sub get_newest_po_age
 {
-    my $timestamp = 0;
+    my $newest_age;
 
-    foreach my $po_file (values %po_files_by_lang) {
-	my $time = stat ($po_file)->ctime;
-	$timestamp = $time if $time > $timestamp;
+    foreach my $file (values %po_files_by_lang) {
+	my $file_age = -M $file;
+	$newest_age = $file_age if !$newest_age || $file_age < $newest_age;
     }
 
-    return $timestamp;
+    return $newest_age;
 }
 
 sub create_cache
@@ -271,14 +268,10 @@ sub load_cache
 
 sub get_cached_translation_database
 {
-    if (-e $cache_file) {
-	my $newest_po_time = &get_po_timestamp;
-	my $cache_file_time = stat ($cache_file)->ctime;
-
-        if ($cache_file_time >= $newest_po_time) {
-	    &load_cache;
-            return;
-	}
+    my $cache_file_age = -M $cache_file;
+    if ($cache_file_age && $cache_file_age <= &get_newest_po_age) {
+	&load_cache;
+        return;
    }
 
    &create_cache;

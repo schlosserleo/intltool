@@ -1,3 +1,8 @@
+2002-02-10  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in: Got rid of dependencies on
+	perl libraries that we really didn't need.
+
 2002-02-09  Darin Adler  <darin@bentspoon.com>
 
 	Turn on the production version of Kenneth's cache.
