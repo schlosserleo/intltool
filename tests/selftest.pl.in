@@ -54,6 +54,9 @@ sub check_result_output($)
         print "[OK]\n"; ## diff was empty, ie. files were equal
     } else {
         print "[FAILED]\n";
+        open OUT, ">>errors";
+        print OUT $result;
+        close OUT;
     }
 }
 
