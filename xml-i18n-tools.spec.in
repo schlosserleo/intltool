@@ -84,7 +84,7 @@ done
 
 %defattr(0555, bin, bin)
 %{prefix}/bin/xml-i18n-toolize
-%{prefix}/xml-i18n-tools/*
+%{prefix}/share/xml-i18n-tools/*
 
 %defattr (0444, bin, bin)
 %doc AUTHORS COPYING ChangeLog NEWS README
