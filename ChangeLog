@@ -1,3 +1,10 @@
+2001-02-01  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* xml-i18n-prepare.in: additional keywords can be specified on comand
+	line.
+	* tests/Makefile.in, tests/cases/Makefile.in,
+	tests/results/Makefile.in: removed.
+
 2001-01-31  Darin Adler  <darin@eazel.com>
 
 	* xml-i18n-merge.in: Fix regular expressions again. Should

@@ -45,6 +45,8 @@ my $file;
 my $desktop_extension = "(desktop|soundlist|keys|directory)+";
 my $desktop_find_regex = ".*desktop\\|soundlist\\|keys\\|directory";
 
+my $keywords = "Name|Comment|description";
+
 ## Always print as the first thing
 $| = 1;
 
@@ -79,6 +81,7 @@ sub main
 {
     print "Working, please wait...\n" if (! $VERBOSE);
     &find_desktop_files;
+    &append_keywords;
     &add_to_potfiles;
     &perform_rescue;
     &add_to_cvsignore;
@@ -99,8 +102,9 @@ sub version{
 sub help
 {
     ## Print usage information
-    print "Usage: $PROGRAM [OPTION]\n";
-    print "Updates pot files and merge them with the translations.\n\n";
+    print "Usage: $PROGRAM [OPTION] KEYWORD ...\n";
+    print "Updates pot files and merge them with the translations.\n";
+    print "KEYWORD is additional key besides Name, Comment and description\n\n";
     print "  -H, --help                 shows this help page\n";
     print "  -X, --verbose              show lots of feedback\n";
     print "  -V, --version              shows the version\n";
@@ -115,6 +119,14 @@ sub invalid_option
     ## print "$PROGRAM: invalid option -- $opt\n";
     print "Try `$PROGRAM --help' for more information.\n";
     exit 1;
+}
+
+sub append_keywords
+{
+    my $arg;
+    foreach $arg (@ARGV) {
+        $keywords .= "|$arg";
+    }
 }
 
 sub add_to_potfiles
@@ -153,10 +165,11 @@ sub rescue_file
         chomp;
         $line++;
 	    my $entry = $_;
-        if ($entry =~ /^(Name|Comment|\s*description)=(.*)$/) {
+        if (($entry =~ /^($keywords)=(.*)$/) ||
+            ($entry =~ /^(\s*description)=(.*)$/)) {
             $msgid = $2;
 	    $msgid =~ s/\"/\\"/;
-        } elsif (($entry =~ /^(Name|Comment|description)\[(.*?)\]=(.*)$/) ||
+        } elsif (($entry =~ /^($keywords)\[(.*?)\]=(.*)$/) ||
                  ($entry =~ /^(\s*\[)(.*?)\]description=(.*)$/)) {
             $lang = $2;
             next if (!-s "po/$lang.po");
@@ -190,10 +203,10 @@ sub generate_empty
 
         while (<FULL>) {
             unless (
-		            (/^(Name|Comment|description)\[.*?\]=.*$/) ||
+		            (/^($keywords)\[.*?\]=.*$/) ||
         	        (/^\s*\[(.*?)\]description=.*$/)
 		           ) {
-                if (/^(Name|Comment)=.*$/) {
+                if (/^($keywords)=.*$/) {
                     print NEW "_$_";
                 } elsif (/^(\s*)(description=.*)$/) {
                     print NEW "$1_$2\n";
