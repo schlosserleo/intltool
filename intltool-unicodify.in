@@ -137,7 +137,7 @@ sub main
     
     close IN;
     
-    $encoding_code_orig = get_local_charset($encoding_code_orig)
+    $encoding_code_orig = get_local_charset($encoding_code_orig);
 
     print "Converting from $encoding_code_orig\n" if $VERBOSE;
     
