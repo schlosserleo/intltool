@@ -258,6 +258,7 @@ sub gen_headers
     {
         open FILE, "<POTFILES.in";
         while (<FILE>) {
+           chomp;
 
            ## Find .xml files in POTFILES.in and generate the
            ## files with help from the xml-i18n-extract script
@@ -322,6 +323,7 @@ sub generate_pot
     open FILE, "<POTFILES.in";
     while (<FILE>) 
     {
+        chomp;
         unlink "../$_.h" if /\.(glade|xml|oaf(\.in)+)$/;
     }
     close FILE;
