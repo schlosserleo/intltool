@@ -1,3 +1,10 @@
+Version 0.31
+
+* New XML merging (compatible with pre-0.27.2 intltool) - bug
+  #130802. (Danilo Segan)
+* Entity decoding and encoding is not done anymore for XML (part of
+  fix for bug #130802). (Danilo Segan)
+
 Version 0.30
 
 * added missing [] quotation macro name defined in AC_DEFUN() 

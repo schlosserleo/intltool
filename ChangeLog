@@ -1,5 +1,9 @@
 2004-06-14  Danilo Šegan  <dsegan@gmx.net>
 
+	* NEWS: Document recent changes of XML merging/extracting.
+
+2004-06-14  Danilo Šegan  <dsegan@gmx.net>
+
 	* tests/results/extract7.xml.h: 
 	* tests/cases/merge6.po: 
 	* tests/results/merge6.xml: 
