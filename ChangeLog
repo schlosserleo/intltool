@@ -1,3 +1,8 @@
+2002-05-02  Abel Cheung  <maddog@linux.org.hk>
+
+	* intltool-update.in.in: Fix regex bug I introduced, so that
+	some non-word characters are allowed in package name.
+
 2002-05-02  Kenneth Christiansen  <kenneth@gnu.org>  
 
         * configure.in: Bump version.

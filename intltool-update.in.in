@@ -595,18 +595,18 @@ sub find_package_name
         }
 
 	my $name = "";
-	$name = $1 if $conf_source =~ /^AM_INIT_AUTOMAKE\(\[?([\$\w]+)/m;
-	if ($conf_source =~ /^AC_INIT\(\[?([\$\w]+)\]?\s*,/m) {
+	$name = $1 if $conf_source =~ /^AM_INIT_AUTOMAKE\([\s\[]*([^,\)\s\]]+)/m;
+	if ($conf_source =~ /^AC_INIT\([\s\[]*([^,\)\s\]]+)\]?\s*,/m) {
 	    $name = $1;
 	    $varhash{"AC_PACKAGE_NAME"} = $1;
 	}
-	$name = $1 if $conf_source =~ /^GETTEXT_PACKAGE=([\$\w]+)/m;
+	$name = $1 if $conf_source =~ /^GETTEXT_PACKAGE=\[?([^\s\]]+)/m;
 
 	$name = "\$AC_PACKAGE_NAME" if "$name" eq "AC_PACKAGE_NAME";
 
-	while ($name =~ /[\$](\w+)/) {
+	while ($name =~ /[\$](\S+)/) {
 	    if (exists $varhash{$1}) {
-		$name =~ s/[\$](\w+)/$varhash{$1}/;
+		$name =~ s/[\$](\S+)/$varhash{$1}/;
 	    }
 	}
 	return $name if $name;
