@@ -1,5 +1,10 @@
 2001-01-26  Darin Adler  <darin@eazel.com>
 
+	* README: Mention the need to have at least one .po file in the
+	po directory.
+
+2001-01-26  Darin Adler  <darin@eazel.com>
+
 	* README: Use a GNOME namespace example instead of the Nautilus
 	namespace one to emphasize that Michael wants people to put as
 	much as possible inside the GNOME namespace.

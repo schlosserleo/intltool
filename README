@@ -6,8 +6,7 @@ scripts and does the other magic to your module, so users building
 from tarballs don't need xml-i18n-tools, only folks building from cvs.
 (This is modeled on gettextize.)
 
-xml-i18n-tools simple to use. To use it for your module you just do
-the following:
+To use xml-i18n-tools in your module, do the following:
 
   o Install xml-i18n-tools, and make sure that the macro it installs is 
     in aclocal's path, or do:
@@ -34,14 +33,15 @@ extracted to the .po files.
 
 To get oaf translation extraction and merging requires a few more steps:
 
- o Rename your .oafinfo file to .oaf.in and put an underscore before
-   every value property for string attributes that should be
-   localized.
+ o Rename your .oafinfo (or .oaf) files to .oaf.in and put an
+   underscore before every value property for string attributes
+   that should be localized.
 
- o Add the .oaf.in files to POTFILES.in
+ o Make sure you have at least on .po file in the "po" directory.
 
- o Put lines like these in every Makefile.am that installs oafinfo
-   files:
+ o Add the .oaf.in files to POTFILES.in.
+
+ o Put lines like these in every Makefile.am that installs oaf files:
  
 	--- start ----
  
@@ -63,3 +63,5 @@ naming convention, with namespacing, for example:
 
 	foo.oafinfo --> GNOME_Foo.oaf.in
 	foo-baa.oafinfo --> GNOME_Foo_baa.oaf.in
+
+That's it.
