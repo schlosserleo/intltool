@@ -1,3 +1,14 @@
+Version 0.15
+
+* Made production version of cache, makes merges much faster (Darin, Kenneth)
+* Reworked intltool-unicodify (Kenneth)
+* Some man page updating (Kenneth)
+* Added a rule for ".ui" files (Darin)
+* Fix AC_AUX_DIR incompatibility (ERDI Gergo)
+* Fix to work well with the newest glib-gettextize (ERDI Gergo)
+* Remove unneeded C code parts of configure.in (Darin)
+
+
 Version 0.14
 
 * Fix to work well with both new and old autoconf (ERDI Gergo)

@@ -1,5 +1,9 @@
 2002-02-10  Darin Adler  <darin@bentspoon.com>
 
+	* NEWS: Updated for 0.15 release.
+
+2002-02-10  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-merge.in.in: Got rid of dependencies on
 	perl libraries that we really didn't need.
 
