@@ -4,7 +4,7 @@
 #  The XML Translation Merge Tool
 #
 #  Copyright (C) 2000 Free Software Foundation.
-#  Copyright (C) 2000 Eazel, Inc
+#  Copyright (C) 2000, 2001 Eazel, Inc
 #
 #  This library is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License as
@@ -22,6 +22,7 @@
 #
 #  Authors:  Maciej Stachowiak <mjs@eazel.com>
 #            Kenneth Christiansen <kenneth@gnu.org>
+#            Darin Adler <darin@eazel.com>
 #
 
 
@@ -284,18 +285,18 @@ sub xml_merge_translations
 
     open OUTPUT, ">$OUTFILE";
 
-    while ($xml_source =~ /[ \t]*<[^<]*\s_[^="]*="[^"]*"[^<]*>/m) {
+    while ($xml_source =~ /[ \t]*<[^<]*\s_\w+="[^"]*"[^<]*>/m) {
         print OUTPUT $`;
         my $orig_node = $&;
 	$xml_source = $';
 
         my $non_translated_line = $orig_node;
-        $non_translated_line =~ s/_([^="]*)="/$1="/;
+        $non_translated_line =~ s/_(\w+)="/$1="/;
             
         my $new_node = $non_translated_line;
             
         my $value_str = $orig_node;
-        $value_str =~ s/.*_[^="]*="([^"]*)".*/$1/sg;
+        $value_str =~ s/.*_\w+="([^"]*)".*/$1/s;
 
         if ($value_str) {
             my %value_translation_map = entity_encode_translations
@@ -305,9 +306,10 @@ sub xml_merge_translations
                 my $translation = $value_translation_map{$key};
                     
                 my $translated_line = $orig_node;
-                $translated_line =~ s/name="([^"]*)"/name="$1-$key"/g;
-                $translated_line =~ s/(\s*)_([^="]*)="[^"]*"/ $1$2="$translation"/g;
-                $new_node="$new_node\n$translated_line";
+                $translated_line =~ s/name="([^"]*)"/name="$1-$key"/;
+                $translated_line =~ s/(\s*)_(\w+)="[^"]*"/$1$2="$translation"/;
+
+                $new_node .= "\n$translated_line";
             }
         }
 
@@ -327,7 +329,7 @@ sub keys_merge_translations
 
     while (<INPUT>) {
         chomp;
-        if (/^\s*_[^="]*=.*/)  {
+        if (/^\s*_\w+=.*/)  {
             my $orig_line = $_;
     
             my $non_translated_line = $orig_line;
@@ -336,7 +338,7 @@ sub keys_merge_translations
             print OUTPUT "${non_translated_line}\n";
             
             my $value_str = $orig_line;
-            $value_str =~ s/.*_[^="]*=(.*)/$1/;
+            $value_str =~ s/.*_\w+=(.*)/$1/;
             
             if ($value_str) {
                 my %value_translation_map = lookup_translations ($value_str);
@@ -366,7 +368,7 @@ sub desktop_merge_translations
 
     while (<INPUT>) {
         chomp;
-        if (/^\s*_[^="]*=.*/)  {
+        if (/^\s*_\w+=.*/)  {
             my $orig_line = $_;
 
             my $non_translated_line = $orig_line;
@@ -375,7 +377,7 @@ sub desktop_merge_translations
             print OUTPUT "${non_translated_line}\n";
 
             my $value_str = $orig_line;
-            $value_str =~ s/.*_[^="]*=(.*)/$1/;
+            $value_str =~ s/.*_\w+=(.*)/$1/;
 
             if ($value_str) {
                 my %value_translation_map = lookup_translations ($value_str);

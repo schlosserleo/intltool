@@ -4,11 +4,11 @@
             value="Could not write to the file %s."/>
 	<str name="MSG_SaveFailedWrite"
 	    value="Writing error when attempting to save %s"/>
-	<str name="MSG_SaveFailedWrite-test" 
+	<str name="MSG_SaveFailedWrite-test"
 	    value="Kunne ikke skrive til filen %s."/>
 	<str name="MSG_SaveFailedExport"
 	    value="Error while attempting to save %s: could not construct exporter"/>
-	<str name="MSG_SaveFailedExport-test" 
+	<str name="MSG_SaveFailedExport-test"
 	    value="Kunne ikke skrive til filen %s."/>
     </strings>
 

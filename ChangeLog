@@ -1,5 +1,12 @@
 2001-01-31  Darin Adler  <darin@eazel.com>
 
+	* xml-i18n-merge.in: Fix regular expressions again. Should
+	fix the stuff I broke with the last change.
+	* tests/results/merge1.xml: Got rid of extra space in test
+	case that corresponded to an extra space made by the script.
+
+2001-01-31  Darin Adler  <darin@eazel.com>
+
 	* tests/selftest.pl: Use the "srcdir" environment variable
 	that is set up by automake. This makes "make distcheck" work.
 
