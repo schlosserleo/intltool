@@ -307,13 +307,12 @@ sub rfc822deb_split {
             $str =~ s/\s*$//;
             push(@list, $str);
             $str = '';
-        } elsif ($line =~s/^\s(\s+.*)/$1/) {
+        } elsif ($line =~ /^\s/) {
             #  Line which must not be reformatted
             $str .= "\n" if length ($str) && $str !~ /\n$/;
             $str .= $line."\n";
         } else {
             #  Continuation line, remove newline
-            $line =~ s/^\s+//;
             $str .= " " if length ($str) && $str !~ /[\n ]$/;
             $str .= $line;
         }

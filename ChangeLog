@@ -1,3 +1,11 @@
+2002-10-02  Denis Barbier  <barbier@linuxfr.org>
+
+	* intltool-extract.in.in:
+	* intltool-merge.in.in: minor fixes for the rfc822deb format, #92043
+	
+	* tests/results/extract10.templates_.h:
+	* tests/results/merge10.templates (added): fixed tests for the above.
+	
 2002-10-02  Yanko Kaneti  <yaneti@declera.com>
 
 	* intltool-merge.in.in: add a short comment on the "<", ">" handling.

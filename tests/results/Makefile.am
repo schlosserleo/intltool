@@ -7,6 +7,7 @@ EXTRA_DIST =					\
 	extract7.xml.h				\
 	extract8.glade.h			\
 	merge1.xml				\
+	merge10.templates			\
 	merge4.xml				\
 	merge5p.sheet				\
 	merge5u.sheet				\

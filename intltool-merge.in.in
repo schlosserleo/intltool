@@ -728,7 +728,7 @@ sub rfc822deb_merge_translations
 
     open OUTPUT, ">${OUTFILE}" or die;
 
-    while ($source =~ /(^|\n)(_)?([^:]+)(:\s*)(.*?)(?=\n[\S\n]|$)/sg) {
+    while ($source =~ /(^|\n+)(_)?([^:_\n]+)(:\s*)(.*?)(?=\n[\S\n]|$)/sg) {
 	    my $sep = $1;
 	    my $non_translated_line = $3.$4;
 	    my $string = $5;
@@ -739,8 +739,8 @@ sub rfc822deb_merge_translations
 
             print OUTPUT $sep.$non_translated_line;
             if ($is_translatable) {
+                my @str_list = rfc822deb_split($string);
                 for my $lang (sort keys %po_files_by_lang) {
-                    my @str_list = rfc822deb_split($string);
                     my $is_translated = 1;
                     my $str_translated = '';
                     my $first = 1;
@@ -779,6 +779,7 @@ sub rfc822deb_merge_translations
                 }
             }
     }
+    print OUTPUT "\n";
 
     close OUTPUT;
     close INPUT;
@@ -806,13 +807,13 @@ sub rfc822deb_split {
             #  New paragraph
             $str =~ s/\s*$//;
             push(@list, $str);
-        } elsif ($line =~s/^\s(\s+.*)/$1/) {
+            $str = '';
+        } elsif ($line =~ /^\s/) {
             #  Line which must not be reformatted
             $str .= "\n" if length ($str) && $str !~ /\n$/;
             $str .= $line."\n";
         } else {
             #  Continuation line, remove newline
-            $line =~ s/^\s+//;
             $str .= " " if length ($str) && $str !~ /[\n ]$/;
             $str .= $line;
         }
