@@ -105,7 +105,7 @@ GetOptions
  "verbose|x"	       => \$VERBOSE,
  "gettext-package|g=s" => \$GETTEXT_PACKAGE,
  "output-file|o=s"     => \$OUTPUT_FILE,
- ) or &PrintErrorInvalidOption;
+ ) or &Console_WriteError_InvalidOption;
 
 &print_help if $HELP_ARG;
 &print_version if $VERSION_ARG;
@@ -261,7 +261,7 @@ sub POFile_DetermineType ($)
    return "gettext\/$gettext_type";
 }
 
-sub POFile_DetermineEncoding ($) 
+sub TextFile_DetermineEncoding ($) 
 {
     my $gettext_code="ASCII"; # All files are ASCII by default
     my $filetype=`file $_ | cut -d ' ' -f 2`;
@@ -627,7 +627,7 @@ sub GeneratePOTemplate
 	    s/^\[.*]\s*//;
 	    print OUTFILE "$_.h\n";
 	    push @temp_headers, "../$_.h";
-	    $gettext_code = &POFile_DetermineEncoding ("../$_.h") if ($gettext_support_nonascii and not defined $forced_gettext_code);
+	    $gettext_code = &TextFile_DetermineEncoding ("../$_.h") if ($gettext_support_nonascii and not defined $forced_gettext_code);
 	} 
 	else 
 	{
@@ -636,7 +636,7 @@ sub GeneratePOTemplate
 	    } else {
 	        print OUTFILE "$SRCDIR/../$_\n";
 	    }
-	    $gettext_code = &POFile_DetermineEncoding ("../$_") if ($gettext_support_nonascii and not defined $forced_gettext_code);
+	    $gettext_code = &TextFile_DetermineEncoding ("../$_") if ($gettext_support_nonascii and not defined $forced_gettext_code);
 	}
 
 	next if (! $gettext_support_nonascii);
