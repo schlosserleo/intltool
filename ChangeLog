@@ -1,3 +1,16 @@
+2005-01-20  Miloslav Trmac <mitr@volny.cz>
+
+	* intltool-extract.in.in (type_xml): Ignore empty strings that are
+	marked for translation in XML files
+
+	* test/selftest.pl.in: Add test 24 to ignore empty strings in XML
+	files that are marked for translation
+	* test/cases/extract12.xml.in: Test case for emptry strings in XML
+	* test/results/extract12.xml.in.h: Test case results for empty strings
+	in XML files that are marked for translation
+
+	Fixes #163689
+
 2005-01-20  James Henstridge  <james@jamesh.id.au>
 
 	* intltoolize.in: if AC_CONFIG_MACRO_DIR is used in the

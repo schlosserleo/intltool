@@ -267,12 +267,12 @@ sub type_keys {
 sub type_xml {
     ### For generic translatable XML files ###
         
-    while ($input =~ /(?:<!--([^>]*?)-->[^\n]*\n?[^\n]*)?\s_$w+\s*=\s*\"([^"]+)\"/sg) { # "
+    while ($input =~ /(?:<!--([^>]*?)-->[^\n]*\n?[^\n]*)?\s_$w+\s*=\s*\"([^"]*)\"/sg) { # "
         $messages{entity_decode_minimal($2)} = [];
         $comments{entity_decode_minimal($2)} = $1 if (defined($1));
     }
 
-    while ($input =~ /(?:<!--([^>]*?)-->\s*)?<_($w+)(?: xml:space="($w+)")?[^>]*>(.+?)<\/_\2>/sg) {
+    while ($input =~ /(?:<!--([^>]*?)-->\s*)?<_($w+)(?: xml:space="($w+)")?[^>]*>(.*?)<\/_\2>/sg) {
         $_ = $4;
         if (!defined($3) || $3 ne "preserve") {
             s/\s+/ /g;

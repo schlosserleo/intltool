@@ -207,4 +207,9 @@ $case = "merge-deepattr.xml";
 system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
+print "24. Ignore empty strings from XML file                              ";
+$case = "extract12.xml.in";
+system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
 exit $failed;
