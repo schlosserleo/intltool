@@ -29,10 +29,10 @@ AC_DEFUN(AC_PROG_INTLTOOL,
 if test -n "$1"; then
     AC_MSG_CHECKING(for intltool >= $1)
 
-    INTLTOOL_REQUIRED_VERSION_AS_INT=$(echo $1 | awk -F. '{ printf "%d", $[1] * 100 + $[2]; }')
-    INTLTOOL_APPLIED_VERSION=$(awk -F\" '/\$VERSION / { printf $[2]; }'  < intltool-update.in)
+    INTLTOOL_REQUIRED_VERSION_AS_INT=`echo $1 | awk -F. '{ printf "%d", $[1] * 100 + $[2]; }'`
+    INTLTOOL_APPLIED_VERSION=`awk -F\" '/\\$VERSION / { printf $[2]; }'  < intltool-update.in`
     changequote({{,}})
-    INTLTOOL_APPLIED_VERSION_AS_INT=$(awk -F\" '/\$VERSION / { split(${{2}}, VERSION, "."); printf "%d\n", VERSION[1] * 100 + VERSION[2];}' < intltool-update.in)
+    INTLTOOL_APPLIED_VERSION_AS_INT=`awk -F\" '/\\$VERSION / { split(${{2}}, VERSION, "."); printf "%d\n", VERSION[1] * 100 + VERSION[2];}' < intltool-update.in`
     changequote([,])
 
     if test "$INTLTOOL_APPLIED_VERSION_AS_INT" -ge "$INTLTOOL_REQUIRED_VERSION_AS_INT"; then
