@@ -1,3 +1,10 @@
+2004-02-05  Callum McKenzie  <callum@physics.otago.ac.nz>
+
+	* intltool-merge.in.in: Removed the sqaure-bracket feature for
+	presenting comments in schema files. It conflicts with the
+	encoding of gconf lists which also use square brackets. See bug
+	#133369 for details.
+
 2004-02-03  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* NEWS, configure.in: update for new release.

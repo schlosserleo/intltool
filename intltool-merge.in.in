@@ -1124,8 +1124,6 @@ sub schemas_merge_translations
 	my $short_string = $9 ? $9 : '';
 	my $long_string = $12 ? $12 : '';
 
-	$c_default_block =~ s/default>\[.*?\]/default>/s;
-        
 	print OUTPUT "$locale_start_spaces$c_default_block";
 
         $default_string =~ s/\s+/ /g;
