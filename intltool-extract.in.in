@@ -266,7 +266,8 @@ sub msg_write {
      	$message =~ s/&quot;/\\"/mg; # "
     	$message =~ s/&lt;/</mg;
     	$message =~ s/&gt;/>/mg;
-        
+     	$message =~ s/&amp;/&/mg;
+       
    	print OUT "/* xgettext:no-c-format */\n" if $message =~ /%/;
     	print OUT "/* $tag */\n" if $tag;
         
