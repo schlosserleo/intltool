@@ -1,3 +1,7 @@
+2004-03-10  Danilo Šegan  <dsegan@gmx.net>
+
+	* tests/results/merge7.xml: Corrected test case.
+
 2004-03-02  Danilo Šegan  <dsegan@gmx.net>
 
 	* intltool-merge.in.in: Reverted compressing of whitespace in
