@@ -1,3 +1,8 @@
+2003-11-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* NEWS: Updated
+	* configure.in: Changed release to 0.28
+
 2003-11-18  Brian Cameron <Brian.Cameron@sun.com>
 
 	* intltool-merge.in.in

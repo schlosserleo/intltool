@@ -1,3 +1,22 @@
+Version 0.28
+
+Brian Cameron fixed a long standing issue in intltool - the migration to a 
+real XML parser -  which means that it now depends on XML::Parser. 
+
+Thanks goes to Brian Cameron! and to Sun Microsystem for sponsoring him ;-)
+
+* made intltool-merge use XML::Parser (#116526 and others) [Brian Cameron]
+
+  - added and updated tests
+  - updated so that intltool-merge doesn't add a trailing '\n' 
+    character to CDATA values.  
+  - Corrected the logic of encoding/decoding the string 
+    before/after translation.
+
+* Added INTLTOOL_KBD_RULE for GOK\s *.kdb files (Bill Haneman)
+* Added --multiple-output option (Kenneth Christiansen)
+* Avoid bashism in xgettext version check. (#120267) (Abel Cheung)
+
 Version 0.27.2
 
 * Fixed the source code encoding mark at POTFILES.in support (Abel Cheung).
