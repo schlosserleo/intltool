@@ -453,7 +453,12 @@ sub generate_po_template
 			"--keyword\=U\_",
 	   		"--files-from\=\.\/POTFILES\.in");
 
-    -e "$MODULE.po" || die "$PROGRAM: $MODULE.po does not exist.\n";
+    if (!-e "$MODULE.po") {
+        print "WARNING: It seems that none of the files in POTFILES.in ".
+              "contain marked strings\n";
+        exit (1);
+    }
+
     system ("rm", "-f", "$MODULE.pot");
     move ("$MODULE.po", "$MODULE.pot") || die "$PROGRAM: couldn't move $MODULE.po to $MODULE.pot.\n";
 
