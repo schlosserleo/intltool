@@ -1,3 +1,8 @@
+2002-06-01  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+        * intltool-extract.in.in: Fixed buglet. 
+
+
 2002-05-31  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-extract.in.in: Added support for translation of 
