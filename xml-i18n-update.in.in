@@ -221,7 +221,7 @@ sub maintain
     find sub { push @buf_i18n_xml, "$File::Find::name" if /\.($xml_extension)$/ }, "..";
 
     open(POTFILES, "POTFILES.in") || die "$PROGRAM:  there's no POTFILES.in!!!\n";
-    @buf_potfiles = <POTFILES>;
+    @buf_potfiles = grep /^[^#]/, <POTFILES>;
 
     print "Searching for missing translatable files...\n";
 

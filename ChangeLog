@@ -1,3 +1,10 @@
+2001-09-23  Darin Adler  <darin@bentspoon.com>
+
+	* xml-i18n-update.in.in: Ignore comment lines when reading
+	POTFILES.in -- fixes bug 60999.
+
+	* xml-i18n-tools.m4: Whitespace tweak.
+
 2001-09-19  Darin Adler  <darin@bentspoon.com>
 
 	* tests/cases/test.po: Removed a troublesome test case. We don't

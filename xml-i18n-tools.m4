@@ -40,6 +40,7 @@ dnl This is a hack - we use the expansion of AC_SUBST instead of
 dnl AC_SUBST itself to avoid automake putting 
 dnl XML_I18N_MERGE_OAF_RULE = @XML_I18N_MERGE_OAF_RULE@
 dnl in all the Makefile.in's, because that will blow up when substituted.
+
 XML_I18N_MERGE_OAF_RULE='\%.oaf : \%.oaf.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po ; $(top_builddir)/xml-i18n-merge -o -p $(top_srcdir)/po $< [$]*.oaf'
 HACK_SUBST(XML_I18N_MERGE_OAF_RULE)
 
