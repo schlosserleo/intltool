@@ -216,7 +216,6 @@ sub GenHeaders{
   
 	print "Found xml-i18n-extract script\nRunning $XML_I18N_EXTRACT...\n";
 
-
         open FILE, "<POTFILES.in";
         while (<FILE>) {
 
@@ -225,7 +224,6 @@ sub GenHeaders{
            #--------------------------------------------------
            if ($_=~ /(.*)(\.xml)/o){
               $filename = "../$1.xml";
-	      print(`pwd`);
               system($XML_I18N_EXTRACT, "--update", $filename);
            }
       

@@ -1,3 +1,9 @@
+2001-01-09  Darin Adler  <darin@eazel.com>
+
+	* xml-i18n-extract.in: A few more tweaks, including
+	getting rid of the special case for 1-line messages.
+	* xml-i18n-update.in: Get rid of debugging print.
+
 2001-01-09  Kenneth Christiansen <kenneth@gnu.org>
 
         * xml-i18n-update.in: Typo
