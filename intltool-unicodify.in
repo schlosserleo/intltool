@@ -105,12 +105,12 @@ sub get_local_charset
 
     # seek character encoding aliases in charset.alias (glib)
 
-    if (open CHARSET_ALIAS, $alias_file) {
-
-        while (<CHARSET_ALIAS>) {
-            if (/([-a-zA-Z0-9]+)\s+$encoding/i) {
-                return $1;
-            }
+    if (open CHARSET_ALIAS, $alias_file)
+    {
+	while (<CHARSET_ALIAS>) 
+        {
+            next if /^\#/;
+            return $1 if (/^\s*([-._a-zA-Z0-9]+)\s+$encoding\b/i)
         }
 
         close CHARSET_ALIAS;
@@ -127,9 +127,11 @@ sub main
 
     open IN, "$LANG.po";
     
-    while (<IN>) {
+    while (<IN>) 
+    {
 	## example: "Content-Type: text/plain; charset=ISO-8859-1\n"
-	if (/Content-Type\:.*charset=(.*)\\n/) {
+	if (/Content-Type\:.*charset=(.*)\\n/) 
+        {
 	    $encoding_code_orig = $1; 
 	    last;
 	}
@@ -162,7 +164,8 @@ sub main
     print OUT $source_orig;
     close OUT;
 
-    if ($OVERWRITE_ARG) {
+    if ($OVERWRITE_ARG) 
+    {
 	copy ("$LANG.po-1", "$LANG.po");
 	system ("rm -rf $LANG.po-1");
     }

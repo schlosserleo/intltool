@@ -1,3 +1,10 @@
+2002-11-21  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* intltool-merge.in.in:
+	* intltool-unicodify.in:
+
+	Fixed #96169 with help from Laurent Vivier and Morten Welinder.
+
 Wed Nov 20 17:53:14 2002  Jonathan Blandford  <jrb@redhat.com>
 
 	* intltool.m4 (INTLTOOL_THEME_RULE): whoops.  Make it work
