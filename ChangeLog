@@ -1,3 +1,7 @@
+2004-01-07  Brian Cameron <brian.cameron@sun.com>
+
+	* intltool-merge.in.in: Fixed DOCTYPE regular expression.
+
 2004-01-07  Denis Barbier  <barbier@linuxfr.org>
 
        * intltool-merge.in.in: The XML::Parser Perl module is only

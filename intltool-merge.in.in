@@ -963,7 +963,7 @@ sub print_header
     {
         print $fh "$1\n";
     }
-    elsif ($source =~ /(<!DOCTYPE.*>)/s)
+    elsif ($source =~ /(<!DOCTYPE[^>]*>)/s)
     {
         print $fh "$1\n";
     }
