@@ -8,8 +8,8 @@ Version 0.27
 * Improved the package name detection code (Abel Cheung)
 * better .server files handling (Abel Cheung)
 * source code with non-ASCII chars support with
-GNU gettext 0.12 (bug #99005, Abel Cheung, Carlos Perell�)
-* intltool-unicodify is deprecated, please use msgconv (Abel Cheung
+GNU gettext 0.12 (bug #99005, Abel Cheung, Carlos Perelló Marín)
+* intltool-unicodify is deprecated, please use msgconv (Abel Cheung)
 
 Version 0.26
 
@@ -80,7 +80,7 @@ Version 0.19
 * A few .m4 fixes (Jacob Berkman)
 * Now works with configure.ac (Kenneth, Abel Cheung)
 * Perform variable substitutions when determining package name (Abel Cheung)
-* We look also at AC_INIT to get the package name. (Carlos Mar�n)
+* We look also at AC_INIT to get the package name. (Carlos Perelló Marín)
 * Added HOWTO on adding i18n support to an application. (Kenneth, Thomas Vander Stichele)
 * Made the selftest more portable (Kenneth).
 * Fixed Glade XML decoding. (Kenneth)
