@@ -75,7 +75,7 @@ if (! $LANG){
 
 ## Handle options
 GetOptions (
-	    "help|h|?"  	=> \$HELP_ARG,
+	    "help|h"	  	=> \$HELP_ARG,
 	    "version|v" 	=> \$VERSION_ARG,
 	    "dist|d"		=> \$DIST_ARG,
 	    "pot|p"		=> \$POT_ARG,

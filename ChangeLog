@@ -1,5 +1,14 @@
 2001-09-23  Darin Adler  <darin@bentspoon.com>
 
+	* xml-i18n-extract.in.in:
+	* xml-i18n-merge.in.in:
+	* xml-i18n-update.in.in:
+	Remove "-?" option as a way to get help for compatibility with
+	older versions of perl (or is it older versions of a perl lib?).
+	Patch contributed by drk@sgi.com.
+
+2001-09-23  Darin Adler  <darin@bentspoon.com>
+
 	* xml-i18n-update.in.in: Ignore comment lines when reading
 	POTFILES.in -- fixes bug 60999.
 

@@ -53,7 +53,7 @@ my $UTF8_ARG = "0";
 
 ## Handle options
 GetOptions (
-	    "help|h|?" => \$HELP_ARG,
+	    "help|h" => \$HELP_ARG,
 	    "version|v" => \$VERSION_ARG,
             "quiet|q" => \$QUIET_ARG,
 	    "oaf-style|o" => \$OAF_STYLE_ARG,
