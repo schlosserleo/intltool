@@ -464,11 +464,8 @@ sub find_package_name
 	 	open (IN, "<Makefile") || die "can't open Makefile: $!";
 		$makefile_source = <IN>;
 	    }
-            if ($makefile_source =~ /^top_srcdir[ \t]*=/) {   
-                $src_dir = $_;
-                $srcdir =~ s/top_srcdir[ \t]*=[ \t]*([^ \t\n\r]*)/$1/;
-                chomp $srcdir;
-                $conf_in = "$srcdir" . "/configure.in" . "\n";
+            if ($makefile_source =~ /top_srcdir[ \t]*=[ \t]*([^ \t\n\r]*)/) {
+                $conf_in = "$1/configure.in";
 	    }
         }
 

@@ -1,3 +1,8 @@
+2001-04-06  Dietmar Maurer  <dietmar@ximian.com>
+
+	* xml-i18n-update.in.in: bug fix - the previous code to extract
+	top_srcdir from the Makefile was wrong.
+
 Sun Apr 04 21:03:00 2001  John Gotts <jgotts@linuxsavvy.com>
 
 	* xml-i18n-tools.spec.in: Should be a noarch.  Also added some missing
