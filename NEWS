@@ -1,3 +1,5 @@
+* Handle all supported gettext escape sequences in PO files
+  -- bug #48489 (Danilo Segan)
 * Fix Scheme string extraction, add support for translators' comments
   -- bug #137029 (Danilo Segan)
 * Fix translations of attributes of XML elements
