@@ -1,3 +1,9 @@
+2003-05-23  Callum McKenzie  <callum@physics.otago.ac.nz>
+
+	* intltool-extract.in.in (type_scheme): Added an allowance for
+	white-space between the _ and the string for scheme parsing. This
+	is to allow more "scheme-like" code.
+
 2003-05-18  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-update.in.in: Removed some \s's that were
