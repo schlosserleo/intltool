@@ -31,6 +31,7 @@ pkgdata_DATA =					\
 	intltool-po-Makefile.in.in-patch-5	\
 	intltool-po-Makefile.in.in-patch-6	\
 	intltool-po-Makefile.in.in-patch-7	\
+	intltool-po-Makefile.in.in-patch-8	\
 	xml-i18n-po-Makefile.in.in-patch-1	\
 	xml-i18n-po-Makefile.in.in-patch-2	\
 	xml-i18n-po-Makefile.in.in-patch-5	\

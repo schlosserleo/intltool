@@ -1,3 +1,21 @@
+2003-12-03  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* intltoolize.in: Handle standard GNU gettext 0.12
+	installations.
+
+	* intltool-po-Makefile.in.in-patch-8: Makefile.in.in patch for
+	gettext 0.12.
+
+	* Makefile.am: Distribute intltool-po-Makefile.in.in-patch-8.
+
+	* intltool-update.in.in: When building with srcdir != builddir,
+	fetch POTFILES.in and source files from srcdir (only works with
+	*-patch-8 at the moment, but is backwards compatible with other
+	patches).
+
+	* intltool-extract.in.in: Allow a --srcdir argument to be passed
+	in.
+
 2003-12-01  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool-merge.in.in:	

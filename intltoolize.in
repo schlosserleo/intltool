@@ -248,6 +248,10 @@ if grep GENPOT po/Makefile.in.in >/dev/null; then
 # gettextize 4.x Standard 
 elif grep '# Copyright (C) 1995-1997, 2000-2002' po/Makefile.in.in > /dev/null; then
   patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-5
+# gettext 0.12
+elif grep '# Copyright (C) 1995-1997, 2000-2003' po/Makefile.in.in > /dev/null;
+then
+  patch po/Makefile.in.in < $pkgdatadir/intltool-po-Makefile.in.in-patch-8
 
 # glib-gettextize
 elif grep '# POTFILES is created from POTFILES.in' po/Makefile.in.in > /dev/null; then
