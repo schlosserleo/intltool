@@ -1,3 +1,8 @@
+2001-05-30  Maciej Stachowiak  <mjs@eazel.com>
+
+	* xml-i18n-tools.m4: Ugly M4 magic to work with autoconf 2.50
+	while retaining autoconf 2.13 support.
+	
 2001-05-22  Karl Eichwalder  <ke@suse.de>
 
 	* xml-i18n-prepare.in (ENTRY): Add missing curly paren.
