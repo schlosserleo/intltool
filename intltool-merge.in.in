@@ -287,7 +287,8 @@ sub create_translation_database
             if (lc $encoding eq "utf-8") {
                 open PO_FILE, "<$po_file";	
             } else {
-                open PO_FILE, "iconv -f $encoding -t UTF-8 $po_file|";	
+                my $iconv = $ENV{"INTLTOOL_ICONV"} || "iconv";
+                open PO_FILE, "$iconv -f $encoding -t UTF-8 $po_file|";	
             }
         } else {
             open PO_FILE, "<$po_file";	
@@ -299,7 +300,7 @@ sub create_translation_database
 	my $msgstr = "";
         while (<PO_FILE>) {
             if (/^msgid "((\\.|[^\\])*)"/ ) {
-		$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgstr && $msgstr ne $msgid;
+		$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgstr;
 		$msgid = unescape_po_string($1);
 		$inmsgid = 1;
 		$inmsgstr = 0;
@@ -314,7 +315,7 @@ sub create_translation_database
 	        $msgstr .= unescape_po_string($1) if $inmsgstr;
 	    }
 	}
-	$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgstr && $msgstr ne $msgid;
+	$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgstr;
     }
 }
 

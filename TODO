@@ -1,5 +1,6 @@
 Things to do before we call this 1.0:
 
+- Add support for gettext 0.11.
 - Remove USED file now that lots of things use intltool?
 - Write real documentation explaining, among other things,
   why we don't do real XML parsing.

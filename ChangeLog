@@ -1,3 +1,18 @@
+2002-02-25  Darin Adler  <darin@bentspoon.com>
+
+	* TODO: Mention gettext 0.11 issue.
+	* configure.in: Strengthen perl version check.
+
+	* intltool-extract.in.in: Tweak glade2 regex.
+
+	* intltool-merge.in.in: Allow alternate iconv program to be
+	specified in INTLTOOL_ICONV environment variable. Put translations
+	in the database even if the msgstr is the same as the msgid.
+
+	* intltool-update.in.in: Tweak glade2 regex. Fix the update_po_file
+	change Kenneth left 1/2 done in here. Replace code to move .po file
+	on top of .pot file with more perlish version.
+
 2002-02-23  Sven Neumann  <sven@gimp.org>
 
 	* USED: gimp uses intltool now
