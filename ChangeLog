@@ -1,7 +1,8 @@
 2002-11-26  Yanko Kaneti  <yaneti@declera.com>
 
-	* intltool-update.in.in: don't generate .h.h files when the file is
-	from a known type and also has the [type: gettext/..] magic.
+	* intltool-update.in.in: don't generate .h.h lines in the POTFILES.in
+	for xgettext when the input fiel line is from a known type and also has
+	the [type: gettext/..] magic.
 
 2002-11-25  Glynn Foster  <glynn.foster@sun.com>
 
