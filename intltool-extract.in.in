@@ -1,4 +1,4 @@
-#!@XML_I18N_TOOLS_PERL@ -w 
+#!@INTLTOOL_PERL@ -w 
 # -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 4  -*-
 
 #
@@ -25,7 +25,7 @@
 #
 
 ## Release information
-my $PROGRAM      = "xml-i18n-extract";
+my $PROGRAM      = "intltool-extract";
 my $PACKAGE      = "@PACKAGE@";
 my $VERSION      = "@VERSION@";
 
@@ -149,7 +149,6 @@ sub help{
 
 ## Sub for printing error messages
 sub error{
-#   print "xml-i18n-extract: invalid option @ARGV\n";
     print "Try `${PROGRAM} --help' for more information.\n";
     exit;
 }

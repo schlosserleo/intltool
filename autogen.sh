@@ -7,9 +7,9 @@ test -z "$srcdir" && srcdir=.
 ORIGDIR=`pwd`
 cd $srcdir
 
-PROJECT=xml-i18n-tools
+PROJECT=intltool
 TEST_TYPE=-f
-FILE=xml-i18n-toolize.in
+FILE=intltoolize.in
 
 DIE=0
 
@@ -46,12 +46,6 @@ fi
 case $CC in
 *lcc | *lcc\ *) am_opt=--include-deps;;
 esac
-
-echo "Running gettextize...  Ignore non-fatal messages."
-# Hmm, we specify --force here, since otherwise things don't
-# get added reliably, but we don't want to overwrite intl
-# while making dist.
-echo "no" | gettextize --copy --force
 
 aclocal $ACLOCAL_FLAGS
 

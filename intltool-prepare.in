@@ -22,7 +22,7 @@
 #	      Kenneth Christiansen <kenneth@gnu.org>
 
 ## Release information
-my $PROGRAM      = "xml-i18n-prepare";
+my $PROGRAM      = "intltool-prepare";
 my $PACKAGE      = "@PACKAGE@";
 my $VERSION      = "@VERSION@";
 my $MAINTAINER   = "<menesis\@delfi.lt>";
@@ -137,7 +137,7 @@ sub add_to_potfiles
         next if contains("po/POTFILES.in", "$desktop.in");
     # Print explanation comment only once
         unless ($intro) {
-           print FILE "# files added by xml-i18n-prepare\n";
+           print FILE "# files added by intltool-prepare\n";
            $intro = 1;
         }
         print FILE "$desktop.in\n";
@@ -288,8 +288,8 @@ sub fix_makefiles
                     my $ext = $1;
                     $line .= "$name\_DATA = \$($name\_in_files:.$ext.in=.$ext)\n";
                     $ext =~ tr/a-z/A-Z/;
-                    if (!contains($makefile, "\@XML_I18N_MERGE_$ext\_RULE\@")) {
-                        $line .= "\@XML_I18N_MERGE_$ext\_RULE\@\n";
+                    if (!contains($makefile, "\@INTLTOOL_$ext\_RULE\@")) {
+                        $line .= "\@INTLTOOL_$ext\_RULE\@\n";
                     }
                 }
             }

@@ -1,5 +1,11 @@
 2001-10-01  Darin Adler  <darin@bentspoon.com>
 
+	First cut at all the name changes to call it intltool.
+	If you use the new m4 macros, everything defaults to doing it the
+	right way for gnome 2 (using UTF-8 everywhere).
+
+2001-10-01  Darin Adler  <darin@bentspoon.com>
+
 	* xml-i18n-tools.m4: A bit more cleanup in here.
 
 2001-10-01  Darin Adler  <darin@bentspoon.com>

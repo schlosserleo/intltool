@@ -1,4 +1,4 @@
-#!@XML_I18N_TOOLS_PERL@ -w
+#!@INTLTOOL_PERL@ -w
 
 #  The GNOME Translation Update Tool
 #
@@ -21,7 +21,7 @@
 #  Author(s): Kenneth Christiansen
 
 ## Release information
-my $PROGRAM  = "xml-i18n-update";
+my $PROGRAM  = "intltool-update";
 my $VERSION  = "@VERSION@";
 my $_PACKAGE = "@PACKAGE@";
 
@@ -302,17 +302,17 @@ sub invalid_option
 
 sub gen_headers
 {
-    my $XML_I18N_EXTRACT = `which xml-i18n-extract 2>/dev/null`;
-    chomp $XML_I18N_EXTRACT;
+    my $EXTRACT = `which intltool-extract 2>/dev/null`;
+    chomp $EXTRACT;
 
-    $XML_I18N_EXTRACT = $ENV{"XML_I18N_EXTRACT"} if $ENV{"XML_I18N_EXTRACT"};
+    $EXTRACT = $ENV{"INTLTOOL_EXTRACT"} if $ENV{"INTLTOOL_EXTRACT"};
 
     ## Generate the .h header files, so we can allow glade and
     ## xml translation support
-    if (! -s $XML_I18N_EXTRACT)
+    if (! -s $EXTRACT)
     {
-	print "\n *** The xml-i18n-extract script wasn't found!"
-	     ."\n *** Without this xml-i18n-update can not generate files.\n";
+	print "\n *** The intltool-extract script wasn't found!"
+	     ."\n *** Without this intltool-update can not generate files.\n";
 	exit;
     }
     else
@@ -322,7 +322,7 @@ sub gen_headers
            chomp;
 
            ## Find xml files in POTFILES.in and generate the
-           ## files with help from the xml-i18n-extract script
+           ## files with help from the extract script
 
 	   my $gettext_type=&determine_type($1);
 
@@ -331,9 +331,9 @@ sub gen_headers
                my $filename = "../$_";
 
                if ($VERBOSE){
-                   system($XML_I18N_EXTRACT, "--update", "--type=$gettext_type", $filename);
+                   system($EXTRACT, "--update", "--type=$gettext_type", $filename);
                } else {
-	 	   system($XML_I18N_EXTRACT, "--update", "--type=$gettext_type", "--quiet", $filename);
+	 	   system($EXTRACT, "--update", "--type=$gettext_type", "--quiet", $filename);
                }
            }
        }

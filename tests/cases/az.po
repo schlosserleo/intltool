@@ -1,4 +1,4 @@
-# Test file for xml-i18n-tools.
+# Test file for intltool.
 #
 #
 # THIS IS A TEST FILE - PLEASE DO NOT CHANGE

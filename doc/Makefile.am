@@ -1,12 +1,12 @@
 man_MANS = \
-	xml-i18n-toolize.8	\
-	xml-i18n-extract.8	\
-	xml-i18n-merge.8	\
-	xml-i18n-prepare.8
+	intltoolize.8		\
+	intltool-extract.8	\
+	intltool-merge.8	\
+	intltool-prepare.8
 
 EXTRA_DIST = \
-	xml-i18n-toolize.8	\
-	xml-i18n-extract.8	\
-	xml-i18n-merge.8	\
-	xml-i18n-prepare.8
+	intltoolize.8		\
+	intltool-extract.8	\
+	intltool-merge.8	\
+	intltool-prepare.8
 

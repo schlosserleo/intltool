@@ -71,7 +71,7 @@ sub check_result_output($)
 
 ## Welcome notice
 
-print "Running selftest of the xml-i18n-tools module...\n\n";
+print "Running selftest of the intltool module...\n\n";
 unlink "errors";
 
 ## 1. Extract/Simple desktop file
@@ -79,7 +79,7 @@ unlink "errors";
 print "1. Checking output from simple desktop file:                     ";
 
 $case = "extract1.desktop";
-system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../intltool-extract --type=gettext/ini --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
 check_result($case);
 
 ## 2. Extract/Simple desktop-like file
@@ -87,7 +87,7 @@ check_result($case);
 print "2. Checking output from simple desktop-like file:                ";
 
 $case = "extract2.keyprop";
-system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../intltool-extract --type=gettext/ini --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
 check_result($case);
 
 ## 3. Extract/Simple desktop-like file
@@ -95,41 +95,41 @@ check_result($case);
 print "3. Checking output from simple xml-file:                         ";
 
 $case = "merge1.xml";
-system("/usr/bin/perl ../xml-i18n-merge -o -p --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../intltool-merge -o -p --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
 print "4. Checking output from simple xml-file:                         ";
 
 $case = "extract3.xml.in";
-system("/usr/bin/perl ../xml-i18n-extract --type=gettext/xml --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../intltool-extract --type=gettext/xml --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
 check_result($case);
 
 print "5. Checking output from simple pong style xml-file:              ";
 
 $case = "merge4.xml";
-system("/usr/bin/perl ../xml-i18n-merge -x -p --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../intltool-merge -x -p --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
 print "6. Checking output from glade style xml-file:                    ";
 
 $case = "extract6.glade";
-system("/usr/bin/perl ../xml-i18n-extract --type=gettext/glade --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../intltool-extract --type=gettext/glade --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
 check_result($case);
 
 print "7u. Checking output from dia sheet style xml-file:               ";
 
 $case = "merge5u.sheet";
-system("/usr/bin/perl ../xml-i18n-merge -x -u --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../intltool-merge -x -u --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
 print "7p. Checking output from dia sheet style xml-file [broken XML]:  ";
 $case = "merge5p.sheet";
-system("/usr/bin/perl ../xml-i18n-merge -x -p --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../intltool-merge -x -p --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
 print "8. Checking output from xml-file with escaped PO strings:        ";
 $case = "merge6.xml";
-system("/usr/bin/perl ../xml-i18n-merge -x -u --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../intltool-merge -x -u --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
 

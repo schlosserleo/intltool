@@ -24,7 +24,6 @@
 AC_DEFUN(XML_I18N_TOOLS_NEWER_THAN_0_9,[ true ])
 
 dnl AC_PROG_XML_I18N_TOOLS([MINIMUM-VERSION [,"G2" if always using --utf8] ])
-
 # serial 1 AC_PROG_XML_I18N_TOOLS
 AC_DEFUN(AC_PROG_XML_I18N_TOOLS,
 [
@@ -66,18 +65,18 @@ AC_SUBST(XML_I18N_MERGE)dnl
 XML_I18N_UPDATE='$(top_builddir)/xml-i18n-update'
 AC_SUBST(XML_I18N_UPDATE)dnl
 
-AC_PATH_PROG(XML_I18N_TOOLS_PERL, perl)
-if test -z "$XML_I18N_TOOLS_PERL"; then
+AC_PATH_PROG(INTLTOOL_PERL, perl)
+if test -z "$INTLTOOL_PERL"; then
    AC_MSG_ERROR([perl not found; required for xml-i18n-tools])
 fi
-if test -z "`$XML_I18N_TOOLS_PERL -v | fgrep '5.' 2> /dev/null`"; then
+if test -z "`$INTLTOOL_PERL -v | fgrep '5.' 2> /dev/null`"; then
    AC_MSG_ERROR([perl 5.x required for xml-i18n-tools])
 fi
 
 dnl  manually sed perl in so people don't have to put the xml-i18n-tools scripts in their 
 dnl  AC_OUTPUT
 AC_OUTPUT_COMMANDS([
-sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${srcdir}/xml-i18n-extract.in > xml-i18n-extract.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/xml-i18n-extract.in > xml-i18n-extract.out
 if cmp -s xml-i18n-extract xml-i18n-extract.out 2>/dev/null; then
   rm -f xml-i18n-extract.out
 else
@@ -86,7 +85,7 @@ fi
 chmod ugo+x xml-i18n-extract
 chmod u+w xml-i18n-extract
 
-sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${srcdir}/xml-i18n-merge.in > xml-i18n-merge.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/xml-i18n-merge.in > xml-i18n-merge.out
 if cmp -s xml-i18n-merge xml-i18n-merge.out 2>/dev/null; then
   rm -f xml-i18n-merge.out
 else
@@ -95,7 +94,7 @@ fi
 chmod ugo+x xml-i18n-merge
 chmod u+w xml-i18n-merge
 
-sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${srcdir}/xml-i18n-update.in > xml-i18n-update.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/xml-i18n-update.in > xml-i18n-update.out
 if cmp -s xml-i18n-update xml-i18n-update.out 2>/dev/null; then
   rm -f xml-i18n-update.out
 else
@@ -103,7 +102,7 @@ else
 fi
 chmod ugo+x xml-i18n-update
 chmod u+w xml-i18n-update
-], XML_I18N_TOOLS_PERL=${XML_I18N_TOOLS_PERL})
+], INTLTOOL_PERL=${INTLTOOL_PERL})
 
 # Redirect the config.log output again, so that the ltconfig log is not
 # clobbered by the next message.

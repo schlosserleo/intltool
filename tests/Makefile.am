@@ -1,10 +1,10 @@
 SUBDIRS = cases results
 
+TESTS = selftest
+
 EXTRA_DIST = selftest.pl.in
 
-TESTS=selftest
-
 selftest: selftest.pl
-	cp $< $@
-	chmod +x $@
+	cp $< $@ && chmod +x $@
 
+CLEANFILES = selftest selftest.pl

@@ -128,14 +128,6 @@ if test ! -f configure.in; then
   exit 1
 fi
 
-
-files=`cd $pkgdatadir && ls`
-if test -z "$files"; then
-  echo "$progname: cannot list files in \`$pkgdatadir'" 1>&2
-  exit 1
-fi
-files='xml-i18n-extract.in xml-i18n-merge.in xml-i18n-update.in'
-
 auxdir=.
 auxdirline=`egrep '^AC_CONFIG_AUX_DIR' configure.in 2>/dev/null`
 if test -n "$auxdirline"; then
@@ -211,25 +203,24 @@ if test -z "$automake"; then
   fi
 fi
 
-
-
 # Change to the auxiliary directory.
 if test "$auxdir" != .; then
   test -z "$automake" && echo "Putting files in AC_CONFIG_AUX_DIR, \`$auxdir'."
   cd $auxdir || exit 1
 fi
 
-for file in $files; do
+for name in extract.in merge.in update.in; do
+  file=xml-i18n-$name
   if test -f "$file" && test -z "$force"; then
     test -z "$automake" && echo "$progname: \`$file' exists: use \`--force' to overwrite" 1>&2
     continue
   fi
 
   $rm $file
-  if test -n "$ln_s" && $ln_s $pkgdatadir/$file $file; then :
-  elif $cp $pkgdatadir/$file $file; then :
+  if test -n "$ln_s" && $ln_s $pkgdatadir/intltool-$name $file; then :
+  elif $cp $pkgdatadir/intltool-$name $file; then :
   else
-    echo "$progname: cannot copy \`$pkgdatadir/$file' to \`$file'" 1>&2
+    echo "$progname: cannot copy \`$pkgdatadir/intltool-$name' to \`$file'" 1>&2
     status=1
   fi
 done

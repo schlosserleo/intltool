@@ -1,4 +1,4 @@
-#!@XML_I18N_TOOLS_PERL@ -w
+#!@INTLTOOL_PERL@ -w
 
 #
 #  The XML Translation Merge Tool
@@ -28,7 +28,7 @@
 #
 
 ## Release information
-my $PROGRAM      = "xml-i18n-merge";
+my $PROGRAM      = "intltool-merge";
 my $PACKAGE      = "@PACKAGE@";
 my $VERSION      = "@VERSION@";
 
@@ -119,17 +119,7 @@ sub split_on_argument {
 sub utf8_sanity_check {
     if (!$UTF8_ARG) {
         if (!$PASS_THROUGH_ARG) {
-            print "****WARNING****: no default behavior to xml-i18n-merge (-p or -u) specified.\n";
-            print "Previous default was equivalent to -p, but generating broken \"XML\" files\n";
-            print "Please read the documentation and choose either -p or -u behavior\n";
-            print "For the moment, will assume -p, but this default may change in the future\n";
-            print "\n\n\n";  
-          
-            print "xml-i18n-merge will now sleep 5 seconds.\n";
-            sleep 5;
             $PASS_THROUGH_ARG="1";
-        } else {
-            #print "xml-i18n-merge warning: \"XML\" with 8-bit pass-through is not likely to be \nreal XML.\n";           
         }
     }
 }
@@ -174,7 +164,6 @@ sub help{
 
 ## Sub for printing error messages
 sub error{
-#   print "xml-i18n-merge: invalid option @ARGV\n";
     print "Try `${PROGRAM} --help' for more information.\n";
     exit;
 }

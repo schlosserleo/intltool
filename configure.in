@@ -1,8 +1,8 @@
 dnl Process this file with autoconf to create configure.
 
-AC_INIT(xml-i18n-toolize.in)
+AC_INIT(intltoolize.in)
 
-INTLTOOL_VERSION="0.9.5"
+INTLTOOL_VERSION="0.9.6"
 
 AM_INIT_AUTOMAKE(intltool, $INTLTOOL_VERSION)
 
@@ -26,11 +26,12 @@ tests/selftest.pl
 tests/cases/Makefile
 tests/results/Makefile
 doc/Makefile
-xml-i18n-extract.in
-xml-i18n-merge.in
-xml-i18n-prepare
-xml-i18n-update.in
-xml-i18n-tools.spec
+intltool-extract.in
+intltool-merge.in
+intltool.spec
+intltoolize
 xml-i18n-toolize
-xml-i18n-unicodify
+intltool-prepare
+intltool-unicodify
+intltool-update.in
 ])

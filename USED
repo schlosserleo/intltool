@@ -1,5 +1,6 @@
-This is the list of modules which use xml-i18n-tools. If some fundamental change
-occurs for the tools, these modules should be revised and tested again.
+This is the list of modules which use intltool (as intltool or as xml-i18n-tools).
+If some fundamental change occurs for the tools, these modules should be revised
+and tested again.
 
 battstat	(not in GNOME CVS)
 bonobo

@@ -13,9 +13,9 @@ The intltool collection will do this steps:
    .oaf files.  This merge step will happen at build resp. installation
    time.
 
-intltool has a script xml-i18n-toolize which copies the various
+intltool has a script intltoolize which copies the various
 scripts and does the other magic to your module, so users building
-from tarballs don't need xml-i18n-tools, only folks building from cvs.
+from tarballs don't need intltool, only folks building from cvs.
 (This is modeled on gettextize.)
 
 
@@ -31,56 +31,45 @@ To use intltool in your module, do the following:
 
  o Add these lines to autogen.sh, after the call to gettextize:
   
-	echo "Running xml-i18n-toolize"
-	xml-i18n-toolize --copy --force --automake
+	echo "Running intltoolize"
+	intltoolize --copy --force --automake
 
  o Add this line to configure.in near the top
 
-	AC_PROG_XML_I18N_TOOLS([minimum required version],[ G2 | <blank> ])
+	AC_PROG_INTLTOOL([minimum required version])
 
- o Add xml-i18n-extract.in, xml-i18n-merge.in and xml-i18n-update.in
+ o Add intltool-extract.in, intltool-merge.in and intltool-update.in
    to EXTRA_DIST in your top-level Makefile.am and also to the
    top-level .cvsignore. Also add the non-.in versions to .cvsignore
 
- o Remove po/desk.pl and po/update.* scripts.  xml-i18n-update will take
+ o Remove po/desk.pl and po/update.* scripts.  intltool-update will take
    over their funtionallity.
 
 At this point, translatable strings will be automatically extracted to
 the .po files, if you'll make use of the following special
 recommendations.
 
-xml-i18n-prepare will help you to prepare the package.  This script will
+intltool-prepare will help you to prepare the package.  This script will
 try to extract translations from existing .desktop files which will
-become obsolete after xml-i18n-toolization has taken place.
+become obsolete after intltoolization has taken place.
 
 Examples are listed in the USED file.
 
-Details of the AC_PROG_XML_I18N_TOOLS macro
+Details of the AC_PROG_INTLTOOL macro
 -------------------------------------------
 
-The first parameter indicates the minimum required version. The
-configure script will halt if the version is newer than 0.9 but older
-than the parameter.
-
-Versions 0.9 and older can be detected through the following line:
-    XML_I18N_TOOLS_NEWER_THAN_0_9 || AC_MSG_ERROR(unsatisfied dependency)
-
-The second parameter is either [G2] (without brackets), or blank. If
-left blank, this indicates that compatible behavior is required. Some
-file types can be generated either as UTF-8 or mixed encoding;
-without [G2], this can be controlled through Makefile.am variables. If
-[G2] is specified, all files will be generated as UTF-8 files, with no
-need for explicit variable settings.
-
+The parameter indicates the minimum required version. The
+configure script will halt if the version is older than
+the parameter.
 
 Extra Steps for DESKTOP Files
 ..............................
 
 This step also applies for similar files (.directory, .soundlist).
 
- o Try to run xml-i18n-prepare.
+ o Try to run intltool-prepare.
 
- o Make sure xml-i18n-prepare did find existing translations in the old
+ o Make sure intltool-prepare did find existing translations in the old
    .desktop files and did correctly merge them into the various po/*.po
    files.  Don't forget to commit the changed .po files; otherwise
    exiting translations will get lost!
@@ -96,7 +85,7 @@ This step also applies for similar files (.directory, .soundlist).
         utilsdir = $(datadir)/gnome/apps/Utilities
         utils_in_files = bug-buddy.desktop.in
         utils_DATA = $(utils_in_files:.desktop.in=.desktop)
-        @XML_I18N_MERGE_DESKTOP_RULE@
+        @INTLTOOL_MERGE_DESKTOP_RULE@
 
 	--- end ----
 
@@ -148,7 +137,7 @@ To get oaf translation extraction and merging requires a few more steps:
 	oaf_in_files = My_OAF_info_file.oaf.in
 	oaf_DATA = $(oaf_in_files:.oaf.in=.oaf)
  
-	@XML_I18N_MERGE_OAF_RULE@
+	@INTLTOOL_MERGE_OAF_RULE@
  
 	EXTRA_DIST=$(oaf_in_files) $(oaf_DATA)
  
@@ -185,8 +174,8 @@ and merging requires these steps:
         xml_in_files = My_xml_file.xml.in
         xml_DATA = $(xml_in_files:.xml.in=.xml)
 
-        XML_I18N_XML_KIND=--utf8
-        @XML_I18N_MERGE_XML_RULE@
+        INTLTOOL_XML_KIND=--utf8
+        @INTLTOOL_MERGE_XML_RULE@
 
         EXTRA_DIST=$(xml_in_files) $(xml_DATA)
 
@@ -198,14 +187,14 @@ resulting XML file will have a UTF-8 effective encoding (you should
 make sure that the encoding="..." declaration in the .xml.in file is
 either absent or actually specifies UTF-8).
 
-Previous versions of xml-i18n-tools generated XML files whose contents
+Previous versions of intltool-generated XML files whose contents
 were made of the contents of the .po files, without paying attention
 to the encodings used. A single "XML" file could thus have strings in
 different encodings. This broken behavior can be asked for by setting
-XML_I18N_XML_KIND=--pass-through in the above snippet.
+INTLTOOL_XML_KIND=--pass-through in the above snippet.
 
-Setting the XML_I18N_XML_KIND has no effect if the string [G2] has
-been given as the second parameter of the AC_PROG_XML_I18N_TOOLS
+Setting the INTLTOOL_XML_KIND has no effect if the string [G2] has
+been given as the second parameter of the AC_PROG_INTLTOOL
 macro. In that case, --utf8 is always assumed.
 
 ---
