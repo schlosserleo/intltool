@@ -1,3 +1,7 @@
+2005-01-13  Jeremy Katz  <katzj@redhat.com>
+
+	* intltool-extract.in.in (place_local): Fix local mode (#163981)
+
 2004-12-02  Danilo Šegan  <dsegan@gmx.net>
 
 	Fix #159511.

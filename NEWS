@@ -1,3 +1,5 @@
+* Fix local mode
+  -- bug #163981 (Jeremy Katz)
 * Fix nested XML tags translation when only attributes are marked for 
   translation in a tag
   -- bug #159511 (Danilo Segan)
