@@ -1,3 +1,15 @@
+2004-11-04  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS: Update for fixes
+
+	* Makefile.in.in: Fix mkinstalldirs stuff to match what automake
+	generates elsewhere more closely, and to work with automake 1.4
+
+	* intltool.m4: Add the m4 stuff from AM_PROG_MKDIR_P, so that we
+	can AC_SUBST mkdir_p, to work with automake 1.4
+
+	Fixes #157298
+
 2004-11-03  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS: Update for Makefile.in.in usage changes

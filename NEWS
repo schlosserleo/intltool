@@ -1,3 +1,5 @@
+* Fix new Makefile.in.in stuff to work with automake 1.4
+  -- bug #157298 (Rodney Dawes)
 * Update I18N-HOWTO for the changes to use our own Makefile.in.in
   -- bug #79598 (Rodney Dawes)
 * Allow use of either AM_GNU_GETTEXT or AM_GLIB_GNU_GETTEXT and use our
