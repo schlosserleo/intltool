@@ -1,3 +1,19 @@
+2002-08-31  Kenneth Christiansen <kenneth@gnu.org>
+
+	* intltool-extract.in.in:
+	* intltool-merge.in.in:
+
+	Add support for 'default' tags. Fixes #89747
+
+2002-08-21  Jody Goldberg <jody@gnome.org>
+
+        * xml-i18n-tools.m4 (AC_DEFUN) : Do not use srcdir in the
+          AC_OUTPUT_COMMANDS.  That is a local variable that holds random paths 
+          by the time we try to use it.
+        * intltool.m4 : ditto.
+
+	Fixes 90352.
+
 2002-08-28  Gregory Leblanc  <gleblanc@linuxweasel.com>
 
 	* intltool.spec.in: Few cleanups, detailed inline. Fixes #48446.

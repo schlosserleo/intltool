@@ -116,7 +116,7 @@ ifdef([AC_DIVERSION_ICMDS],[
 
 AC_OUTPUT_COMMANDS([
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/intltool-extract.in > intltool-extract.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${ac_given_srcdir}/intltool-extract.in > intltool-extract.out
 if cmp -s intltool-extract intltool-extract.out 2>/dev/null; then
   rm -f intltool-extract.out
 else
@@ -125,7 +125,7 @@ fi
 chmod ugo+x intltool-extract
 chmod u+w intltool-extract
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/intltool-merge.in > intltool-merge.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${ac_given_srcdir}/intltool-merge.in > intltool-merge.out
 if cmp -s intltool-merge intltool-merge.out 2>/dev/null; then
   rm -f intltool-merge.out
 else
@@ -134,7 +134,7 @@ fi
 chmod ugo+x intltool-merge
 chmod u+w intltool-merge
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/intltool-update.in > intltool-update.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${ac_given_srcdir}/intltool-update.in > intltool-update.out
 if cmp -s intltool-update intltool-update.out 2>/dev/null; then
   rm -f intltool-update.out
 else

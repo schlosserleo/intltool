@@ -259,7 +259,7 @@ sub type_schemas {
     ### For schemas XML files ###
          
     # FIXME: We should handle escaped < (less than)
-    while ($input =~ /<(short|long)>([^<]+)<\/\1>/sg) {
+    while ($input =~ /<(default|short|long)>([^<]+)<\/\1>/sg) {
         $_ = $2;
         s/\s+/ /g;
 	s/^ //;

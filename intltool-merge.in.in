@@ -606,26 +606,35 @@ sub schemas_merge_translations
     # Support for <_foo>blah</_foo> style translations.
 
     my $regex_start = "^(.*?)([ \t]*)<locale name=\"C\">";
+    my $regex_default = "([ \t\n]*)<default>(.*?)</default>";
     my $regex_short = "([ \t\n]*)<short>(.*?)</short>";
     my $regex_long  = "([ \t\n]*)<long>(.*?)</long>";
     my $regex_end   = "([ \t\n]*)</locale>";
 
-    while ($source =~ s|$regex_start$regex_short$regex_long$regex_end||s) {
+    while ($source =~ s|$regex_start$regex_default$regex_short$regex_long$regex_end||s) {
         print OUTPUT $1;
 
         my $locale_start_spaces = $2;
 	my $locale_end_spaces = $7;
-	my $short_spaces = $3;
-	my $short_string = $4;
-	my $long_spaces = $5;
-	my $long_string = $6;
+	my $default_spaces = $3;
+	my $default_string = $4;
+	my $short_spaces = $5;
+	my $short_string = $6;
+	my $long_spaces = $7;
+	my $long_string = $8;
 
 	# English first
 
 	print OUTPUT "$locale_start_spaces<locale name=\"C\">";
+	print OUTPUT "$default_spaces<default>$default_string</default>";
 	print OUTPUT "$short_spaces<short>$short_string</short>";
 	print OUTPUT "$long_spaces<long>$long_string</long>";
 	print OUTPUT "$locale_end_spaces</locale>";
+
+        $default_string =~ s/\s+/ /g;
+        $default_string =~ s/^ //;
+        $default_string =~ s/ $//;
+        $default_string = entity_decode($default_string);
 
 	$short_string =~ s/\s+/ /g;
 	$short_string =~ s/^ //;
@@ -638,12 +647,20 @@ sub schemas_merge_translations
 	$long_string = entity_decode($long_string);
 
 	for my $lang (sort keys %po_files_by_lang) {
+	    my $default_translation = $translations{$lang, $default_string};
 	    my $short_translation = $translations{$lang, $short_string};
 	    my $long_translation  = $translations{$lang, $long_string};
 
-	    next if (!$short_translation && !$long_translation);
+	    next if (!$default_translation && !$short_translation && 
+                     !$long_translation);
 
 	    print OUTPUT "\n$locale_start_spaces<locale name=\"$lang\">";
+
+            if ($default_translation)
+            {
+                $default_translation = entity_encode($default_translation);
+                print OUTPUT "$default_spaces<default>$default_translation</default>";
+            }
 
 	    if ($short_translation)
 	    {
