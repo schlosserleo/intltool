@@ -26,15 +26,15 @@ dnl AC_PROG_INTLTOOL([MINIMUM-VERSION])
 AC_DEFUN(AC_PROG_INTLTOOL,
 [
 
-INTLTOOL_DESKTOP_RULE=  '%.desktop:   %.desktop.in   $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -d -u'
+  INTLTOOL_DESKTOP_RULE='%.desktop:   %.desktop.in   $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -d -u'
 INTLTOOL_DIRECTORY_RULE='%.directory: %.directory.in $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -d -u'
-INTLTOOL_KEYS_RULE=     '%.keys:      %.keys.in      $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -k -u'
-INTLTOOL_OAF_RULE=      '%.oaf:       %.oaf.in       $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -o -p'
-INTLTOOL_PONG_RULE=     '%.pong:      %.pong.in      $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -x -u'
-INTLTOOL_SERVER_RULE=   '%.server:    %.server.in    $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -o -u'
-INTLTOOL_SHEET_RULE=    '%.sheet:     %.sheet.in     $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -x -u'
+     INTLTOOL_KEYS_RULE='%.keys:      %.keys.in      $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -k -u'
+      INTLTOOL_OAF_RULE='%.oaf:       %.oaf.in       $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -o -p'
+     INTLTOOL_PONG_RULE='%.pong:      %.pong.in      $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -x -u'
+   INTLTOOL_SERVER_RULE='%.server:    %.server.in    $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -o -u'
+    INTLTOOL_SHEET_RULE='%.sheet:     %.sheet.in     $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -x -u'
 INTLTOOL_SOUNDLIST_RULE='%.soundlist: %.soundlist.in $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -d -u'
-INTLTOOL_XML_RULE=      '%.xml:       %.xml.in       $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -x -u'
+      INTLTOOL_XML_RULE='%.xml:       %.xml.in       $(top_builddir)/intltool-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/intltool-merge $(top_srcdir)/po $< [$]@ -x -u'
 
 AC_SUBST(INTLTOOL_DESKTOP_RULE)
 AC_SUBST(INTLTOOL_DIRECTORY_RULE)

@@ -1,3 +1,9 @@
+2001-10-02  Darin Adler  <darin@bentspoon.com>
+
+	* intltool.m4:
+	* xml-i18n-tools.m4:
+	Fix mistake where the whitespace screws up the macros.
+
 2001-10-01  Darin Adler  <darin@bentspoon.com>
 
 	First cut at all the name changes to call it intltool.
