@@ -19,7 +19,10 @@ my $PROGRAM  = "xml-i18n-update";
 my $VERSION  = "@VERSION@";
 my $_PACKAGE = "@PACKAGE@";
 
-my $LANG    = $ARGV[0];
+my $LANG     = $ARGV[0];
+
+my @languages;
+my %po_files_by_lang = ();
 
 my $PACKAGE = &find_package_name;
 
@@ -68,6 +71,9 @@ if ($LANG=~/^-(.)*/){
     elsif ($LANG eq "--maintain" || "$LANG" eq "-M"){
         &maintain;
     }
+    elsif ($LANG eq "--statuslist" || "$LANG" eq "-L"){
+	&show_status;
+    }
     else {
         &invalid_option;
     }
@@ -103,8 +109,8 @@ sub version{
     exit;
 }
 
-sub help{
-
+sub help
+{
     # Print usage information
     #------------------------
     print "Usage: ./${PROGRAM} [OPTIONS] ...LANGCODE\n";
@@ -121,9 +127,9 @@ sub help{
     exit;
 }
 
-sub maintain{
-   
-    # Search and fine, all translatable files
+sub maintain
+{   
+    # Search and find all translatable files
     # ---------------------------------------
     $list_i18n_plain = "find ../ -print | egrep '.*\\.(c|y|cc|c++|h|gob)\$' ";
     $list_i18n_xml   = "find ../ -print | egrep '.*\\.(xml|glade|oaf\.in)\$' ";
@@ -167,7 +173,7 @@ sub maintain{
     foreach my $file (@buf_i18n_xml){ 
         open FILE, "<$file";
         while (<FILE>) {
-            if ($_=~/_(.*)\=\"/o){
+            if ($_=~/\s_(.*)\=\"/o){
                 $file = unpack("x3 A*",$file) . "\n";
                 push @buf_allfiles, $file;
                 last;
@@ -207,29 +213,32 @@ sub maintain{
     }         
 }
 
-sub invalid_option{
-
+sub invalid_option
+{
     # Handle invalid arguments
     #-------------------------
     print "${PROGRAM}: invalid option -- $LANG\n";
     print "Try `${PROGRAM} --help' for more information.\n";
 }
  
-sub gen_headers{
+sub gen_headers
+{
     my $XML_I18N_EXTRACT = `which xml-i18n-extract 2>/dev/null`;
     chomp $XML_I18N_EXTRACT;
  
     $XML_I18N_EXTRACT = $ENV{"XML_I18N_EXTRACT"} if $ENV{"XML_I18N_EXTRACT"};
  
-    print "extract: ${XML_I18N_EXTRACT}\n";
-
     # Generate the .h header files, so we can allow glade and
     # xml translation support
     #--------------------------------------------------------
-    if (-s $XML_I18N_EXTRACT){
-  
-	print "Found xml-i18n-extract script\nRunning $XML_I18N_EXTRACT...\n";
-
+    if (! -s $XML_I18N_EXTRACT)
+    {
+	print "\n *** The xml-i18n-extract script wasn't found!"
+	     ."\n *** Without this xml-i18n-update might not generate correct files.";
+	exit;
+    } 
+    else 
+    {
         open FILE, "<POTFILES.in";
         while (<FILE>) {
 
@@ -270,8 +279,8 @@ sub gen_headers{
    }
 }
 
-sub generate_pot{
-
+sub generate_pot
+{
     # Generate the potfiles from the POTFILES.in file
     #------------------------------------------------
 
@@ -342,8 +351,8 @@ sub generate_pot{
     print "done\n";
 }
 
-sub merging{
-
+sub merging
+{
     if ($ARGV[1]){
         $LANG   = $ARGV[1]; 
     } else {
@@ -354,14 +363,17 @@ sub merging{
         print "Merging $LANG.po with $PACKAGE.pot...";
     }
 
+    &perform_merge($LANG);
+}
+
+sub perform_merge
+{
+    my ($LANG) = @_;
+
     $MERGE="cp $LANG.po $LANG.po.old && msgmerge $LANG.po.old $PACKAGE.pot -o $LANG.po";
 
     system($MERGE);
     
-    if ($ARGV[0] ne "--dist" && $ARGV[0] ne "-D") {
-        print "\n\n";
-    }
-
     # Remove the "messages" trash file generated
     # by gettext, aswell as the backup file
     #-------------------------------------------
@@ -369,27 +381,63 @@ sub merging{
     unlink "$LANG.po.old";
 }
 
-sub not_existing{
-
-    # Report error if supplied language 
-    # file is non-existant
-    #----------------------------------
+sub not_existing
+{
+    # Report error if supplied language file is non-existing
+    #-------------------------------------------------------
     print "${PROGRAM}:  sorry, $LANG.po does not exist!\n";
     print "Try `${PROGRAM} --help' for more information.\n";    
     exit;
 }
 
-sub status{
+sub gather_po_files 
+{
+    my @po_files = glob("./*.po");
 
-    # Print status information about the po file
-    #-------------------------------------------
-    $STATUS="msgfmt --statistics $LANG.po";
+    @languages = map (&po_file2lang, @po_files);
+
+    foreach my $lang (@languages) {
+	$po_files_by_lang{$lang} = shift (@po_files);
+    }
+}
+
+sub po_file2lang 
+{ 
+    my $tmp = $_; 
+    $tmp =~ s/^.*\/(.*)\.po$/$1/; 
+    return $tmp; 
+}
+
+sub status 
+{
+    $exec_status="msgfmt --statistics $LANG.po";
     
-    system($STATUS);
+    system($exec_status);
     print "\n";   
 }
 
-sub find_package_name {
+sub show_status 
+{
+    &gen_headers;
+    &generate_pot;
+    &gather_po_files;
+
+    foreach my $lang (@languages){
+	print "$lang: ";
+	&perform_merge($lang);
+    }
+  
+    print "\n\n << Status table for $PACKAGE >>\n\n";
+
+    foreach my $lang (@languages){
+        print "$lang: ";
+	$exec_status="msgfmt --statistics $lang.po";
+	system($exec_status);
+    }  
+}    
+
+sub find_package_name 
+{
     my $base_dirname = `pwd`;
     $base_dirname =~ s%.*/%%;
     chomp $base_dirname;
