@@ -1,3 +1,6 @@
+* Add new INTLTOOL_XML_NOMERGE_RULE for translating XML files without
+  merging the translations back into the output XML file
+  -- bug #155842 (Rodney Dawes)
 * Fix new Makefile.in.in stuff to work with automake 1.4
   -- bug #157298 (Rodney Dawes)
 * Update I18N-HOWTO for the changes to use our own Makefile.in.in
