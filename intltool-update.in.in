@@ -142,14 +142,14 @@ sub maintain{
     # Check if we should ignore some found files, when 
     # comparing with POTFILES.in
     #-------------------------------------------------
-    if (-s ".potignore"){
-        open FILE, ".potignore";
+    if (-s "POTFILES.skip"){
+        open FILE, "POTFILES.skip";
         while (<FILE>) {
             if ($_=~/^[^#]/o){
                 push @buf_potfiles_ignore, $_;
             }
         }
-        print "Found .potignore: Ignoring files...\n";
+        print "Found POTFILES.skip: Ignoring files...\n";
         @buf_potfiles = (@buf_potfiles_ignore, @buf_potfiles);
     }
 
@@ -197,7 +197,7 @@ sub maintain{
         print OUT @result;
         print "\nHere is the result:\n\n", @result, "\n";
         print "The file \"missing\" has been placed in the current directory.\n";
-        print "Files supposed to be ignored should be placed in \".potignore\"\n";
+        print "Files supposed to be ignored should be placed in \"POTFILES.skip\"\n";
     }
 
     # If there is nothing to complain about, notice the user
