@@ -1,3 +1,7 @@
+2001-01-05  Jody Goldberg <jgoldberg@home.com>
+
+	* xml-i18n-tools.m4 : s/top_builddir/top_srcdir/
+
 2001-01-06  Kenneth Christiansen <kenneth@gnu.org>
 
         * update.sh: Applied patch from Christian Rose.

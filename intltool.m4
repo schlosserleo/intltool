@@ -26,13 +26,13 @@ AC_DEFUN(AC_PROG_XML_I18N_TOOLS,
 [
 # Always use our own xml-i18n-tools.
 
-XML_I18N_EXTRACT='$(top_builddir)/xml-i18n-extract'
+XML_I18N_EXTRACT='$(top_srcdir)/xml-i18n-extract'
 AC_SUBST(XML_I18N_EXTRACT)dnl
 
-XML_I18N_MERGE='$(top_builddir)/xml-i18n-merge'
+XML_I18N_MERGE='$(top_srcdir)/xml-i18n-merge'
 AC_SUBST(XML_I18N_MERGE)dnl
 
-XML_I18N_UPDATE='$(top_builddir)/xml-i18n-update'
+XML_I18N_UPDATE='$(top_srcdir)/xml-i18n-update'
 AC_SUBST(XML_I18N_UPDATE)dnl
 
 dnl This is a hack - we use the expansion of AC_SUBST instead of
@@ -40,7 +40,7 @@ dnl AC_SUBST itself to avoid automake putting
 dnl XML_I18N_MERGE_OAF_RULE = @XML_I18N_MERGE_OAF_RULE@
 dnl in all the Makefile.in's
 XML_I18N_MERGE_OAF_RULE='\%.oaf : \%.oaf.in $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -o $(top_srcdir)/po $< [$]*.oaf'
+	$(top_srcdir)/xml-i18n-merge -o $(top_srcdir)/po $< [$]*.oaf'
 AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
 s%@XML_I18N_MERGE_OAF_RULE@%[$]XML_I18N_MERGE_OAF_RULE%g
 AC_DIVERT_POP()dnl
