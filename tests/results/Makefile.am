@@ -3,4 +3,7 @@ EXTRA_DIST =					\
 	extract2.keyprop.h			\
 	extract3.xml.in.h			\
 	merge1.xml				\
-	merge4.xml
+	merge4.xml				\
+	merge5p.sheet				\
+	merge5u.sheet				\
+	merge6.xml		

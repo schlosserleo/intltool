@@ -1,3 +1,11 @@
+Version XXX
+
+XXX unfinished 
+* Generates UTF-8 or (as previously) broken XML files. Please read the
+README for more information -- grep for XML_KIND (Cyrille Chepelov)
+* Support for .sheet files (Cyrille Chepelov)
+
+
 Version 0.9
 
 * Self test fixes (Darin)

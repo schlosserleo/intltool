@@ -1,3 +1,45 @@
+2001-08-18  Cyrille Chepelov  <chepelov@calixo.net>
+
+	* xml-i18n-merge.in.in: added two new flags, --pass-through(-p)
+	and --utf8(-u). The former asks for previous XML behaviour, the
+	latter complies better with the XML spec. If neither is asked,
+	xml-i18n-merge.in.in will complain vehemently but do -p.
+
+	* xml-i18n-tools.m4: updated all MERGE_.*_RULE macros to use -p
+	where not sure, -u for _SHEET_RULE, and
+	developer-specificable behaviour for _XML_RULE. Added an optional
+	minimum version parameter (FIXME: how to detect "very old" (up to
+	0.9) xml-i18n-tools ?)
+
+	* NEWS: updated (put a reference to the README)
+	* README: documented the XML_I18N_XML_KIND variable in the XML section.
+	Didn't document .sheet files, given their specificity.
+	
+	* tests/cases/fr.po (REMOVED):
+	* tests/cases/fr_BE.po (NEW):
+	* tests/cases/fr_FR.po (NEW):
+	split into two identical versions, one encoded in UTF-8 and one in
+	ISO-8859-1.
+	* tests/cases/az.po (NEW): UTF-8 encoded Azerbaijani version of
+	the above. AZ is normally not represented using latin1, so this is
+	a valuable test case.
+	
+	* tests/cases/merge5.sheet.in(REMOVED):
+	* tests/cases/merge5u.sheet.in(NEW):
+	* tests/cases/merge5p.sheet.in(NEW):
+	* tests/results/merge5.sheet(REMOVED):
+	* tests/results/merge5u.sheet(NEW):
+	* tests/results/merge5p.sheet(NEW):
+	* tests/cases/merge6.sheet.in(NEW):
+	* tests/cases/merge6.sheet(NEW):
+	* tests/cases/merge6.po(NEW):
+	* selftest.pl.in: updated the test case 7, split into tests 7u and
+	7p, to check for both --pass-through and --utf8 behaviours. Test 8
+	added to check for PO string unescaping.
+
+	* tests/cases/Makefile.am:
+	* tests/results/Makefile.am: forgot to update these.
+	
 2001-08-17  Cyrille Chepelov  <chepelov@calixo.net>
 
 	* xml-i18n-update.in.in: Now understands .sheet files (dia) are

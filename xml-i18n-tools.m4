@@ -23,6 +23,7 @@
 
 define([HACK_SUBST], defn([AC_SUBST]))
 
+dnl AC_PROG_XML_I18N_TOOLS([MINIMUM-VERSION])
 # serial 1 AC_PROG_XML_I18N_TOOLS
 AC_DEFUN(AC_PROG_XML_I18N_TOOLS,
 [
@@ -32,42 +33,48 @@ dnl AC_SUBST itself to avoid automake putting
 dnl XML_I18N_MERGE_OAF_RULE = @XML_I18N_MERGE_OAF_RULE@
 dnl in all the Makefile.in's, because that will blow up when substituted.
 XML_I18N_MERGE_OAF_RULE='\%.oaf : \%.oaf.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -o $(top_srcdir)/po $< [$]*.oaf'
+	$(top_builddir)/xml-i18n-merge -o -p $(top_srcdir)/po $< [$]*.oaf'
 HACK_SUBST(XML_I18N_MERGE_OAF_RULE)
 
 XML_I18N_MERGE_SERVER_RULE='\%.server : \%.server.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -o $(top_srcdir)/po $< [$]*.server'
+	$(top_builddir)/xml-i18n-merge -o -p $(top_srcdir)/po $< [$]*.server'
 HACK_SUBST(XML_I18N_MERGE_SERVER_RULE)
 
 dnl same deal
 XML_I18N_MERGE_KEYS_RULE='\%.keys : \%.keys.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -k $(top_srcdir)/po $< [$]*.keys'
+	$(top_builddir)/xml-i18n-merge -k -p $(top_srcdir)/po $< [$]*.keys'
 HACK_SUBST(XML_I18N_MERGE_KEYS_RULE)
 
 dnl same deal
 XML_I18N_MERGE_DESKTOP_RULE='\%.desktop : \%.desktop.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< [$]*.desktop'
+	$(top_builddir)/xml-i18n-merge -d -p $(top_srcdir)/po $< [$]*.desktop'
 HACK_SUBST(XML_I18N_MERGE_DESKTOP_RULE)
 
 dnl same deal
 XML_I18N_MERGE_DIRECTORY_RULE='\%.directory : \%.directory.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< [$]*.directory'
+	$(top_builddir)/xml-i18n-merge -d -p $(top_srcdir)/po $< [$]*.directory'
 HACK_SUBST(XML_I18N_MERGE_DIRECTORY_RULE)
 
 dnl same deal
 XML_I18N_MERGE_SOUNDLIST_RULE='\%.soundlist : \%.soundlist.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< [$]*.soundlist'
+	$(top_builddir)/xml-i18n-merge -d -p $(top_srcdir)/po $< [$]*.soundlist'
 HACK_SUBST(XML_I18N_MERGE_SOUNDLIST_RULE)
 
 dnl same deal
 XML_I18N_MERGE_PONG_RULE='\%.pong : \%.pong.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -x $(top_srcdir)/po $< [$]*.pong'
+	$(top_builddir)/xml-i18n-merge -x -p $(top_srcdir)/po $< [$]*.pong'
 HACK_SUBST(XML_I18N_MERGE_PONG_RULE)
 
 dnl same deal
 XML_I18N_MERGE_XML_RULE='\%.xml : \%.xml.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -x $(top_srcdir)/po $< [$]*.xml'
+	$(top_builddir)/xml-i18n-merge -x $(XML_I18N_XML_KIND) $(top_srcdir)/po $< [$]*.xml'
 HACK_SUBST(XML_I18N_MERGE_XML_RULE)
+
+dnl same deal
+XML_I18N_MERGE_SHEET_RULE='\%.sheet : \%.sheet.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
+	$(top_builddir)/xml-i18n-merge -x -u $(top_srcdir)/po $< [$]*.sheet'
+HACK_SUBST(XML_I18N_MERGE_SHEET_RULE)
+
 
 # Always use our own xml-i18n-tools.
 XML_I18N_EXTRACT='$(top_builddir)/xml-i18n-extract'
@@ -102,6 +109,18 @@ sed -e "s:@XML_I18N_TOOLS_PERL@:${XML_I18N_TOOLS_PERL}:;" < ${srcdir}/xml-i18n-u
 chmod ugo+x xml-i18n-update;
 chmod u+w xml-i18n-update;
 ], XML_I18N_TOOLS_PERL=${XML_I18N_TOOLS_PERL})
+
+#check the version of XML_18N_TOOLS used
+min_x18t_version_s=ifelse([$1], ,0.9,$1)
+AC_MSG_CHECKING(for xml-i18n-tools >= $min_x18t_version_s)
+min_x18t_version=`echo $min_x18t_version_s |awk 'BEGIN {FS=".";} {printf "%d", ([$]1 * 1000 + [$]2) * 1000 + [$]3;}'`
+x18t_version=`./xml-i18n-merge --version | head -1 | sed -e "s/.*)//" | awk 'BEGIN {FS=".";} {printf "%d", ([$]1 * 1000 + [$]2) * 1000 + [$]3;}'`
+if test "$x18t_version" -ge "$min_x18t_version"; then
+   AC_MSG_RESULT(found)
+else
+   AC_MSG_ERROR(you need to autogen with xml-i18n-tools >= $min_x18t_version_s
+for this version of $PACKAGE.)     
+fi
 
 # Redirect the config.log output again, so that the ltconfig log is not
 # clobbered by the next message.
