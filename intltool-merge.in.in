@@ -849,7 +849,7 @@ sub readXml
         die "ERROR Cannot find filename: $filename\n";
     }
 
-    my $xp = new XML::Parser(Style => 'XML::Parser::Style::Tree');
+    my $xp = new XML::Parser(Style => 'Tree');
     my $tree = $xp->parsefile($filename);
 
 # <foo><head id="a">Hello <em>there</em></head><bar>Howdy<ref/></bar>do</foo>
