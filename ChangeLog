@@ -1,5 +1,18 @@
 2003-03-11  Kenneth Christiansen <kenneth@gnu.org>
 
+	* tests/selftest.pl.in: Cleaned up a bit.
+
+2003-03-11  Denis Barbier  <barbier@linuxfr.org>
+
+	* intltool-extract.in.in:
+	* intltool-merge.in.in:
+	* intltool-update.in.in: Send error messages to stderr instead of
+	  stdout.  Fix some buglets related to --quiet/--verbose flags.
+
+	Fixes bug #105013
+
+2003-03-11  Kenneth Christiansen <kenneth@gnu.org>
+
 	* intltool.m4: fixed bug #98988
 
 2003-03-04  James Henstridge  <james@daa.com.au>

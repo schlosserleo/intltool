@@ -147,12 +147,12 @@ sub help{
 
 ## Sub for printing error messages
 sub error{
-    print "Try `${PROGRAM} --help' for more information.\n";
+    print STDERR "Try `${PROGRAM} --help' for more information.\n";
     exit;
 }
 
 sub message {
-    print "Generating C format header file for translation.\n";
+    print "Generating C format header file for translation.\n" unless $QUIET_ARG;
 }
 
 sub extract {

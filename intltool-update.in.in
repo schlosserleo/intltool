@@ -194,7 +194,7 @@ sub main
     ## to the command line is non-existent
     &print_error_not_existing("$lang.po") if ! -s "$lang.po";
 
-    print "Working, please wait..." unless $VERBOSE;
+    print "Working, please wait..." if $VERBOSE;
     &generate_headers;
     &generate_po_template;
     &update_po_file ($lang, $output_file);
@@ -431,24 +431,24 @@ sub find_leftout_files
 	print "\n" if $VERBOSE;
         open OUT, ">missing";
         print OUT @result;
-        print "The following files contain translations and are currently not in use. Please\n";
-	print "consider adding these to the POTFILES.in file, located in the po/ directory.\n\n";
-	print @result, "\n";
-	print "If some of these files are left out on purpose then please add them to\n";
-	print "POTFILES.skip instead of POTFILES.in. A file 'missing' containing this list\n";
-        print "of left out files has been written in the current directory.\n";
+        print STDERR "The following files contain translations and are currently not in use. Please\n";
+	print STDERR "consider adding these to the POTFILES.in file, located in the po/ directory.\n\n";
+	print STDERR @result, "\n";
+	print STDERR "If some of these files are left out on purpose then please add them to\n";
+	print STDERR "POTFILES.skip instead of POTFILES.in. A file 'missing' containing this list\n";
+        print STDERR "of left out files has been written in the current directory.\n";
     }
 
     ## If there is nothing to complain about, notify the user
     else {
-        print "\nAll files containing translations are present in POTFILES.in.\n";
+        print "\nAll files containing translations are present in POTFILES.in.\n" if $VERBOSE;
     }
 }
 
 sub print_error_invalid_option
 {
     ## Handle invalid arguments
-    print "Try `${PROGRAM} --help' for more information.\n";
+    print STDERR "Try `${PROGRAM} --help' for more information.\n";
     exit 1;
 }
 
@@ -463,7 +463,7 @@ sub generate_headers
     ## xml translation support
     if (! -s $EXTRACT)
     {
-	print "\n *** The intltool-extract script wasn't found!"
+	print STDERR "\n *** The intltool-extract script wasn't found!"
 	     ."\n *** Without it, intltool-update can not generate files.\n";
 	exit;
     }
@@ -554,9 +554,9 @@ sub generate_po_template
     print "done\n" if $VERBOSE;
 
     if (!-e "$MODULE.po") 
-{
-        print "WARNING: It seems that none of the files in POTFILES.in ".
-              "contain marked strings\n";
+    {
+        print STDERR "WARNING: It seems that none of the files in POTFILES.in ".
+              	     "contain marked strings\n";
         exit (1);
     }
 
@@ -602,8 +602,8 @@ sub print_error_not_existing
     my ($file) = @_;
 
     ## Report error if supplied language file is non-existing
-    print "$PROGRAM: $file does not exist!\n";
-    print "Try '$PROGRAM --help' for more information.\n";
+    print STDERR "$PROGRAM: $file does not exist!\n";
+    print STDERR "Try '$PROGRAM --help' for more information.\n";
     exit;
 }
 
@@ -731,8 +731,8 @@ sub open_CONF_handle
     }
     else
     {
-	print "$PROGRAM: Unable to proceed.\n" .
-	      "Make sure to run this script inside the po directory.\n";
+	print STDERR "$PROGRAM: Unable to proceed.\n" .
+	             "Make sure to run this script inside the po directory.\n";
 	exit;
     }
 }
