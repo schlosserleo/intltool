@@ -1,3 +1,9 @@
+2001-01-15  Darin Adler  <darin@eazel.com>
+
+	* xml-i18n-tools.spec.in: Add the installed scripts
+	so the RPM version also installs them. Maciej missed
+	this when doing his fix for 5454.
+
 2001-01-15  Kenneth Christiansen <kenneth@gnu.org>
 
         * xml-i18n-update.in: Rewrote maintain section.
