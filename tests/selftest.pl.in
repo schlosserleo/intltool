@@ -197,4 +197,9 @@ $case = "test.scm";
 system("$INTLTOOL_EXTRACT --type=gettext/scheme --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
+print "22. Merge into file with CDATA sections:                             ";
+$case = "merge-cdata.xml";
+system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
+check_merge_result($case);
+
 exit $failed;

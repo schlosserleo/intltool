@@ -720,7 +720,7 @@ sub traverse
                     return; # this means there will be no same translation with xml:lang="$language"...
                             # if we want them both, just remove this "return"
                 } else {
-                    print $fh ">$lookup</$nodename>";
+                    print $fh ">", $lookup, "</$nodename>";
                 }
 	    } else {
 		print $fh "/>";
@@ -770,6 +770,24 @@ sub traverse
 	    }
 	}
     }
+}
+
+sub intltool_tree_cdatastart
+{
+    my $expat    = shift;
+    my $clist = $expat->{Curlist};
+    my $pos   = $#$clist;
+
+    push @$clist, 0 => $expat->original_string();
+}
+
+sub intltool_tree_cdataend
+{
+    my $expat    = shift;
+    my $clist = $expat->{Curlist};
+    my $pos   = $#$clist;
+
+    $clist->[$pos] .= $expat->original_string();
 }
 
 sub intltool_tree_char
@@ -850,6 +868,8 @@ sub readXml
     my $xp = new XML::Parser(Style => 'Tree');
     $xp->setHandlers(Char => \&intltool_tree_char);
     $xp->setHandlers(Start => \&intltool_tree_start);
+    $xp->setHandlers(CdataStart => \&intltool_tree_cdatastart);
+    $xp->setHandlers(CdataEnd => \&intltool_tree_cdataend);
     my $tree = $xp->parsefile($filename);
 
 # <foo><head id="a">Hello <em>there</em></head><bar>Howdy<ref/></bar>do</foo>

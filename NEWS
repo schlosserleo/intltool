@@ -1,3 +1,6 @@
+* Support CDATA sections in XML files
+  -- bug #157718 (Danilo Segan, Rodney Dawes)
+
 Version 0.32.1
 
 * Deprecate --pass-through option, default to UTF-8 for anything

@@ -1,3 +1,20 @@
+2004-11-12  Danilo Šegan  <dsegan@gmx.net>
+
+	Fixes bug #157718.
+
+	* NEWS: Document changes.
+
+	* intltool-merge.in.in (intltool_tree_cdatastart): Added.
+	(intltool_tree_cdataend): Added.
+	(traverse): Simple style fix.
+	(readXml): Set CDATA handlers.
+
+	* tests/selftest.pl.in: Add test 22 to test CDATA merging.
+	* tests/results/Makefile.am (EXTRA_DIST): Add merge-cdata.xml, sorted.
+	* tests/cases/Makefile.am (EXTRA_DIST): Add merge-cdata.xml.in, sorted.
+	* tests/results/merge-cdata.xml: Added.
+	* tests/cases/merge-cdata.xml.in: Added.
+
 2004-11-06  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS:
