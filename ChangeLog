@@ -9,6 +9,14 @@
 
 	* tests/cases/merge6.(xml.in|po):
 	* tests/results/merge6.xml: included more tests on escapes.
+
+	* xml-i18n-tools.m4: Added a second, optional parameter. If this
+	is equal to G2 (as in "GNOME 2.0 or better"), then there is no
+	variable behaviour based on the value of $XML_I18N_XML_KIND or
+	_KEYS_KIND. All _MERGE_.*_RULEs have been marked as using -p for
+	G1, -u for G2 if nothing better was known. (OAF is -p only)
+	* NEWS:
+	* README: documented the above capability.
 	
 2001-08-18  Cyrille Chepelov  <chepelov@calixo.net>
 

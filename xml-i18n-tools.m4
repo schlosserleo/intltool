@@ -23,10 +23,18 @@
 
 define([HACK_SUBST], defn([AC_SUBST]))
 
-dnl AC_PROG_XML_I18N_TOOLS([MINIMUM-VERSION])
+AC_DEFUN(XML_I18N_TOOLS_NEWER_THAN_0_9,[ true ])
+
+dnl AC_PROG_XML_I18N_TOOLS([MINIMUM-VERSION [,"G2" if always using --utf8] ])
 # serial 1 AC_PROG_XML_I18N_TOOLS
 AC_DEFUN(AC_PROG_XML_I18N_TOOLS,
 [
+  AC_DEFUN(X18T_PFORG1,  dnl and -u for G2
+        ifelse([$2],[G2],[ -u ], [ -p ]))
+  AC_DEFUN(X18T_XML_KIND, 
+        ifelse([$2],[G2],[ -u ],[ $(XML_I18N_XML_KIND) ]))
+  AC_DEFUN(X18T_KEYS_KIND, 
+        ifelse([$2],[G2],[ -u ],[ $(XML_I18N_KEYS_KIND) ]))
 
 dnl This is a hack - we use the expansion of AC_SUBST instead of
 dnl AC_SUBST itself to avoid automake putting 
@@ -42,31 +50,31 @@ HACK_SUBST(XML_I18N_MERGE_SERVER_RULE)
 
 dnl same deal
 XML_I18N_MERGE_KEYS_RULE='\%.keys : \%.keys.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -k $(XML_I18N_KEYS_KIND) $(top_srcdir)/po $< [$]*.keys'
+	$(top_builddir)/xml-i18n-merge -k X18T_KEYS_KIND $(top_srcdir)/po $< [$]*.keys'
 HACK_SUBST(XML_I18N_MERGE_KEYS_RULE)
 dnl same deal
 XML_I18N_MERGE_DESKTOP_RULE='\%.desktop : \%.desktop.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -d -p $(top_srcdir)/po $< [$]*.desktop'
+	$(top_builddir)/xml-i18n-merge -d X18T_PFORG1 $(top_srcdir)/po $< [$]*.desktop'
 HACK_SUBST(XML_I18N_MERGE_DESKTOP_RULE)
 
 dnl same deal
 XML_I18N_MERGE_DIRECTORY_RULE='\%.directory : \%.directory.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -d -p $(top_srcdir)/po $< [$]*.directory'
+	$(top_builddir)/xml-i18n-merge -d X18T_PFORG1 $(top_srcdir)/po $< [$]*.directory'
 HACK_SUBST(XML_I18N_MERGE_DIRECTORY_RULE)
 
 dnl same deal
 XML_I18N_MERGE_SOUNDLIST_RULE='\%.soundlist : \%.soundlist.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -d -p $(top_srcdir)/po $< [$]*.soundlist'
+	$(top_builddir)/xml-i18n-merge -d X18T_PFORG1 $(top_srcdir)/po $< [$]*.soundlist'
 HACK_SUBST(XML_I18N_MERGE_SOUNDLIST_RULE)
 
 dnl same deal
 XML_I18N_MERGE_PONG_RULE='\%.pong : \%.pong.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -x -p $(top_srcdir)/po $< [$]*.pong'
+	$(top_builddir)/xml-i18n-merge -x X18T_PFORG1 $(top_srcdir)/po $< [$]*.pong'
 HACK_SUBST(XML_I18N_MERGE_PONG_RULE)
 
 dnl same deal
 XML_I18N_MERGE_XML_RULE='\%.xml : \%.xml.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
-	$(top_builddir)/xml-i18n-merge -x $(XML_I18N_XML_KIND) $(top_srcdir)/po $< [$]*.xml'
+	$(top_builddir)/xml-i18n-merge -x X18T_XML_KIND $(top_srcdir)/po $< [$]*.xml'
 HACK_SUBST(XML_I18N_MERGE_XML_RULE)
 
 dnl same deal

@@ -36,7 +36,7 @@ To use xml-i18n-tools in your module, do the following:
 
  o Add this line to configure.in near the top
 
-	AM_PROG_XML_I18N_TOOLS
+	AC_PROG_XML_I18N_TOOLS([minimum required version],[ G2 | <blank> ])
 
  o Add xml-i18n-extract.in, xml-i18n-merge.in and xml-i18n-update.in
    to EXTRA_DIST in your top-level Makefile.am and also to the
@@ -54,6 +54,23 @@ try to extract translations from existing .desktop files which will
 become obsolete after xml-i18n-toolization has taken place.
 
 Examples are listed in the USED file.
+
+Details of the AC_PROG_XML_I18N_TOOLS macro
+-------------------------------------------
+
+The first parameter indicates the minimum required version. The
+configure script will halt if the version is newer than 0.9 but older
+than the parameter.
+
+Versions 0.9 and older can be detected through the following line:
+    XML_I18N_TOOLS_NEWER_THAN_0_9 || AC_MSG_ERROR(unsatisfied dependency)
+
+The second parameter is either [G2] (without brackets), or blank. If
+left blank, this indicates that compatible behavior is required. Some
+file types can be generated either as UTF-8 or mixed encoding;
+without [G2], this can be controlled through Makefile.am variables. If
+[G2] is specified, all files will be generated as UTF-8 files, with no
+need for explicit variable settings.
 
 
 Extra Steps for DESKTOP Files
@@ -187,10 +204,13 @@ to the encodings used. A single "XML" file could thus have strings in
 different encodings. This broken behavior can be asked for by setting
 XML_UTF8_XML_KIND=--pass-through in the above snippet.
 
-
+Setting the XML_UTF8_XML_KIND has no effect if the string [G2] has
+been given as the second parameter of the AC_PROG_XML_I18N_TOOLS
+macro. In that case, --utf8 is always assumed.
 
 ---
 
 XXX: add section for KEYS files. Works almost like XML files .
 The XML_UTF8_KEYS_KIND Makefile.am variable controls the kind of files
-output (--pass-through for GNOME1, --utf8 for GNOME2).
+output (--pass-through for GNOME1, --utf8 for GNOME2), and is
+overriden as --utf8 if [G2] has been specified.
