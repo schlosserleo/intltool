@@ -1,5 +1,10 @@
 2001-01-09  Kenneth Christiansen <kenneth@gnu.org>
 
+        * xml-i18n-update.in: New indent, more like GNU
+        coding style. Upped code a little.
+
+2001-01-09  Kenneth Christiansen <kenneth@gnu.org>
+
         * xml-i18n-extract.in: New indent, more like GNU
 	coding style. Upped code a little.
 

@@ -21,7 +21,7 @@ my $_PACKAGE = "@PACKAGE@";
 
 my $LANG    = $ARGV[0];
 
-my $PACKAGE = &FindPackageName;
+my $PACKAGE = &find_package_name;
 
 # Always print as the first thing
 #--------------------------------
@@ -40,14 +40,14 @@ if (! $LANG){
 if ($LANG=~/^-(.)*/){
 
     if ("$LANG" eq "--version"   || "$LANG" eq "-V"){
-        &Version;
+        &version;
     }
     elsif ($LANG eq "--help"     || "$LANG" eq "-H"){
-	&Help;
+	&help;
     }
     elsif ($LANG eq "--dist"     || "$LANG" eq "-D"){
-        &Merging;
-	&Status;
+        &merging;
+	&status;
     }
     elsif ($LANG eq "--pot"      || "$LANG" eq "-P"){
 
@@ -55,21 +55,21 @@ if ($LANG=~/^-(.)*/){
         # will not generate the header files twise 
 	#--------------------------------------------
 	if (-e ".headerlock"){
-   	&GeneratePot;
+   	&generate_pot;
 	}else{
-        &GenHeaders;
-	&GeneratePot;}
+        &gen_headers;
+	&generate_pot;}
         exit;
     }
     elsif ($LANG eq "--headers"  || "$LANG" eq "-S"){
-        &GenHeaders;
+        &gen_headers;
         exit;
     }
     elsif ($LANG eq "--maintain" || "$LANG" eq "-M"){
-        &Maintain;
+        &maintain;
     }
     else {
-        &InvalidOption;
+        &invalid_option;
     }
 
 } else {
@@ -77,21 +77,21 @@ if ($LANG=~/^-(.)*/){
    # Run standard procedure
    #-----------------------
    if(-s "$LANG.po"){
-        &GenHeaders; 
-	&GeneratePot;
-	&Merging;
-	&Status;
+        &gen_headers; 
+	&generate_pot;
+	&merging;
+	&status;
    }  
 
    # Report error if the language file supplied
    # to the command line is non-existent
    #-------------------------------------------
    else {
-	&NotExisting;       
+	&not_existing;       
    }
 }
 
-sub Version{
+sub version{
 
     # Print version information
     #--------------------------
@@ -103,7 +103,7 @@ sub Version{
     exit;
 }
 
-sub Help{
+sub help{
 
     # Print usage information
     #------------------------
@@ -121,7 +121,7 @@ sub Help{
     exit;
 }
 
-sub Maintain{
+sub maintain{
    
     # Search and fine, all translatable files
     # ---------------------------------------
@@ -193,7 +193,7 @@ sub Maintain{
     }         
 }
 
-sub InvalidOption{
+sub invalid_option{
 
     # Handle invalid arguments
     #-------------------------
@@ -201,7 +201,7 @@ sub InvalidOption{
     print "Try `${PROGRAM} --help' for more information.\n";
 }
  
-sub GenHeaders{
+sub gen_headers{
     my $XML_I18N_EXTRACT = `which xml-i18n-extract 2>/dev/null`;
     chomp $XML_I18N_EXTRACT;
  
@@ -256,7 +256,7 @@ sub GenHeaders{
    }
 }
 
-sub GeneratePot{
+sub generate_pot{
 
     # Generate the potfiles from the POTFILES.in file
     #------------------------------------------------
@@ -328,7 +328,7 @@ sub GeneratePot{
     print "done\n";
 }
 
-sub Merging{
+sub merging{
 
     if ($ARGV[1]){
         $LANG   = $ARGV[1]; 
@@ -355,7 +355,7 @@ sub Merging{
     unlink "$LANG.po.old";
 }
 
-sub NotExisting{
+sub not_existing{
 
     # Report error if supplied language 
     # file is non-existant
@@ -365,7 +365,7 @@ sub NotExisting{
     exit;
 }
 
-sub Status{
+sub status{
 
     # Print status information about the po file
     #-------------------------------------------
@@ -375,9 +375,7 @@ sub Status{
     print "\n";   
 }
 
-
-
-sub FindPackageName {
+sub find_package_name {
     my $base_dirname = `pwd`;
     $base_dirname =~ s%.*/%%;
     chomp $base_dirname;
@@ -416,4 +414,3 @@ sub FindPackageName {
 	  "Make sure to run this script inside the po directory.\n";
     exit;
 }
-
