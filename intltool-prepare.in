@@ -43,7 +43,7 @@ my $file;
 
 my $desktop_extension = "(desktop|soundlist|keys|directory)";
 
-my $keywords = "Name|Comment|description";
+my $keywords = "Name|Comment|GenericName|SwallowTitle|description";
 
 ## Always print as the first thing
 $| = 1;

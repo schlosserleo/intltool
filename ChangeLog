@@ -1,3 +1,7 @@
+2004-01-06  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* intltool-prepare.in: Fix bug #129793
+
 2004-01-06  Morten Welinder  <terra@gnome.org>
 
 	* intltool.m4: Fix broken shell syntax.
