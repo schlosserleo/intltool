@@ -1,4 +1,4 @@
-## intltool.m4 - Configure intltool for the target system. -*-Shell-script-*-
+ll## intltool.m4 - Configure intltool for the target system. -*-Shell-script-*-
 ## Copyright (C) 2001 Eazel, Inc.
 ## Author: Maciej Stachowiak <mjs@noisehavoc.org>
 ##         Kenneth Christiansen <kenneth@gnu.org>
@@ -131,7 +131,9 @@ fi
 chmod ugo+x intltool-extract
 chmod u+w intltool-extract
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/intltool-merge.in > intltool-merge.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" \
+    -e "s:@INTLTOOL_PERL_MODULE_PATH@:$(datadir)/intltool:;" \
+    < ${srcdir}/intltool-merge.in > intltool-merge.out
 if cmp -s intltool-merge intltool-merge.out 2>/dev/null; then
   rm -f intltool-merge.out
 else
