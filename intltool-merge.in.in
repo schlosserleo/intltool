@@ -223,9 +223,6 @@ sub get_local_charset
 
         close CHARSET_ALIAS;
     }
-    else {
-        print "Warning: file $alias_file not found\n";
-    }
 
     # if not found, return input string
 
