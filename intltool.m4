@@ -95,8 +95,7 @@ fi
 if test -z "`$INTLTOOL_PERL -v | fgrep '5.' 2> /dev/null`"; then
    AC_MSG_ERROR([perl 5.x required for intltool])
 fi
-if `perl -e "require XML::Parser" 2>/dev/null`; then
-else
+if  ! `perl -e "require XML::Parser" 2>/dev/null`; then
    AC_MSG_ERROR([XML::Parser perl module is required for intltool])
 fi
 
