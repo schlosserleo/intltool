@@ -1,0 +1,35 @@
+2001-01-03  Maciej Stachowiak  <mjs@eazel.com>
+
+	Initial checkin of xml-i18n system.
+	
+	* .cvsignore: Files to ignore.
+	* AUTHORS: Add me and Kenny.
+	* COPYING: The GPL
+	* INSTALL: Install instructions
+	* Makefile.am: Makefile.
+	* autogen.sh: the usual.
+	* configure.in: Generate generated files.
+
+	* xml-i18n-toolize.in: Used to generate xml-i18n-toolize, a
+	program like libtoolize that makes your module use xml-i18n-tools.
+
+	* xml-i18n-extract.in: Used to generate xml-i18n-extract; based on
+	Kenneth Christiansen's ui-extract.pl. This script knows how to
+	extract translations from -ui.xml, nautilus theme, .glad and
+	.oaf.in files.
+
+	* xml-i18n-update.in: Used to generate
+	xml-i18n-update. This translation update script is based on based on
+	Kenneth Christiansen's update.pl
+
+	* xml-i18n-merge.in: Used to generate xml-i18n-merge, an XML
+	translation merge script (only works for .oaf files so far).
+	
+	* xml-i18n-tools.Makefile.patch: Patch for po/Makefile.in.in,
+	automatically applied after xml-18n-toolize
+	
+	* xml-i18n-tools.m4: M4 macro file that defines AM_PROG_XML_I18N_TOOLS
+
+
+
+	
