@@ -21,6 +21,9 @@ the following:
  o  Add this line to configure.in near the top
  
     AM_PROG_XML_I18N_TOOLS
+
+ o  Make sure you add xml-i18n-extract, xml-i18n-merge and
+    xml-i18n-update to EXTRA_DIST in your top-level Makefile.am
  
  o  Add the .xml and .glade files you want translated to POTFILES.in
  
@@ -30,7 +33,8 @@ extracted to the .po files.
 To get oaf translation extraction and merging requires a few more steps:
 
  o Rename your .oafinfo file to .oaf.in and put an underscore before
-   every value property for string attributes
+   every value property for string attributes that should be
+   localized.
 
  o Add the .oaf.in files to POTFILES.in
 
@@ -46,7 +50,7 @@ To get oaf translation extraction and merging requires a few more steps:
  
  @XML_I18N_MERGE_OAF_RULE@
  
- EXTRA_DIST=$(oaf_in_files) $(oafinfo_DATA)
+ EXTRA_DIST=$(oaf_in_files) $(oaf_DATA)
  
 --- end ----
  
@@ -58,3 +62,5 @@ naming convention, with namespacing, for example:
 nautilus.oafinfo --> Nautilus_shell.oaf.in
  
 nautilus-rpm-view.oafinfo --> Nautilus_View_rpm.oaf.in
+
+

@@ -20,7 +20,8 @@ my $VERSION = "@VERSION@";
 my $_PACKAGE = "@PACKAGE@";
 
 my $LANG    = $ARGV[0];
-my $PACKAGE = $ENV{"PACKAGE"};
+
+my $PACKAGE = &FindPackageName;
 
 # Always print as the first thing
 #--------------------------------
@@ -46,6 +47,7 @@ if ($LANG=~/^-(.)*/){
     }
     elsif ($LANG eq "--dist"     || "$LANG" eq "-D"){
         &Merging;
+	&Status;
     }
     elsif ($LANG eq "--pot"      || "$LANG" eq "-P"){
 
@@ -373,3 +375,22 @@ sub Status{
     system($STATUS);
     print "\n";   
 }
+
+
+
+sub FindPackageName {
+    $base_dirname = `pwd`;
+    $base_dirname =~ s%.*/%%;
+    chomp $base_dirname;
+
+    if ($base_dirname eq "po" && -f "../configure.in") {
+	$package_name = `grep AM_INIT_AUTOMAKE ../configure.in`;
+	chomp $package_name;
+	$package_name =~ s/AM_INIT_AUTOMAKE\(([^,]*),.*/$1/;
+	return $package_name;
+    }
+    
+    die "$PROGRAM: Unable to determine package name.\n" .  
+	"Make sure to run this script inside the po directory.";
+}
+

@@ -1,3 +1,12 @@
+2001-01-05  Maciej Stachowiak  <mjs@eazel.com>
+
+	* README: Some fixes suggested by Darin.
+	* xml-i18n-tools.Makefile.patch: Applied changes from Kenneth
+	Christiansen to make things like `make fr' to build a single po
+	file work.
+	* xml-i18n-update.in: Detect PACKAGE automatically by finding
+	configure.in and looking there.
+
 2001-01-05  Jody Goldberg <jgoldberg@home.com>
 
 	* xml-i18n-tools.m4 : s/top_builddir/top_srcdir/
