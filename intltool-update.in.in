@@ -457,6 +457,8 @@ sub generate_po_template
         if (/\.($xml_extension|$ini_extension)$/ || /^\[/) {
             s/^\[.*]\s*//;
             print OUTFILE "$_.h\n";
+        } else {
+            print OUTFILE "$_\n";
         }
     }
     close OUTFILE;

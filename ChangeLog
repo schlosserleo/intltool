@@ -1,8 +1,13 @@
+2002-11-27  Yanko Kaneti  <yaneti@declera.com>
+
+	* intltool-update.in.in: when the line in POTFILES.in is not an xml or
+	ini file, add it as is. Fixes yesterdays fix, ugh.
+
 2002-11-26  Yanko Kaneti  <yaneti@declera.com>
 
 	* intltool-update.in.in: don't generate .h.h lines in the POTFILES.in
-	for xgettext when the input fiel line is from a known type and also has
-	the [type: gettext/..] magic.
+	for xgettext when the input file line is from a known type and also has
+	the [type: gettext/..] hint.
 
 2002-11-25  Glynn Foster  <glynn.foster@sun.com>
 
