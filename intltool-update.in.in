@@ -107,8 +107,8 @@ GetOptions
  "output-file|o=s"     => \$OUTPUT_FILE,
  ) or &Console_WriteError_InvalidOption;
 
-&print_help if $HELP_ARG;
-&print_version if $VERSION_ARG;
+&Console_Write_IntltoolHelp if $HELP_ARG;
+&Console_Write_IntltoolVersion if $VERSION_ARG;
 
 my $arg_count = ($DIST_ARG > 0)
     + ($POT_ARG > 0)
@@ -116,7 +116,7 @@ my $arg_count = ($DIST_ARG > 0)
     + ($MAINTAIN_ARG > 0)
     + ($REPORT_ARG > 0);
 
-&print_help if $arg_count > 1;
+&Console_Write_IntltoolHelp if $arg_count > 1;
 
 # --version and --help don't require a module name
 my $MODULE = $GETTEXT_PACKAGE || &FindPackageName;
