@@ -1,9 +1,18 @@
-Version 0.28
+Version 0.28 
+"...Jeg har aldrig rigtig brudt mig om glögg, det smager lidt ligesom 
+ Sverige lugter (From Jul på Vesterbro)"
+
 
 Brian Cameron fixed a long standing issue in intltool - the migration to a 
-real XML parser -  which means that it now depends on XML::Parser. 
+real XML parser -  which means that it now depends on XML::Parser. Malcolm 
+Tredinnick made sure to fix some of the new bugs introduced by this as well 
+as some other long standing bugs!
 
 Thanks goes to Brian Cameron! and to Sun Microsystem for sponsoring him ;-)
+and thanks goes to Malcolm for picking up Scrollkeeper hacking and keeping 
+an eye on intltool at the same time.
+
+Thanks guys!
 
 * made intltool-merge use XML::Parser (#116526 and others) [Brian Cameron]
 
@@ -12,10 +21,16 @@ Thanks goes to Brian Cameron! and to Sun Microsystem for sponsoring him ;-)
     character to CDATA values.  
   - Corrected the logic of encoding/decoding the string 
     before/after translation.
+  - Added it to build, made it install (Kenneth Christiansen)
+    - Added missing DESTDIR (Abel Cheung)
+    - Also nstall OrigTree.pm in the distribution tree (Malcolm Tredinnick)
+    - Check for the XML::Parser module at build time (Malcolm Tredinnick)
 
 * Added INTLTOOL_KBD_RULE for GOK\s *.kdb files (Bill Haneman)
 * Added --multiple-output option (Kenneth Christiansen)
 * Avoid bashism in xgettext version check. (#120267) (Abel Cheung)
+* Handle standard GNU gettext 0.12 and 0.13 installations (Malcolm Tredinnick)
+* Fix the running of test 18 (multiple output test) (Malcolm Tredinnick)
 
 Version 0.27.2
 

@@ -33,6 +33,14 @@
 
 2003-12-01  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+	* intltool/Makefile.am
+	* intltool/configure.in
+	* intltool/intltool-merge.in.in
+	* intltool/intltool.m4
+
+
+2003-12-01  Kenneth Rohde Christiansen  <kenneth@gnu.org>	
+
 	* intltool-merge.in.in:	
 	* tests/results/merge6.xml:
 	* tests/results/merge7.xml:
