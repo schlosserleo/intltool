@@ -98,5 +98,11 @@ $case = "merge1.xml";
 system("/usr/bin/perl ../xml-i18n-merge -o --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
+print "4. Checking output from simple xml-file:                      ";
+
+$case = "extract3.xml.in";
+system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
+check_result_output($case);
+
 exit $failed;
 
