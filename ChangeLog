@@ -1,5 +1,9 @@
 2001-10-02  Darin Adler  <darin@bentspoon.com>
 
+	* intltool.m4: A bit of cleanup and reorganization.
+
+2001-10-02  Darin Adler  <darin@bentspoon.com>
+
 	* doc/intltool-extract.8:
 	* doc/intltool-merge.8:
 	* doc/intltool-prepare.8:
