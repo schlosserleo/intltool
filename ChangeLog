@@ -1,3 +1,15 @@
+2004-06-14  Danilo Šegan  <dsegan@gmx.net>
+
+	* tests/results/extract7.xml.h: 
+	* tests/cases/merge6.po: 
+	* tests/results/merge6.xml: 
+	Adjust test cases for new behaviour of intltool-merge and intltool-extract.
+
+	* intltool-extract.in.in (type_xml): Remove entity decoding for
+	tag content.
+
+	Complete fix for bug #130802.
+
 2004-06-13  Danilo Šegan  <dsegan@gmx.net>
 
 	* intltool-merge.in.in (getAttributeString): Separate out a
