@@ -44,6 +44,20 @@ sub check_result($)
     }
 }
 
+sub check_result_output($)
+{
+    my $testcase = $_[0];
+    $testcase =~ s/\.in//;
+    my $result =`diff results/$testcase cases/$testcase`;
+
+    if (!$result) {
+        print "[OK]\n"; ## diff was empty, ie. files were equal
+    } else {
+        print "[FAILED]\n";
+    }
+}
+
+
 ## SELFTESTS
 
 ## Welcome notice
@@ -61,8 +75,17 @@ check_result($case);
 
 ## 2. Extract/Simple desktop-like file
 
-print "1. Checking output from simple desktop-like file:             ";
+print "2. Checking output from simple desktop-like file:             ";
 
 $case = "extract2.keyprop";
 `xml-i18n-extract --type=gettext/ini --quiet --update cases/$case`;
 check_result($case);
+
+## 3. Extract/Simple desktop-like file
+
+print "3. Checking output from simple xml-file:                      ";
+
+$case = "merge1.xml";
+`~/share/xml-i18n-tools/xml-i18n-merge -o cases/ cases/$case.in cases/$case`;
+check_result_output($case);
+
