@@ -1,3 +1,8 @@
+2001-01-08  Almer S. Tigelaar  <almer1@dds.nl>
+
+	* autogen.sh: Change message to advise to "make install" as there
+	is nothing to "make".
+
 2001-01-07  Fatih Demir	<kabalak@gmx.net>
 
 	* .cvsignore: Added xml-i18n-tools.spec.
