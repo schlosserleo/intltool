@@ -25,6 +25,7 @@ tests/Makefile
 tests/selftest.pl
 tests/cases/Makefile
 tests/results/Makefile
+doc/Makefile
 xml-i18n-extract.in
 xml-i18n-merge.in
 xml-i18n-prepare

@@ -1,0 +1,72 @@
+.TH XML-I18N-TOOLIZE 8 "September 09, 2001" "xml-i18n-tools"
+
+.SH NAME
+xml-i18n-toolize \- prepare a package to use xml-i18n-tools
+
+.SH SYNOPSIS
+.B "xml-i18n-toolize"
+[
+.BR --automake
+] [
+.BR \-c | --copy
+] [
+.BR --debug
+] [
+.BR \-n | --dry-run
+] [
+.BR \-f | --force
+] [
+.BR \--help
+] [
+.BR \--version
+]
+
+
+.SH DESCRIPTION
+This prepares a package to use xml-i18n-tools by linking or copying
+various files needed by xml-i18n-tools into place for use when building.
+Note that you must change your working directory to the top
+level directory of the package before running
+.B xml-i18n-toolize.
+
+
+.SH OPTIONS
+.TP
+.B \--automake
+Work silently and assume that
+.B automake
+is being used.
+.TP
+.B \-c, \--copy
+Copy files rather than symlinking to them.
+.TP
+.B \--debug
+Enable verbose shell tracing.
+.TP
+.B \-n, \--dry-run
+Print commands rather then executing them.
+.TP
+.B \-f, \--force
+Replace existing files if they exist.
+.TP
+.B \--help
+Show usage and basic help information.
+.TP
+.B \--version
+Show version information.
+
+
+.SH REPORTING BUGS
+Report bugs to http://bugzilla.eazel.com or by sending email
+to kenneth@gnu.org.
+
+.SH AUTHOR
+Darin Adler           <darin@eazel.com>
+.br
+Kenneth Christiansen  <kenneth@gnu.org>
+.br
+Maciej Stachowiak     <mjs@eazel.com>
+
+
+.SH SEE ALSO
+xml-i18n-merge(8), xml-i18n-prepare(8), xml-i18n-extract(8)

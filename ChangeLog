@@ -1,3 +1,10 @@
+2001-09-09  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* doc/*: Added the manpages from intltool. They aren't
+	installed yet because I have only changed /s/intl/xml-i18n-/
+	and they need more work and also the script need more
+	options from intltool. I'm working on it, please be patient.
+	
 2001-09-02  Robin * Slomkowski  <rslomkow@rslomkow.org>
 
 	* tests/cases/Makefile.am: changed extract1.desktop.in
