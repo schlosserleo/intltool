@@ -69,6 +69,10 @@ my @languages;
 my %po_files_by_lang = ();
 my %translations = ();
 
+# Use this instead of \w for XML files to handle more possible characters.
+my $w = "[-A-Za-z0-9._:]";
+
+
 &split_on_argument;
 
 
@@ -290,18 +294,18 @@ sub oaf_merge_translations
 
     open OUTPUT, ">$OUTFILE";
 
-    while ($xml_source =~ /[ \t]*<[^<]*\s_\w+="[^"]*"[^<]*>/m) {
+    while ($xml_source =~ /[ \t]*<[^<]*\s_$w+="[^"]*"[^<]*>/m) {
         print OUTPUT $`;
         my $orig_node = $&;
 	$xml_source = $';
 
         my $non_translated_line = $orig_node;
-        $non_translated_line =~ s/_(\w+)="/$1="/;
+        $non_translated_line =~ s/_($w+)="/$1="/;
             
         my $new_node = $non_translated_line;
             
         my $value_str = $orig_node;
-        $value_str =~ s/.*_\w+="([^"]*)".*/$1/s;
+        $value_str =~ s/.*_$w+="([^"]*)".*/$1/s;
 
         if ($value_str) {
             my %value_translation_map = entity_encode_translations
@@ -312,7 +316,7 @@ sub oaf_merge_translations
                     
                 my $translated_line = $orig_node;
                 $translated_line =~ s/name="([^"]*)"/name="$1-$key"/;
-                $translated_line =~ s/(\s*)_(\w+)="[^"]*"/$1$2="$translation"/;
+                $translated_line =~ s/(\s*)_($w+)="[^"]*"/$1$2="$translation"/;
 
                 $new_node .= "\n$translated_line";
             }
@@ -345,10 +349,10 @@ sub xml_merge_translations
 
     # First just unmark for translation all empty nodes
     # for example <_foo/> is just replaced by <foo/>
-    $xml_source =~ s/<_(\w+)\/>/<$1\/>/mg;
+    $xml_source =~ s/<_($w+)\/>/<$1\/>/mg;
 
     # Support for XML <_foo>blah</_foo> style translations
-    while ($xml_source =~ /([ \t]*)<_(\w+)>([^<]+)<\/_\2>/m) {
+    while ($xml_source =~ /([ \t]*)<_($w+)>([^<]+)<\/_\2>/m) {
         print OUTPUT $`;
 	$xml_source = $';
 

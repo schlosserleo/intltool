@@ -44,7 +44,7 @@ sub check_result($)
     if ($? == 0 && $result eq "") { 
 	print "[OK]\n"; ## diff was empty, ie. files were equal
     } else { 
-	print "[FAILED]\n"; 
+	print "[FAILED] ($testcase)\n"; 
 	$failed = 1;
     }
 }
@@ -58,7 +58,7 @@ sub check_result_output($)
     if ($? == 0 && $result eq "") {
         print "[OK]\n"; ## diff was empty, ie. files were equal
     } else {
-        print "[FAILED]\n";
+        print "[FAILED] ($testcase)\n";
         open OUT, ">>errors";
         print OUT $result;
         close OUT;
@@ -109,6 +109,12 @@ print "5. Checking output from simple pong style xml-file:           ";
 $case = "merge4.xml";
 system("/usr/bin/perl ../xml-i18n-merge -x --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
 check_result_output($case);
+
+print "6. Checking output from glade style xml-file:                 ";
+
+$case = "extract6.glade";
+system("/usr/bin/perl ../xml-i18n-extract --type=gettext/glade --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
+check_result($case);
 
 exit $failed;
 

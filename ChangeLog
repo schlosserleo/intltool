@@ -1,3 +1,27 @@
+2001-08-10  Darin Adler  <darin@bentspoon.com>
+
+	* tests/cases/.cvsignore:
+	* tests/cases/Makefile.am:
+	* tests/cases/extract3.xml.in:
+	* tests/cases/extract6.glade:
+	* tests/cases/merge1.xml.in:
+	* tests/cases/merge4.xml.in:
+	* tests/results/extract6.glade.h:
+	* tests/results/merge1.xml:
+	* tests/results/merge4.xml:
+	* tests/selftest.pl.in:
+	Added new test cases for bugs reported by Zbigniew Chyla.
+	- tags with "-" characters in XML files
+	- <message> tags in glade files
+
+	* xml-i18n-extract.in.in: Changed XML file characters to
+	use the set [-A-Za-z0-9._:] instead of just [A-Za-z0-9].
+	Added "message" to the list of tags supported in glade
+	files.
+
+	* xml-i18n-merge.in.in: Changed XML file characters to
+        use the set [-A-Za-z0-9._:] instead of just [A-Za-z0-9].
+
 === xml-i18n-tools 0.9 ===
 
 2001-08-06  Maciej Stachowiak  <mjs@noisehavoc.org>

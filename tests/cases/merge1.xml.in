@@ -3,7 +3,7 @@
         <str name="MSG_SaveFailed"
             _value="Could not write to the file %s."/>
 	<str name="MSG_SaveFailedWrite"
-	    _value="Writing error when attempting to save %s"/>
+	    _value.-_:="Writing error when attempting to save %s"/>
 	<str name="MSG_SaveFailedExport"
 	    _value="Error while attempting to save %s: could not construct exporter"/>
     </strings>

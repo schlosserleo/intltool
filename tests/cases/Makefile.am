@@ -4,4 +4,5 @@ EXTRA_DIST =					\
 	merge1.xml.in				\
 	merge4.xml.in				\
 	extract3.xml.in				\
+	extract6.glade				\
 	test.po 
