@@ -17,5 +17,8 @@ EXTRA_DIST =					\
 	merge6.xml.in				\
 	merge7.xml.in				\
 	merge8.keys.in				\
+	schemasmerge1.po			\
+	schemasmerge2.po			\
 	test.po 				\
+	test.schemas.in			\
 	$(NULL)

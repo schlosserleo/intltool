@@ -633,47 +633,34 @@ sub schemas_merge_translations
     # For example, <_foo/> is just replaced by <foo/>.
     $source =~ s|<\s*_($w+)\s*/>|<$1/>|g;
 
-    # Support for <_foo>blah</_foo> style translations.
-
-    my $regex_start = "^(.*?)([ \t]*)<locale name=\"C\">";
-    my $regex_default = "([ \t\n]*)<default>(.*?)</default>";
-    my $regex_short = "([ \t\n]*)<short>(.*?)</short>";
-    my $regex_long  = "([ \t\n]*)<long>(.*?)</long>";
-    my $regex_end   = "([ \t\n]*)</locale>";
-
-    while ($source =~ s|$regex_start$regex_default$regex_short$regex_long$regex_end||s) {
+    while ($source =~ s/
+                        (.*?)
+                        (\s+)(<locale\ name="C">(\s*)
+                            (<default>\s*(.*?)\s*<\/default>)?(\s*)
+                            (<short>\s*(.*?)\s*<\/short>)?(\s*)
+                            (<long>\s*(.*?)\s*<\/long>)?(\s*)
+                        <\/locale>)
+                       //sx) {
         print OUTPUT $1;
 
-        my $locale_start_spaces = $2;
-	my $locale_end_spaces = $7;
-	my $default_spaces = $3;
-	my $default_string = $4;
-	my $short_spaces = $5;
-	my $short_string = $6;
-	my $long_spaces = $7;
-	my $long_string = $8;
+		my $locale_start_spaces = $2 ? $2 : '';
+		my $default_spaces = $4 ? $4 : '';
+		my $short_spaces = $7 ? $7 : '';
+		my $long_spaces = $10 ? $10 : '';
+		my $locale_end_spaces = $13 ? $13 : '';
+		my $c_default_block = $3 ? $3 : '';
+		my $default_string = $6 ? $6 : '';
+		my $short_string = $9 ? $9 : '';
+		my $long_string = $12 ? $12 : '';
 
-	# English first
-
-	print OUTPUT "$locale_start_spaces<locale name=\"C\">";
-	print OUTPUT "$default_spaces<default>$default_string</default>";
-	print OUTPUT "$short_spaces<short>$short_string</short>";
-	print OUTPUT "$long_spaces<long>$long_string</long>";
-	print OUTPUT "$locale_end_spaces</locale>";
+		$c_default_block =~ s/default>\[.*?\]/default>/s;
+        print OUTPUT "$locale_start_spaces$c_default_block";
 
         $default_string =~ s/\s+/ /g;
-        $default_string =~ s/^ //;
-        $default_string =~ s/ $//;
         $default_string = entity_decode($default_string);
-
 	$short_string =~ s/\s+/ /g;
-	$short_string =~ s/^ //;
-	$short_string =~ s/ $//;
 	$short_string = entity_decode($short_string);
-
 	$long_string =~ s/\s+/ /g;
-	$long_string =~ s/^ //;
-	$long_string =~ s/ $//;
 	$long_string = entity_decode($long_string);
 
 	for my $lang (sort keys %po_files_by_lang) {
@@ -686,22 +673,25 @@ sub schemas_merge_translations
 
 	    print OUTPUT "\n$locale_start_spaces<locale name=\"$lang\">";
 
-            if ($default_translation)
-            {
-                $default_translation = entity_encode($default_translation);
-                print OUTPUT "$default_spaces<default>$default_translation</default>";
-            }
+        print OUTPUT "$default_spaces";    
+        if ($default_translation)
+        {
+            $default_translation = entity_encode($default_translation);
+            print OUTPUT "<default>$default_translation</default>";
+        }
 
+		print OUTPUT "$short_spaces";
 	    if ($short_translation)
 	    {
-		$short_translation = entity_encode($short_translation);
-		print OUTPUT "$short_spaces<short>$short_translation</short>";
+			$short_translation = entity_encode($short_translation);
+			print OUTPUT "<short>$short_translation</short>";
 	    }
 
+		print OUTPUT "$long_spaces";
 	    if ($long_translation)
 	    {
-		$long_translation = entity_encode($long_translation);
-		print OUTPUT "$long_spaces<long>$long_translation</long>";
+			$long_translation = entity_encode($long_translation);
+			print OUTPUT "<long>$long_translation</long>";
 	    }	    
 
 	    print OUTPUT "$locale_end_spaces</locale>";

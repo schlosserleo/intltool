@@ -14,4 +14,6 @@ EXTRA_DIST =					\
 	merge6.xml				\
 	merge7.xml				\
 	merge8.keys				\
+	test.schemas				\
+	test.schemas.in.h			\
 	$(NULL)

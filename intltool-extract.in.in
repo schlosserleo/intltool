@@ -259,12 +259,19 @@ sub type_schemas {
     ### For schemas XML files ###
          
     # FIXME: We should handle escaped < (less than)
-    while ($input =~ /<(default|short|long)>([^<]+)<\/\1>/sg) {
-        $_ = $2;
+    while ($input =~ /
+                      <locale\ name="C">\s*
+                          (<default>\s*(.*?)\s*<\/default>\s*)?
+                          (<short>\s*(.*?)\s*<\/short>\s*)?
+                          (<long>\s*(.*?)\s*<\/long>\s*)?
+                      <\/locale>
+                     /sgx) {
+        my @totranslate = ($2,$4,$6);
+        foreach (@totranslate) {
+            next if !$_;
         s/\s+/ /g;
-	s/^ //;
-	s/ $//;
         $messages{entity_decode_minimal($_)} = [];
+        }
     }
 }
 

@@ -1,3 +1,17 @@
+2002-10-02  Yanko Kaneti  <yaneti@declera.com>
+
+	* intltool-extract.in.in
+	* intltool-merge.in.in: gconf schemas handling changes as described
+	in bug #94611.
+	* tests/selftest.pl.in
+	* tests/cases/Makefile.am
+	* tests/results/Makefile.am
+	* tests/cases/schemasmerge1.po (added)
+	* tests/cases/schemasmerge2.po (added)
+	* tests/cases/test.schemas.in (added)
+	* tests/results/test.schemas (added)
+	* tests/results/test.schemas.in.h (added): 2 tests for the above.
+
 2002-10-02  Denis Barbier  <barbier@linuxfr.org>
 
 	* intltool-extract.in.in:

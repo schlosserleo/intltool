@@ -151,4 +151,14 @@ $case = "merge10.templates";
 system("@PERL@ ../intltool-merge -r --quiet cases cases/${case}_ cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
+print "15. Extract messages from a gconf schema style file:                 ";
+$case = "test.schemas.in";
+system("@PERL@ ../intltool-extract --type=gettext/schemas --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
+print "16. Merge translations into a gconf schema  style file:              ";
+$case = "test.schemas";
+system("@PERL@ ../intltool-merge -s --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
+check_merge_result($case);
+
 exit $failed;
