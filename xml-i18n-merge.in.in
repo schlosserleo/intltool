@@ -22,7 +22,7 @@
 #
 #  Authors:  Maciej Stachowiak <mjs@eazel.com>
 #            Kenneth Christiansen <kenneth@gnu.org>
-#            Darin Adler <darin@eazel.com>
+#            Darin Adler <darin@bentspoon.com>
 #
 #  Proper XML UTF-8ification written by Cyrille Chepelov <chepelov@calixo.net>
 #
@@ -167,7 +167,7 @@ sub help{
     print "  -u, --utf8                   convert all strings to UTF-8 before merging\n";
     print "  -p, --pass-through           use strings as found in .po files, without\n";
     print "                               conversion (STRONGLY unrecommended with -x)\n";
-    print "\nReport bugs to bugzilla.eazel.com, module xml-i18n-tools or <mjs\@eazel.com>\n";
+    print "\nReport bugs to bugzilla.gnome.org, module xml-i18n-tools or xml-i18n-tools-list\@gnome.org>\n";
     exit;
 }
 

@@ -1,5 +1,15 @@
 2001-09-15  Darin Adler  <darin@bentspoon.com>
 
+	* doc/xml-i18n-extract.8:
+	* doc/xml-i18n-merge.8:
+	* doc/xml-i18n-prepare.8:
+	* doc/xml-i18n-toolize.8:
+	* xml-i18n-extract.in.in:
+	* xml-i18n-merge.in.in:
+	Updated my email address.
+
+2001-09-15  Darin Adler  <darin@bentspoon.com>
+
 	* xml-i18n-prepare.in: A few simplifications.
 
 2001-09-09  Carlos Perelló Marín <carlos@gnome-db.org>
