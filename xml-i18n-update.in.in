@@ -1,17 +1,26 @@
 #!@PERL@ -w
 
-#  GNOME PO Update Utility.
-#  (C) 2000 The Free Software Foundation
+#  The GNOME Translation Update Tool 
+#
+#  Copyright (C) 2000 Free Software Foundation.
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as
+#  published by the Free Software Foundation; either version 2 of the
+#  License, or (at your option) any later version.
+#
+#  This script is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this library; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 #  Author(s): Kenneth Christiansen
-#
-#  GNOME PO Update Utility can use the XML to POT Generator, xml-i18n-extract
-#  Please distribute it along with this scrips, aswell as desk.po and
-#  README.tools.
-#
-#  Also remember to change $PACKAGE to reflect the package the script is
-#  used within.
 
+use Getopt::Long;
 
 ## Declare global variables
 my $PROGRAM  = "xml-i18n-update";
@@ -19,6 +28,15 @@ my $VERSION  = "@VERSION@";
 my $_PACKAGE = "@PACKAGE@";
 
 my $LANG     = $ARGV[0];
+
+## Scalars used by the option stuff
+my $HELP_ARG 	   = "0";
+my $VERSION_ARG    = "0";
+my $DIST_ARG	   = "0";
+my $POT_ARG	   = "0";
+my $HEADERS_ARG    = "0";
+my $MAINTAIN_ARG   = "0";
+my $STATUSLIST_ARG = "0";
 
 my @languages;
 my %po_files_by_lang = ();
@@ -35,44 +53,56 @@ if (! $LANG){
     exit;
 }
 
-## Use the supplied arguments
-if ($LANG=~/^-(.)*/){
+## Handle options
+GetOptions (
+	    "help|h|?"  	=> \$HELP_ARG,
+	    "version|v" 	=> \$VERSION_ARG,
+	    "dist|d"		=> \$DIST_ARG,
+	    "pot|p"		=> \$POT_ARG,
+	    "headers|s"		=> \$HEADERS_ARG,
+	    "maintain|m"	=> \$MAINTAIN_ARG,
+	    "statuslist|l"	=> \$STATUSLIST_ARG
+	    ) or &invalid_option;
 
-    if ("$LANG" eq "--version" || "$LANG" eq "-V")
-    {
-        &version;
-    }
-    elsif ($LANG eq "--help" || "$LANG" eq "-H")
-    {
+
+## Use the supplied arguments
+## Check for options. 
+## This section will check for the different options.
+
+sub split_on_argument {
+
+    if ($VERSION_ARG) {
+	&version;
+
+    } elsif ($HELP_ARG) {
 	&help;
-    }
-    elsif ($LANG eq "--dist" || "$LANG" eq "-D")
-    {
+
+    } elsif ($DIST_ARG) {
         &merging;
-	&status;
-    }
-    elsif ($LANG eq "--pot" || "$LANG" eq "-P")
-    {
+        &status;
+
+    } elsif ($POT_ARG) {
         &gen_headers;
-	&generate_pot;
-        exit;
-    }
-    elsif ($LANG eq "--headers"  || "$LANG" eq "-S")
-    {
+        &generate_pot; 
+
+    } elsif ($HEADERS_ARG) {
         &gen_headers;
         exit;
-    }
-    elsif ($LANG eq "--maintain" || "$LANG" eq "-M")
-    {
+
+    } elsif ($MAINTAIN_ARG) {
         &maintain;
-    }
-    elsif ($LANG eq "--statuslist" || "$LANG" eq "-L")
-    {
-	&show_status;
-    }
-    else {
-        &invalid_option;
-    }
+
+    } elsif ($STATUSLIST_ARG) {
+        &show_status;
+
+    } else {
+	&help;
+    }  
+} 
+
+if ($LANG=~/^-(.)*/)
+{
+    &split_on_argument;
 
 } else {
    
