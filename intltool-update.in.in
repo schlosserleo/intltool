@@ -826,7 +826,7 @@ sub Console_Write_TranslationStatus
 
     $output_file = "$SRCDIR/$lang.po" if ($output_file eq "");
 
-    system ("$MSGFMT", "-o", "/dev/null", "--statistics", $output_file);
+    system ("$MSGFMT", "-o", "/dev/null", "--verbose", $output_file);
 }
 
 sub Console_Write_CoverageReport
@@ -846,7 +846,7 @@ sub Console_Write_CoverageReport
     foreach my $lang (@languages)
     {
 	print "$lang: ";
-	system ("$MSGFMT", "-o", "/dev/null", "--statistics", "$SRCDIR/$lang.po");
+	system ("$MSGFMT", "-o", "/dev/null", "--verbose", "$SRCDIR/$lang.po");
     }
 }
 
