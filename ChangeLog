@@ -1,7 +1,13 @@
 2002-06-04  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+	* tests/results/extract8.glade.h: Fixed test.
+
+
+2002-06-04  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
 	* NEWS: Updated.
 	* configure.in: Bump version.
+
 
 2002-06-01  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
