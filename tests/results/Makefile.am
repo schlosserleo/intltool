@@ -6,7 +6,8 @@ EXTRA_DIST =					\
 	extract6.glade.h			\
 	extract7.xml.h				\
 	extract8.glade.h			\
-	extract9.xml.h				\
+	extract9.xml				\
+	extract9.xml.in.h			\
 	extract10.templates_.h			\
 	extract-comments.xml.h			\
 	merge1.xml				\

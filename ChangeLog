@@ -1,5 +1,11 @@
 2004-10-07  Danilo Šegan  <dsegan@gmx.net>
 
+	* tests/cases/Makefile.am (EXTRA_DIST): 
+	* tests/results/Makefile.am (EXTRA_DIST): 
+	Update with new and changed extract9.* files.
+
+2004-10-07  Danilo Šegan  <dsegan@gmx.net>
+
 	* intltool-merge.in.in (traverse): Add missing "{".
 
 	* tests/selftest.pl.in: Add more spaces to align test 18 better.
