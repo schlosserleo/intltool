@@ -1,3 +1,7 @@
+2001-01-07  Fatih Demir	<kabalak@gmx.net>
+
+	* .cvsignore: Added xml-i18n-tools.spec.
+
 2001-01-05  Maciej Stachowiak  <mjs@eazel.com>
 
 	* README: Some fixes suggested by Darin.

@@ -18,4 +18,5 @@ stamp-h.in
 xml-i18n-extract
 xml-i18n-merge
 xml-i18n-toolize
+xml-i18n-tools.spec
 xml-i18n-update
