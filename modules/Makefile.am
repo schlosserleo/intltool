@@ -12,4 +12,4 @@ EXTRA_DIST =					\
 
 install:
 	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(datadir)/intltool/XML/Parser/Style
-	cp $(top_srcdir)/modules/XML/Parser/Style/OrigTree.pm $(DESTDIR)$(datadir)/intltool/XML/Parser/Style
+	$(INSTALL_DATA) $(top_srcdir)/modules/XML/Parser/Style/OrigTree.pm $(DESTDIR)$(datadir)/intltool/XML/Parser/Style

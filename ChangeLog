@@ -1,3 +1,7 @@
+2003-12-30  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* modules/Makefile.am: Fixed #130140
+
 2003-12-23  Kristian Rietveld  <kris@gtk.org>
 
 	[Commit as per Kenneth's request]
