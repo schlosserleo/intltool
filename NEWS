@@ -1,3 +1,7 @@
+Version 0.21
+
+* Use $srcdir in the version check (Mark McLoughlin)
+
 Version 0.20
 
 * Added support for .schemas files (Kenneth)

@@ -1,7 +1,13 @@
+2002-05-20  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+        * NEWS: Updated.
+
+
 2002-05-20  Mark McLoughlin  <mark@skynet.ie>
 
 	* intltool.m4: use $srcdir when looking for
 	intltool-update.in
+
 
 2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
