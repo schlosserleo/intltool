@@ -1,3 +1,7 @@
+2001-09-01  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* xml-i18n-update.in.in: Fixed the .server support.
+
 2001-08-26  Darin Adler  <darin@bentspoon.com>
 
 	* xml-i18n-tools.m4: Don't touch the xml-i18n-* scripts when they
