@@ -1,11 +1,9 @@
-
-doc_i18n_tool_SOURCES = \
-	doc-i18n-tool.c
+# doc_i18n_tool_SOURCES = doc-i18n-tool.c
 
 CFLAGS = $(DOC_I18N_TOOL_CFLAGS)
 
 LDADDS = $(DOC_I18N_TOOL_LIBS)
 
-bin_PROGRAMS = doc-i18n-tool
+bin_PROGRAMS = # doc-i18n-tool
 
-doc_i18n_tool_LDADD = $(LDADDS)
+# doc_i18n_tool_LDADD = $(LDADDS)

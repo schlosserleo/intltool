@@ -1,5 +1,11 @@
 2001-10-26  Darin Adler  <darin@bentspoon.com>
 
+	* Makefile.am:
+	* doc-i18n-tool/Makefile.am:
+	Oops. Not so easy to turn something off.
+
+2001-10-26  Darin Adler  <darin@bentspoon.com>
+
 	* Makefile.am: Turn off compiling of doc-i18n-tool as an
 	interim measure so people using eazel-hacking can build.
 	Soon, we can make this a configure-time option and change
