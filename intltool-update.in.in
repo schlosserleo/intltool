@@ -597,7 +597,7 @@ sub GeneratePOTemplate
 
     open INFILE, $POTFILES_in;
     unlink "POTFILES.in.temp";
-    open OUTFILE, ">POTFILES.in.temp";
+    open OUTFILE, ">POTFILES.in.temp" or die("Cannot open POTFILES.in.temp for writing");
 
     my $gettext_support_nonascii = 0;
 
@@ -833,7 +833,7 @@ sub SubstituteVariable
     {
 	if (/^(\w+)=(.*)$/)
 	{
-	    ($varhash{$1} = $2) =~  s/^["'](.*)["']$/$1)/;
+	    ($varhash{$1} = $2) =~  s/^["'](.*)["']$/$1/;
 	}
     }
     
@@ -845,7 +845,10 @@ sub SubstituteVariable
 	
 	return SubstituteVariable ("$untouched$sub$rest");
     }
-    return $str;
+    
+    # We're using Perl backticks ` and "echo -n" here in order to 
+    # expand any shell escapes (such as backticks themselves) in every variable
+    return `echo -n "$str"`;
 }
 
 sub CONF_Handle_Open

@@ -1,4 +1,5 @@
-
+* Allow shell-backticks (and other shell features) in variable names
+  -- bug #152448 (Danilo Segan)
 * Fix typographical error in intltool.m4
   -- bug #153630 (Rodney Dawes)
 

@@ -1,3 +1,14 @@
+2004-09-24  Danilo Šegan  <dsegan@gmx.net>
+
+	* NEWS: Document anything significant in this patch.
+
+	* intltool-update.in.in (GeneratePOTemplate): Bork out if we
+	cannot write POTFILES.in.temp.
+
+	* intltool-update.in.in (SubstituteVariable): Fix typo in re: s/$1)/$1/
+	(variables with quotes got ")" attached previously); use shell
+	escaping (`echo -n "$str"`)--fixes #152448.
+
 2004-09-24  Rodney Dawes  <dobey@novell.com>
 
 	* intltool.m4: Fix typo in front of comment
