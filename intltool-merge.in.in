@@ -307,7 +307,7 @@ sub oaf_merge_translations
             my %value_translation_map = entity_encode_translations
                 (lookup_translations ($value_str));
 
-            foreach my $key (keys %value_translation_map) {
+            foreach my $key (sort keys %value_translation_map) {
                 my $translation = $value_translation_map{$key};
                     
                 my $translated_line = $orig_node;
@@ -364,7 +364,7 @@ sub xml_merge_translations
             my %value_translation_map = entity_encode_translations
                 (lookup_translations ($value_str));
 
-            foreach my $key (keys %value_translation_map) {
+            foreach my $key (sort keys %value_translation_map) {
                 my $translation = $value_translation_map{$key};
 
                 $new_node .= "\n$spaces<$tag_name xml:lang=\"$key\">$translation</$tag_name>";

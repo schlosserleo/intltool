@@ -1,3 +1,8 @@
+2001-06-07  Darin Adler  <darin@bentspoon.com>
+
+	* xml-i18n-merge.in.in: Merge translations in sorted order rather
+	than in seemingly-random order.
+
 2001-06-03  Karl Eichwalder  <ke@suse.de>
 
 	* README: Adjustments.  Add info on .desktop files.
