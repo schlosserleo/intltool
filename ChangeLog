@@ -1,3 +1,9 @@
+2004-04-06  Danilo Šegan  <dsegan@gmx.net>
+
+	* intltool-update.in.in:
+	s/GetLanguageFromPOFile/POFile_GetLanguage/ (fix for
+	"intltool-update -r").
+
 2004-03-10  Danilo Šegan  <dsegan@gmx.net>
 
 	* tests/results/merge7.xml: Corrected test case.

@@ -770,7 +770,7 @@ sub GatherPOFiles
 {
     my @po_files = glob ("./*.po");
 
-    @languages = map (&GetLanguageFromPOFile, @po_files);
+    @languages = map (&POFile_GetLanguage, @po_files);
 
     foreach my $lang (@languages) 
     {
