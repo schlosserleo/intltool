@@ -1,3 +1,18 @@
+Version 0.8.4
+
+* Support for the new gettext 0.10.36 (Darin, Stanislav Brabec)
+* Backport of changes in branches to HEAD (Darin)
+* Better XML support (George)
+* More tests (Darin)
+* Handling of more extensions (Clahey, Laszlo, me) 
+* Spec file cleanup (Arik)
+* Updated documentation (Laszlo)
+* Misc bugfixes (Darin, Maciej, Laszlo, me)
+* New translations: hrm, this is a translation tool, why should it 
+  support translation - what a concept :)
+
+======================================================================
+
 BACK TO HEAD
 ____________
 
