@@ -9,7 +9,7 @@
 	<str name="MSG_SaveFailedExport"
 	    value="Error while attempting to save %s: could not construct exporter"/>
 	<str name="MSG_SaveFailedExport-test"
-	    value="Kunne ikke skrive til filen %s."/>
+	    value="Kunne ikke skrive til &#38; filen &#34;%s&#34; -- \."/>
     </strings>
 
     <commands>

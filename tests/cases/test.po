@@ -40,7 +40,7 @@ msgstr ""
 #: po/abiword.xml.h:7
 #, no-c-format
 msgid "Error while attempting to save %s: could not construct exporter"
-msgstr "Kunne ikke skrive til filen %s."
+msgstr "Kunne ikke skr\ive\ til & filen \"%s\" -- \\."
 
 #: po/abiword.xml.h:8
 msgid "New"
