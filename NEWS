@@ -1,3 +1,6 @@
+* Add support for .icon files
+  -- bug #157412 (Takao Fujiwara, Rodney Dawes)
+
 Version 0.32
 
 * Check to avoid whining about {arch} and $PACKAGE-$VERSION dist directories

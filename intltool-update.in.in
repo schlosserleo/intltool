@@ -74,6 +74,7 @@ my $xml_support =
 "kbd(?:\\.in)+";	# GOK specific. 
 
 my $ini_support =
+"icon(?:\\.in)+|".	# http://www.freedesktop.org/Standards/icon-theme-spec
 "desktop(?:\\.in)+|".	# http://www.freedesktop.org/Standards/menu-spec
 "caves(?:\\.in)+|".	# GNOME Games specific
 "directory(?:\\.in)+|".	# http://www.freedesktop.org/Standards/menu-spec
