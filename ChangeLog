@@ -2,6 +2,16 @@
 
 	* NEWS: Update for bug fix
 
+	* intltool.m4: Rename AC_PROG_INTLTOOL to IT_PROG_INTLTOOL and add a
+	definition for AC_PROG_INTLTOOL to just call IT_PROG_INTLTOOL as a
+	means of deprecation (this is what libtool does for AM_PROG_LIBTOOL)
+
+	Fixes #151508
+
+2004-11-04  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS: Update for bug fix
+
 	* intltool.m4: Add INTLTOOL_XML_NOMERGE_RULE so that people can pull
 	strings from XML files, but not merge the translations back in
 
