@@ -1,3 +1,16 @@
+2003-11-18  Brian Cameron <Brian.Cameron@sun.com>
+
+	* intltool-merge.in.in
+	* tests/results/merge4.xml
+	* tests/results/merge5p.xml
+	* tests/results/merge5u.xml
+	* tests/results/merge6.xml
+	* tests/results/merge7.xml
+
+	Updated intltool-merge so that it doesn't add a trailing '\n' 
+	character to CDATA values.  Also corrected the logic of
+	encoding/decoding the string before/after translation.
+
 2003-11-11 Bill Haneman <billh@gnome.org> 
 
 	* intltool.m4:

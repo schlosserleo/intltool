@@ -1,57 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <foo>
-   <bar>
-      This is a " test
-   </bar>
-   <bar xml:lang="az">
-      This is a " test
-   </bar>
-   <bar xml:lang="fr">
-      This is a " test
-   </bar>
-   <bar xml:lang="fr_BE">
-      This is a " test
-   </bar>
-   <bar xml:lang="fr_FR">
-      This is a " test
-   </bar>
-   <bar xml:lang="merge6">
-      This is a &quot; test --> is this a success ?
-   </bar>
-   <bar xml:lang="schemasmerge1">
-      This is a " test
-   </bar>
-   <bar xml:lang="schemasmerge2">
-      This is a " test
-   </bar>
-   <bar xml:lang="test">
-      This is a " test
-   </bar>
-   <bar>
-      This is another ' test
-   </bar>
-   <bar xml:lang="az">
-      This is another ' test
-   </bar>
-   <bar xml:lang="fr">
-      This is another ' test
-   </bar>
-   <bar xml:lang="fr_BE">
-      This is another ' test
-   </bar>
-   <bar xml:lang="fr_FR">
-      This is another ' test
-   </bar>
-   <bar xml:lang="merge6">
-      This is &apos; another \ test, and a \0123uccess.
-   </bar>
-   <bar xml:lang="schemasmerge1">
-      This is another ' test
-   </bar>
-   <bar xml:lang="schemasmerge2">
-      This is another ' test
-   </bar>
-   <bar xml:lang="test">
-      This is another ' test
-   </bar>
+  <bar>This is a " test</bar>
+  <bar xml:lang="az">This is a " test</bar>
+  <bar xml:lang="fr">This is a " test</bar>
+  <bar xml:lang="fr_BE">This is a " test</bar>
+  <bar xml:lang="fr_FR">This is a " test</bar>
+  <bar xml:lang="merge6">This is a &quot; test --> is this a success ?</bar>
+  <bar xml:lang="schemasmerge1">This is a " test</bar>
+  <bar xml:lang="schemasmerge2">This is a " test</bar>
+  <bar xml:lang="test">This is a " test</bar>
+  <bar>This is another ' test</bar>
+  <bar xml:lang="az">This is another ' test</bar>
+  <bar xml:lang="fr">This is another ' test</bar>
+  <bar xml:lang="fr_BE">This is another ' test</bar>
+  <bar xml:lang="fr_FR">This is another ' test</bar>
+  <bar xml:lang="merge6">This is &apos; another \ test, and a \0123uccess.</bar>
+  <bar xml:lang="schemasmerge1">This is another ' test</bar>
+  <bar xml:lang="schemasmerge2">This is another ' test</bar>
+  <bar xml:lang="test">This is another ' test</bar>
 </foo>

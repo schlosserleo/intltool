@@ -46,12 +46,12 @@ if(!$ret) {
     die "You must have XML::Parser installed to run $0\n\n";
 } 
 
-#use vars qw($must_end_tag, $last_depth, $translation_depth, @tag_stack, @entered_tag);
 my $must_end_tag      = -1;
 my $last_depth        = -1;
 my $translation_depth = -1;
 my @tag_stack = ();
 my @entered_tag = ();
+my $leading_space = "";
 
 ## Scalars used by the option stuff
 my $HELP_ARG = 0;
@@ -607,7 +607,6 @@ sub parseTree
     my $ref       = shift;
     my $depth     = shift || 0;
     my $language  = shift || "";
-    my $indent    = 3;
     my $not_cdata = 0;
 
     $entered_tag[$depth + 1] = 0;
@@ -624,7 +623,7 @@ sub parseTree
 
         # Handle empty nodes.
         #
-        if (! $sub || $sub =~ /^[\s]*$/) {
+        if (! $sub) {
             next;
         }
 
@@ -650,7 +649,7 @@ sub parseTree
             push @tag_stack, $current_tag;
 
             $must_end_tag = $depth;
-            print $fh " " x ($last_depth * $indent), "<", $current_tag;
+            print $fh "<", $current_tag;
 
             parseTree($fh, $sub, $depth + 1, $language);
 
@@ -658,9 +657,9 @@ sub parseTree
             #
             if ($must_end_tag != -1) {
                 if ($must_end_tag < $depth) {
-                    print $fh ">\n";
+                    print $fh ">";
                 } else {
-                    print $fh " />\n";
+                    print $fh " />";
                         pop(@tag_stack);
                     if ($depth == $translation_depth) {
                         $translation_depth = -1;
@@ -675,7 +674,7 @@ sub parseTree
                 while ($last_depth > $depth) {
                     $last_depth--;
  
-                    print $fh " " x ($last_depth * $indent), "</", pop(@tag_stack), ">\n";
+                    print $fh "</", pop(@tag_stack), ">";
                 }
             }
             $last_depth = $depth;
@@ -685,12 +684,14 @@ sub parseTree
             if ($translation_depth == $depth) {
 
                 for my $lang (sort keys %po_files_by_lang) {
-
+                    print $fh "\n";
+                    $leading_space =~ s/.*\n//g;
+                    print $fh $leading_space;
                     if ($MULTIPLE_OUTPUT && $lang ne "$language") {
                         next;
-		    }
+                    }
 
-                    print $fh " " x ($depth * $indent), "<", $current_tag, " xml:lang=\"", $lang, "\"";
+                    print $fh "<", $current_tag, " xml:lang=\"", $lang, "\"";
                     $must_end_tag = $depth;
 
                     parseTree($fh, $sub, $depth + 1, $lang);
@@ -699,9 +700,9 @@ sub parseTree
                     #
                     if ($must_end_tag != -1) {
                         if ($must_end_tag < $depth) {
-                            print $fh ">\n";
+                            print $fh ">";
                         } else {
-                            print $fh " />\n";
+                            print $fh " />";
                             pop(@tag_stack);
                             if ($depth == $translation_depth) {
                                 $translation_depth = -1;
@@ -716,14 +717,15 @@ sub parseTree
                         while ($last_depth > $depth + 1) {
                             $last_depth--;
      
-                            print $fh " " x ($last_depth * $indent), "</", pop(@tag_stack), ">\n";
+                            print $fh "</", pop(@tag_stack), ">";
                         }
-                        print $fh " " x ($depth * $indent), "</", $current_tag, ">\n";
+                        print $fh "</", $current_tag, ">";
                     }
                 }
                 $translation_depth = -1;
                 $last_depth = $depth;
             }
+            $leading_space = "";
 
         } elsif (ref $sub eq 'HASH') {
 
@@ -736,7 +738,6 @@ sub parseTree
                 $string =~ s/\s+/ /g;
                 $string =~ s/^ //;
                 $string =~ s/ $//;
-                $string = entity_decode($string);
 
                 if ($key =~ /^_/) {
                     $key =~ s|^_||g;
@@ -745,7 +746,8 @@ sub parseTree
 
                         # Handle translation
                         #
-                        my $translation = $translations{$language, $string};
+                        my $decode_string = entity_decode($string);
+                        my $translation = $translations{$language, $decode_string};
                         if ($translation) {
                             $translation = entity_encode($translation);
                             $string = $translation;
@@ -773,15 +775,18 @@ sub parseTree
             #
             if ($must_end_tag != -1) {
                 if ($must_end_tag < $depth) {
-                    print $fh ">\n";
+                    print $fh ">";
                 } else {
-                    print $fh " />\n";
+                    print $fh " />";
                     pop(@tag_stack);
                 }
                 $must_end_tag = -1;
             }
 
-            if ($not_cdata) {
+            if ($sub =~ /^[\s]*$/) {
+                $leading_space .= $sub;
+                print $fh $sub;
+            } elsif ($not_cdata) {
 
                 # Handle tags
                 #
@@ -812,7 +817,6 @@ sub parseTree
                 $string =~ s/\s+/ /g;
                 $string =~ s/^ //;
                 $string =~ s/ $//;
-                $string = entity_decode($string);
 
                 # Display CDATA
                 #
@@ -820,14 +824,15 @@ sub parseTree
 
                     # Handle translation
                     #
-                    my $translation = $translations{$language, $string};
+                    my $decode_string = entity_decode($string);
+                    my $translation = $translations{$language, $decode_string};
                     if ($translation) {
                         $translation = entity_encode($translation);
                         $string = $translation;
                     }
                 }
 
-                print $fh " " x ($depth * $indent), $string, "\n";
+                print $fh $string;
             }
         }
     }
