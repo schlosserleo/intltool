@@ -221,6 +221,7 @@ sub find_leftout_files
 {
     my (@buf_i18n_plain,
 	@buf_i18n_xml,
+	@buf_i18n_xml_unmarked,
 	@buf_i18n_ini,
 	@buf_potfiles,
 	@buf_potfiles_ignore,
@@ -239,6 +240,10 @@ sub find_leftout_files
     find sub {
 	push @buf_i18n_ini, "$File::Find::name" if /\.($ini_extension)$/ 
 	}, "..";
+    find sub {
+        push @buf_i18n_xml_unmarked, "$File::Find::name" if /\.(schemas(\.in)+)$/
+        }, "..";
+
 
     open POTFILES, "POTFILES.in" || die "$PROGRAM:  there's no POTFILES.in!\n";
 
@@ -346,6 +351,11 @@ sub find_leftout_files
             }
         }
     }
+
+    foreach my $file (@buf_i18n_xml_unmarked){
+        push @buf_allfiles, unpack("x3 A*", $file) . "\n";
+    }
+
 
     @buf_allfiles_sorted = sort (@buf_allfiles);
     @buf_potfiles_sorted = sort (@buf_potfiles);

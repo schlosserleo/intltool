@@ -1,3 +1,8 @@
+2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+        * intltool-update.in.in: Made -m respect .schemas
+	files.
+
 === intltool 0.20 ===
 
 2002-05-19  Kenneth Rohde Christiansen  <kenneth@gnu.org>
