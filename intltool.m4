@@ -31,9 +31,9 @@ if test -n "$1"; then
     AC_MSG_CHECKING(for intltool >= $1)
 
     INTLTOOL_REQUIRED_VERSION_AS_INT=`echo $1 | awk -F. '{ printf "%d", $[1] * 100 + $[2]; }'`
-    INTLTOOL_APPLIED_VERSION=`awk -F\" '/\\$VERSION / { printf $[2]; }'  < ${srcdir}/intltool-update.in`
+    INTLTOOL_APPLIED_VERSION=`awk -F\" '/\\$VERSION / { printf $[2]; }'  < ${ac_aux_dir}/intltool-update.in`
     changequote({{,}})
-    INTLTOOL_APPLIED_VERSION_AS_INT=`awk -F\" '/\\$VERSION / { split(${{2}}, VERSION, "."); printf "%d\n", VERSION[1] * 100 + VERSION[2];}' < ${srcdir}/intltool-update.in`
+    INTLTOOL_APPLIED_VERSION_AS_INT=`awk -F\" '/\\$VERSION / { split(${{2}}, VERSION, "."); printf "%d\n", VERSION[1] * 100 + VERSION[2];}' < ${ac_aux_dir}/intltool-update.in`
     changequote([,])
 
     if test "$INTLTOOL_APPLIED_VERSION_AS_INT" -ge "$INTLTOOL_REQUIRED_VERSION_AS_INT"; then
@@ -125,7 +125,7 @@ ifdef([AC_DIVERSION_ICMDS],[
 
 AC_OUTPUT_COMMANDS([
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/intltool-extract.in > intltool-extract.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${ac_aux_dir}/intltool-extract.in > intltool-extract.out
 if cmp -s intltool-extract intltool-extract.out 2>/dev/null; then
   rm -f intltool-extract.out
 else
@@ -135,7 +135,7 @@ chmod ugo+x intltool-extract
 chmod u+w intltool-extract
 
 sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" \
-    < ${srcdir}/intltool-merge.in > intltool-merge.out
+    < ${ac_aux_dir}/intltool-merge.in > intltool-merge.out
 if cmp -s intltool-merge intltool-merge.out 2>/dev/null; then
   rm -f intltool-merge.out
 else
@@ -144,7 +144,7 @@ fi
 chmod ugo+x intltool-merge
 chmod u+w intltool-merge
 
-sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/intltool-update.in > intltool-update.out
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${ac_aux_dir}/intltool-update.in > intltool-update.out
 if cmp -s intltool-update intltool-update.out 2>/dev/null; then
   rm -f intltool-update.out
 else

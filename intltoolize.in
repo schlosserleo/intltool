@@ -260,7 +260,9 @@ for file in $deep_files; do
 
   dirname=`echo x$file | sed 's%^x\(.*/\).*$%\1%'`
   $rm_rec $file
-  if $cur/$mkinstalldirs $dirname; then
+  # mkinstalldirs is also put in auxdir
+  auxdir_absolute=`cd $cur && cd $auxdir && pwd`
+  if $auxdir_absolute/$mkinstalldirs $dirname; then
     if test -n "$ln_s" && $ln_s $pkgdatadir/$file $dirname; then :
     elif $cp $pkgdatadir/$file $dirname; then :
     else

@@ -1,6 +1,11 @@
 2003-12-31  Thomas Vander Stichele  <thomas at apestaart dot org>
 
-	* intltoolize.in: make sure errors return non-zero
+        * intltool.m4: fix for the case where AC_CONFIG_AUX_DIR is set
+                       (#130280)
+
+2003-12-31  Thomas Vander Stichele  <thomas at apestaart dot org>
+
+	* intltoolize.in: make sure errors return non-zero (#130279)
 
 2003-12-31  Thomas Vander Stichele  <thomas at apestaart dot org>
 
