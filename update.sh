@@ -39,7 +39,7 @@ if [ "$DEPENDS" = "" -o ! -x "$DEPENDS" ] ;
 fi
 
 XMLDIR=$(which xml-i18n-toolize | sed s@/bin/xml-i18n-toolize@@)
-export XML_I18N_EXTRACT="$XMLDIR/share/xml-i18n-tools/xml-i18n-extract"
-export XML_I18N_UPDATE="$XMLDIR/share/xml-i18n-tools/xml-i18n-update"
-
+XML_I18N_EXTRACT="$XMLDIR/share/xml-i18n-tools/xml-i18n-extract"
+XML_I18N_UPDATE="$XMLDIR/share/xml-i18n-tools/xml-i18n-update"
+PACKAGE=$PACKAGE XML_I18N_EXTRACT=$XML_I18N_EXTRACT \
 $XML_I18N_UPDATE $1
