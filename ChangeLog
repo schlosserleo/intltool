@@ -1,3 +1,10 @@
+2003-11-10  Bill Haneman <billh@gnome.org>
+
+	* intltool.m4
+	Added INTLTOOL_KBD_RULE for gok's *.kbd files,
+	*.kbd.in -> *.kbd using the XML mechanism.
+	Fix for bug 127237.
+
 2003-11-05  Brian Cameron <Brian.Cameron@sun.com>
 
 	* intltool-merge.in.in

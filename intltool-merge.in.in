@@ -199,6 +199,8 @@ Other options:
   -u, --utf8             convert all strings to UTF-8 before merging
   -p, --pass-through     use strings as found in .po files, without
                          conversion (STRONGLY unrecommended with -x)
+  -m, --multiple-output  output one localized file per locale, instead of 
+	                 a single file containing all localized elements
   -c, --cache=FILE       specify cache file name
                          (usually \$top_builddir/po/.intltool-merge-cache)
   -q, --quiet            suppress most messages
