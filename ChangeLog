@@ -1,3 +1,11 @@
+2001-01-05  Maciej Stachowiak  <mjs@eazel.com>
+
+	* xml-i18n-tools.Makefile.patch: Fix up to remove accidentally
+	inserted duplicate definitions of some variables.
+	
+	* xml-i18n-tools.m4: In XML_I18N_MERGE_OAF_RULE, make .oaf file
+	depend on all .po files, as well as on .oaf.in.
+
 2001-01-04  Robin * Slomkowski  <rslomkow@eazel.com>
 
 	* Makefile.am: added specfile to EXTRA_DISTS

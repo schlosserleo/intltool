@@ -1,5 +1,5 @@
 --- Makefile.in.in.clean	Wed Jan  3 05:25:20 2001
-+++ Makefile.in.in	Wed Jan  3 17:05:59 2001
++++ Makefile.in.in	Thu Jan  4 15:48:19 2001
 @@ -14,6 +14,7 @@
  
  srcdir = @srcdir@
@@ -8,17 +8,13 @@
  VPATH = @srcdir@
  
  prefix = @prefix@
-@@ -35,7 +36,16 @@
+@@ -35,7 +36,12 @@
  GMSGFMT = PATH=../src:$$PATH @GMSGFMT@
  MSGFMT = @MSGFMT@
  XGETTEXT = PATH=../src:$$PATH @XGETTEXT@
 -MSGMERGE = PATH=../src:$$PATH msgmerge
-+
-+GMSGFMT = PATH=../src:$$PATH @GMSGFMT@
-+MSGFMT = @MSGFMT@
-+XGETTEXT = PATH=../src:$$PATH @XGETTEXT@
-+XML_I18N_UPDATE=@XML_I18N_UPDATE@
-+XML_I18N_EXTRACT=@XML_I18N_EXTRACT@
++XML_I18N_UPDATE = @XML_I18N_UPDATE@
++XML_I18N_EXTRACT = @XML_I18N_EXTRACT@
 + 
 +MSGMERGE = PATH=$(top_builddir):$$PATH PACKAGE=$(PACKAGE) XML_I18N_EXTRACT=$(XML_I18N_EXTRACT) $(XML_I18N_UPDATE) --dist
 +GENPOT   = PATH=$(top_builddir):$$PATH PACKAGE=$(PACKAGE) XML_I18N_EXTRACT=$(XML_I18N_EXTRACT) $(XML_I18N_UPDATE) --pot
@@ -26,7 +22,7 @@
  
  DEFS = @DEFS@
  CFLAGS = @CFLAGS@
-@@ -49,7 +59,7 @@
+@@ -49,7 +55,7 @@
  POFILES = @POFILES@
  GMOFILES = @GMOFILES@
  DISTFILES = ChangeLog Makefile.in.in POTFILES.in $(PACKAGE).pot \
@@ -35,7 +31,7 @@
  
  POTFILES = \
  
-@@ -85,12 +95,7 @@
+@@ -85,12 +91,7 @@
  all-no:
  
  $(srcdir)/$(PACKAGE).pot: $(POTFILES)
@@ -49,7 +45,7 @@
  
  $(srcdir)/cat-id-tbl.c: stamp-cat-id; @:
  $(srcdir)/stamp-cat-id: $(PACKAGE).pot
-@@ -216,13 +221,12 @@
+@@ -216,13 +217,12 @@
  	for cat in $$catalogs; do \
  	  cat=`basename $$cat`; \
  	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
