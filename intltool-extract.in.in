@@ -203,7 +203,7 @@ sub entity_decode
     s/&quot;/"/g; # "
     s/&amp;/&/g;
     s/&lt;/</g;
-    s/&gt/>/g;
+    s/&gt;/>/g;
 
     return $_;
 }
