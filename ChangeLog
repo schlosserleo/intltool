@@ -1,5 +1,14 @@
 2004-05-27  Rodney Dawes  <dobey@novell.com>
 
+	* configure.in: Add check for XML::Parser at configure time (#129009)
+
+	* intltool.m4: Use $INTLTOOL_PERL instead of "perl" to check for the
+	existence of XML::Parser (#133366)
+
+	Fixes #129009 and #133366
+
+2004-05-27  Rodney Dawes  <dobey@novell.com>
+
 	* intltool-update.in.in (SubstituteVariable): Grab the entire line
 	after the = in the variable declaration, not just up to the first bit
 	of whitespace (#143245)

@@ -33,6 +33,12 @@ fi
 if test -z "`$PERL -v | fgrep 'v5.' 2> /dev/null`" -a -z "`$PERL -v | fgrep 'version 5.' 2> /dev/null`"; then
    AC_MSG_ERROR([perl 5.x required for intltool])
 fi
+AC_MSG_CHECKING([for XML::Parser])
+if `$PERL -e "require XML::Parser" 2>/dev/null`; then
+   AC_MSG_RESULT([ok])
+else
+   AC_MSG_ERROR([XML::Parser perl module is required for intltool])
+fi
 
 # find the actual value for $prefix that we'll end up with
 # i think there's a better way to do this...
