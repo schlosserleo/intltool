@@ -1,5 +1,11 @@
 2001-01-16  Darin Adler  <darin@eazel.com>
 
+	* xml-i18n-update.in: Added back in the line of
+	code to generate the pot that was accidentally
+	removed.
+
+2001-01-16  Darin Adler  <darin@eazel.com>
+
 	* xml-i18n-merge.in: Fix so it won't parse the
 	comments as translations.
 

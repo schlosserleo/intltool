@@ -54,6 +54,7 @@ if ($LANG=~/^-(.)*/){
     elsif ($LANG eq "--pot" || "$LANG" eq "-P")
     {
         &gen_headers;
+	&generate_pot;
         exit;
     }
     elsif ($LANG eq "--headers"  || "$LANG" eq "-S")
