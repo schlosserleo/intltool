@@ -1,3 +1,10 @@
+2005-01-20  James Henstridge  <james@jamesh.id.au>
+
+	* intltoolize.in: if AC_CONFIG_MACRO_DIR is used in the
+	configure.in file, install intltool.m4 to that macro directory.
+
+	Fixes #160943
+
 2005-01-20  Rodney Dawes  <dobey@novell.com>
 
 	* intltool-update.in.in (echo_n): Add new method to implement the
