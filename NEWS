@@ -1,4 +1,4 @@
-Version 0.10
+Version 0.11
 
 * Rename to intltool (Darin)
 * Fix split line bug (Darin)
@@ -7,6 +7,8 @@ Version 0.10
 * Get rid of "\n" -> "n" escaping logic (Darin)
 * Make update ignore comment lines in POTFILES.in (Darin)
 * Remove "-?" option for compatibility with old Perl (Darin)
+* Fix longstanding undefined variable problem in *ize scripts (Peter Williams)
+
 
 Version 0.9.5
 

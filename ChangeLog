@@ -1,5 +1,18 @@
 2001-10-04  Darin Adler  <darin@bentspoon.com>
 
+	* NEWS: More news, release will be 0.11, not 0.10.
+	* configure.in: Bump version number.
+
+	* tests/cases/Makefile.am: Add missing files so "make
+	distcheck" passes.
+	* tests/results/Makefile.am: Add missing files so "make
+	distcheck" passes.
+
+	* tests/selftest.pl.in: Do the tests in the destination
+	directory, instead of in srcdir.
+
+2001-10-04  Darin Adler  <darin@bentspoon.com>
+
 	* intltool-extract.in.in:
 	* intltool-merge.in.in:
 	* intltool-update.in.in:
