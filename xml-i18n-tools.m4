@@ -80,6 +80,13 @@ AC_SUBST(XML_I18N_MERGE)dnl
 XML_I18N_UPDATE='$(top_builddir)/xml-i18n-update'
 AC_SUBST(XML_I18N_UPDATE)dnl
 
+dnl same deal
+XML_I18N_MERGE_SOUNDLIST_RULE='\%.soundlist : \%.soundlist.in $(top_builddir)/xml-i18n-merge $(top_srcdir)/po/*.po\
+	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< [$]*.soundlist'
+AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
+s%@XML_I18N_MERGE_SOUNDLIST_RULE@%[$]XML_I18N_MERGE_SOUNDLIST_RULE%g
+AC_DIVERT_POP()dnl
+
 AC_PATH_PROG(XML_I18N_TOOLS_PERL, perl)
 if test -z "$XML_I18N_TOOLS_PERL"; then
    AC_MSG_ERROR([perl not found; required for xml-i18n-tools])

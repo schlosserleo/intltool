@@ -1,3 +1,10 @@
+BACK TO HEAD
+____________
+
+All users of xml-i18n-tools from CVS should now get sources from HEAD.
+The stable branch is being retired. There weren't really two branches
+of development.
+
 INITIAL ANNOUNCEMENT
 ____________________
 
@@ -13,11 +20,11 @@ feature, currently only for oaf files.
 * Here's what this package does:
 
 ** Automatically extracts translatable strings from oaf, glade, bonobo
-  ui, nautilus theme and other XML files into the po files.
+  ui, nautilus theme and other XML files into the po files.
 
 ** Automatically merges translations from po files back into .oaf files
-  (encoding to be 7-bit clean). I can also extend this merging
-  mechanism to support other types of XML files.
+  (encoding to be 7-bit clean). I can also extend this merging
+  mechanism to support other types of XML files.
 
 Having the translations directly in the XML file is critical for some
 file formats, and very helpful for others. When one package installs a
@@ -60,12 +67,12 @@ extracted to the .po files.
 steps:
 
 ** Rename your .oafinfo file to .oaf.in and put an underscore before
-   every value property for string attributes
+   every value property for string attributes
 
 ** Add the .oaf.in files to POTFILES.in
 
 ** Put lines like these in every Makefile.am that installs oafinfo
-   files:
+   files:
 
 --- start ----
 

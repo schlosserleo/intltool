@@ -3,8 +3,6 @@
 %define ver		@VERSION@
 %define RELEASE		1
 %define rel		%{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
-%define prefix		/usr
-%define sysconfdir	/etc
 
 Name:		%name
 Summary:	This module contains some utility scripts and assorted auto* magic for internationalizing various kinds of XML files.
@@ -16,7 +14,7 @@ Source: 	%{name}-%{ver}.tar.gz
 URL: 		http://nautilus.eazel.com/
 BuildRoot:	/var/tmp/%{name}-%{ver}-root
 Docdir: 	%{prefix}/doc
-BuildArchitectures: noarch
+BuildArch:      noarch
 
 %description
 ** Automatically extracts translatable strings from oaf, glade, bonobo
@@ -39,6 +37,11 @@ services.  You will need to install this package if you intend to build Nautilus
 from source code.
 
 %changelog
+* Sun Feb 18 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
+- Changes to make the spec file more portable across RPM based
+  systems.  Changes mainly consisted of using macros better, and
+  removing any hard-coded paths.
+
 * Thu Jan 04 2000 Robin * Slomkowski <rslomkow@eazel.com>
 - created this thing
 
@@ -55,8 +58,8 @@ LINGUAS=""
 LANG=""
 export LC_ALL LINGUAS LANG
 
-CFLAGS="$RPM_OPT_FLAGS" ./configure $MYARCH_FLAGS --prefix=%{prefix} \
-	--sysconfdir=%{sysconfdir}
+CFLAGS="$RPM_OPT_FLAGS" ./configure $MYARCH_FLAGS --prefix=%{_prefix} \
+	--sysconfdir=%{_sysconfdir}
 
 if [ "$SMP" != "" ]; then
   (make "MAKE=make -k -j $SMP"; exit 0)
@@ -68,7 +71,7 @@ fi
 %install
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-make prefix=$RPM_BUILD_ROOT%{prefix} sysconfdir=$RPM_BUILD_ROOT%{sysconfdir} install
+make prefix=$RPM_BUILD_ROOT%{_prefix} sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} install
 
 for FILE in "$RPM_BUILD_ROOT/bin/*"; do
 	file "$FILE" | grep -q not\ stripped && strip $FILE
@@ -84,15 +87,10 @@ done
 %files
 
 %defattr(0555, bin, bin)
-%{prefix}/bin/xml-i18n-extract
-%{prefix}/bin/xml-i18n-merge
-%{prefix}/bin/xml-i18n-prepare
-%{prefix}/bin/xml-i18n-toolize
-%{prefix}/bin/xml-i18n-unicodify
-%{prefix}/bin/xml-i18n-update
-%{prefix}/share/xml-i18n-tools/*
+%doc AUTHORS COPYING ChangeLog NEWS README
+%{_bindir}/*
+%{_datadir}/xml-i18n-tools/*
 
 %defattr (0444, bin, bin)
-%doc AUTHORS COPYING ChangeLog NEWS README
 # Should go in a devel package.
-%{prefix}/share/aclocal/*.m4
+%{_datadir}/aclocal/*.m4

@@ -8,25 +8,25 @@ from tarballs don't need xml-i18n-tools, only folks building from cvs.
 
 To use xml-i18n-tools in your module, do the following:
 
-  o Install xml-i18n-tools, and make sure that the macro it installs is 
-    in aclocal's path, or do:
+ o Install xml-i18n-tools, and make sure that the macro it installs is 
+   in aclocal's path, or do:
 
 	export ACLOCAL_FLAGS='-I /usr/local/share/aclocal' 
 
- o  Add these lines to autogen.sh, after the call to gettextize:
+ o Add these lines to autogen.sh, after the call to gettextize:
   
 	echo "Running xml-i18n-toolize"
 	xml-i18n-toolize --copy --force --automake
 
- o  Add this line to configure.in near the top
+ o Add this line to configure.in near the top
  
 	AM_PROG_XML_I18N_TOOLS
 
- o  Add xml-i18n-extract.in, xml-i18n-merge.in and xml-i18n-update.in
-    to EXTRA_DIST in your top-level Makefile.am and also to the
-    top-level .cvsignore. Also add the non-.in versions to .cvsignore
+ o Add xml-i18n-extract.in, xml-i18n-merge.in and xml-i18n-update.in
+   to EXTRA_DIST in your top-level Makefile.am and also to the
+   top-level .cvsignore. Also add the non-.in versions to .cvsignore
  
- o  Add the .xml and .glade files you want translated to POTFILES.in
+ o Add the .xml and .glade files you want translated to POTFILES.in
  
 At this point, strings marked translatable will be automatically
 extracted to the .po files.
@@ -34,14 +34,14 @@ extracted to the .po files.
 To get oaf translation extraction and merging requires a few more steps:
 
  o Rename your .oafinfo (or .oaf) files to .oaf.in and put an
-   underscore before every value property for string attributes
+   underscore before every value property for string attributes
    that should be localized.
 
- o Make sure you have at least on .po file in the "po" directory.
+ o Make sure you have at least one .po file in the "po" directory.
 
  o Add the .oaf.in files to POTFILES.in.
 
- o Put lines like these in every Makefile.am that installs oaf files:
+ o Put lines like these in every Makefile.am that installs oaf files:
  
 	--- start ----
  

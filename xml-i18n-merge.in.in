@@ -260,6 +260,7 @@ sub entity_encode
 {
     my ($pre_encoded) = @_;
 
+    $pre_encoded =~ s/\\(.)/$1/g;
     my @list_of_chars = unpack ('C*', $pre_encoded);
 
     return join ('', map (&entity_encode_int, @list_of_chars));
@@ -267,8 +268,7 @@ sub entity_encode
 
 sub entity_encode_int
 {
-    # FIXME: should probably entity encode more stuff.
-    if ($_ > 127) {
+    if ($_ > 127 || $_ == 34 || $_ == 38) {
 	return "&#" . $_ . ";";
     } else {
 	return chr $_;

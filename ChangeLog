@@ -1,3 +1,176 @@
+2001-05-09  Darin Adler  <darin@eazel.com>
+
+	* Makefile.am: SUBDIRS included "." for a good reason. That's
+	the only way to make sure the scripts are built before the
+	tests directory. The problem was actually a bug in automake
+	1.3 -- this program requires automake 1.4.
+
+2001-05-09  Darin Adler  <darin@eazel.com>
+
+	Rolled all the changes from the stable branch to here. We're
+	going to stop using the stable branch and just develop on HEAD.
+
+	2001-05-09  Darin Adler  <darin@eazel.com>
+
+	Fix bug 8274 (autogen.sh creates recursive makefile on Solaris):
+
+	* Makefile.am: For some reason, SUBDIRS included "." -- no wonder
+	the makefile went on forever!
+
+	2001-05-08  Darin Adler  <darin@eazel.com>
+
+	* tests/cases/.cvsignore: Ignore a generated file.
+
+	2001-05-08  Darin Adler  <darin@eazel.com>
+
+	* tests/cases/Makefile.am:
+	* tests/results/Makefile.am:
+	Added George's tests to the EXTRA_DIST so that "make distcheck"
+	passes.
+
+	2001-05-02  Darin Adler  <darin@eazel.com>
+
+	* xml-i18n-po-Makefile.in.in-patch-2: New version of the gettext
+	0.10.36 (and newer) patch contributed by Stanislav Brabec
+	<utx@penguin.cz>.
+
+	2001-04-27  Darin Adler  <darin@eazel.com>
+
+	A first try at making xml-i18n-tools compatible with the new
+	gettext 0.10.36. I created a new patch and make the toolize
+	script choose the appropriate patch based on the file contents.
+
+	* xml-i18n-tools.Makefile.patch:
+	* xml-i18n-po-Makefile.in.in-patch-1:
+	Renamed the old patch.
+
+	* xml-i18n-po-Makefile.in.in-patch-2:
+	Checked in a new patch that works with gettext 0.10.36.
+
+	* xml-i18n-toolize.in:
+	Added code to use patch2 if "builddir" appears in the file
+	and patch1 if it doesn't.
+
+	* Makefile.am:
+	Add the new files.
+
+	2001-04-10  Christopher James Lahey  <clahey@ximian.com>
+
+	reviewed by: Kenneth Christiansen <kenneth@gnu.org>
+
+	* xml-i18n-update.in.in: Added .etspec to the list of xml file
+	types.
+
+	2001-03-09  Maciej Stachowiak  <mjs@eazel.com>
+
+	reviewed by: George Lebl  <jirka@5z.com>
+
+	* xml-i18n-update.in.in: Handle .directory files properly; needed
+	to xml-i18n-toolize control-center.
+
+	2001-03-01  Arik Devens  <arik@eazel.com>
+
+	reviewed by: Robin * Slomkowski  <rslomkow@eazel.com>
+
+	Fixed bug 6766, xml-i18n-tools spec file needs cleanups.
+	
+	* xml-i18n-tools.spec.in: Added greg leblanc's changes to the spec
+	file.
+
+	2001-03-01  Darin Adler  <darin@eazel.com>
+
+	reviewed by: Maciej Stachowiak <mjs@eazel.com>
+
+	* xml-i18n-merge.in.in: Also encode "&".
+
+	* tests/cases/test.po:
+	* tests/results/merge1.xml:
+	Test case for that.
+
+	2001-03-01  Darin Adler  <darin@eazel.com>
+
+	reviewed by: Maciej Stachowiak <mjs@eazel.com>
+
+	Fixed bug 7230 (opening images in Nautilus fails), which was
+	caused by a translation with a \" sequence in it.
+
+	* xml-i18n-merge.in.in: Handle '\' sequences in the strings
+	from the po file, specifically '\"' for a quote mark.
+
+	* tests/cases/test.po:
+	* tests/results/merge1.xml:
+	Added a test case for the new features.
+
+	2001-02-25  Maciej Stachowiak  <mjs@eazel.com>
+
+	reviewed by: Ian McKellar  <ian@eazel.com>
+
+	* xml-i18n-tools.m4: Reorder things a bit to help the Bonobo
+	build.
+
+	2001-02-25  Maciej Stachowiak  <mjs@eazel.com>
+
+	reviewed by: Seth Nickell  <seth@eazel.com>
+
+	Fixed bugs 6980 (workaround for glade does not work) and 6976
+	(<A0> in README and NEWS).
+	
+	* NEWS, README: Replaced 0xA0 characters with spaces.  
+	* xml-i18n-extract.in.in: improve glade workaround to notice
+	window and label IDs with more than one digit after them. Patch
+	from db@zigo.dhs.org
+
+	2001-02-25  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* configure.in: Bumped version to 0.8.2, this one is required for
+	control-center and gnome-core to work correctly with the Tools.
+	* xml-i18n-prepare.in: do not grep non-existing po files. Write correct
+	merge rule according to extension.
+	* xml-i18n-tools.m4: added macros for .directory and .soundlist files.
+	FIXME: should be better way to do it, these macros are equal.
+
+	2001-02-19  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* xml-i18n-prepare.in: escape "'s in msgid also. fixes #6757. added
+	missing }, and removed check for existance of LL.po file -- to rescue
+	all translations from .desktop files -- newly created files should be
+	added to cvs.
+
+	2001-02-15  Darin Adler  <darin@eazel.com>
+
+	* xml-i18n-update.in.in: Add support for ".ui" files.
+
+	2001-02-15  Darin Adler  <darin@eazel.com>
+
+	* README: Remove silly "ignore non-fatal errors" message.
+
+	2001-02-14  Maciej Stachowiak  <mjs@eazel.com>
+
+	* configure.in: Bumped version to 0.8.1
+
+	2001-02-13  Morten Welinder  <terra@diku.dk>
+
+	* xml-i18n-update.in.in (find_package_name): Only return package
+ 	name when found.
+	(determine_type): Properly return a value and declare locals
+ 	locally.
+	(maintain): Escape a double quote to keep Emacs font-lock happy.
+	(whole file): remove trailing white space.
+
+	2001-02-13  Maciej Stachowiak  <mjs@eazel.com>
+
+	* xml-i18n-update.in.in: Fix some utterly broken code that was
+	trying to find the top level.
+
+	2001-02-13  Maciej Stachowiak  <mjs@eazel.com>
+
+	* xml-i18n-update.in.in: Turn on use strict, fix problems found as
+	a result.
+
+	2001-02-13  Maciej Stachowiak  <mjs@eazel.com>
+
+	* configure.in: Bumped version to 0.8
+	
 2001-04-10  Christopher James Lahey  <clahey@ximian.com>
 
 	* xml-i18n-update.in.in (determine_type): Added etspec to the
@@ -13,13 +186,13 @@
 	* xml-i18n-update.in.in: bug fix - the previous code to extract
 	top_srcdir from the Makefile was wrong.
 
-Sun Apr 04 21:03:00 2001  John Gotts <jgotts@linuxsavvy.com>
+2001-04-04  John Gotts <jgotts@linuxsavvy.com>
 
 	* xml-i18n-tools.spec.in: Should be a noarch.  Also added some missing
 	files.  Additionally, I think there was a problem generating the spec
 	file.
 
-Sun Mar 25 03:18:35 2001  George Lebl <jirka@5z.com>
+2001-03-25  George Lebl <jirka@5z.com>
 
 	* xml-i18n-extract.in.in (type_xml): The message is anything but <,
 	  not anything but _.  This fixes a bug where it would not extract

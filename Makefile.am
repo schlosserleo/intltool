@@ -24,7 +24,8 @@ pkgdata_DATA =					\
 	xml-i18n-extract.in			\
 	xml-i18n-merge.in			\
 	xml-i18n-update.in			\
-	xml-i18n-tools.Makefile.patch		\
+	xml-i18n-po-Makefile.in.in-patch-1	\
+	xml-i18n-po-Makefile.in.in-patch-2	\
 	$(NULL)
 
 

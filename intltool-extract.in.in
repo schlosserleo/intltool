@@ -247,7 +247,7 @@ sub type_glade {
                 # Glade has some bugs, especially it uses translations tags to contain little
                 # non-translatable content. We work around this, by not including these
                 # strings that only includes something like: label4, and window1
-                if ($2 !~ /^(window|label)[0-9]$/) {
+                if ($2 !~ /^(window|label)[0-9]+$/) {
                     $messages{$2} = [];
                 }
             }
