@@ -1,3 +1,8 @@
+2001-02-25  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* xml-i18n-tools.m4: added macros for .directory and .soundlist files.
+	FIXME: should be better way to do it, these macros are equal.
+
 2001-02-19  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* xml-i18n-prepare.in: escape "'s in msgid also. fixes #6757. added
