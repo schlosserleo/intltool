@@ -185,7 +185,7 @@ and merging requires these steps:
         xml_in_files = My_xml_file.xml.in
         xml_DATA = $(xml_in_files:.xml.in=.xml)
 
-        XML_UTF8_XML_KIND=--utf8
+        XML_I18N_XML_KIND=--utf8
         @XML_I18N_MERGE_XML_RULE@
 
         EXTRA_DIST=$(xml_in_files) $(xml_DATA)
@@ -202,9 +202,9 @@ Previous versions of xml-i18n-tools generated XML files whose contents
 were made of the contents of the .po files, without paying attention
 to the encodings used. A single "XML" file could thus have strings in
 different encodings. This broken behavior can be asked for by setting
-XML_UTF8_XML_KIND=--pass-through in the above snippet.
+XML_I18N_XML_KIND=--pass-through in the above snippet.
 
-Setting the XML_UTF8_XML_KIND has no effect if the string [G2] has
+Setting the XML_I18N_XML_KIND has no effect if the string [G2] has
 been given as the second parameter of the AC_PROG_XML_I18N_TOOLS
 macro. In that case, --utf8 is always assumed.
 

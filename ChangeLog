@@ -1,3 +1,7 @@
+2001-08-21  Zbigniew Chyla  <cyba@gnome.pl>
+
+	* README: s/XML_UTF8_XML_KIND/XML_I18N_XML_KIND/
+
 2001-08-19  Maciej Stachowiak  <mjs@noisehavoc.org>
 
 	* xml-i18n-tools.m4: REmove buggy check for xml-i18n-tools 0.9 or
