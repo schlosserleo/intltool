@@ -1,3 +1,8 @@
+2002-03-17  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in: Don't confuse a nonexistent file with an
+	age of 0. Patch from nix@esperi.demon.co.uk.
+
 2002-03-09  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* NEWS: Updated

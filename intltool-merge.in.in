@@ -269,7 +269,7 @@ sub load_cache
 sub get_cached_translation_database
 {
     my $cache_file_age = -M $cache_file;
-    if ($cache_file_age) {
+    if (defined $cache_file_age) {
         if ($cache_file_age <= &get_newest_po_age) {
             &load_cache;
             return;
