@@ -267,9 +267,14 @@ for file in $deep_files; do
       echo "$progname: cannot copy '$pkgdatadir/$file' to '$dirname'" 1>&2
       status=1
     fi
+  else
+    echo "$progname: cannot execute $mkinstalldirs" 1>&2
+    status=1
   fi
 done
-)
+exit $status
+# make sure this subshell exits with the exit value if it failed
+) || exit $?
 
 # FIXME: This probably does not work w/ builddir != srcdir because it
 # gets at source files relative to the current directory.
