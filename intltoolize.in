@@ -243,15 +243,6 @@ for file in $files; do
   fi
 done
 
-if test ! -d intltool-modules; then
-  if $mkdir intltool-modules; then
-    echo "$progname: created intltool-modules" 1>&2
-  else
-    echo "$progname: unable to create 'intltool-modules' directory" 1>&2
-    exit 1
-  fi
-fi
-cd intltool-modules || exit 1
 exit $status
 # make sure this subshell exits with the exit value if it failed
 ) || exit $?

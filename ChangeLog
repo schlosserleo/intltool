@@ -1,3 +1,8 @@
+2004-01-06  Tommi Komulainen  <tommi.komulainen@iki.fi>
+
+	* intltoolize.in: Don't create intltool-modules directory, it's no
+	longer needed. (#130694)
+
 2004-01-05  Jonathan Blandford  <jrb@redhat.com>
 
 	* intltool.m4: fix broken shell syntax.
