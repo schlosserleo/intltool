@@ -9,6 +9,7 @@ EXTRA_DIST =					\
 	extract8.glade				\
 	extract9.xml				\
 	extract10.templates_			\
+	fr.po					\
 	fr_BE.po				\
 	fr_FR.po				\
 	merge1.xml.in				\
@@ -20,6 +21,7 @@ EXTRA_DIST =					\
 	merge7.xml.in				\
 	merge8.keys.in				\
 	merge10.templates_			\
+	merge10.templates			\
 	schemasmerge1.po			\
 	schemasmerge2.po			\
 	test.po 				\
