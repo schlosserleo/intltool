@@ -40,8 +40,6 @@ my $VERSION = "@VERSION@";
 use strict; 
 use Getopt::Long;
 use Text::Wrap;
-use POSIX qw(locale_h);
-setlocale (LC_ALL, "C");
 
 ## Scalars used by the option stuff
 my $HELP_ARG = 0;
