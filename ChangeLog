@@ -1,5 +1,13 @@
 2004-06-12  Rodney Dawes  <dobey@novell.com>
 
+	* intltool-merge.in.in:
+	* intltool-prepare.in:
+	* intltool-update.in.in:
+	Add perl mode comment for emacs to be consistent with the
+	intltool-extract.in.in script so we can edit properly
+	
+2004-06-12  Rodney Dawes  <dobey@novell.com>
+
 	* README: Document the changes to intltool.m4 for declaring that
 	an application does not need the XML processing features of intltool
 
