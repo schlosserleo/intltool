@@ -28,6 +28,7 @@ pkgdata_DATA =					\
 	intltool-po-Makefile.in.in-patch-1	\
 	intltool-po-Makefile.in.in-patch-2	\
 	intltool-po-Makefile.in.in-patch-3	\
+	intltool-po-Makefile.in.in-patch-4	\
 	xml-i18n-po-Makefile.in.in-patch-1	\
 	xml-i18n-po-Makefile.in.in-patch-2	\
 	$(NULL)
