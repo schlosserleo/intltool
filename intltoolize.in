@@ -124,17 +124,23 @@ EOF
   esac
 done
 
-if test ! -f configure.in; then
-  echo "$progname: 'configure.in' does not exist" 1>&2
-  echo "$help" 1>&2
-  exit 1
+if test -f configure.ac; then
+    configure="configure.ac"
+else
+    if test -f configure.in; then
+	configure="configure.in"
+    else
+	echo "$progname: neither 'configure.ac' nor 'configure.in' exists" 1>&2
+	echo "$help" 1>&2
+	exit 1
+    fi
 fi
 
 
 files='intltool-extract.in intltool-merge.in intltool-update.in'
 
 auxdir=.
-auxdirline=`egrep '^AC_CONFIG_AUX_DIR' configure.in 2>/dev/null`
+auxdirline=`egrep '^AC_CONFIG_AUX_DIR' $configure 2>/dev/null`
 if test -n "$auxdirline"; then
   # Handle explicit AC_CONFIG_AUX_DIR settings.
   auxdir=`echo "$auxdirline" | sed 's/^AC_CONFIG_AUX_DIR(\([^)]*\)).*$/\1/'`
@@ -169,9 +175,9 @@ else
 fi
 
 if test -z "$automake"; then
-  if egrep '^AC_PROG_INTLTOOL' configure.in >/dev/null 2>&1; then :
+  if egrep '^AC_PROG_INTLTOOL' $configure >/dev/null 2>&1; then :
   else
-    echo "Remember to add 'AC_PROG_INTLTOOL' to 'configure.in'."
+    echo "Remember to add 'AC_PROG_INTLTOOL' to $configure."
   fi
 
   if grep 'generated automatically by aclocal' aclocal.m4 >/dev/null 2>&1; then
