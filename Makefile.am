@@ -2,7 +2,6 @@
 
 aclocal_macros = xml-i18n-tools.m4
 
-EXTRA_DIST = $(aclocal_macros) xml-i18n-toolize.in xml-i18n-extract.in xml-i18n-merge.in xml-i18n-update.in
 CLEANFILES = xml-i18n-toolize xml-i18n-extract xml-i18n-merge xml-i18n-update
 
 # These are required by xml-i18n-toolize.
@@ -15,3 +14,11 @@ aclocal_DATA = $(aclocal_macros)
 # The  xml-i18n-tools distributor.
 bin_SCRIPTS = xml-i18n-toolize
 
+EXTRA_DIST = \
+	$(aclocal_macros) \
+	xml-i18n-toolize.in \
+	xml-i18n-extract.in \
+	xml-i18n-merge.in \
+	xml-i18n-update.in \
+	$(pkgdata_DATA) \
+	$(NULL)

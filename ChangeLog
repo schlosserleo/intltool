@@ -1,5 +1,9 @@
 2001-01-04  Robin * Slomkowski  <rslomkow@eazel.com>
 
+	* Makefile.am: added Makefile.patch to EXTRA_DISTS
+
+2001-01-04  Robin * Slomkowski  <rslomkow@eazel.com>
+
 	* configure.in: added support for a spec file.
 	* xml-i18n-tools.spec.in: added a specfile.
 
