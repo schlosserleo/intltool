@@ -73,6 +73,15 @@ if test -z "`$INTLTOOL_PERL -v | fgrep '5.' 2> /dev/null`"; then
    AC_MSG_ERROR([perl 5.x required for xml-i18n-tools])
 fi
 
+# Remove Intltool [] tags from po/POTFILES
+AC_OUTPUT_COMMANDS_PRE([
+	changequote(,)
+	mv -f po/POTFILES po/POTFILES.tmp
+	sed -e 's/\[.*\] +//' < po/POTFILES.tmp > po/POTFILES
+	rm -f po/POTFILES.tmp
+	changequote([,])
+])
+
 dnl  manually sed perl in so people don't have to put the xml-i18n-tools scripts in their 
 dnl  AC_OUTPUT
 AC_OUTPUT_COMMANDS([

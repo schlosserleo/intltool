@@ -1,3 +1,7 @@
+2002-01-24  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* intltool.m4: Remove intltool [] tags from POTFILES 
+
 2002-01-22  Darin Adler  <darin@bentspoon.com>
 
 	* intltool-merge.in.in: Don't use NDBM_File unless the
