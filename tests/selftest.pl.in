@@ -116,5 +116,11 @@ $case = "extract6.glade";
 system("/usr/bin/perl ../xml-i18n-extract --type=gettext/glade --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
 check_result($case);
 
+print "7. Checking output from dia sheet style xml-file:             ";
+
+$case = "merge5.sheet";
+system("/usr/bin/perl ../xml-i18n-merge -x --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
+check_result_output($case);
+
 exit $failed;
 

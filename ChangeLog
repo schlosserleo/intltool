@@ -3,6 +3,16 @@
 	* xml-i18n-update.in.in: Now understands .sheet files (dia) are
 	XML files.
 	* USED: added dia.	
+
+	* tests/cases/.cvsignore:
+	* tests/cases/merge5.sheet.in (NEW): 
+	* tests/cases/fr.po (NEW):
+	* tests/results/merge5.sheet (NEW):
+	* tests/selftest.pl.in: Added a new test case for dia sheet files
+	merging, and correctness with respect to UTF-8 encoding in XML
+	files. It would be excellent if someone from a non-latin1 language
+	could update this test ! 
+	Please note that this test currently fails.
 	
 2001-08-10  Darin Adler  <darin@bentspoon.com>
 
