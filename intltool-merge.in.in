@@ -643,8 +643,11 @@ sub getAttributeString
 		if ($translation) {
 		    $translation = entity_encode($translation);
 		    $string = $translation;
+                    $$translate = 2;
 		}
-	    }
+            } else {
+                 $$translate = 1 if ($translate && (!$$translate)); # watch not to "overwrite" if $translate == 2
+            }
 	}
 	
 	$result .= " $key=$quote$string$quote";

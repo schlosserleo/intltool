@@ -1,3 +1,8 @@
+2004-11-05  Danilo Šegan  <dsegan@gmx.net>
+
+	* intltool-merge.in.in (getAttributeString): I missed some parts
+	of the patch during commit of #155843 fix (2004-10-23).
+
 2004-07-27  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS:
