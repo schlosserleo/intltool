@@ -34,7 +34,7 @@ $| = 1;
 
 my $failed = 0;
 
-my $srcdir = $ENV{"srcdir"} or ".";
+my $srcdir = $ENV{"srcdir"} || ".";
 
 sub check_result($)
 {

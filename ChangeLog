@@ -1,5 +1,9 @@
 2001-07-12  Darin Adler  <darin@bentspoon.com>
 
+	* tests/selftest.pl.in: Fix an "or" that should be "||".
+
+2001-07-12  Darin Adler  <darin@bentspoon.com>
+
 	* autogen.sh: Don't run autoheader because we have no headers.
 
 2001-06-07  Darin Adler  <darin@bentspoon.com>
@@ -49,7 +53,9 @@
 	errors so it works with Ximian Setup Tools.
 
 2001-05-11  Laszlo Kovacs <laszlo.kovacs@sun.com>
+
 	patch reviewed by Kenneth Christiansen <kenneth@gnu.org>
+
 	* xml-i18n-update.in.in: added proper handling of files
 	with .xml extension
 	* xml-i18n-tools.m4: added macro to merge back translations
