@@ -823,7 +823,7 @@ sub SubstituteVariable
     # variables elsewhere.
     while (<CONF>)
     {
-	if (/^(\w+)=(\S+)/)
+	if (/^(\w+)=(.*)$/)
 	{
 	    $varhash{$1} = $2;
 	}
@@ -920,13 +920,15 @@ sub FindPackageName
 	($name, $version) = ($1, $2);
 	($varhash{"AC_PACKAGE_NAME"} = $name) =~ s/[\[\]\s]//g;
 	($varhash{"AC_PACKAGE_VERSION"} = $version) =~ s/[\[\]\s]//g;
-    }
+ 	($varhash{"VERSION"} = $version) =~ s/[\[\]\s]//g;
+   }
     
     if ($conf_source =~ /^AC_INIT\(([^,\)]+),([^,\)]+)/m) 
     {
 	($name, $version) = ($1, $2);
 	($varhash{"AC_PACKAGE_NAME"} = $name) =~ s/[\[\]\s]//g;
 	($varhash{"AC_PACKAGE_VERSION"} = $version) =~ s/[\[\]\s]//g;
+ 	($varhash{"VERSION"} = $version) =~ s/[\[\]\s]//g;
     }
 
     # \s makes this not work, why?

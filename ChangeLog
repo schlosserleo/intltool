@@ -1,3 +1,13 @@
+2004-05-27  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-update.in.in (SubstituteVariable): Grab the entire line
+	after the = in the variable declaration, not just up to the first bit
+	of whitespace (#143245)
+	(FindPackageName): Substitute the VERSION variable in the same way that
+	we use AC_PACKAGE_VERSION (#143248)
+
+	Fixes #143245 and #143248
+
 2004-05-26  Rodney Dawes  <dobey@novell.com>
 
 	* intltool-update.in.in (FindPackageName): Fix the regex clauses
