@@ -1,3 +1,8 @@
+Version 0.31.1
+
+* Switch to gnome-common for autogen.sh so we can detect automake
+  versions better -- bug #145027 (Jordi Mallach)
+
 Version 0.31
 
 * Usage of [no-xml] option in AC_PROG_INTLTOOL to avoid requiring
