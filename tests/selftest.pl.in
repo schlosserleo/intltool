@@ -34,10 +34,12 @@ $| = 1;
 
 my $failed = 0;
 
+my $srcdir = $ENV{"srcdir"} or ".";
+
 sub check_result($)
 {
     my $testcase = $_[0];
-    my $result =`diff -Nup results/$testcase.h cases/$testcase.h`;
+    my $result =`diff -Nup $srcdir/results/$testcase.h $srcdir/cases/$testcase.h`;
     
     if ($? == 0 && $result eq "") { 
 	print "[OK]\n"; ## diff was empty, ie. files were equal
@@ -51,7 +53,7 @@ sub check_result_output($)
 {
     my $testcase = $_[0];
     $testcase =~ s/\.in//;
-    my $result =`diff -Nup results/$testcase cases/$testcase`;
+    my $result =`diff -Nup $srcdir/results/$testcase $srcdir/cases/$testcase`;
 
     if ($? == 0 && $result eq "") {
         print "[OK]\n"; ## diff was empty, ie. files were equal
@@ -77,7 +79,7 @@ unlink "errors";
 print "1. Checking output from simple desktop file:                  ";
 
 $case = "extract1.desktop";
-system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
 check_result($case);
 
 ## 2. Extract/Simple desktop-like file
@@ -85,7 +87,7 @@ check_result($case);
 print "2. Checking output from simple desktop-like file:             ";
 
 $case = "extract2.keyprop";
-system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../xml-i18n-extract --type=gettext/ini --quiet --update $srcdir/cases/$case") == 0 or $failed = 1;
 check_result($case);
 
 ## 3. Extract/Simple desktop-like file
@@ -93,7 +95,7 @@ check_result($case);
 print "3. Checking output from simple xml-file:                      ";
 
 $case = "merge1.xml";
-system("/usr/bin/perl ../xml-i18n-merge -o --quiet cases/ cases/$case.in cases/$case") == 0 or $failed = 1;
+system("/usr/bin/perl ../xml-i18n-merge -o --quiet $srcdir/cases $srcdir/cases/$case.in $srcdir/cases/$case") == 0 or $failed = 1;
 check_result_output($case);
 
 exit $failed;
