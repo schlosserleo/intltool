@@ -1,3 +1,8 @@
+2002-01-29  Darin Adler  <darin@bentspoon.com>
+
+	* NEWS: Updated for 0.14 release.
+	* configure.in: Bump to 0.14.
+
 2002-01-29  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* intltool.m4: use AC_DIVERT to access config.status only when the

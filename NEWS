@@ -1,3 +1,8 @@
+Version 0.14
+
+* Fix to work well with both new and old autoconf (ERDI Gergo)
+
+
 Version 0.13
 
 * Handle desktop file entries with regexp metacharacters (Darin)
