@@ -107,7 +107,7 @@ sub place_normal {
 
 ## Sub for printing release information
 sub version{
-    print "${PROGRAM} (${PACKAGE} ${VERSION}\n";
+    print "${PROGRAM} (${PACKAGE}) ${VERSION}\n";
     print "Written by Maciej Stachowiak and Kenneth Christiansen, 2000.\n\n";
     print "Copyright (C) 2000 Free Software Foundation, Inc.\n";
     print "Copyright (C) 2000, 2001 Eazel, Inc.\n";
@@ -118,7 +118,7 @@ sub version{
 
 ## Sub for printing usage information
 sub help{
-    print "Usage: xml-i18n-merge [OPTIONS] PO_DIRECTORY FILENAME OUTPUT_FILE\n";
+    print "Usage: ${PROGRAM} [OPTIONS] PO_DIRECTORY FILENAME OUTPUT_FILE\n";
     print "Generates an xml file that includes translated versions of some attributes,\n";
     print "from an untranslated source and a po directory that includes translations.\n";
     print "  -V, --version                shows the version\n";
@@ -134,7 +134,7 @@ sub help{
 ## Sub for printing error messages
 sub error{
 #   print "xml-i18n-merge: invalid option @ARGV\n";
-    print "Try `xml-i18n-merge --help' for more information.\n";
+    print "Try `${PROGRAM} --help' for more information.\n";
     exit;
 }
 

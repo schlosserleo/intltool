@@ -1,5 +1,14 @@
 2001-01-24  Gediminas Paulauskas <menesis@delfi.lt>
 
+	* xml-i18n-*.in: use ${PROGRAM} instead of directly specifying
+	name. Also recognize *.directory files.
+	* xml-i18n-prepare: now generates <desktop>.in files, adds them
+	to POTFILES.in, and <desktop> -- to .cvsignore. Add only if that
+	line does not exist in file. Here <desktop> is .desktop, .directory,
+	.soundlist and .keys.
+
+2001-01-24  Gediminas Paulauskas <menesis@delfi.lt>
+
 	* xml-i18n-prepare: initial version of utility which
 	helps convert apps to xml-i18n-tools and save
 	desktop entries into po files.

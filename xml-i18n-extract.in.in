@@ -157,7 +157,7 @@ sub help{
 ## Sub for printing error messages
 sub error{
 #   print "xml-i18n-extract: invalid option @ARGV\n";
-    print "Try `xml-i18n-extract --help' for more information.\n";
+    print "Try `${PROGRAM} --help' for more information.\n";
     exit;
 }
 
@@ -325,5 +325,4 @@ sub msg_write {
         }
     }
 }
-
 
