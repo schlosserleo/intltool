@@ -1,5 +1,10 @@
 2003-12-16  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
+	* intltool-update.in.in: Fixed some FIXME's in the code.
+	Did my best at not breaking anything - ie. performed some tests.
+
+	Made it recognize .py files.
+	
 	* intltool.m4: Changed to work with auxdir. 
 	Patch from Kees Cook (#116362).
 
