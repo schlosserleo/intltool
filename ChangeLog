@@ -1,5 +1,14 @@
 2001-01-03  Maciej Stachowiak  <mjs@eazel.com>
 
+	* AUTHORS: Added Darin since he did a lot of the design and
+	implementation work.
+	
+	* xml-i18n-tools.Makefile.patch: New version based on
+	Darin's Nautilus-customized version, which avoids the .headerlock mess and
+	simplifies things.
+
+2001-01-03  Maciej Stachowiak  <mjs@eazel.com>
+
 	Initial checkin of xml-i18n system.
 	
 	* .cvsignore: Files to ignore.
