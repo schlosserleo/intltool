@@ -687,6 +687,7 @@ sub GeneratePOTemplate
     my $xgettext_command = join ' ', @xgettext_argument;
 
     # intercept xgettext error message
+    print "Running $xgettext_command\n" if $VERBOSE;
     my $xgettext_error_msg = `$xgettext_command 2>\&1`;
     my $command_failed = $?;
 
