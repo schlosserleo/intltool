@@ -1,3 +1,8 @@
+Version 0.18
+
+* Updated tests to use embedded markup in translatable messages. (Sven Neumann)
+* Made the version check more portable. (ERDI Gergo, Jacob Bergman)
+
 
 Version 0.17
 

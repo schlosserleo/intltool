@@ -1,3 +1,8 @@
+2002-03-09  Kenneth Rohde Christiansen  <kenneth@gnu.org>
+
+	* NEWS: Updated
+	* configure.in: Bumped version.
+
 2002-03-07  Sven Neumann  <sven@gimp.org>
 
 	* tests/cases/extract7.xml
