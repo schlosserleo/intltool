@@ -1,3 +1,11 @@
+=== intltool 0.23 ===
+
+2002-11-01  Kenneth Christiansen <kenneth@gnu.org>
+
+	* tests/*/Makefile.am: Fixed make distcheck.
+	* NEWS: Updated news.
+	* configure.in: Changed release version.
+
 2002-10-22  Kenneth Christiansen <kenneth@gnu.org>
 
 	* xml-i18n-toolize.in: I think it works with

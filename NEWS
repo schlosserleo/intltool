@@ -1,3 +1,18 @@
+Version 0.23
+
+* gettextize 4.x work (Kenneth).
+* Build system fixes (Kenneth).
+* Recognise the "xml:space" attribute and preserve whitespace 
+  if set to "preserve" (Mark McLoughlin).
+* GConf schemas handling changes as described in bug #94611. (Yanko).
+* Added support for rfc822deb format (Denis Barbier).
+* Use charset.alias if available (Denis Barbier, Jacob Berkman).
+* Add support for 'default' tags #89747 (Kenneth).
+* Spec file cleanup #48446. (Gregory Leblanc).
+* Hardcode aclocal-1.4/automake-1.4 so that users with both automake 1.6 
+  and 1.4 installed get the right automake. (Havoc).
+* Other bugfixes (Kjartan Maraas).
+
 Version 0.22
 
 * Added support for translation of descriptions used by ATK in glade files
