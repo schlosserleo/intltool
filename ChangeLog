@@ -1,5 +1,10 @@
 2001-02-15  Darin Adler  <darin@eazel.com>
 
+	* configure.in: Rolling back to 0.7. The 0.8.1 verson is
+	on the branch, not here on HEAD.
+
+2001-02-15  Darin Adler  <darin@eazel.com>
+
 	* README: Remove silly "Ignore non fatal errors" message.
 	* configure.in: Bump version to 0.8.1 so this version is
 	seen as newer than the recent release. I didn't bump all
