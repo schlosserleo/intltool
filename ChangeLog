@@ -1,3 +1,24 @@
+2001-10-29  Darin Adler  <darin@bentspoon.com>
+
+	* intltool-merge.in.in:
+	Major rewrite. Handle entities better, handle multiline entries
+	in .po files better. Handle multiple translations within the
+	same element in an oaf-style file better.
+
+	* tests/cases/merge6.po: Fix test case since we now decode entities
+	properly for the .po file entries.
+
+	* tests/cases/test.po: Remove _File test case since it requires
+	something we haven't even designed -- translating attributes for a
+	non-empty XML node. Change merge7 part of test to use a more realistic
+	msgstr line.
+
+	* tests/results/merge1.xml: Add all the translations that the old
+	version was failing to include.
+
+	* tests/results/merge7.xml: Took out some whitespace that is no longer
+	preserved by the merging process.
+
 2001-10-29  jacob berkman  <jacob@ximian.com>
 
 	* intltool-update.in.in: add support for a --gettext-package

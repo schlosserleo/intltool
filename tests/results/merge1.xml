@@ -18,6 +18,11 @@
 	    tip="Close the current file"
 	    pixtype="stock" pixname="Close"
 	    accel="*Control*w"/>
+	<cmd name="DLG_FileClose-test"
+	    label="Luk"
+	    tip="Close the current file"
+	    pixtype="stock" pixname="Close"
+	    accel="*Control*w"/>
     </commands>
 
     <menu>
@@ -30,6 +35,9 @@
 
 	    <menuitem name="ViewZoom" verb=""
 		label="_Zoom..."
+		tip="Zoom the spreadsheet in or out"/>
+	    <menuitem name="ViewZoom-test" verb=""
+		label="Zoom"
 		tip="Zoom the spreadsheet in or out"/>
 
 	    <menuitem name="ViewNewShared" verb=""
@@ -52,6 +60,11 @@
 	    label="New"
 	     tip="Create a new workbook"
 	    verb="FileNew"/>
+	<toolitem name="New-test"
+	    pixtype="stock" pixname="New"
+	    label="Ny"
+	     tip="Create a new workbook"
+	    verb="FileNew"/>
 
 	<separator/>
 
@@ -60,11 +73,21 @@
 	    label="Print"
 	    tip="Print the workbook"
 	    verb="FilePrint"/>
+	<toolitem name="Print-test"
+	    pixtype="stock" pixname="Print"
+	    label="Udskriv"
+	    tip="Print the workbook"
+	    verb="FilePrint"/>
 
 	<toolitem name="PrintPreview"
 	    pixtype="file" pixname="font-bold-f.png"
 	    label="Print Preview"
 	    tip="Print preview"
+	    verb="FilePrintPreview"/>
+	<toolitem name="PrintPreview-test"
+	    pixtype="file" pixname="font-bold-f.png"
+	    label="Vis udskrift"
+	    tip="Eksempel"
 	    verb="FilePrintPreview"/>
 
 	<separator/>
@@ -72,6 +95,11 @@
 	<toolitem name="Copy"
 	    pixtype="stock" pixname="Copy"
 	    label="Copy"
+	    tip="Copy the current selection to the clipboard"
+	    verb="EditCopy"/>
+	<toolitem name="Copy-test"
+	    pixtype="stock" pixname="Copy"
+	    label="Kopi&#233;r"
 	    tip="Copy the current selection to the clipboard"
 	    verb="EditCopy"/>
 

@@ -96,11 +96,6 @@ msgstr ""
 msgid "_Close"
 msgstr "Luk"
 
-#: po/abiword.xml.h:22
-#, fuzzy
-msgid "_File"
-msgstr "Fil"
-
 #: po/abiword.xml.h:23
 #, fuzzy
 msgid "_Zoom..."
@@ -114,7 +109,9 @@ msgstr ""
 msgid "Fax"
 msgstr "Translated Fax"
 
-msgid "Nearly all image operations are performed by right-clicking on the image. And don't worry, you can undo most mistakes..."
+msgid ""
+"Nearly all image operations are performed by right-clicking on the image. "
+"And don't worry, you can undo most mistakes..."
 msgstr "You are so very lucky to be using this excellent program."
 
 #~ msgid " Auto Update"
