@@ -606,7 +606,7 @@ sub parseTree
     my $fh        = shift;
     my $ref       = shift;
     my $depth     = shift || 0;
-    my $language  = shift;
+    my $language  = shift || "";
     my $indent    = 3;
     my $not_cdata = 0;
 
@@ -688,7 +688,7 @@ sub parseTree
 
                     if ($MULTIPLE_OUTPUT && $lang ne "$language") {
                         next;
-                    }
+		    }
 
                     print $fh " " x ($depth * $indent), "<", $current_tag, " xml:lang=\"", $lang, "\"";
                     $must_end_tag = $depth;
@@ -855,23 +855,25 @@ sub xml_merge_output
 {
     my $source;
 
-	if ($MULTIPLE_OUTPUT) {
+    if ($MULTIPLE_OUTPUT) {
         for my $lang (sort keys %po_files_by_lang) {
-            open OUTPUT, ">$OUTFILE-$lang" or die "Cannot open $OUTFILE-$lang: $!\n";
-        	my $tree = readXml($FILE);
+	    if ( ! -e $lang ) {
+	        mkdir $lang or die "Cannot create subdirectory $lang: $!\n";
+            }
+            open OUTPUT, ">$lang/$OUTFILE" or die "Cannot open $lang/$OUTFILE: $!\n";
+            my $tree = readXml($FILE);
             print OUTPUT qq{<?xml version="1.0" encoding="UTF-8"?>\n};
-        	parseTree(\*OUTPUT, $tree, 0, $lang);
+            parseTree(\*OUTPUT, $tree, 0, $lang);
             close OUTPUT;
-            print "CREATED $OUTFILE-$lang\n";
+            print "CREATED $lang/$OUTFILE\n";
         }
-    } else {
-        open OUTPUT, ">$OUTFILE" or die "Cannot open $OUTFILE: $!\n";
-    	my $tree = readXml($FILE);
-        print OUTPUT qq{<?xml version="1.0" encoding="UTF-8"?>\n};
-    	parseTree(\*OUTPUT, $tree, 0);
-        close OUTPUT;
-        print "CREATED $OUTFILE\n";
-    }
+    } 
+    open OUTPUT, ">$OUTFILE" or die "Cannot open $OUTFILE: $!\n";
+    my $tree = readXml($FILE);
+    print OUTPUT qq{<?xml version="1.0" encoding="UTF-8"?>\n};
+    parseTree(\*OUTPUT, $tree, 0);
+    close OUTPUT;
+    print "CREATED $OUTFILE\n";
 }
 
 sub keys_merge_translations

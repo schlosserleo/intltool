@@ -1,4 +1,13 @@
-2003-11-05  Brian Cameron <Brian.Cameron@sun.com>
+2003-11-11 Bill Haneman <billh@gnome.org> 
+
+	* intltool.m4:
+	Added "-m" flag to INTLTOOL_KBD_RULE.
+
+	* intltool-merge.in.in:
+	Changed "-m" behavior to write (using the original 
+	filenames) to locale-specific directories.
+
+2003-11-10  Brian Cameron <Brian.Cameron@sun.com>
 
 	* intltool-merge.in.in
 	Fixed bug which caused --multiple-output to break.
