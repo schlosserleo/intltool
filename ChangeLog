@@ -1,3 +1,10 @@
+2001-02-15  Darin Adler  <darin@eazel.com>
+
+	* README: Remove silly "Ignore non fatal errors" message.
+	* configure.in: Bump version to 0.8.1 so this version is
+	seen as newer than the recent release. I didn't bump all
+	the version numbers strewn throughout other source files.
+
 2001-02-09  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* xml-i18n-prepare.in: new added fix_makefiles, which does changes in

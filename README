@@ -15,7 +15,7 @@ To use xml-i18n-tools in your module, do the following:
 
  o  Add these lines to autogen.sh, after the call to gettextize:
   
-	echo "Running xml-i18n-toolize... Ignore non-fatal messages."
+	echo "Running xml-i18n-toolize"
 	xml-i18n-toolize --copy --force --automake
 
  o  Add this line to configure.in near the top
