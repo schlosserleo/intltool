@@ -1,3 +1,11 @@
+2002-03-07  Sven Neumann  <sven@gimp.org>
+
+	* tests/cases/extract7.xml
+	* tests/cases/merge7.xml.in
+	* tests/results/extract7.xml.h
+	* tests/results/merge7.xml: updated tests to use embedded markup in
+	translatable messages.
+
 2002-03-06  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* intltool.m4: Made the version check more portable.
