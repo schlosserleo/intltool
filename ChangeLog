@@ -1,5 +1,10 @@
 2005-01-23  Rodney Dawes  <dobey@novell.com>
 
+	* NEWS:
+	* configure.in: Up version to 0.33 for release
+
+2005-01-23  Rodney Dawes  <dobey@novell.com>
+
 	* INSTALL: Remove this automake generated file from CVS
 
 	* Makefile.am (SUBDIRS): Remove doc-i18n-tool

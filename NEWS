@@ -1,3 +1,13 @@
+Version 0.33
+
+* Fix support for srcdir != builddir during make dist/distcheck
+  -- bug #159846 (Rodney Dawes)
+* Ignore empty strings in XML files that are marked for translation
+  -- bug #163689 (Miloslav Trmac)
+* Add support for AC_CONFIG_MACRO_DIR to intltoolize
+  -- bug #160943 (James Henstridge)
+* Re-implement "echo -n" in perl for portability
+  -- bug #162027 (Rodney Dawes)
 * Fix local mode
   -- bug #163981 (Jeremy Katz)
 * Fix nested XML tags translation when only attributes are marked for 
