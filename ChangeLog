@@ -1,3 +1,8 @@
+2002-11-02  Kenneth Christiansen <kenneth@skummelt.no>
+
+	* intltool/tests/cases/Makefile.am: 
+	Removed a file that was included by mistake.
+
 === intltool 0.23 ===
 
 2002-11-01  Kenneth Christiansen <kenneth@gnu.org>
