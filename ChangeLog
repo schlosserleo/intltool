@@ -1,3 +1,16 @@
+2002-10-20  Mark McLoughlin  <mark@skynet.ie>
+
+	* intltool-extract.in.in:
+	(type_xml): recognise the "xml:space" attribute
+	and preserve whitespace if set to "preserve".
+	(msg_write): pass -1 as the limit to split so
+	trailing whitespace is preserved. Fixes #95886.
+
+	* tests/cases/extract9.xml:
+	* tests/results/extract9.xml.h:
+	* tests/selftest.pl.in: add a test case for the
+	above.
+
 2002-10-16  Yanko Kaneti  <yaneti@declera.com>
 
 	* tests/cases/test.schemas.in:

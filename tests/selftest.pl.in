@@ -161,4 +161,9 @@ $case = "test.schemas";
 system("@PERL@ ../intltool-merge -s --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
+print "17. Extract messages from a xml file using the xml:space attribute:  ";
+$case = "extract9.xml";
+system("@PERL@ ../intltool-extract --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
 exit $failed;
