@@ -2,6 +2,19 @@
 
 	* NEWS: Update for bug fix
 
+	* intltool-update.in.in (isNotValidMissing): Add this function to
+	intltool-update so we can check for special directories and avoid
+	complaining that files with translations are missing from them
+	(FindLeftoutFiles): Add calls to check isNotValidMissing before pushing
+	files onto the stack of missing files, so that we don't include files
+	in special directories that shouldn't be in POTFILES.in
+
+	Fixes #157278
+
+2004-11-04  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS: Update for bug fix
+
 	* intltool.m4: Rename AC_PROG_INTLTOOL to IT_PROG_INTLTOOL and add a
 	definition for AC_PROG_INTLTOOL to just call IT_PROG_INTLTOOL as a
 	means of deprecation (this is what libtool does for AM_PROG_LIBTOOL)

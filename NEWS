@@ -1,3 +1,6 @@
+* Check to avoid whining about {arch} and $PACKAGE-$VERSION dist directories
+  when looking for files missing from POTFILES.in
+  -- bug #157278 (Rodney Dawes)
 * Deprecate AC_PROG_INTLTOOL for IT_PROG_INTLTOOL
   -- bug #151508 (Rodney Dawes)
 * Add new INTLTOOL_XML_NOMERGE_RULE for translating XML files without
