@@ -1,5 +1,14 @@
 2004-01-06  Denis Barbier  <barbier@linuxfr.org>
 
+	* intltool-extract.in.in, tests/cases/extract10.templates_,
+	  tests/cases/fr.po, tests/results/extract10.templates_.h,:
+	  Added framework to allow comments in source files, which are
+	  automatically added to PO files in order to give instructions
+	  to translators.  Each format has to define its own comment
+	  parsing, only rfc822deb currently implements this new feature.
+
+2004-01-06  Denis Barbier  <barbier@linuxfr.org>
+
 	* intltool-extract.in.in, intltool-merge.in.in,
 	  tests/results/merge10.templates:  Apply changes to rfc822deb
 	  formatted files to match current Debian usage.
