@@ -1,5 +1,12 @@
 2002-02-25  Darin Adler  <darin@bentspoon.com>
 
+	* intltool-merge.in.in: Write out a message to make it clear what's
+	happening when we find an old cache file and don't use it. I was
+	seeing some strange stuff, and this message might help me understand
+	more clearly what's going on.
+
+2002-02-25  Darin Adler  <darin@bentspoon.com>
+
 	* NEWS: Notes.
 	* configure.in: Bump version.
 
