@@ -1,3 +1,9 @@
+2003-08-03  Abel Cheung  <maddog@linux.org.hk>
+
+	* doc/*.8:
+	  Updated manpages to reflect current options.
+	* ChangeLog: convert to UTF-8.
+
 2003-06-02  Kenneth Rohde Christiansen  <kenneth@gnu.org>
 
 	* doc/I18N-HOWTO: Updated with suggestion from gettext maintainer
@@ -70,7 +76,7 @@
 	* intltool-po-Makefile.in.in-patch-5: Correct the invocation of
 	INTLTOOL_MERGE. Fixes bug #106898.
 
-2003-02-25  Alberto Manuel Brand„o Simıes  <albie@alfarrabio.di.uminho.pt>
+2003-02-25  Alberto Manuel Brand√£o Sim√µes  <albie@alfarrabio.di.uminho.pt>
 
 	* intltool-extract.in.in (type_xml): Extract attributes when there
 	are spaces arount the equal sign;
@@ -483,7 +489,7 @@ Wed Nov 20 15:05:36 2002  Jonathan Blandford  <jrb@redhat.com>
 	- Perform variable substitutions when determining package name.
 	(fixes #66155 and #78926)
 
-2002-03-13  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2002-03-13  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* intltool-update.in.in: We look also at AC_INIT to get the package
 	name.
@@ -872,7 +878,7 @@ Wed Nov 20 15:05:36 2002  Jonathan Blandford  <jrb@redhat.com>
 	* intltool-merge.in.in: Fix regexp so we don't run into
 	trouble when desktop file entries have metacharacters in them.
 
-2001-11-13  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-11-13  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* USED: gedit's HEAD use now intltool.
 
@@ -1137,7 +1143,7 @@ Mon Oct 22 17:31:26 2001  Jonathan Blandford  <jrb@redhat.com>
 	doesn't work if you don't have any .po files by using $(wildcard)
 	inside the make rules.
 
-2001-09-29  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-09-29  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 	
 	* USED: Added ganimal.
 
@@ -1179,7 +1185,7 @@ Mon Oct 22 17:31:26 2001  Jonathan Blandford  <jrb@redhat.com>
 	be confused by partial escape sequences. Also remove the absurd code
 	that turns "\n" into "n".
 
-2001-09-19  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-09-19  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* xml-i18n-tools.spec.in: fixes from jgotts@linuxsavvy.com
 	(kenneth sended me this patch)
@@ -1187,7 +1193,7 @@ Mon Oct 22 17:31:26 2001  Jonathan Blandford  <jrb@redhat.com>
 	* xml-i18n-extract.in.in: Added .scm support from old intltool code
 	from kenneth and scripts from gimp.
 
-2001-09-19  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-09-19  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* Added the changes from kenneth (intltool rel 0.9.5)
 
@@ -1211,7 +1217,7 @@ Mon Oct 22 17:31:26 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* xml-i18n-prepare.in: A few simplifications.
 
-2001-09-09  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-09-09  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* doc/*: Added the manpages from intltool. They aren't
 	installed yet because I have only changed /s/intl/xml-i18n-/
@@ -1223,7 +1229,7 @@ Mon Oct 22 17:31:26 2001  Jonathan Blandford  <jrb@redhat.com>
 	* tests/cases/Makefile.am: changed extract1.desktop.in
 	to extract1.desktop as the .in file did not exist.
 
-2001-09-01  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-09-01  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* xml-i18n-update.in.in: Fixed the .server support.
 
@@ -1386,11 +1392,11 @@ Mon Oct 22 17:31:26 2001  Jonathan Blandford  <jrb@redhat.com>
 	* xml-i18n-tools.m4, xml-i18n-update.in.in: Add support for
 	.server files (what used to be .oaf)
 
-2001-07-16  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-07-16  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* USED: Added gnome-control-center
 
-2001-07-14  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-07-14  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* USED: Added procman && gturing
 
@@ -1430,7 +1436,7 @@ Mon Oct 22 17:31:26 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* xml-i18n-prepare.in (ENTRY): Add missing curly paren.
 
-2001-05-22  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-05-22  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* USED: Added gnome-db.
 
