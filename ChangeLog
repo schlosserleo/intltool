@@ -1,5 +1,9 @@
 2004-08-22  Rodney Dawes  <dobey@novell.com>
 
+	* configure.in: Update version to 0.31.2
+
+2004-08-22  Rodney Dawes  <dobey@novell.com>
+
 	* NEWS: Document fix for #144725
 
 2004-08-22  Daniel Elstner  <daniel.elstner@gmx.net>
