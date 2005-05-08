@@ -1,3 +1,10 @@
+2005-05-08  Stepan Kasal  <kasal@ucw.cz>
+
+	* Makefile.in.in (dist): Don't create $(GETTEXT_PACKAGE).pot now,
+	when we don't do update-po and don't distribute it.
+	(check): Hook it here instead, so that distcheck verifies that all
+	the sources listed in POTFILES.in are indeed distributed.
+
 2005-03-10  Tor Lillqvist  <tml@novell.com>
 
 	* intltool-extract.in.in

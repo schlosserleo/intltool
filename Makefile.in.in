@@ -179,7 +179,7 @@ uninstall:
 	  rm -f $(DESTDIR)$(gettextsrcdir)/Makefile.in.in; \
 	fi
 
-check: all
+check: all $(GETTEXT_PACKAGE).pot
 
 dvi info tags TAGS ID:
 
@@ -200,7 +200,7 @@ maintainer-clean: distclean
 	rm -f Makefile.in.in
 
 distdir = ../$(GETTEXT_PACKAGE)-$(VERSION)/$(subdir)
-dist distdir: $(DISTFILES) $(GETTEXT_PACKAGE).pot
+dist distdir: $(DISTFILES)
 	dists="$(DISTFILES)"; \
 	for file in $$dists; do \
 	  ln $(srcdir)/$$file $(distdir) 2> /dev/null \
