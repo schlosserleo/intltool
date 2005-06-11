@@ -1,3 +1,11 @@
+2005-05-10  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-update.in.in (FindLeftoutFiles): Update the sed script to
+	be more practical with the checking of translatable tags in XML files
+	Patch from Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	Fixes #304365
+	
 2005-05-08  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.in.in (EXTRA_DISTFILES): New variable for specifying files
