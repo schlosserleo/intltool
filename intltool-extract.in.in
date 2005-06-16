@@ -281,7 +281,13 @@ sub type_xml {
             s/ $//;
         }
         $messages{$_} = [];
-        $comments{$_} = $1 if (defined($1));
+        if (defined($1)) {
+            if (defined($comments{$_})) {
+                $comments{$_} .= "\n" . $1;
+            } else {
+                $comments{$_} = $1;
+            }
+        }
     }
 }
 
