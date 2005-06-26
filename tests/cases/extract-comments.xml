@@ -16,8 +16,8 @@
 
 <_translate>This doesn't have a comment for translators</_translate>
 
-<!-- This comment is currently ignored because it contains > (greater than) 
-sign in it, but the following string isn't -->
+<!-- This comment is not ignored even if it contains > (greater than) 
+sign in it, and the following string shows up as well -->
 <_translate>Dum-dee-dum</_translate>
 
 <tagnotmarked _markedattribute="attribute without comment">some content</tagnotmarked>

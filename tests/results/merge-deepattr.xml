@@ -27,6 +27,9 @@
   <tag xml:lang="schemasmerge2" translate="Time zone">
     <translate>Select Area</translate>
   </tag>
+  <tag xml:lang="spacepreserve" translate="Time zone">
+    <translate>Select Area</translate>
+  </tag>
   <tag xml:lang="test" translate="Time zone">
     <translate>Select Area</translate>
   </tag>

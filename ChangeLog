@@ -1,3 +1,38 @@
+2005-06-26  Danilo Šegan  <dsegan@gmx.net>
+
+	Fix #160262: Correct handling of xml:space inheritance.
+
+	* tests/selftest.pl.in: Added testcases 25 and 26 for inherited
+	xml:space. 
+
+	* tests/cases/space-preserve.xml.in: 
+	* tests/cases/spacepreserve.po: 
+	* tests/results/space-preserve.xml.in.h:
+	* tests/results/space-preserve.xml: Added testcase.
+
+	* tests/results/merge-deepattr.xml: Updated testcase.
+
+	* tests/results/extract-comments.xml.h: 
+	* tests/cases/extract-comments.xml: Updated testcase.
+
+	* intltool-extract.in.in (intltool_tree_comment)
+	(intltool_tree_cdatastart, intltool_tree_cdataend)
+	(intltool_tree_char, intltool_tree_start, getXMLstring):
+	Verbatim copy from intltool-merge.in.in.
+	(readXml): Copied from intltool-merge.in.in and added comment
+	handler.
+	(getAttributeString): New function.
+
+	* intltool-merge.in.in (intltool_tree_comment): Added for
+	compatibility with intltool-extract.
+
+	(getAttributeString, getXMLstring): Some code clean-ups.
+
+	(traverse): Add $spacepreserve parameter.
+	(translate_subnodes): Add $spacepreserve parameter.
+	(getXMLstring): Add $spacepreserve parameter.
+	(parseTree): Set $spacepreserve for root node as well.
+
 2005-06-16  Danilo Šegan  <dsegan@gmx.net>
 
 	* intltool-extract.in.in (type_xml): Merge multiple comments for

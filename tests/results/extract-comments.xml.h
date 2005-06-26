@@ -1,3 +1,5 @@
+/*  This comment is not ignored even if it contains > (greater than) 
+sign in it, and the following string shows up as well  */
 char *s = N_("Dum-dee-dum");
 /*  If comment doesn't end on the previous line, it should be handled
      correctly  */
