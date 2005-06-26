@@ -229,6 +229,6 @@ check_merge_result($case);
 
 
 system("rm -f cases/*.*") if $srcdir ne ".";
-system("rm -rf az extract9 fr fr_BE fr_FR merge6 schemasmerge1 schemasmerge2 test merge6.xml");
+system("rm -rf az extract9 fr fr_BE fr_FR merge6 schemasmerge1 schemasmerge2 spacepreserve test merge6.xml");
 
 exit $failed;

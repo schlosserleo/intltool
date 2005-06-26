@@ -1,5 +1,11 @@
 2005-06-26  Danilo Šegan  <dsegan@gmx.net>
 
+	* tests/selftest.pl.in: Remove "spacepreserve" directory as well.
+	* tests/Makefile.am (CLEANFILES): Remove spacepreserve/merge6.xml
+	(this is done in selftest.pl.in). 
+
+2005-06-26  Danilo Šegan  <dsegan@gmx.net>
+
 	* tests/selftest.pl.in: Add new testcase for well-formedness.
 	* tests/results/Makefile.am: Add new file.
 	* tests/results/merge11.xml: Add result.
