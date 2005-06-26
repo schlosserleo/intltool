@@ -1,5 +1,10 @@
 2005-06-26  Danilo Šegan  <dsegan@gmx.net>
 
+	* tests/results/Makefile.am (EXTRA_DIST): Add new files.
+	* tests/cases/Makefile.am (EXTRA_DIST, CLEAN_FILES): Add new files.
+
+2005-06-26  Danilo Šegan  <dsegan@gmx.net>
+
 	Fix #160262: Correct handling of xml:space inheritance.
 
 	* tests/selftest.pl.in: Added testcases 25 and 26 for inherited

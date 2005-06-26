@@ -28,6 +28,8 @@ EXTRA_DIST =					\
 	merge8.keys.in				\
 	schemasmerge1.po			\
 	schemasmerge2.po			\
+	space-preserve.xml.in			\
+	spacepreserve.po			\
 	test.po 				\
 	test.schemas.in				\
 	test.scm				\
@@ -42,6 +44,8 @@ CLEANFILES =					\
 	merge-cdata.xml				\
 	merge-deepattr.xml			\
 	merge10.templates			\
+	space-preserve.xml.in.h			\
+	space-preserve.xml			\
 	test.schemas				\
 	test.schemas.in.h			\
 	test.scm.h				\

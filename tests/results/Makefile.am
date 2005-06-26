@@ -22,6 +22,8 @@ EXTRA_DIST =					\
 	merge7.xml				\
 	merge8.keys				\
 	multi.merge6.xml			\
+	space-preserve.xml			\
+	space-preserve.xml.in.h			\
 	test.schemas				\
 	test.schemas.in.h			\
 	test.scm.h				\
