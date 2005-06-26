@@ -15,6 +15,7 @@ EXTRA_DIST =					\
 	merge-deepattr.xml			\
 	merge1.xml				\
 	merge10.templates			\
+	merge11.xml				\
 	merge4.xml				\
 	merge5p.sheet				\
 	merge5u.sheet				\

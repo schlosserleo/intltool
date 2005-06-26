@@ -120,6 +120,12 @@ msgstr "not an ODA document"
 msgid "PDF document"
 msgstr "not a PDF document"
 
+msgid "Sample <b>xml</b> data."
+msgstr "Well-formed <b>XML</b> data."
+
+msgid "Sample <i>xml</i> data."
+msgstr "Invalid <i>XML data."
+
 #~ msgid " Auto Update"
 #~ msgstr " Opdatér automatisk"
 

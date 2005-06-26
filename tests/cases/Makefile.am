@@ -19,6 +19,7 @@ EXTRA_DIST =					\
 	merge-deepattr.xml.in			\
 	merge1.xml.in				\
 	merge10.templates_			\
+	merge11.xml.in				\
 	merge4.xml.in				\
 	merge5p.sheet.in			\
 	merge5u.sheet.in			\
@@ -44,6 +45,7 @@ CLEANFILES =					\
 	merge-cdata.xml				\
 	merge-deepattr.xml			\
 	merge10.templates			\
+	merge11.xml				\
 	space-preserve.xml.in.h			\
 	space-preserve.xml			\
 	test.schemas				\

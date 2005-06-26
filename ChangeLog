@@ -1,5 +1,14 @@
 2005-06-26  Danilo Šegan  <dsegan@gmx.net>
 
+	* tests/selftest.pl.in: Add new testcase for well-formedness.
+	* tests/results/Makefile.am: Add new file.
+	* tests/results/merge11.xml: Add result.
+	* tests/cases/Makefile.am: Add new files.
+	* tests/cases/merge11.xml.in: Add testcase.
+	* tests/cases/test.po: Add strings for well-formedness check.
+
+2005-06-26  Danilo Šegan  <dsegan@gmx.net>
+
 	Fix #170471: discard non-well-formed translations when merging XML.
 	
 	* intltool-merge.in.in (isWellFormedXmlFragment): Added.

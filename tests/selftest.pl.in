@@ -222,6 +222,11 @@ $case = "space-preserve.xml";
 system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
+print "27. Merge non-well-formed translations into xml file:                ";
+$case = "merge11.xml";
+system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
+check_merge_result($case);
+
 
 system("rm -f cases/*.*") if $srcdir ne ".";
 system("rm -rf az extract9 fr fr_BE fr_FR merge6 schemasmerge1 schemasmerge2 test merge6.xml");
