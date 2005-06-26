@@ -1,5 +1,9 @@
 2005-06-26  Danilo Šegan  <dsegan@gmx.net>
 
+	* README: Remove note about comment not being allowed to contain ">".
+
+2005-06-26  Danilo Šegan  <dsegan@gmx.net>
+
 	* tests/Makefile.am (CLEANFILES): Add spacepreserve/merge6.xml.
 	* tests/results/Makefile.am (EXTRA_DIST): Add new files.
 	* tests/cases/Makefile.am (EXTRA_DIST, CLEAN_FILES): Add new files.
