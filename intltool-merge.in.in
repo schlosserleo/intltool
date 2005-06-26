@@ -704,6 +704,23 @@ sub translate_subnodes
     }
 }
 
+sub isWellFormedXmlFragment
+{
+    my $ret = eval 'require XML::Parser';
+    if(!$ret) {
+        die "You must have XML::Parser installed to run $0\n\n";
+    } 
+
+    my $fragment = shift;
+    return 0 if (!$fragment);
+
+    $fragment = "<root>$fragment</root>";
+    my $xp = new XML::Parser(Style => 'Tree');
+    my $tree = 0;
+    eval { $tree = $xp->parse($fragment); };
+    return $tree;
+}
+
 sub traverse
 {
     my $fh = shift; 
@@ -742,7 +759,7 @@ sub traverse
             }
 
 	    if ($lookup || $translate == 2) {
-                my $translation = $translations{$language, $lookup};
+                my $translation = $translations{$language, $lookup} if isWellFormedXmlFragment($translations{$language, $lookup});
                 if ($MULTIPLE_OUTPUT && ($translation || $translate == 2)) {
                     $translation = $lookup if (!$translation);
                     print $fh " xml:lang=\"", $language, "\"" if $language;
@@ -778,7 +795,7 @@ sub traverse
                         #
                         my $translate = 0;
                         my $localattrs = getAttributeString($attrs, 1, $lang, \$translate);
-                        my $translation = $translations{$lang, $lookup};
+                        my $translation = $translations{$lang, $lookup} if isWellFormedXmlFragment($translations{$lang, $lookup});
                         if ($translate && !$translation) {
                             $translation = $lookup;
                         }

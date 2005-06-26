@@ -1,5 +1,12 @@
 2005-06-26  Danilo Šegan  <dsegan@gmx.net>
 
+	Fix #170471: discard non-well-formed translations when merging XML.
+	
+	* intltool-merge.in.in (isWellFormedXmlFragment): Added.
+	(traverse): Use isWellFormedXmlFragment when using translations.
+
+2005-06-26  Danilo Šegan  <dsegan@gmx.net>
+
 	* README: Remove note about comment not being allowed to contain ">".
 
 2005-06-26  Danilo Šegan  <dsegan@gmx.net>
