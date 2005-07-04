@@ -51,6 +51,9 @@ To use intltool in your module, do the following:
    to EXTRA_DIST in your top-level Makefile.am and also to the top-level
    .cvsignore. Also add the non-.in versions to .cvsignore.  
 
+ o Add intltool-extract, intltool-merge, and intltool-update to
+   DISTCLEANFILES in your top-level Makefile.am.
+
  o Remove po/desk.pl and po/update.* scripts.  intltool-update will take
    over their functionality.
 

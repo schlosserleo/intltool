@@ -1,3 +1,8 @@
+2005-07-04  Tim-Philipp Müller  <tim at centricular dot net>
+
+	* README: Mention DISTCLEANFILES in automake section (without
+	  that 'make distcheck' might not work in programs). (#309455)
+
 2005-06-26  Danilo Šegan  <danilo@gnome.org>
 
 	* AUTHORS (Maintainers): List Rodney and myself.
