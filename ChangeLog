@@ -1,3 +1,8 @@
+2005-07-06  Danilo Šegan  <danilo@gnome.org>
+	
+	* intltool-extract.in.in (getXMLstring): Sync.
+	* intltool-merge.in.in (getXMLstring): Ignore comments ($type == 1).
+
 2005-07-04  Tim-Philipp Müller  <tim at centricular dot net>
 
 	* README: Mention DISTCLEANFILES in automake section (without

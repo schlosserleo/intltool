@@ -656,7 +656,7 @@ sub getXMLstring
                 $content =~ s/\s+/ /gs if (!$spacepreserve);
 		$result .= $content;
 	    }
-	} else {
+	} elsif ( "$type" ne "1" ) {
 	    # We've got another element
 	    $result .= "<$type";
 	    $result .= getAttributeString(@{$content}[0], 0); # no nested translatable elements
