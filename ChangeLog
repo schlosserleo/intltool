@@ -1,3 +1,11 @@
+2005-03-23  Stepan Kasal  <kasal@ucw.cz>
+
+	* Makefile.in.in: Fix the rule for POTFILES so that it deletes the
+	  [encoding:...] tags.  Don't use \[ as it's non-POSIX extension.
+	  Other minor simplifications.
+	* intltool.m4: In the code which creates POTFILES, don't use \[,
+	  and use correct quoting, instead of changequote().
+
 2005-07-06  Danilo Šegan  <danilo@gnome.org>
 	
 	* intltool-extract.in.in (getXMLstring): Sync.
