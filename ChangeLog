@@ -1,3 +1,8 @@
+2005-07-25  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS:
+	* configure.in: Update for 0.34 release
+
 2005-03-23  Stepan Kasal  <kasal@ucw.cz>
 
 	* Makefile.in.in: Fix the rule for POTFILES so that it deletes the
@@ -5,6 +10,8 @@
 	  Other minor simplifications.
 	* intltool.m4: In the code which creates POTFILES, don't use \[,
 	  and use correct quoting, instead of changequote().
+
+	Fixes #171330
 
 2005-07-06  Danilo Šegan  <danilo@gnome.org>
 	

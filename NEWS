@@ -1,3 +1,31 @@
+Version 0.34
+
+* Fix the regex for stripping the intltool type tags in POTFILES.in
+  -- bug #171330 (Stepan Kasal)
+* Add notice about using DISTCLEANFILES for toplevel Makefile.am
+  -- bug #309455 (Tim-Philipp Muller)
+* Discard not-well-formed translations when merging XML
+  -- bug #170471 (Danilo Segan)
+* Correct handling of xml:space inheritance
+  -- bug #160262 (Danilo Segan)
+* Merge multiple comments for the same string in XML files
+  -- bug #171579 (Danilo Segan)
+* Update sed script to be more practictal for translatable XML
+  -- bug #304365 (Nickolay V. Shmyrev)
+* Support disting files that may not exist for all packages via EXTRA_DISTFILES
+  -- bugs #168788 and #171327 (Rodney Dawes)
+* Do not create the pot file during dist, but do build it for check
+  (Stepan Kasal)
+* Add support for use on win32 native perl (Tor Lillqvist)
+* Do not dist .gmo files, and remove them with distclean
+  Remove Makefile.in.in with maintainer-clean
+  -- bug #166724 (Rodney Dawes)
+* Minor fixes to Makefile.in.in (Stepan Kasal)
+* Use --verbose instead of --statistics for msgfmt
+  -- bug #165881
+* Remove the need for patching Makefile.in.in and just copy in our own
+  -- bug #165066 (Rodney Dawes)
+
 Version 0.33
 
 * Fix support for srcdir != builddir during make dist/distcheck
