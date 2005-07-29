@@ -37,8 +37,8 @@ VERSION=@VERSION@
 
 # Directory names.
 prefix=@prefix@
-datadir=@datadir@
 datarootdir=@datarootdir@
+datadir=@datadir@
 pkgdatadir=@pkgdatadir@
 
 aclocaldir=${datadir}/aclocal
