@@ -1,3 +1,8 @@
+2005-07-29  Stepan Kasal  <kasal@ucw.cz>
+
+	* Makefile.in.in: Add datarootdir variable, for compatibility with
+	Autoconf > 2.59.
+
 2005-07-28  Stepan Kasal  <kasal@ucw.cz>
 
 	* intltool.m4 (IT_PROG_INTLTOOL): Don't compute mkdir_p, it's no
