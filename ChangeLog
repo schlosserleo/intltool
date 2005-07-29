@@ -1,3 +1,9 @@
+2005-07-28  Stepan Kasal  <kasal@ucw.cz>
+
+	* intltool.m4 (IT_PROG_INTLTOOL): Don't compute mkdir_p, it's no
+	longer used in Makefile.in.in.
+	* Makefile.in.in: Remove the line "mkdir_p = @mkdir_p@".
+
 2005-07-28  Rodney Dawes  <dobey@novell.com>
 
 	* doc/intltool-merge.8: Fix a typo s/seperated/separated/
