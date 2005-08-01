@@ -329,10 +329,9 @@ sub getAttributeString
             $$translate = 2;
 	}
         ## differences end here from intltool-merge.in.in
+	$result .= " $key=$quote$string$quote";
     }
-    ## differences
-    return "";
-    ## differences end here
+    return $result;
 }
 
 # Verbatim copy from intltool-merge.in.in
