@@ -1,3 +1,10 @@
+Version 0.34.1
+
+* automake/autoconf fixes and improvements 
+  (Rodney Dawes, Stepan Kasal)
+* extraction of XML attributes fixed
+  (Danilo Segan)
+
 Version 0.34
 
 * Fix the regex for stripping the intltool type tags in POTFILES.in
