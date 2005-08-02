@@ -1,9 +1,12 @@
 Version 0.34.1
 
-* automake/autoconf fixes and improvements 
-  (Rodney Dawes, Stepan Kasal)
-* extraction of XML attributes fixed
-  (Danilo Segan)
+* Fix missing attributes for extracted XML (Danilo Segan)
+* Support datarootdir variable for autoconf > 2.59
+  -- bug #311869 (Stepan Kasal, Rodney Dawes)
+* Don't use mkdir_p variable any longer
+  -- bug #311129 (Stepan Kasal)
+* Fix typo in man page for intltool-merge
+  -- bug #311521 (Rodney Dawes)
 
 Version 0.34
 

@@ -1,3 +1,7 @@
+2005-08-02  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS: Update to reference bug numbers and changes better for 0.34.1
+
 2005-08-02  Danilo Šegan  <danilo@gnome.org>
 
 	* NEWS: 
@@ -5,7 +9,8 @@
 
 2005-08-01  Danilo Šegan  <danilo@gnome.org>
 
-	* intltool-extract.in.in (getAttributeString): Return correct attributes.
+	* intltool-extract.in.in (getAttributeString):
+	Return correct attributes.
 
 2005-07-29  Rodney Dawes  <dobey@novell.com>
 
