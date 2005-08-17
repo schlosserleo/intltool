@@ -1,3 +1,11 @@
+2005-08-16  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-update.in.in (FindPackageName): Set PACKAGE_NAME instead
+	of AC_PACKAGE_NAME
+	Patch from Peter Moulder
+
+	Fixes #311523
+
 2005-08-02  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS: Update to reference bug numbers and changes better for 0.34.1

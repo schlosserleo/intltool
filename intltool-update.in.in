@@ -991,9 +991,9 @@ sub FindPackageName
 	($name, $version) = ($1, $2);
 	$name    =~ s/[\[\]\s]//g;
 	$version =~ s/[\[\]\s]//g;
-	$varhash{"AC_PACKAGE_NAME"} = $name;
+	$varhash{"PACKAGE_NAME"} = $name;
 	$varhash{"PACKAGE"} = $name;
-	$varhash{"AC_PACKAGE_VERSION"} = $version;
+	$varhash{"PACKAGE_VERSION"} = $version;
 	$varhash{"VERSION"} = $version;
     }
     
@@ -1002,19 +1002,18 @@ sub FindPackageName
 	($name, $version) = ($1, $2);
 	$name    =~ s/[\[\]\s]//g;
 	$version =~ s/[\[\]\s]//g;
-	$varhash{"AC_PACKAGE_NAME"} = $name;
+	$varhash{"PACKAGE_NAME"} = $name;
 	$varhash{"PACKAGE"} = $name;
-	$varhash{"AC_PACKAGE_VERSION"} = $version;
+	$varhash{"PACKAGE_VERSION"} = $version;
 	$varhash{"VERSION"} = $version;
     }
 
     # \s makes this not work, why?
     $name = $1 if $conf_source =~ /^GETTEXT_PACKAGE=\[?([^\n\]]+)/m;
     
-    # prepend '$' to auto* internal variables, usually they are
-    # used in configure.in/ac without the '$'
-    $name =~ s/AC_/\$AC_/g;
-    $name =~ s/\$\$/\$/g;
+    # m4 macros AC_PACKAGE_NAME, AC_PACKAGE_VERSION etc. have same value
+    # as corresponding $PACKAGE_NAME, $PACKAGE_VERSION etc. shell variables.
+    $name =~ s/\bAC_PACKAGE_/\$PACKAGE_/g;
 
     $name = $domain if $domain;
 
