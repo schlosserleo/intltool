@@ -45,7 +45,6 @@ INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 
 CC = @CC@
-GENCAT = @GENCAT@
 GMSGFMT = @GMSGFMT@
 MSGFMT = @MSGFMT@
 XGETTEXT = @XGETTEXT@
@@ -94,7 +93,7 @@ INSTOBJEXT = @INSTOBJEXT@
 
 .po.cat:
 	sed -f ../intl/po2msg.sed < $< > $*.msg \
-	  && rm -f $@ && $(GENCAT) $@ $*.msg
+	  && rm -f $@ && gencat $@ $*.msg
 
 
 all: all-@USE_NLS@

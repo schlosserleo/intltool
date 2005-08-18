@@ -1,5 +1,11 @@
 2005-08-17  Stepan Kasal  <kasal@ucw.cz>
 
+	* Makefile.in.in (GENCAT): Remove the variable; glib-gettext doesn't
+	substitute it and GNU gettext deprecates it; replace the occurence
+	with constant "gencat".
+
+2005-08-17  Stepan Kasal  <kasal@ucw.cz>
+
 	* intltool.m4 (AC_PROG_INTLTOOL): Use AU_ALIAS, not AC_DEFUN,
 	so that "autoconf -W obsolete" and "autoupdate" know.
 	Add a hint for aclocal from Automake <= 1.9.5.
