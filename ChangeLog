@@ -1,5 +1,14 @@
 2005-08-23  Stepan Kasal  <kasal@ucw.cz>
 
+	The support for Autoconf 2.13 was broken on 2004-10-07, when
+	AC_CONFIG_COMMANDS was used.  No one complained, so it's time to
+	AC_PREREQ([2.50]) and remove the compatibility code.
+
+	* intltool.m4 (IT_PROG_INTLTOOL): Drop support for Autoconf 2.13;
+	eliminate the remaining pair of `changequote' calls.
+
+2005-08-23  Stepan Kasal  <kasal@ucw.cz>
+
 	* Makefile.in.in (INSTOBJEXT): Removed the variable; all ocurrences
 	replaced with constant ".mo".  There is no other possible value;
 	moreover, GNU gettext deprecates this variable.

@@ -25,23 +25,18 @@
 dnl IT_PROG_INTLTOOL([MINIMUM-VERSION], [no-xml])
 # serial 2 IT_PROG_INTLTOOL
 AC_DEFUN([IT_PROG_INTLTOOL],
-[
+[AC_PREREQ([2.50])dnl
 
 if test -n "$1"; then
     AC_MSG_CHECKING(for intltool >= $1)
 
-    INTLTOOL_REQUIRED_VERSION_AS_INT=`echo $1 | awk -F. '{ printf "%d", $[1] * 100 + $[2]; }'`
-    INTLTOOL_APPLIED_VERSION=`awk -F\" '/\\$VERSION / { printf $[2]; }'  < ${ac_aux_dir}/intltool-update.in`
-    changequote({{,}})
-    INTLTOOL_APPLIED_VERSION_AS_INT=`awk -F\" '/\\$VERSION / { split(${{2}}, VERSION, "."); printf "%d\n", VERSION[1] * 100 + VERSION[2];}' < ${ac_aux_dir}/intltool-update.in`
-    changequote([,])
-
-    if test "$INTLTOOL_APPLIED_VERSION_AS_INT" -ge "$INTLTOOL_REQUIRED_VERSION_AS_INT"; then
-	AC_MSG_RESULT([$INTLTOOL_APPLIED_VERSION found])
-    else
-	AC_MSG_RESULT([$INTLTOOL_APPLIED_VERSION found. Your intltool is too old.  You need intltool $1 or later.])
-	exit 1
-    fi
+    INTLTOOL_REQUIRED_VERSION_AS_INT=`echo $1 | awk -F. '{ print $ 1 * 100 + $ 2; }'`
+    INTLTOOL_APPLIED_VERSION=`awk -F\" '/\\$VERSION / { print $ 2; }' ${ac_aux_dir}/intltool-update.in`
+    [INTLTOOL_APPLIED_VERSION_AS_INT=`awk -F\" '/\\$VERSION / { split($ 2, VERSION, "."); print VERSION[1] * 100 + VERSION[2];}' ${ac_aux_dir}/intltool-update.in`
+    ]
+    AC_MSG_RESULT([$INTLTOOL_APPLIED_VERSION found])
+    test "$INTLTOOL_APPLIED_VERSION_AS_INT" -ge "$INTLTOOL_REQUIRED_VERSION_AS_INT" ||
+	AC_MSG_ERROR([Your intltool is too old.  You need intltool $1 or later.])
 fi
 
   INTLTOOL_DESKTOP_RULE='%.desktop:   %.desktop.in   $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; LC_ALL=C $(INTLTOOL_MERGE) -d -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< [$]@' 
@@ -81,14 +76,9 @@ AC_SUBST(INTLTOOL_SCHEMAS_RULE)
 AC_SUBST(INTLTOOL_THEME_RULE)
 
 # Use the tools built into the package, not the ones that are installed.
-
-INTLTOOL_EXTRACT='$(top_builddir)/intltool-extract'
-INTLTOOL_MERGE='$(top_builddir)/intltool-merge'
-INTLTOOL_UPDATE='$(top_builddir)/intltool-update'
-
-AC_SUBST(INTLTOOL_EXTRACT)
-AC_SUBST(INTLTOOL_MERGE)
-AC_SUBST(INTLTOOL_UPDATE)
+AC_SUBST(INTLTOOL_EXTRACT, '$(top_builddir)/intltool-extract')
+AC_SUBST(INTLTOOL_MERGE, '$(top_builddir)/intltool-merge')
+AC_SUBST(INTLTOOL_UPDATE, '$(top_builddir)/intltool-update')
 
 AC_PATH_PROG(INTLTOOL_PERL, perl)
 if test -z "$INTLTOOL_PERL"; then
@@ -112,23 +102,11 @@ AC_PATH_PROG(INTLTOOL_MSGMERGE, msgmerge, msgmerge)
 AC_PATH_PROG(INTLTOOL_XGETTEXT, xgettext, xgettext)
 
 # Remove file type tags (using []) from po/POTFILES.
-
-ifdef([AC_DIVERSION_ICMDS],[
-  AC_DIVERT_PUSH(AC_DIVERSION_ICMDS)
-     [mv -f po/POTFILES po/POTFILES.tmp
-      sed -e '/[[]encoding.*]/d' -e 's/[[].*] *//' < po/POTFILES.tmp > po/POTFILES
-      rm -f po/POTFILES.tmp
-     ]dnl
-  AC_DIVERT_POP()
-],[
-  ifdef([AC_CONFIG_COMMANDS_PRE],[
-    AC_CONFIG_COMMANDS_PRE([
-       [mv -f po/POTFILES po/POTFILES.tmp
-        sed -e '/[[]encoding.*]/d' -e 's/[[].*] *//' < po/POTFILES.tmp > po/POTFILES
-        rm -f po/POTFILES.tmp
-       ]dnl
-    ])
-  ])
+AC_CONFIG_COMMANDS_PRE([
+   [mv -f po/POTFILES po/POTFILES.tmp
+    sed -e '/[[]encoding.*]/d' -e 's/[[].*] *//' < po/POTFILES.tmp > po/POTFILES
+    rm -f po/POTFILES.tmp
+   ]dnl
 ])
 
 # Manually sed perl in so people don't have to put the intltool scripts in AC_OUTPUT.
