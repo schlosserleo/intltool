@@ -1,3 +1,10 @@
+2005-09-16  Tor Lillqvist  <tml@novell.com>
+
+	* intltoolize.in: On Win32 set prefix from $0. Do not use the
+	configure-time path. This should make intltoolize work even if
+	installed by the end-user in a different location than the prefix
+	passed to configure by the packager.
+
 2005-08-23  Stepan Kasal  <kasal@ucw.cz>
 
 	The support for Autoconf 2.13 was broken on 2004-10-07, when

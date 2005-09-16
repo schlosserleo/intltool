@@ -37,6 +37,15 @@ VERSION=@VERSION@
 
 # Directory names.
 prefix=@prefix@
+
+case "`uname`" in
+MINGW32*)
+  # Assume intltoolize is in $prefix/bin. Strip off the script name and the "bin"
+  prefix=`dirname $0`
+  prefix=`dirname $prefix`
+  ;;
+esac
+
 datarootdir=@datarootdir@
 datadir=@datadir@
 pkgdatadir=@pkgdatadir@
