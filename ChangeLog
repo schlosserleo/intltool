@@ -1,3 +1,19 @@
+2005-11-24  Stepan Kasal  <kasal@ucw.cz>
+
+	* intltool-merge.in.in (EXPANDED_LIBDIR): Rename to ..
+	(INTLTOOL_LIBDIR): ... this.
+	* intltool-prepare.in: Use @INTLTOOL_PERL@, not @PERL@.
+	* intltool-unicodify.in: Both of the above two changes.
+	* configure.in: Don't generate the scripts here, ...
+	* Makefile.am: ... generate all of them here.  Reorganize,
+	  so that the file lists are not redundant; use the "dist_"
+	  prefix where possible. When creating *.in from *.in.in,
+	  substitute only PACKAGE and VERSION, nothing more.
+	(%: %.in): Fix this rule, so that the @...@ substrings are not
+	  garbled by configure; add INTLTOOL_LIBDIR.
+	* intltool.m4 (IT_PROG_INTLTOOL): Simplify the AC_CONFIG_COMMANDS at
+	  the end, and add INTLTOOL_LIBDIR.
+
 2005-11-24  Rodney Dawes  <dobey@novell.com>
 
 	* intltoolize.in: Use POSIX sh syntax for Solaris (Laszlo Peter)

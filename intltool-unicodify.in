@@ -1,4 +1,4 @@
-#!@PERL@ -w
+#!@INTLTOOL_PERL@ -w
         
 #
 #  The i18n Unicode Encoding Utility
@@ -101,7 +101,7 @@ sub print_help
 sub get_local_charset
 {
     my ($encoding) = @_;
-    my $alias_file = $ENV{"G_CHARSET_ALIAS"} || "@EXPANDED_LIBDIR@/charset.alias";
+    my $alias_file = $ENV{"G_CHARSET_ALIAS"} || "@INTLTOOL_LIBDIR@/charset.alias";
 
     # seek character encoding aliases in charset.alias (glib)
 
