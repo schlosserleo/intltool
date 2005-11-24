@@ -1,5 +1,15 @@
 2005-11-24  Stepan Kasal  <kasal@ucw.cz>
 
+	* Makefile.in.in (MKINSTALLDIRS): This variable is no longer
+	defined, remove all references.
+	($(top_srcdir)/mkinstalldirs): Do not use this script, it's
+	deprecated and may not be available with Automake >= 1.8.
+	(mkdir_p): Use this instead.  mkdir_p is AC_SUBSTed by Automake >= 1.8.
+	Until we can suppose that, use "$(install_sh) -d"; it is a safe
+	fallback working with all versions of Automake >= 1.5.
+
+2005-11-24  Stepan Kasal  <kasal@ucw.cz>
+
 	* intltool-merge.in.in (EXPANDED_LIBDIR): Rename to ..
 	(INTLTOOL_LIBDIR): ... this.
 	* intltool-prepare.in: Use @INTLTOOL_PERL@, not @PERL@.
