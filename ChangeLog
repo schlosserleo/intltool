@@ -1,4 +1,21 @@
-2005-09-21  Stepan Kasal  <kasal@ucw.cz>
+2005-11-24  Stepan Kasal  <kasal@ucw.cz>
+
+	This change fixes interaction with AM_GNU_GETTEXT and helps when
+	intltool is used with multiple po directories.
+
+	* intltool.m4 (IT_PO_SUBDIR): New macro, installs a hook which
+	  fixes $1/Makefile and touches $1/stamp-it.
+	(IT_PROG_INTLTOOL): Call IT_PO_SUBDIR([po]), instead of the
+	  AC_CONFIG_COMMANDS_PRE hook.
+	* Makefile.in.in (POTFILES, Makefile): These rules now use the
+	  stamp file "stamp-it".
+	(distclean): Remove the file "stamp-it".  Don't delete $(GMOFILES),
+	  because AM_GNU_GETTEXT adds srcdir prefix to the files; use mere
+	  "*.gmo" instead.
+
+	Fixes #312217
+
+2005-11-24  Stepan Kasal  <kasal@ucw.cz>
 
 	* Makefile.in.in (dist): Fix two bugs for srcdir != builddir.
 

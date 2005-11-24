@@ -101,13 +101,7 @@ AC_PATH_PROG(INTLTOOL_MSGFMT, msgfmt, msgfmt)
 AC_PATH_PROG(INTLTOOL_MSGMERGE, msgmerge, msgmerge)
 AC_PATH_PROG(INTLTOOL_XGETTEXT, xgettext, xgettext)
 
-# Remove file type tags (using []) from po/POTFILES.
-AC_CONFIG_COMMANDS_PRE([
-   [mv -f po/POTFILES po/POTFILES.tmp
-    sed -e '/[[]encoding.*]/d' -e 's/[[].*] *//' < po/POTFILES.tmp > po/POTFILES
-    rm -f po/POTFILES.tmp
-   ]dnl
-])
+IT_PO_SUBDIR([po])
 
 dnl The following is very similar to
 dnl
@@ -152,6 +146,43 @@ INTLTOOL_MSGFMT='${INTLTOOL_MSGFMT}' INTLTOOL_MSGMERGE='${INTLTOOL_MSGMERGE}'
 INTLTOOL_XGETTEXT='${INTLTOOL_XGETTEXT}'])
 
 ])
+
+
+# IT_PO_SUBDIR(DIRNAME)
+# ---------------------
+# All po subdirs have to be declared with this macro; the subdir "po" is
+# declared by IT_PROG_INTLTOOL.
+#
+AC_DEFUN([IT_PO_SUBDIR],
+[AC_PREREQ([2.53])dnl We use ac_top_srcdir inside AC_CONFIG_COMMANDS.
+dnl
+dnl The following CONFIG_COMMANDS should be exetuted at the very end
+dnl of config.status.
+AC_CONFIG_COMMANDS_PRE([
+  AC_CONFIG_COMMANDS([$1/stamp-it], [
+    rm -f "$1/stamp-it" "$1/stamp-it.tmp" "$1/POTFILES" "$1/Makefile.tmp"
+    >"$1/stamp-it.tmp"
+    [sed '/^#/d
+	 s/^[[].*] *//
+	 /^[ 	]*$/d
+	'"s|^|	$ac_top_srcdir/|" \
+      "$srcdir/$1/POTFILES.in" | sed '$!s/$/ \\/' >"$1/POTFILES"
+    ]
+    if test ! -f "$1/Makefile"; then
+      AC_MSG_ERROR([$1/Makefile is not ready.])
+    fi
+    mv "$1/Makefile" "$1/Makefile.tmp"
+    [sed '/^POTFILES =/,/[^\\]$/ {
+		/^POTFILES =/!d
+		r $1/POTFILES
+	  }
+	 ' "$1/Makefile.tmp" >"$1/Makefile"]
+    rm -f "$1/Makefile.tmp"
+    mv "$1/stamp-it.tmp" "$1/stamp-it"
+  ])
+])dnl
+])
+
 
 # deprecated macros
 AU_ALIAS([AC_PROG_INTLTOOL], [IT_PROG_INTLTOOL])
