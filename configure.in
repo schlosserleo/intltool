@@ -28,33 +28,6 @@ AC_PATH_PROG(INTLTOOL_MSGFMT, msgfmt, msgfmt)
 AC_PATH_PROG(INTLTOOL_MSGMERGE, msgmerge, msgmerge)
 AC_PATH_PROG(INTLTOOL_XGETTEXT, xgettext, xgettext)
 
-# find the actual value for $prefix that we'll end up with
-# i think there's a better way to do this...
-REAL_PREFIX=
-if test "x$exec_prefix" = "xNONE"; then
-  if test "x$prefix" = "xNONE"; then
-    REAL_PREFIX=$ac_default_prefix
-  else
-    REAL_PREFIX=$prefix
-  fi
-else
-  REAL_PREFIX=$exec_prefix
-fi
-
-LIBDIR_TMP="$libdir"
-old_exec_prefix=$exec_prefix
-exec_prefix=$REAL_PREFIX
-EXPANDED_LIBDIR=`eval echo $LIBDIR_TMP`
-exec_prefix=$old_exec_prefix
-AC_SUBST(EXPANDED_LIBDIR)
-
-DATADIR_TMP="$datadir"
-old_exec_prefix=$exec_prefix
-exec_prefix=$REAL_PREFIX
-EXPANDED_DATADIR=`eval echo $DATADIR_TMP`
-exec_prefix=$old_exec_prefix
-AC_SUBST(EXPANDED_DATADIR)
-
 
 AC_OUTPUT([
 Makefile

@@ -1,5 +1,10 @@
 2005-11-24  Stepan Kasal  <kasal@ucw.cz>
 
+	* configure.in (EXPANDED_LIBDIR, EXPANDED_DATADIR): Removed, they are
+	  no longer used.
+
+2005-11-24  Stepan Kasal  <kasal@ucw.cz>
+
 	* Makefile.in.in (MKINSTALLDIRS): This variable is no longer
 	defined, remove all references.
 	($(top_srcdir)/mkinstalldirs): Do not use this script, it's
