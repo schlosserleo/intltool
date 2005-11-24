@@ -279,10 +279,10 @@ fi
 # FIXME: This probably does not work w/ builddir != srcdir because it
 # gets at source files relative to the current directory.
 
-if ! grep INTLTOOL_MAKEFILE po/Makefile.in.in >/dev/null; then
+grep INTLTOOL_MAKEFILE po/Makefile.in.in >/dev/null || {
   echo "$progname: 'po/Makefile.in.in' is out of date: use '--force' to overwrite"
   exit 1
-fi
+}
 
 exit $status
 

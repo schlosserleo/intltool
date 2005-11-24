@@ -1,3 +1,9 @@
+2005-11-24  Rodney Dawes  <dobey@novell.com>
+
+	* intltoolize.in: Use POSIX sh syntax for Solaris (Laszlo Peter)
+
+	Fixes #322263
+
 2005-09-16  Tor Lillqvist  <tml@novell.com>
 
 	* intltoolize.in: On Win32 set prefix from $0. Do not use the
