@@ -1,7 +1,13 @@
+2005-09-21  Stepan Kasal  <kasal@ucw.cz>
+
+	* Makefile.in.in (dist): Fix two bugs for srcdir != builddir.
+
 2005-11-24  Stepan Kasal  <kasal@ucw.cz>
 
 	* configure.in (EXPANDED_LIBDIR, EXPANDED_DATADIR): Removed, they are
 	  no longer used.
+
+	Fixes #312214
 
 2005-11-24  Stepan Kasal  <kasal@ucw.cz>
 
@@ -29,6 +35,8 @@
 	* intltool.m4 (IT_PROG_INTLTOOL): Simplify the AC_CONFIG_COMMANDS at
 	  the end, and add INTLTOOL_LIBDIR.
 
+	Fixes #315021
+	
 2005-11-24  Rodney Dawes  <dobey@novell.com>
 
 	* intltoolize.in: Use POSIX sh syntax for Solaris (Laszlo Peter)
