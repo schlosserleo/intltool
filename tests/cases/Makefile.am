@@ -15,6 +15,7 @@ EXTRA_DIST =					\
 	fr.po					\
 	fr_BE.po				\
 	fr_FR.po				\
+	iso88591text.xml.in			\
 	merge-cdata.xml.in			\
 	merge-deepattr.xml.in			\
 	merge1.xml.in				\
@@ -34,6 +35,7 @@ EXTRA_DIST =					\
 	test.po 				\
 	test.schemas.in				\
 	test.scm				\
+	unicodetext.xml.in			\
 	$(NULL)
 
 CLEANFILES =					\
@@ -42,6 +44,7 @@ CLEANFILES =					\
 	extract12.xml.in.h			\
 	extract9.xml				\
 	extract9.xml.in.h			\
+	iso88591text.xml.in.h			\
 	merge-cdata.xml				\
 	merge-deepattr.xml			\
 	merge10.templates			\
@@ -51,4 +54,5 @@ CLEANFILES =					\
 	test.schemas				\
 	test.schemas.in.h			\
 	test.scm.h				\
+	unicodetext.xml.in.h			\
 	$(NULL)

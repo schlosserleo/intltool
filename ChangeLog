@@ -1,3 +1,20 @@
+2005-11-25  Simos Xenitellis  <simos@gnome.org>
+
+	* intltool-extract.in.in (intltool_tree_comment): Just copy the
+	original string from expat, and strip the begin/end comment blocks
+
+	* tests/cases/iso88591text.xml.in:
+	* tests/cases/unicodetext.xml.in:
+	* tests/cases/Makefile.am: New test cases for XML comment encoding
+
+	* tests/results/iso88591text.xml.in.h:
+	* tests/results/unicodetext.xml.in.h:
+	* tests/results/Makefile.am: New results for XML comment encoding tests
+
+	* tests/selftest.pl.in: Add the new regression tests for XML comments
+
+	Fixes #320721
+
 2005-11-24  Stepan Kasal  <kasal@ucw.cz>
 
 	This change fixes interaction with AM_GNU_GETTEXT and helps when
@@ -35,6 +52,8 @@
 	(mkdir_p): Use this instead.  mkdir_p is AC_SUBSTed by Automake >= 1.8.
 	Until we can suppose that, use "$(install_sh) -d"; it is a safe
 	fallback working with all versions of Automake >= 1.5.
+
+	Fixes #311874
 
 2005-11-24  Stepan Kasal  <kasal@ucw.cz>
 
@@ -76,11 +95,15 @@
 	* intltool.m4 (IT_PROG_INTLTOOL): Drop support for Autoconf 2.13;
 	eliminate the remaining pair of `changequote' calls.
 
+	Fixes #311870
+
 2005-08-23  Stepan Kasal  <kasal@ucw.cz>
 
 	* Makefile.in.in (INSTOBJEXT): Removed the variable; all ocurrences
 	replaced with constant ".mo".  There is no other possible value;
 	moreover, GNU gettext deprecates this variable.
+
+	Fixes #312333
 
 2005-08-17  Stepan Kasal  <kasal@ucw.cz>
 
@@ -88,11 +111,15 @@
 	substitute it and GNU gettext deprecates it; replace the occurence
 	with constant "gencat".
 
+	Fixes #312332
+
 2005-08-17  Stepan Kasal  <kasal@ucw.cz>
 
 	* intltool.m4 (AC_PROG_INTLTOOL): Use AU_ALIAS, not AC_DEFUN,
 	so that "autoconf -W obsolete" and "autoupdate" know.
 	Add a hint for aclocal from Automake <= 1.9.5.
+
+	Fixes #312334
 
 2005-08-16  Rodney Dawes  <dobey@novell.com>
 

@@ -11,6 +11,7 @@ EXTRA_DIST =					\
 	extract9.xml				\
 	extract9.xml.in.h			\
 	extract12.xml.in.h			\
+	iso88591text.xml.h			\
 	merge-cdata.xml				\
 	merge-deepattr.xml			\
 	merge1.xml				\
@@ -28,4 +29,5 @@ EXTRA_DIST =					\
 	test.schemas				\
 	test.schemas.in.h			\
 	test.scm.h				\
+	unicodetext.xml.in.h			\
 	$(NULL)
