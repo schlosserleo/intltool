@@ -1,3 +1,9 @@
+2005-11-28  Carlos Garcia Campos  <carlosgc@gnome.org>
+
+	* intltool-update.in.in:
+	* intltool.m4:
+	Add support for DBus .service files
+
 2005-11-25  Simos Xenitellis  <simos@gnome.org>
 
 	* intltool-extract.in.in (intltool_tree_comment): Just copy the
