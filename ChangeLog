@@ -1,3 +1,7 @@
+2005-11-28  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS: Update to include list of fixes since 0.34.1
+
 2005-11-28  Carlos Garcia Campos  <carlosgc@gnome.org>
 
 	* intltool-update.in.in:

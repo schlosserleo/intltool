@@ -1,3 +1,33 @@
+
+* Add support for translating DBus service files
+  -- bug #322629 (Carlos Garcia Campos)
+* Preserve encoding of XML comments
+  -- bug #320721 (Simos Xenitellis)
+* Improve interaction with use of AM_GNU_GETTEXT
+  -- bug #312217 (Stepan Kasal)
+* Fix two small issues with srcdir != builddir
+  (Stepan Kasal)
+* Remove unused variables from configure.in
+  -- bug #312214 (Stepan Kasal)
+* Use $(install_sh) -d instead of $(top_srcdir)/mkinstalldirs
+  -- bug #311874 (Stepan Kasal)
+* Don't substitute some variables in the intltool build
+  -- bug #315021 (Stepan Kasal)
+* Use POSIX sh syntax for Solaris
+  -- bug #322263 (Laszlo Peter)
+* Set the prefix from $0 on win32 systems
+  (Tor Lillqvist)
+* Remove unneeded compatibility code for autoconf 2.13
+  -- bug #311870 (Stepan Kasal)
+* Remove deprecated INSTOBJEXT variable use
+  -- bug #312333 (Stepan Kasal)
+* Remove use of deprecated GENCAT variable
+  -- bug #212332 (Stepan Kasal)
+* Use AU_ALIAS instead of AC_DEFUN for autoconf and autoupdate
+  -- bug #312334 (Stepan Kasal)
+* Use PACKAGE_NAME instead of AC_PACKAGE_NAME
+  -- bug #311523 (Peter Moulder)
+
 Version 0.34.1
 
 * Fix missing attributes for extracted XML (Danilo Segan)
