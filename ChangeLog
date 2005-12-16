@@ -1,3 +1,10 @@
+2005-12-16  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS: Update
+
+	* intltool.m4: Complain if automake version in use is not >= 1.5
+	See bug #323282
+
 2005-11-28  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS: Update to include list of fixes since 0.34.1

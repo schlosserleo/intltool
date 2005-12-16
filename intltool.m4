@@ -27,6 +27,14 @@ dnl IT_PROG_INTLTOOL([MINIMUM-VERSION], [no-xml])
 AC_DEFUN([IT_PROG_INTLTOOL],
 [AC_PREREQ([2.50])dnl
 
+case "$am__api_version" in
+    1.[01234])
+	AC_MSG_ERROR([Automake 1.5 or newer is required to use intltool])
+    ;;
+    *)
+    ;;
+esac
+
 if test -n "$1"; then
     AC_MSG_CHECKING(for intltool >= $1)
 
