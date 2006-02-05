@@ -1,4 +1,6 @@
 
+Version 0.34.2
+
 * We require automake >= 1.5 now, so check that we aren't on something older
   -- bug #323282 (Rodney Dawes)
 * Add support for translating DBus service files

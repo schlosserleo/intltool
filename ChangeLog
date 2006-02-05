@@ -1,3 +1,10 @@
+2006-02-05  Rodney Dawes  <dobey@novell.com>>
+
+	* NEWS: 
+	* configure.in: Update for 0.34.2 release.
+
+	* tests/results/Makefile.am: Fix typo to make dist work again
+
 2005-12-16  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS: Update
