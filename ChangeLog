@@ -1,4 +1,10 @@
-2006-02-05  Rodney Dawes  <dobey@novell.com>>
+2006-02-14  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.in.in: Add useless comment after POTFILES = \ line, so that
+	the CATALOGS variable doesn't get replaced by the POTFILES data
+	This is a temporary workaround for bug #330509
+
+2006-02-05  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS: 
 	* configure.in: Update for 0.34.2 release.
