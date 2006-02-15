@@ -125,7 +125,7 @@ my $arg_count = ($DIST_ARG > 0)
 &Console_Write_IntltoolHelp if $arg_count > 1;
 
 # --version and --help don't require a module name
-my $MODULE = $GETTEXT_PACKAGE || &FindPackageName;
+my $MODULE = $GETTEXT_PACKAGE || &FindPackageName || "unknown";
 
 if ($POT_ARG)
 {
@@ -874,8 +874,10 @@ sub SubstituteVariable
     {
 	my $rest = $3;
 	my $untouched = $1;
-	my $sub = $varhash{$2};
-	
+	my $sub = "";
+        # Ignore recursive definitions of variables
+        $sub = $varhash{$2} if defined $varhash{$2} and $varhash{$2} !~ /\${?$2}?/;
+
 	return SubstituteVariable ("$untouched$sub$rest");
     }
     
@@ -992,10 +994,10 @@ sub FindPackageName
 	($name, $version) = ($1, $2);
 	$name    =~ s/[\[\]\s]//g;
 	$version =~ s/[\[\]\s]//g;
-	$varhash{"PACKAGE_NAME"} = $name;
-	$varhash{"PACKAGE"} = $name;
-	$varhash{"PACKAGE_VERSION"} = $version;
-	$varhash{"VERSION"} = $version;
+	$varhash{"PACKAGE_NAME"} = $name if (not $name =~ /\${?AC_PACKAGE_NAME}?/);
+	$varhash{"PACKAGE"} = $name if (not $name =~ /\${?PACKAGE}?/);
+	$varhash{"PACKAGE_VERSION"} = $version if (not $name =~ /\${?AC_PACKAGE_VERSION}?/);
+	$varhash{"VERSION"} = $version if (not $name =~ /\${?VERSION}?/);
     }
     
     if ($conf_source =~ /^AC_INIT\(([^,\)]+),([^,\)]+)/m) 
@@ -1003,10 +1005,10 @@ sub FindPackageName
 	($name, $version) = ($1, $2);
 	$name    =~ s/[\[\]\s]//g;
 	$version =~ s/[\[\]\s]//g;
-	$varhash{"PACKAGE_NAME"} = $name;
-	$varhash{"PACKAGE"} = $name;
-	$varhash{"PACKAGE_VERSION"} = $version;
-	$varhash{"VERSION"} = $version;
+	$varhash{"PACKAGE_NAME"} = $name if (not $name =~ /\${?AC_PACKAGE_NAME}?/);
+	$varhash{"PACKAGE"} = $name if (not $name =~ /\${?PACKAGE}?/);
+	$varhash{"PACKAGE_VERSION"} = $version if (not $name =~ /\${?AC_PACKAGE_VERSION}?/);
+	$varhash{"VERSION"} = $version if (not $name =~ /\${?VERSION}?/);
     }
 
     # \s makes this not work, why?
