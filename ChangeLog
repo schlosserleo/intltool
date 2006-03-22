@@ -1,3 +1,11 @@
+2006-03-22  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-merge.in.in (create_translation_database): Change WARNING
+	to NOTICE for non-UTF-8 po file encodings, and print to STDOUT rather
+	than STDERR as it isn't an error
+
+	Fixes #331046
+
 2006-03-18  Danilo Šegan  <danilo@gnome.org>
 
 	* MAINTAINERS: Added to fix bug #335025.
