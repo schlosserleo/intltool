@@ -1,3 +1,8 @@
+2006-04-11  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.in.in: Remove all the bits related to building C code, we
+	don't need it in here, as all we're doing is processing translations
+
 2006-03-22  Rodney Dawes  <dobey@novell.com>
 
 	* intltool-merge.in.in (create_translation_database): Change WARNING

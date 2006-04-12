@@ -22,7 +22,6 @@ PACKAGE = @PACKAGE@
 VERSION = @VERSION@
 
 SHELL = /bin/sh
-@SET_MAKE@
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -46,7 +45,6 @@ mkdir_p = $(install_sh) -d
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 
-CC = @CC@
 GMSGFMT = @GMSGFMT@
 MSGFMT = @MSGFMT@
 XGETTEXT = @XGETTEXT@
@@ -55,19 +53,9 @@ INTLTOOL_EXTRACT = @INTLTOOL_EXTRACT@
 MSGMERGE = INTLTOOL_EXTRACT=$(INTLTOOL_EXTRACT) srcdir=$(srcdir) $(INTLTOOL_UPDATE) --gettext-package $(GETTEXT_PACKAGE) --dist
 GENPOT   = INTLTOOL_EXTRACT=$(INTLTOOL_EXTRACT) srcdir=$(srcdir) $(INTLTOOL_UPDATE) --gettext-package $(GETTEXT_PACKAGE) --pot
 
-DEFS = @DEFS@
-CFLAGS = @CFLAGS@
-CPPFLAGS = @CPPFLAGS@
-
-INCLUDES = -I.. -I$(top_srcdir)/intl
-
-COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(XCFLAGS)
-
-SOURCES = 
 POFILES = @POFILES@
 GMOFILES = @GMOFILES@
-DISTFILES = ChangeLog Makefile.in.in POTFILES.in \
-$(POFILES) $(SOURCES)
+DISTFILES = ChangeLog Makefile.in.in POTFILES.in $(POFILES)
 EXTRA_DISTFILES = POTFILES.skip Makevars LINGUAS
 
 POTFILES = \
@@ -77,10 +65,7 @@ CATALOGS = @CATALOGS@
 CATOBJEXT = @CATOBJEXT@
 
 .SUFFIXES:
-.SUFFIXES: .c .o .po .pox .gmo .mo .msg .cat
-
-.c.o:
-	$(COMPILE) $<
+.SUFFIXES: .po .pox .gmo .mo .msg .cat
 
 .po.pox:
 	$(MAKE) $(GETTEXT_PACKAGE).pot
@@ -106,8 +91,7 @@ all-no:
 $(GETTEXT_PACKAGE).pot: $(POTFILES)
 	$(GENPOT)
 
-install: install-exec install-data
-install-exec:
+install: install-data
 install-data: install-data-@USE_NLS@
 install-data-no: all
 install-data-yes: all
@@ -171,11 +155,8 @@ uninstall:
 
 check: all $(GETTEXT_PACKAGE).pot
 
-dvi info tags TAGS ID:
-
 mostlyclean:
-	rm -f core core.* *.pox $(GETTEXT_PACKAGE).pot *.old.po cat-id-tbl.tmp
-	rm -fr *.o
+	rm -f *.pox $(GETTEXT_PACKAGE).pot *.old.po cat-id-tbl.tmp
 	rm -f .intltool-merge-cache
 
 clean: mostlyclean
@@ -189,7 +170,7 @@ maintainer-clean: distclean
 	@echo "it deletes files that may require special tools to rebuild."
 	rm -f Makefile.in.in
 
-distdir = ../$(GETTEXT_PACKAGE)-$(VERSION)/$(subdir)
+distdir = ../$(PACKAGE)-$(VERSION)/$(subdir)
 dist distdir: $(DISTFILES)
 	dists="$(DISTFILES)"; \
 	extra_dists="$(EXTRA_DISTFILES)"; \
