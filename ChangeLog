@@ -1,5 +1,25 @@
 2006-04-11  Rodney Dawes  <dobey@novell.com>
 
+	* Makefile.in.in: Dump localedir, gnuclocaledir, and gettextsrcdir
+	variables as we no longer need them
+	Add DATADIRNAME substitution handling and define itlocaledir with it
+	Dump GMOFILES as it is not used in here
+	Add in a variable to deal with old ALL_LINGUAS
+	Set up PO_LINGUAS to get the locales from the LINGUAS file
+	Set up POFILES to be generated from one of PO_LINGUAS or ALL_LINGUAS
+	Dump CATOBJEXT as we no longer need it in here
+	Set up CATALOGS to be genereated from one of PO_LINGUAS or ALL_LINGUAS
+	Replace usage of CATALOGS to decipher the locale from, with straight
+	usage of either PO_LINGUAS or ALL_LINGUAS to get the locale names
+
+	* configure.ac: Bump the version so modules can depend on these changes
+	for supporting LINGUAS files in po subdirectories
+
+	* intltool.m4: Substitute the ALL_LINGUAS variable, so that we can
+	use it in our Makefile.in.in, for modules that have not migrated yet
+	
+2006-04-11  Rodney Dawes  <dobey@novell.com>
+
 	* Makefile.in.in: Remove all the bits related to building C code, we
 	don't need it in here, as all we're doing is processing translations
 
