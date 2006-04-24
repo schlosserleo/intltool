@@ -1,3 +1,10 @@
+2006-04-21  Rodney Dawes  <dobey@novell.com>
+
+	* intltool.m4: Handle micro-version number when checking that the
+	intltool version is >= the requested version
+
+	Fixes #339627
+
 2006-04-17  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.in.in: Restore stub tags for automake to work properly
