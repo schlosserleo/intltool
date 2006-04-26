@@ -54,7 +54,7 @@ GENPOT   = INTLTOOL_EXTRACT=$(INTLTOOL_EXTRACT) srcdir=$(srcdir) $(INTLTOOL_UPDA
 
 ALL_LINGUAS = @ALL_LINGUAS@
 
-PO_LINGUAS=$(shell if test -e LINGUAS; then grep -v ^\# LINGUAS; fi)
+PO_LINGUAS=$(shell if test -r LINGUAS; then grep -v ^\# LINGUAS; fi)
 
 POFILES = $(shell if test -n "$(PO_LINGUAS)"; then LINGUAS="$(PO_LINGUAS)"; else LINGUAS="$(ALL_LINGUAS)"; fi; for lang in $$LINGUAS; do echo $$lang.po; done)
 

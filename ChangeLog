@@ -1,3 +1,9 @@
+2006-04-26  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.in.in (PO_LINGUAS): Use test -r instead of -e, for Solaris
+
+	* intltool.m4: Up the serial to 34
+
 2006-04-21  Rodney Dawes  <dobey@novell.com>
 
 	* intltool.m4: Handle micro-version number when checking that the
