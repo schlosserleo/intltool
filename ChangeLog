@@ -1,5 +1,10 @@
 2006-04-27  Rodney Dawes  <dobey@novell.com>
 
+	* Makefile.in.in (PO_LINGUAS): Quote the ^\# argument to grep, so that
+	it gets interpreted properly
+	
+2006-04-27  Rodney Dawes  <dobey@novell.com>
+
 	* Makefile.in.in (POFILES, CATALOGS): Replace the echo $$lang.{po,gmo}
 	command within the for loop, with printf "$$lang.{po,gmo} " so that we
 	will work on Solaris again
