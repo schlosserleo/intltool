@@ -1,3 +1,10 @@
+2006-05-09  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.in.in (PO_LINGUAS): Use $(srcdir)/LINGUAS rather than just
+	LINGUAS here, to fix builddir != srcdir
+
+	Fixes #341058
+
 2006-04-27  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.in.in (PO_LINGUAS): Quote the ^\# argument to grep, so that
