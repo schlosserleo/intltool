@@ -1,3 +1,12 @@
+2006-05-10  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-update.in.in (GeneratePOTemplate): Get MSGID_BUGS_ADDRESS
+	from Makevars and pass it in to xgettext
+	(FindMakevarsBugAddress): Look for MSGID_BUGS_ADDRESS in Makevars so
+	that we can pass it to xgettext
+
+	Fixes #329346 Original patch by Dwayne Bailey <dwayne@translate.org.za>
+
 2006-05-09  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.in.in (PO_LINGUAS): Use $(srcdir)/LINGUAS rather than just
