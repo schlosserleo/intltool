@@ -1,3 +1,10 @@
+2006-05-15  Rodney Dawes  <dobey@novell.com>
+
+	* NEWS:
+	* configure.in: Up version to 0.35.0 for release
+
+	* intltool.m4: Up serial to 35
+
 2006-05-10  Rodney Dawes  <dobey@novell.com>
 
 	* intltool-update.in.in (GeneratePOTemplate): Get MSGID_BUGS_ADDRESS

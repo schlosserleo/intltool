@@ -1,3 +1,21 @@
+Version 0.35.0
+
+* Support for MSGID_BUGS_ADDRESS variable in Makevars and for xgettext
+  -- bug #329346 (Dwayne Bailey, Rodney Dawes)
+* Support for po/LINGUAS file being preferred over ALL_LINGUAS variable
+  -- bugs #341508 #339770 (Rodney Dawes)
+* Support micro-version when validating version requirements
+  -- bug #339627 (Rodney Dawes)
+* Clean up Makefile.in.in to remove useless bits
+  -- bug #338817 (Rodney Dawes)
+* Change WARNING to NOTICE for non-UTF-8 po file encodings
+  -- bug #331046 (Rodney Dawes)
+* Add MAINTAINERS file
+  -- bug #335025 (Danilo Segan)
+* Work around recursive variable resolution in intltool-update
+  -- bug #321785 (Danilo Segan)
+* Work around variable stripping in Makefile.in.in substitution
+  -- bug #330509 (Rodney Dawes)
 
 Version 0.34.2
 
