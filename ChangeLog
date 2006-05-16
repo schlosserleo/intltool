@@ -1,3 +1,11 @@
+2006-05-16  Rodney Dawes  <dobey@novell.com>
+
+	* intltoolize.in: Change the warning message for a missing call to
+	IT_PROG_INTLTOOL in configure.{in,ac} to a more appropriate error,
+	and exit with a return value of 1 if it is not present
+
+	Fixes #341985
+
 2006-05-15  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS:

@@ -192,7 +192,8 @@ fi
 if test -z "$automake"; then
   if egrep '^(AC|IT)_PROG_INTLTOOL' $configure >/dev/null 2>&1; then :
   else
-    echo "Remember to add 'IT_PROG_INTLTOOL' to $configure."
+    echo "ERROR: 'IT_PROG_INTLTOOL' must appear in $configure for intltool to work."
+    exit 1
   fi
 
   if grep 'generated automatically by aclocal' aclocal.m4 >/dev/null 2>&1; then
