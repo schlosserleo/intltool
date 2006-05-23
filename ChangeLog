@@ -1,3 +1,28 @@
+2006-05-23  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-extract.in.in (escape_char): Return \\\\ when escaping \\
+
+	* tests/selftest.pl.in:
+	* tests/cases/Makefile.am:
+	* tests/cases/test-quoted.dtd:
+	* tests/cases/test-quoted.po:
+	* tests/results/Makefile.am:
+	* tests/results/multi.test-quoted.dtd:
+	* tests/results/test-quoted.dtd.h:
+	Add tests for testing the new gettext/quoted style implementation 
+
+	* tests/results/merge-deepattr.xml: Update to include a dummy tag
+	section for the "test-quoted" lang that was added for the above tests
+	
+2006-05-19  Chris Lahey  <clahey@clahey.net>
+
+	* intltool-extract.in.in
+	* intltool-merge.in.in:
+	* doc/intltool-extract.8:
+	* doc/intltool-merge.8: Added gettext/quoted format which just extracts
+	and/or merges all strings between "".
+	Merging only supports multiple file mode.
+
 2006-05-16  Rodney Dawes  <dobey@novell.com>
 
 	* intltoolize.in: Change the warning message for a missing call to

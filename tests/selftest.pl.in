@@ -237,7 +237,17 @@ $case = "iso88591text.xml.in";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
+print "30. Extract messages from a quoted style file:                       ";
+$case = "test-quoted.dtd";
+system("$INTLTOOL_EXTRACT --type=gettext/quoted --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
+print "31. Merge translations into multiple quoted style files:             ";
+$case = "test-quoted.dtd";
+system("$INTLTOOL_MERGE --quoted-style --quiet --multiple-output cases cases/$case $case") == 0 or $failed = 1;
+check_multimerge_result($case, "test-quoted");
+
 system("rm -f cases/*.*") if $srcdir ne ".";
-system("rm -rf az extract9 fr fr_BE fr_FR merge6 schemasmerge1 schemasmerge2 spacepreserve test merge6.xml");
+system("rm -rf az extract9 fr fr_BE fr_FR merge6 schemasmerge1 schemasmerge2 spacepreserve test test-quoted merge6.xml");
 
 exit $failed;

@@ -33,4 +33,7 @@
   <tag xml:lang="test" translate="Time zone">
     <translate>Select Area</translate>
   </tag>
+  <tag xml:lang="test-quoted" translate="Time zone">
+    <translate>Select Area</translate>
+  </tag>
 </root>

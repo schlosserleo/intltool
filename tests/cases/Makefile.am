@@ -32,6 +32,8 @@ EXTRA_DIST =					\
 	schemasmerge2.po			\
 	space-preserve.xml.in			\
 	spacepreserve.po			\
+	test-quoted.dtd				\
+	test-quoted.po				\
 	test.po 				\
 	test.schemas.in				\
 	test.scm				\
@@ -51,6 +53,7 @@ CLEANFILES =					\
 	merge11.xml				\
 	space-preserve.xml.in.h			\
 	space-preserve.xml			\
+	test-quoted.dtd.h			\
 	test.schemas				\
 	test.schemas.in.h			\
 	test.scm.h				\
