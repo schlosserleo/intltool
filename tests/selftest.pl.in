@@ -44,7 +44,7 @@ sub check_command_result
 
     my $result =`$command`;
     
-    if ($? == 0 && $result eq "") { 
+    if ($? == 0 && ($result eq "" || $result =~ /^No differences/)) { 
         print "[OK]\n"; ## diff was empty, ie. files were equal
     } else { 
         print "[FAILED] ($testcase)\n"; 

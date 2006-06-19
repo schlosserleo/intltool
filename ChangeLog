@@ -1,3 +1,11 @@
+2006-06-19  Rodney Dawes  <dobey@novell.com>
+
+	* tests/selftest.pl.in (check_command_result): Check for the output
+	of No differences from the diff command to work with older/non-GNU
+	versions of diff. Original patch from Tim Mooney
+
+	Fixes #345114
+
 2006-05-23  Rodney Dawes  <dobey@novell.com>
 
 	* intltool-extract.in.in (escape_char): Return \\\\ when escaping \\
