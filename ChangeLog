@@ -1,3 +1,10 @@
+2006-10-24  Rodney Dawes  <dobey@novell.com>
+
+	* intltool.m4: Add code from glib-gettext to detect DATADIRNAME
+	Patch from Loïc Minier <lool+gnome@via.ecp.fr>
+
+	Fixes #345255
+
 2006-06-19  Rodney Dawes  <dobey@novell.com>
 
 	* tests/selftest.pl.in (check_command_result): Check for the output
