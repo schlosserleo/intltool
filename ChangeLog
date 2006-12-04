@@ -1,3 +1,11 @@
+2006-12-04  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-merge.in.in (create_translation_database):
+	Make regex patterns greedier, to avoid perl stack overflows
+	Patch from Joerg Sonnenberger <joerg@bec.de>
+
+	Fixes #353403
+
 2006-10-24  Rodney Dawes  <dobey@novell.com>
 
 	* intltool.m4: Add code from glib-gettext to detect DATADIRNAME

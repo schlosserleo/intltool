@@ -426,7 +426,7 @@ sub create_translation_database
         {
 	    $nextfuzzy = 1 if /^#, fuzzy/;
        
-	    if (/^msgid "((\\.|[^\\])*)"/ ) 
+	    if (/^msgid "((\\.|[^\\]+)*)"/ ) 
             {
 		$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgid && $msgstr;
 		$msgid = "";
@@ -442,14 +442,14 @@ sub create_translation_database
 		$nextfuzzy = 0;
 	    }
 
-	    if (/^msgstr "((\\.|[^\\])*)"/) 
+	    if (/^msgstr "((\\.|[^\\]+)*)"/) 
             {
 	        $msgstr = unescape_po_string($1);
 		$inmsgstr = 1;
 		$inmsgid = 0;
 	    }
 
-	    if (/^"((\\.|[^\\])*)"/) 
+	    if (/^"((\\.|[^\\]+)*)"/) 
             {
 	        $msgid .= unescape_po_string($1) if $inmsgid;
 	        $msgstr .= unescape_po_string($1) if $inmsgstr;
