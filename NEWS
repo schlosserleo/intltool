@@ -1,3 +1,15 @@
+Version 0.35.1
+
+* Make regex patterns greedier, to avoid perl stack overflows
+  -- bug #353403 (Joerg Sonnenberger)
+* Add code to detect DATADIRNAME
+  -- bug #345255 (Loïc Minier)
+* Support older/non-GNU versions of diff when validating tests
+  -- bug #345114 (Tim Mooney, Rodney Dawes)
+* Add new mode to support quoted text in any file (Chris Lahey, Rodney Dawes)
+* Fix the warning message for missing IT_PROG_INTLTOOL and error out
+  -- bug #341985 (Rodney Dawes)
+
 Version 0.35.0
 
 * Support for MSGID_BUGS_ADDRESS variable in Makevars and for xgettext
