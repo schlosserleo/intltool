@@ -1,5 +1,13 @@
 2006-12-08  Rodney Dawes  <dobey@novell.com>
 
+	* Makefile.in.in: Set $(top_builddir) to @top_builddir@ instead of ..
+	Use $(top_builddir) instead of .. for the stamp-it rule
+	Patch from Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	Fixes #345560
+
+2006-12-08  Rodney Dawes  <dobey@novell.com>
+
 	* Makefile.in.in: Add support for using LINGUAS environment variable
 	during build and install
 	Simplify some of the rules to use USE_LINGUAS to avoid duplication
