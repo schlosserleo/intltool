@@ -1,3 +1,11 @@
+2006-12-18  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.in.in: Fix the LINGUAS support to only use locales that are
+	in both LINGUAS and the LINGUAS file or ALL_LINGUAS variable, if
+	LINGUAS is set in the build environment
+
+	Fixes #342500 more completely
+
 2006-12-09  Rodney Dawes  <dobey@novell.com>
 
 	* intltool-update.in.in: Set $PKGNAME variable with FindPackageName so
