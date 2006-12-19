@@ -90,10 +90,9 @@ my $buildin_gettext_support =
 $| = 1;
 
 ## Sometimes the source tree will be rooted somewhere else.
-my $SRCDIR = ".";
+my $SRCDIR = $ENV{"srcdir"} || ".";
 my $POTFILES_in;
 
-$SRCDIR = $ENV{"srcdir"} if $ENV{"srcdir"};
 $POTFILES_in = "<$SRCDIR/POTFILES.in";
 
 my $devnull = ($^O eq 'MSWin32' ? 'NUL:' : '/dev/null');
@@ -506,7 +505,7 @@ sub FindLeftoutFiles
     foreach (@buf_potfiles_sorted)
     {
 	chomp (my $dummy = $_);
-	if ("$dummy" ne "" and ! -f "../$dummy")
+	if ("$dummy" ne "" and ! -f "$SRCDIR/../$dummy")
 	{
 	    push @buf_potfiles_notexist, $_;
 	}
@@ -590,7 +589,7 @@ sub GenerateHeaders
 	   {
 	       s/^\[[^\[].*]\s*//;
 
-	       my $filename = "../$_";
+	       my $filename = "$SRCDIR/../$_";
 
 	       if ($VERBOSE)
 	       {
@@ -667,18 +666,14 @@ sub GeneratePOTemplate
 	elsif (/\.($xml_support|$ini_support)$/ || /^\[/)
 	{
 	    s/^\[.*]\s*//;
-            print OUTFILE "../$_.h\n";
-	    push @temp_headers, "../$_.h";
-	    $gettext_code = &TextFile_DetermineEncoding ("../$_.h") if ($gettext_support_nonascii and not defined $forced_gettext_code);
+            print OUTFILE "$SRCDIR/../$_.h\n";
+	    push @temp_headers, "$SRCDIR/../$_.h";
+	    $gettext_code = &TextFile_DetermineEncoding ("$SRCDIR/../$_.h") if ($gettext_support_nonascii and not defined $forced_gettext_code);
 	} 
 	else 
 	{
-	    if ($SRCDIR eq ".") {
-	        print OUTFILE "../$_\n";
-	    } else {
-	        print OUTFILE "$SRCDIR/../$_\n";
-	    }
-	    $gettext_code = &TextFile_DetermineEncoding ("../$_") if ($gettext_support_nonascii and not defined $forced_gettext_code);
+            print OUTFILE "$SRCDIR/../$_\n";
+	    $gettext_code = &TextFile_DetermineEncoding ("$SRCDIR/../$_") if ($gettext_support_nonascii and not defined $forced_gettext_code);
 	}
 
 	next if (! $gettext_support_nonascii);
