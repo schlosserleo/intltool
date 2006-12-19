@@ -1,3 +1,10 @@
+2006-12-19  Rodney Dawes  <dobey@novell.com>
+
+	* Makefile.in.in: Add a call to intltool-update -m to the check rule
+	so that we can ensure that POTFILES.in is kept up to date
+	(USER_LINGUAS): Remove trailing whitespace which broke building without
+	LINGUAS set in the environment
+
 2006-12-18  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.in.in: Fix the LINGUAS support to only use locales that are
