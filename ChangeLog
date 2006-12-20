@@ -1,6 +1,6 @@
 2006-12-20  Rodney Dawes  <dobey@novell.com>
 
-	* Makefile.in.in (POTFILES): Replace useless comment with PLACEHOLDER
+	* Makefile.in.in (POTFILES): Replace useless comment with $(NULL)
 
 	Fixes #330509
 
