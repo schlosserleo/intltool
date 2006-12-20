@@ -1,3 +1,18 @@
+Version 0.35.2
+
+* Create builddir if it doesn't exist when generating header files
+  -- bug #348952 (Rodney Dawes)
+* Update checks for leftout files with intltool-update -m
+  -- bug #386118 (Rodney Dawes)
+* Better support for using $srcdir (Rodney Dawes)
+* Run intltool-update -m in make check (Rodney Dawes)
+* Handle LINGUAS environment variable properly
+  -- bug #342500 (Rodney Dawes)
+* Make sure that we always call FindPackageName so variables get set properly
+  -- bug #350013 (Rodney Dawes)
+* Set $top_builddir in Makefile.in.in for stamp-it rule
+  -- bug #345560 (Daniel Leidert)
+
 Version 0.35.1
 
 * Make regex patterns greedier, to avoid perl stack overflows
