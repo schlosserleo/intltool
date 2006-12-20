@@ -590,7 +590,7 @@ sub GenerateHeaders
 	   {
 	       s/^\[[^\[].*]\s*//;
 
-	       my $filename = "$SRCDIR/../$_";
+	       my $filename = "../$_";
 
 	       if ($VERBOSE)
 	       {
@@ -667,9 +667,9 @@ sub GeneratePOTemplate
 	elsif (/\.($xml_support|$ini_support)$/ || /^\[/)
 	{
 	    s/^\[.*]\s*//;
-            print OUTFILE "$SRCDIR/../$_.h\n";
-	    push @temp_headers, "$SRCDIR/../$_.h";
-	    $gettext_code = &TextFile_DetermineEncoding ("$SRCDIR/../$_.h") if ($gettext_support_nonascii and not defined $forced_gettext_code);
+            print OUTFILE "../$_.h\n";
+	    push @temp_headers, "../$_.h";
+	    $gettext_code = &TextFile_DetermineEncoding ("../$_.h") if ($gettext_support_nonascii and not defined $forced_gettext_code);
 	} 
 	else 
 	{
