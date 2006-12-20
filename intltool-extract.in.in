@@ -114,6 +114,11 @@ sub split_on_argument {
 sub place_normal {
     $FILE	 = $ARGV[0];
     $OUTFILE     = "$FILE.h";
+
+    my $dirname = dirname ($OUTFILE);
+    if (! -d "$dirname" && $dirname ne "") {
+        system ("mkdir -p $dirname");
+    }
 }   
 
 sub place_local {
