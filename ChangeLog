@@ -1,3 +1,10 @@
+2007-01-03  Jürg Billeter  <j@bitron.ch>
+
+	* Makefile.in.in: Fix LINGUAS environment variable support to match the
+	entries in the LINGUAS file more precisely
+
+	Fixes #342500 even more completely
+
 2006-12-20  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS:
