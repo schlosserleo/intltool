@@ -317,7 +317,8 @@ sub FindLeftoutFiles
 	@buf_potfiles_ignore,
 	@buf_allfiles,
 	@buf_allfiles_sorted,
-	@buf_potfiles_sorted
+	@buf_potfiles_sorted,
+        @buf_potfiles_ignore_sorted
     );
 
     ## Search and find all translatable files
@@ -352,7 +353,7 @@ sub FindLeftoutFiles
 	}
 
 	print "Found $ignore: Ignoring files...\n" if $VERBOSE;
-	open FILE, "<$ignore" or die "ERROR: Failed to open $ignore!\n";
+	open FILE, "<$SRCDIR/$ignore" or die "ERROR: Failed to open $SRCDIR/$ignore!\n";
 	    
 	while (<FILE>)
 	{
@@ -360,7 +361,7 @@ sub FindLeftoutFiles
 	}
 	close FILE;
 
-	@buf_potfiles = (@buf_potfiles_ignore, @buf_potfiles);
+	@buf_potfiles_ignore_sorted = sort (@buf_potfiles_ignore);
     }
 
     foreach my $file (@buf_i18n_plain)
@@ -491,6 +492,11 @@ sub FindLeftoutFiles
 	$in2{$_} = 1;
     }
 
+    foreach (@buf_potfiles_ignore_sorted) 
+    {
+	$in2{$_} = 1;
+    }
+
     my @result;
 
     foreach (@buf_allfiles_sorted)
@@ -539,7 +545,7 @@ sub FindLeftoutFiles
 	    warn "\n" if ($VERBOSE or @result);
 	    warn "\e[1mThe following files do not exist anymore:\e[0m\n\n";
 	    warn @buf_potfiles_notexist, "\n";
-	    warn "Please remove them from POTFILES.in or POTFILES.skip. A file \e[1m'notexist'\e[0m\n".
+	    warn "Please remove them from POTFILES.in. A file \e[1m'notexist'\e[0m\n".
 		 "containing this list of absent files has been written in the current directory.\n";
 	}
     }

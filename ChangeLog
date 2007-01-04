@@ -1,3 +1,15 @@
+2007-01-03  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-update.in.in (FindLeftoutFiles): Load POTFILES.skip or
+	POTFILES.ignore from $SRCDIR
+	Handle the files in POTFILES.{skip,ignore} separately from POTFILES.in
+	so that we can ignore them when checking that all the files listed in
+	POTFILES.in still exist, as POTFILES.skip may contain generated files
+	that only exist for a short amount of time, and can be optional in some
+	builds
+
+	Fixes #391892
+
 2007-01-03  Jürg Billeter  <j@bitron.ch>
 
 	* Makefile.in.in: Fix LINGUAS environment variable support to match the
