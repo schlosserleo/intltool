@@ -1,3 +1,13 @@
+Version 0.35.3
+
+* Check for leftout files in builddir, for for generated files (Rodney Dawes)
+* Load POTFILES.{skip,ignore} from $SRCDIR in intltool-update
+  -- bug #391892 (Rodney Dawes)
+* Ignore files in POTFILES.{skip,ignore} when looking for leftout files
+  -- bug #391892 (Rodney Dawes)
+* Match $LINGUAS with LINGUAS file more precisely
+  -- bug #342500 (Jürg Billeter)
+
 Version 0.35.2
 
 * Create builddir if it doesn't exist when generating header files
