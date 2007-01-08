@@ -1,5 +1,10 @@
 2007-01-08  Rodney Dawes  <dobey@novell.com>
 
+	* NEWS:
+	* configure.in: Up version to 0.35.4 for release
+
+2007-01-08  Rodney Dawes  <dobey@novell.com>
+
 	* intltool-update.in.in (FindLeftoutFiles): Fix the logic of the
 	previous commit to avoid potential breakage
 

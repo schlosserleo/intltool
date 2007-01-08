@@ -1,3 +1,7 @@
+Version 0.35.4
+
+* Fix logic of checking for leftout files in builddir or srcdir (Rodney Dawes)
+
 Version 0.35.3
 
 * Check for leftout files in builddir, for for generated files (Rodney Dawes)
