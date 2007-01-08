@@ -512,7 +512,7 @@ sub FindLeftoutFiles
     foreach (@buf_potfiles_sorted)
     {
 	chomp (my $dummy = $_);
-	if ("$dummy" ne "" and (! -f "$SRCDIR/../$dummy" or ! -f "../$dummy"))
+	if ("$dummy" ne "" and !(-f "$SRCDIR/../$dummy" or -f "../$dummy"))
 	{
 	    push @buf_potfiles_notexist, $_;
 	}
