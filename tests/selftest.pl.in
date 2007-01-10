@@ -247,6 +247,11 @@ $case = "test-quoted.dtd";
 system("$INTLTOOL_MERGE --quoted-style --quiet --multiple-output cases cases/$case $case") == 0 or $failed = 1;
 check_multimerge_result($case, "test-quoted");
 
+print "32. Extract comments for translators from a .desktop.in file:        ";
+$case = "extract13.desktop.in";
+system("$INTLTOOL_EXTRACT --type=gettext/ini --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
 system("rm -f cases/*.*") if $srcdir ne ".";
 system("rm -rf az extract9 fr fr_BE fr_FR merge6 schemasmerge1 schemasmerge2 spacepreserve test test-quoted merge6.xml");
 

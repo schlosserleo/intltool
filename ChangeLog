@@ -1,3 +1,18 @@
+2007-01-10  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-extract.in.in (type_ini): Handle extracting comments as
+	well as messages
+	* tests/cases/Makefile.am: Add extract13.desktop.in appropriately
+	* tests/cases/extract13.desktop.in: New test case for .desktop comments
+	* tests/results/Makefile.am: Add extract13.desktop.in.h
+	* tests/results/extract13.desktop.in.h: Resulting header with strings
+	* tests/selftest.pl.in: Add test case 32 for extracting desktop file
+	comment strings for translators
+
+	Patch from Takao Fujiwara <Takao.Fujiwara@Sun.COM>
+
+	Fixes #390271
+
 2007-01-08  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS:

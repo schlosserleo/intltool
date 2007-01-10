@@ -4,6 +4,7 @@ EXTRA_DIST =					\
 	extract-comments.xml.h			\
 	extract1.desktop.h			\
 	extract10.templates_.h			\
+	extract13.desktop.in.h			\
 	extract3.xml.in.h			\
 	extract6.glade.h			\
 	extract7.xml.h				\

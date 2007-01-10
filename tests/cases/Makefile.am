@@ -5,6 +5,7 @@ EXTRA_DIST =					\
 	extract-comments.xml			\
 	extract1.desktop			\
 	extract10.templates_			\
+	extract13.desktop.in			\
 	extract3.xml.in				\
 	extract6.glade				\
 	extract7.xml				\
@@ -44,6 +45,7 @@ CLEANFILES =					\
 	extract-comments.xml.h			\
 	extract10.templates_.h			\
 	extract12.xml.in.h			\
+	extract13.desktop.in.h			\
 	extract9.xml				\
 	extract9.xml.in.h			\
 	iso88591text.xml.in.h			\
