@@ -344,7 +344,7 @@ sub FindLeftoutFiles
     ## comparing with POTFILES.in
     foreach my $ignore ("POTFILES.skip", "POTFILES.ignore")
     {
-	(-s $ignore) or next;
+	(-s "$SRCDIR/$ignore") or next;
 
 	if ("$ignore" eq "POTFILES.ignore")
 	{
