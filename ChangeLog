@@ -1,6 +1,14 @@
 2007-02-13  Rodney Dawes  <dobey@novell.com>
 
-	* intltoole-merge.in.in (xml_merge_output, quoted_merge_translations):
+	* intltool-update.in.in (GenerateHeaders):
+	* Makefile.am:
+	Don't hardcode the fallback path to intltool-extract
+
+	Fixes #399476
+
+2007-02-13  Rodney Dawes  <dobey@novell.com>
+
+	* intltool-merge.in.in (xml_merge_output, quoted_merge_translations):
 	Check that $lang is a directory, rather than just that it exists
 	Create the directory if it doesn't exist, and check that it is a
 	directory if it gets created by a different thread

@@ -43,7 +43,6 @@ edit = $(edit_in_in) -e "s|[@]INTLTOOL_PERL@|$(PERL)|g" \
 	    -e "s|[@]INTLTOOL_MSGFMT@|$(INTLTOOL_MSGFMT)|g" \
 	    -e "s|[@]INTLTOOL_MSGMERGE@|$(INTLTOOL_MSGMERGE)|g" \
 	    -e "s|[@]INTLTOOL_XGETTEXT@|$(INTLTOOL_XGETTEXT)|g" \
-	    -e "s|[@]INTLTOOL_EXTRACT@|$(bindir)/intltool-extract|g" \
 	    -e "s|[@]INTLTOOL_LIBDIR@|$(libdir)|g"
 
 intltool-extract.in: intltool-extract.in.in Makefile
