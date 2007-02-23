@@ -1,3 +1,14 @@
+Version 0.35.5
+
+* Don't hardcode fallback path to intltool-extract
+  -- bug #399476 (Rodney Dawes)
+* Fix mkdir race in inltool-merge.in.in
+  -- bug #400788 (Rodney Dawes, Leonardo Boshell)
+* Update an additional check to use $SRCDIR properly for POTFILES.skip
+  -- bug #391892 (Rodney Dawes)
+* Handle extracting comments from ini-style files
+  -- bug #390271 (Takao Fujiwara)
+
 Version 0.35.4
 
 * Fix logic of checking for leftout files in builddir or srcdir (Rodney Dawes)
