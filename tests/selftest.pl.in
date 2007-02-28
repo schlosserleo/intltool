@@ -36,6 +36,7 @@ my $failed = 0;
 
 my $srcdir = $ENV{"srcdir"} || ".";
 
+my $strip_trailing_cr = ($^O eq 'MSWin32' || $^O eq 'msys') ? '--strip-trailing-cr' : '';
 
 sub check_command_result
 {
@@ -58,7 +59,7 @@ sub check_command_result
 sub check_extract_result($)
 {
     my ($testcase) = @_;
-    check_command_result("diff -u $srcdir/results/$testcase.h cases/$testcase.h", $testcase);
+    check_command_result("diff -u $strip_trailing_cr $srcdir/results/$testcase.h cases/$testcase.h", $testcase);
 }
 
 sub check_merge_result($)
@@ -66,7 +67,7 @@ sub check_merge_result($)
     my ($testcase) = @_;
 
     $testcase =~ s/\.in$//;
-    check_command_result("diff -u $srcdir/results/$testcase cases/$testcase", $testcase);
+    check_command_result("diff -u $strip_trailing_cr $srcdir/results/$testcase cases/$testcase", $testcase);
 }
 
 
@@ -76,7 +77,7 @@ sub check_multimerge_result
     my ($language) = shift;
 
     $testcase =~ s/\.in$//;
-    check_command_result("diff -u $srcdir/results/multi.$testcase $language/$testcase", $testcase);
+    check_command_result("diff -u $strip_trailing_cr $srcdir/results/multi.$testcase $language/$testcase", $testcase);
 }
 
 

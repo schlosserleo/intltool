@@ -1,3 +1,9 @@
+2007-02-28  Tor Lillqvist  <tml@novell.com>
+
+	* tests/selftest.pl.in: Use --strip-trailing-cr on Windows. (This
+	requires a reasonably new GNU diff. The 2.8.7 one from gnuwin32
+	seems to work fine.) Fixes make check on Windows.
+
 2007-02-23  Rodney Dawes  <dobey@novell.com>
 
 	* NEWS:
