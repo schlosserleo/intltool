@@ -1,3 +1,10 @@
+2007-03-02  Danilo Šegan  <danilo@gnome.org>
+
+	Fix #413461 (resulting from #399476 fix).
+
+	* intltool-update.in.in (isIntltoolExtractInPath): Added.
+	(GenerateHeaders): Use isIntltoolExtractInPath instead of -x.
+
 2007-02-28  Tor Lillqvist  <tml@novell.com>
 
 	* tests/selftest.pl.in: Use --strip-trailing-cr on Windows. (This
