@@ -1,3 +1,10 @@
+2007-03-17  Thomas Andersen  <phomes@gmail.com>
+
+	* tests/cases/extract13.desktop.in
+	Remove invalid category "Application"
+
+	Fixes #417659
+
 2007-03-02  Danilo Šegan  <danilo@gnome.org>
 
 	Fix #413461 (resulting from #399476 fix).

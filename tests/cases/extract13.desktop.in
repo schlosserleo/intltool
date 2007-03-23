@@ -17,7 +17,7 @@ Type=Application
 # 9. This comment should NOT be extracted.
 StartupNotify=true
 # 10. This comment should NOT be extracted.
-Categories=GNOME;GTK;Application;Core;
+Categories=GNOME;GTK;Core;
 # 11. This comment should NOT be extracted.
 X-GNOME-DocPath=gnome-search-tool/gnome-search-tool.xml
 X-GNOME-Bugzilla-Bugzilla=GNOME
