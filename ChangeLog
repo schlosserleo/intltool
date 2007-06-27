@@ -1,3 +1,9 @@
+2007-06-27  Rodney Dawees  <dobey.pwns@gmail.com>
+
+	* Makefile.in.in: Add dummy install-exec
+
+	Fixes #448200
+
 2007-03-17  Thomas Andersen  <phomes@gmail.com>
 
 	* tests/cases/extract13.desktop.in
