@@ -1,4 +1,11 @@
-2007-06-27  Rodney Dawees  <dobey.pwns@gmail.com>
+2007-06-28  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool.m4: Fix autoconf warnings
+	Patch from Guillem Jover
+
+	Fixes #430093
+
+2007-06-27  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* Makefile.in.in: Add dummy install-exec
 
