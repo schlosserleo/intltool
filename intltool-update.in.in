@@ -328,7 +328,12 @@ sub FindLeftoutFiles
 	push @buf_i18n_ini,          "$File::Find::name" if /\.($ini_support)$/;
 	push @buf_i18n_xml_unmarked, "$File::Find::name" if /\.(schemas(\.in)+)$/;
 	}, "..";
-
+    find sub { 
+	push @buf_i18n_plain,        "$File::Find::name" if /\.($buildin_gettext_support)$/;
+	push @buf_i18n_xml,          "$File::Find::name" if /\.($xml_support)$/;
+	push @buf_i18n_ini,          "$File::Find::name" if /\.($ini_support)$/;
+	push @buf_i18n_xml_unmarked, "$File::Find::name" if /\.(schemas(\.in)+)$/;
+	}, "$SRCDIR/..";
 
     open POTFILES, $POTFILES_in or die "$PROGRAM:  there's no POTFILES.in!\n";
     @buf_potfiles = grep !/^(#|\s*$)/, <POTFILES>;
@@ -489,11 +494,15 @@ sub FindLeftoutFiles
     my %in2;
     foreach (@buf_potfiles_sorted) 
     {
+        s#^$SRCDIR/../##;
+        s#^$SRCDIR/##;
 	$in2{$_} = 1;
     }
 
     foreach (@buf_potfiles_ignore_sorted) 
     {
+        s#^$SRCDIR/../##;
+        s#^$SRCDIR/##;
 	$in2{$_} = 1;
     }
 
@@ -501,9 +510,15 @@ sub FindLeftoutFiles
 
     foreach (@buf_allfiles_sorted)
     {
-	if (!exists($in2{$_}))
+        my $dummy = $_;
+        my $srcdir = $SRCDIR;
+
+        $srcdir =~ s#^../##;
+        $dummy =~ s#^$srcdir/../##;
+        $dummy =~ s#^$srcdir/##;
+	if (!exists($in2{$dummy}))
 	{
-	    push @result, $_
+	    push @result, $dummy
 	}
     }
 

@@ -1,5 +1,15 @@
 2007-06-30  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-update.in.in (FindLeftoutFiles):
+	Look for files in $SRCDIR/.. as well as ..
+	Strip $SRCDIR from the filenames when adding to the hash table
+	Strip $SRCDIR from the filenames when looking up in the hash table
+	Strip $SRCDIR from the filenames when listing in missing
+	
+	Fixes #438722
+
+2007-06-30  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-update.in.in (GeneratePOTemplate):
 	Don't write $SRCDIR/../ or ../ to POTFILES.in.temp
 	Pass .. as the --directory argument to xgettext
