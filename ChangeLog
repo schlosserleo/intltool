@@ -1,3 +1,13 @@
+2007-06-30  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-update.in.in (GeneratePOTemplate):
+	Don't write $SRCDIR/../ or ../ to POTFILES.in.temp
+	Pass .. as the --directory argument to xgettext
+	Pass --default-domain to xgettext
+	Pass --flag arguments for glib functions to xgettext
+
+	Fixes #449938
+
 2007-06-28  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool.m4: Fix autoconf warnings
