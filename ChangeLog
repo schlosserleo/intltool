@@ -1,3 +1,22 @@
+2007-07-20  Danilo Šegan <danilo@gnome.org>
+
+	Patch from Leonardo Boshell  <lb@kmc.com.co>
+
+	* intltool-extract.in.in (entity_decode): Decode &amp; after all the
+	other entities to avoid double decoding.
+	* intltool-merge.in.in (entity_decode): Decode &amp; at the end and
+	decode &gt; as well so strings are decoded exactly the same by the
+	extract and merge tools.
+	* tests/cases/extract14.xml.in:
+	* tests/cases/merge12.xml.in:
+	* tests/cases/test.po:
+	* tests/results/extract14.xml.in.h:
+	* tests/results/merge12.xml:
+	* tests/selftest.pl.in: New tests to check that entities in XML files
+	are decoded in the proper order.
+
+	Fixes #411698.
+
 2007-06-30  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-update.in.in (FindLeftoutFiles):

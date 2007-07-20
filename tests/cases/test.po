@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Test file - DON'T CHANGE\n"
 "POT-Creation-Date: 2001-01-31 17:45+0100\n"
-"PO-Revision-Date: 2000-05-29 02:16+01:00\n"
+"PO-Revision-Date: 2007-02-24 16:02-0500\n"
 "Last-Translator: Kenneth Christiansen <kenneth@gnu.org>\n"
 "Language-Team: NONE <kenneth@gnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -125,6 +125,18 @@ msgstr "Well-formed <b>XML</b> data."
 
 msgid "Sample <i>xml</i> data."
 msgstr "Invalid <i>XML data."
+
+msgid "The &amp;gt; entity produces the &gt; character"
+msgstr "The following entity: &amp;gt; produces: &gt;"
+
+msgid "The &amp;lt; entity produces the &lt; character"
+msgstr "The following entity: &amp;lt; produces: &lt;"
+
+msgid "The &gt; entity produces the > character"
+msgstr "The following entity: &gt; produces: >"
+
+msgid "The &lt; entity produces the < character"
+msgstr "The following entity: &lt; produces: <"
 
 #~ msgid " Auto Update"
 #~ msgstr " Opdatér automatisk"

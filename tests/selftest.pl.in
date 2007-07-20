@@ -253,6 +253,16 @@ $case = "extract13.desktop.in";
 system("$INTLTOOL_EXTRACT --type=gettext/ini --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
+print "33. Decode XML entities in the right order when extracting:          ";
+$case = "extract14.xml.in";
+system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
+print "34. Merge XML translations, decoding entities in the right order:    ";
+$case = "merge12.xml";
+system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
+check_merge_result($case);
+
 system("rm -f cases/*.*") if $srcdir ne ".";
 system("rm -rf az extract9 fr fr_BE fr_FR merge6 schemasmerge1 schemasmerge2 spacepreserve test test-quoted merge6.xml");
 
