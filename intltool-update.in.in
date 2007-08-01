@@ -693,13 +693,13 @@ sub GeneratePOTemplate
 	elsif (/\.($xml_support|$ini_support)$/ || /^\[/)
 	{
 	    s/^\[.*]\s*//;
-            print OUTFILE "$_.h\n";
+            print OUTFILE "../$_.h\n";
 	    push @temp_headers, "../$_.h";
 	    $gettext_code = &TextFile_DetermineEncoding ("../$_.h") if ($gettext_support_nonascii and not defined $forced_gettext_code);
 	} 
 	else 
 	{
-            print OUTFILE "$_\n";
+            print OUTFILE "$SRCDIR/../$_\n";
 	    $gettext_code = &TextFile_DetermineEncoding ("$SRCDIR/../$_") if ($gettext_support_nonascii and not defined $forced_gettext_code);
 	}
 
@@ -741,7 +741,7 @@ sub GeneratePOTemplate
     unlink "$MODULE.pot";
     my @xgettext_argument=("$XGETTEXT",
 			   "--add-comments",
-			   "--directory\=..",
+			   "--directory\=.",
                            "--default-domain\=$MODULE",
                            "--flag\=g_strdup_printf:1:c-format",
                            "--flag\=g_string_printf:2:c-format",

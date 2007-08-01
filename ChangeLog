@@ -1,3 +1,13 @@
+2007-08-01  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	Patch from Wouter Bolsterlee <wbolster@gnome.org>
+
+	* intltool-update.in.in. (FindLeftoutFiles):
+	Don't need to strip $SRCDIR from filenames when adding to hash table
+	Gettext doesn't require the reference to not have the leading ../
+
+	Fixes #449938
+
 2007-07-20  Danilo Šegan <danilo@gnome.org>
 
 	Patch from Leonardo Boshell  <lb@kmc.com.co>
