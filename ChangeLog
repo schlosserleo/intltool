@@ -1,3 +1,10 @@
+2007-08-01  David Zeuthen  <davidz@redhat.com>
+
+	* intltool-update.in.in, intltool.m4: Add support for PolicyKit
+	policy XML files (extension .policy).
+
+	Fixes #462312
+
 2007-08-01  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	Patch from Wouter Bolsterlee <wbolster@gnome.org>

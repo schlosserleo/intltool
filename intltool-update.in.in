@@ -71,7 +71,8 @@ my $xml_support =
 "sheet(?:\\.in)+|".	# ?
 "schemas(?:\\.in)+|".	# GConf specific
 "pong(?:\\.in)+|".	# DEPRECATED: PONG is not used [by GNOME] any longer.
-"kbd(?:\\.in)+";	# GOK specific. 
+"kbd(?:\\.in)+|".	# GOK specific. 
+"policy(?:\\.in)+";	# PolicyKit files
 
 my $ini_support =
 "icon(?:\\.in)+|".	# http://www.freedesktop.org/Standards/icon-theme-spec
