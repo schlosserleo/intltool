@@ -1,5 +1,27 @@
 2007-08-02  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* configure.in:
+	* Makefile.am:
+	* intltool.m4:
+	Don't need the xgettext/msgfmt/msgmerge/iconv checks any more
+	Don't need to substitute xgettext/msgfmt/msgmerge/iconv variables
+
+	* intltool-merge.in.in: Add isProgramInPath and isGNUGettextTool
+	methods and check for GNU iconv here
+
+	* intltool-update.in.in (Get_Program_Path):
+	Rename to isProgramInPath
+	Use $devnull to redirect
+	Pass --version to $file to avoid "no input file" errors
+	(isGNUGettextTool): New method to check for GNU gettext tools
+	(GenerateHeaders, GeneratePOTemplate, POFile_Update):
+	(Console_Write_TranslationStatus, Console_Write_CoverateReport):
+	Update to use isGNUGettextTool to ensure we use GNU gettext tools
+
+	Fixes #301364 and #311936
+
+2007-08-02  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-update.in.in (isIntltoolExtractInPath):
 	Rename to Get_Program_Path
 	(GenerateHeaders, GeneratePOTemplate): Use Get_Program_Path method

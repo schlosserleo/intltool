@@ -108,11 +108,6 @@ if test "x$2" != "xno-xml"; then
    fi
 fi
 
-AC_PATH_PROG(INTLTOOL_ICONV, iconv, iconv)
-AC_PATH_PROG(INTLTOOL_MSGFMT, msgfmt, msgfmt)
-AC_PATH_PROG(INTLTOOL_MSGMERGE, msgmerge, msgmerge)
-AC_PATH_PROG(INTLTOOL_XGETTEXT, xgettext, xgettext)
-
 # Substitute ALL_LINGUAS so we can use it in po/Makefile
 AC_SUBST(ALL_LINGUAS)
 
@@ -163,10 +158,6 @@ AC_CONFIG_COMMANDS([intltool], [
 for file in intltool-extract intltool-merge intltool-update; do
   sed -e "s|@INTLTOOL_EXTRACT@|`pwd`/intltool-extract|g" \
       -e "s|@INTLTOOL_LIBDIR@|${INTLTOOL_LIBDIR}|g" \
-      -e "s|@INTLTOOL_ICONV@|${INTLTOOL_ICONV}|g" \
-      -e "s|@INTLTOOL_MSGFMT@|${INTLTOOL_MSGFMT}|g" \
-      -e "s|@INTLTOOL_MSGMERGE@|${INTLTOOL_MSGMERGE}|g" \
-      -e "s|@INTLTOOL_XGETTEXT@|${INTLTOOL_XGETTEXT}|g" \
       -e "s|@INTLTOOL_PERL@|${INTLTOOL_PERL}|g" \
 	< ${ac_aux_dir}/${file}.in > ${file}.out
   if cmp -s ${file} ${file}.out 2>/dev/null; then
@@ -181,9 +172,7 @@ done
 ],
 [INTLTOOL_PERL='${INTLTOOL_PERL}' ac_aux_dir='${ac_aux_dir}'
 prefix="$prefix" exec_prefix="$exec_prefix" INTLTOOL_LIBDIR="$libdir" 
-INTLTOOL_EXTRACT='${INTLTOOL_EXTRACT}' INTLTOOL_ICONV='${INTLTOOL_ICONV}'
-INTLTOOL_MSGFMT='${INTLTOOL_MSGFMT}' INTLTOOL_MSGMERGE='${INTLTOOL_MSGMERGE}'
-INTLTOOL_XGETTEXT='${INTLTOOL_XGETTEXT}'])
+INTLTOOL_EXTRACT='${INTLTOOL_EXTRACT}'])
 
 ])
 
