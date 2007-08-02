@@ -1,3 +1,12 @@
+2007-08-02  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-update.in.in (isIntltoolExtractInPath):
+	Rename to Get_Program_Path
+	(GenerateHeaders, GeneratePOTemplate): Use Get_Program_Path method
+	to find the path for $EXTRACT and $XGETTEXT
+
+	Fixes #349560
+
 2007-08-01  David Zeuthen  <davidz@redhat.com>
 
 	* intltool-update.in.in, intltool.m4: Add support for PolicyKit

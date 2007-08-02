@@ -579,7 +579,7 @@ sub Console_WriteError_InvalidOption
     exit 1;
 }
 
-sub isIntltoolExtractInPath
+sub Get_Program_Path
 {
     my ($file) = @_;
     # If either a file exists, or when run it returns 0 exit status
@@ -593,7 +593,7 @@ sub GenerateHeaders
 
     ## Generate the .h header files, so we can allow glade and
     ## xml translation support
-    if (! isIntltoolExtractInPath("$EXTRACT"))
+    if (! Get_Program_Path ("$EXTRACT"))
     {
 	print STDERR "\n *** The intltool-extract script wasn't found!"
 	     ."\n *** Without it, intltool-update can not generate files.\n";
@@ -644,7 +644,7 @@ sub GeneratePOTemplate
     my $XGETTEXT_ARGS = $ENV{"XGETTEXT_ARGS"} || '';
     chomp $XGETTEXT;
 
-    if (! -x $XGETTEXT)
+    if (! Get_Program_Path ("$XGETTEXT"))
     {
 	print STDERR " *** xgettext is not found on this system!\n".
 		     " *** Without it, intltool-update can not extract strings.\n";
