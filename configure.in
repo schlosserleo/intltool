@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to create configure.
 AC_INIT(intltoolize.in)
-INTLTOOL_VERSION=0.35.5
+INTLTOOL_VERSION=0.36.0
 
 AM_INIT_AUTOMAKE(intltool, $INTLTOOL_VERSION)
 

@@ -12,12 +12,14 @@ EXTRA_DIST =					\
 	extract9.xml				\
 	extract9.xml.in.h			\
 	extract12.xml.in.h			\
+	extract14.xml.in.h			\
 	iso88591text.xml.in.h			\
 	merge-cdata.xml				\
 	merge-deepattr.xml			\
 	merge1.xml				\
 	merge10.templates			\
 	merge11.xml				\
+	merge12.xml				\
 	merge4.xml				\
 	merge5p.sheet				\
 	merge5u.sheet				\

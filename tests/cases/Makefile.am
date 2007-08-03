@@ -13,6 +13,7 @@ EXTRA_DIST =					\
 	extract9.po				\
 	extract9.xml.in				\
 	extract12.xml.in			\
+	extract14.xml.in			\
 	fr.po					\
 	fr_BE.po				\
 	fr_FR.po				\
@@ -22,6 +23,7 @@ EXTRA_DIST =					\
 	merge1.xml.in				\
 	merge10.templates_			\
 	merge11.xml.in				\
+	merge12.xml.in				\
 	merge4.xml.in				\
 	merge5p.sheet.in			\
 	merge5u.sheet.in			\
@@ -46,6 +48,7 @@ CLEANFILES =					\
 	extract10.templates_.h			\
 	extract12.xml.in.h			\
 	extract13.desktop.in.h			\
+	extract14.xml.in.h			\
 	extract9.xml				\
 	extract9.xml.in.h			\
 	iso88591text.xml.in.h			\
@@ -53,6 +56,7 @@ CLEANFILES =					\
 	merge-deepattr.xml			\
 	merge10.templates			\
 	merge11.xml				\
+	merge12.xml				\
 	space-preserve.xml.in.h			\
 	space-preserve.xml			\
 	test-quoted.dtd.h			\

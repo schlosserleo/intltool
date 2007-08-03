@@ -1,5 +1,11 @@
 2007-08-02  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* configure.in: Up version to 0.36.0 for release
+
+	* intltool.m4: Up serial to 36
+
+2007-08-02  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* configure.in:
 	* Makefile.am:
 	* intltool.m4:
