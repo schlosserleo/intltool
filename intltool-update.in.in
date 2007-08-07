@@ -998,13 +998,13 @@ sub CONF_Handle_Open
 
 	    $conf_in || die "Cannot find top_builddir in Makevars.";
 	}
-	elsif (-f "../configure.ac") 
+	elsif (-f "$SRCDIR/../configure.ac") 
 	{
-	    $conf_in = "../configure.ac";
+	    $conf_in = "$SRCDIR/../configure.ac";
 	} 
-	elsif (-f "../configure.in") 
+	elsif (-f "$SRCDIR/../configure.in") 
 	{
-	    $conf_in = "../configure.in";
+	    $conf_in = "$SRCDIR/../configure.in";
 	} 
 	else 
 	{

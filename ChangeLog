@@ -1,3 +1,10 @@
+2007-08-07  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-update.in.in (CONF_Handle_Open):
+	Check for the conf_in file in $SRCDIR/../ instead of just ../
+
+	Fixes #464474
+
 2007-08-06  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-update.in.in (Console_Write_CoverageReport):
