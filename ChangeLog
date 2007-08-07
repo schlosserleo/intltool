@@ -1,3 +1,10 @@
+2007-08-06  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-update.in.in (Console_Write_CoverageReport):
+	Print the locale id and Current translation status message to STDERR
+
+	Fixes #464121
+
 2007-08-02  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* configure.in: Up version to 0.36.0 for release

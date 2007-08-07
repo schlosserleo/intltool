@@ -916,15 +916,15 @@ sub Console_Write_CoverageReport
 
     foreach my $lang (@languages) 
     {
-	print "$lang: ";
+	print STDERR "$lang: ";
 	&POFile_Update ($lang, "");
     }
 
-    print "\n\n * Current translation support in $MODULE \n\n";
+    print STDERR "\n\n * Current translation support in $MODULE \n\n";
 
     foreach my $lang (@languages)
     {
-	print "$lang: ";
+	print STDERR "$lang: ";
 	system ("$MSGFMT", "-o", "$devnull", "--verbose", "$SRCDIR/$lang.po");
     }
 }
