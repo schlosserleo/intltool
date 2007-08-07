@@ -1,5 +1,12 @@
 2007-08-07  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-update.in.in (FindLeftoutFiles):
+	Strip _build/ from the path name, to ignore some files during distcheck
+
+	Fixes #464474
+
+2007-08-07  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-update.in.in (CONF_Handle_Open):
 	Check for the conf_in file in $SRCDIR/../ instead of just ../
 

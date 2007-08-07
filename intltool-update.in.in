@@ -517,6 +517,7 @@ sub FindLeftoutFiles
         $srcdir =~ s#^../##;
         $dummy =~ s#^$srcdir/../##;
         $dummy =~ s#^$srcdir/##;
+        $dummy =~ s#_build/##;
 	if (!exists($in2{$dummy}))
 	{
 	    push @result, $dummy
