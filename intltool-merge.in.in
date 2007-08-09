@@ -104,20 +104,9 @@ sub isProgramInPath
     return 0;
 }
 
-sub isGNUGettextTool
+if (! isProgramInPath ("$iconv"))
 {
-    my ($file) = @_;
-    # Check that we are using GNU gettext tools
-    if (isProgramInPath ($file)) {
-        my $version = `$file --version`;
-        return 1 if ($version =~ m/.*\(GNU .*\).*/);
-    }
-    return 0;
-}
-
-if (! isGNUGettextTool ("$iconv"))
-{
-	print STDERR " *** GNU iconv is not found on this system!\n".
+	print STDERR " *** iconv is not found on this system!\n".
 		     " *** Without it, intltool-merge can not convert encodings.\n";
 	exit;
 }

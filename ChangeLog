@@ -1,3 +1,11 @@
+2007-08-09  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-merge.in.in:
+	Get rid of isGNUGettextTool as we don't really need it here
+	Only check if iconv is in the path
+
+	Fixes #464846
+
 2007-08-07  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-update.in.in (FindLeftoutFiles):
