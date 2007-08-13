@@ -1,3 +1,7 @@
+2007-08-13  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* configure.in: Up version to 0.36.1 for release
+
 2007-08-09  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-merge.in.in:
