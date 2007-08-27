@@ -1,3 +1,8 @@
+2007-08-26  Christian Persch  <chpe@gnome.org>
+
+	* intltool-merge.in.in: Only merge translations for languages listed
+	in LINGUAS. Bug #438178.
+
 2007-08-13  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* configure.in: Up version to 0.36.1 for release
