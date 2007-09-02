@@ -1,3 +1,7 @@
+2007-09-02  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* MAINTAINERS: Update with proper formatting
+
 2007-08-26  Christian Persch  <chpe@gnome.org>
 
 	* intltool-merge.in.in: Only merge translations for languages listed
