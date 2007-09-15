@@ -100,7 +100,7 @@ sub isProgramInPath
 {
     my ($file) = @_;
     # If either a file exists, or when run it returns 0 exit status
-    return 1 if ((-x $file) or (system("$file --version >$devnull") == 0));
+    return 1 if ((-x $file) or (system("$file >$devnull") == 0));
     return 0;
 }
 

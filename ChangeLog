@@ -1,3 +1,10 @@
+2007-09-15  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-merge.in.in (isProgramInPath:
+	Remove --version from the test run
+
+	Fixes #464846
+
 2007-09-02  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* MAINTAINERS: Update with proper formatting
