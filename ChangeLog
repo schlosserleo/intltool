@@ -1,6 +1,11 @@
 2007-09-15  Rodney Dawes  <dobey.pwns@gmail.com>
 
-	* intltool-merge.in.in (isProgramInPath:
+	* intltool-merge.in.in (isProgramInPath):
+	Pass -l as the argument, as iconv with no argument stalls
+
+2007-09-15  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-merge.in.in (isProgramInPath):
 	Remove --version from the test run
 
 	Fixes #464846
