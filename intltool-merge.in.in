@@ -292,10 +292,9 @@ sub gather_po_files
             {
                 next if /^#/;
 
-                if (/([-a-zA-Z_@.]+)\n/)
+                for my $lang (split)
                 {
-                    my $lang = $1;
-
+                    chomp ($lang);
                     my $po_file = $PO_DIR . "/" . $lang . ".po";
                     if (-e $po_file) {
                         $po_files_by_lang{$lang} = $po_file;

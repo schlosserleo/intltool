@@ -1,3 +1,12 @@
+2007-10-22  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-merge.in.in (gather_po_files):
+	Replace the if (/match/) with a for (split) to handle locales
+	separated by whitespace on the same line in the LINGUAS file
+	Original patch from Mike Massonnet <mike.massonnet@gmail.com>
+
+	Fixes #488724
+
 2007-09-15  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-merge.in.in (isProgramInPath):
