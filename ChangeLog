@@ -1,3 +1,10 @@
+2007-10-31  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool.m4: Add a block to check for GNU gettext tools and fail
+	if the scripts aren't found and aren't GNU versions
+
+	Fixes #490845
+
 2007-10-22  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-merge.in.in (gather_po_files):
