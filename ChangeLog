@@ -1,5 +1,12 @@
 2007-10-31  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-update.in.in (FindLeftoutFiles):
+	Only add the additional $SRCIDR/.. path if $SRCDIR is not .
+
+	Fixes #491408
+
+2007-10-31  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltoolize.in: Update the grep to check for IT_PROG_INTLTOOL
 	being defined in aclocal.m4, to avoid the error message when not needed
 

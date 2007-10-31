@@ -334,7 +334,7 @@ sub FindLeftoutFiles
 	push @buf_i18n_xml,          "$File::Find::name" if /\.($xml_support)$/;
 	push @buf_i18n_ini,          "$File::Find::name" if /\.($ini_support)$/;
 	push @buf_i18n_xml_unmarked, "$File::Find::name" if /\.(schemas(\.in)+)$/;
-	}, "$SRCDIR/..";
+	}, "$SRCDIR/.." if "$SRCDIR" ne ".";
 
     open POTFILES, $POTFILES_in or die "$PROGRAM:  there's no POTFILES.in!\n";
     @buf_potfiles = grep !/^(#|\s*$)/, <POTFILES>;
