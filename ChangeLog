@@ -1,3 +1,10 @@
+2007-11-24  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-update.in.in (FindLeftoutFiles):
+	Handle the C_ macro as defined in gi18n.h along with N_ Q_ and _
+
+	Fixes #499179
+
 2007-10-31  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-update.in.in (FindLeftoutFiles):
