@@ -777,7 +777,7 @@ sub GeneratePOTemplate
     my $XGETTEXT_KEYWORDS = &FindPOTKeywords;
     push @xgettext_argument, $XGETTEXT_KEYWORDS;
     my $MSGID_BUGS_ADDRESS = &FindMakevarsBugAddress;
-    push @xgettext_argument, "--msgid-bugs-address\=$MSGID_BUGS_ADDRESS" if $MSGID_BUGS_ADDRESS;
+    push @xgettext_argument, "--msgid-bugs-address\=\"$MSGID_BUGS_ADDRESS\"" if $MSGID_BUGS_ADDRESS;
     push @xgettext_argument, "--from-code\=$encoding" if ($gettext_support_nonascii);
     push @xgettext_argument, $XGETTEXT_ARGS if $XGETTEXT_ARGS;
     my $xgettext_command = join ' ', @xgettext_argument;

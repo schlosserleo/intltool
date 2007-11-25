@@ -1,5 +1,12 @@
 2007-11-25  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-update.in.in (GeneratePOTemplate):
+	Quote MSGID_BUGS_ADDRESS when passing to xgettext
+
+	Fixes #493267
+
+2007-11-25  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-merge.in.in (xml_merge_output):
 	Output the untranslated file in C/ for multiple output
 	Only output in the current directory for single-file output
