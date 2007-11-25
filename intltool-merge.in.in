@@ -1075,14 +1075,25 @@ sub xml_merge_output
             close OUTPUT;
             print "CREATED $lang/$OUTFILE\n" unless $QUIET_ARG;
         }
-    } 
-    open OUTPUT, ">$OUTFILE" or die "Cannot open $OUTFILE: $!\n";
-    binmode (OUTPUT) if $^O eq 'MSWin32';
-    my $tree = readXml($FILE);
-    print_header($FILE, \*OUTPUT);
-    parseTree(\*OUTPUT, $tree);
-    close OUTPUT;
-    print "CREATED $OUTFILE\n" unless $QUIET_ARG;
+        if ( ! -d "C" ) {
+            mkdir "C" or -d "C" or die "Cannot create subdirectory C: $!\n";
+        }
+        open OUTPUT, ">C/$OUTFILE" or die "Cannot open C/$OUTFILE: $!\n";
+        binmode (OUTPUT) if $^O eq 'MSWin32';
+        my $tree = readXml($FILE);
+        print_header($FILE, \*OUTPUT);
+        parseTree(\*OUTPUT, $tree);
+        close OUTPUT;
+        print "CREATED C/$OUTFILE\n" unless $QUIET_ARG;
+    } else {
+        open OUTPUT, ">$OUTFILE" or die "Cannot open $OUTFILE: $!\n";
+        binmode (OUTPUT) if $^O eq 'MSWin32';
+        my $tree = readXml($FILE);
+        print_header($FILE, \*OUTPUT);
+        parseTree(\*OUTPUT, $tree);
+        close OUTPUT;
+        print "CREATED $OUTFILE\n" unless $QUIET_ARG;
+    }
 }
 
 sub keys_merge_translations

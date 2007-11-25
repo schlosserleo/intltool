@@ -1,3 +1,11 @@
+2007-11-25  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-merge.in.in (xml_merge_output):
+	Output the untranslated file in C/ for multiple output
+	Only output in the current directory for single-file output
+
+	Fixes #487817
+
 2007-11-24  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-update.in.in (FindLeftoutFiles):
