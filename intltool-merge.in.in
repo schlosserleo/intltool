@@ -575,6 +575,7 @@ sub entity_encode_int_minimalist
     return "&amp;" if $_ == 38;
     return "&apos;" if $_ == 39;
     return "&lt;" if $_ == 60;
+    return "&gt;" if $_ == 62;
     return chr $_;
 }
 

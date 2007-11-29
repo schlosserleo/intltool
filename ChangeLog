@@ -1,3 +1,8 @@
+2007-11-29  Christian Persch  <chpe@gnome.org>
+
+	* intltool-merge.in.in: (entity_encode_int_minimalist):
+	Also encode ">". Bug #499590.
+
 2007-11-25  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-update.in.in (GeneratePOTemplate):
