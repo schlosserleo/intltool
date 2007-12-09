@@ -22,7 +22,7 @@
   <attrmsg xml:lang="schemasmerge1" value="The &amp;gt; entity produces the &gt; character"></attrmsg>
   <attrmsg xml:lang="schemasmerge2" value="The &amp;gt; entity produces the &gt; character"></attrmsg>
   <attrmsg xml:lang="spacepreserve" value="The &amp;gt; entity produces the &gt; character"></attrmsg>
-  <attrmsg xml:lang="test" value="The following entity: &amp;gt; produces: >"></attrmsg>
+  <attrmsg xml:lang="test" value="The following entity: &amp;gt; produces: &gt;"></attrmsg>
   <attrmsg xml:lang="test-quoted" value="The &amp;gt; entity produces the &gt; character"></attrmsg>
 
   <childmsg>The &amp;lt; entity produces the &lt; character</childmsg>

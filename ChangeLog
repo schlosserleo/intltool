@@ -1,3 +1,14 @@
+2007-12-09  Rodney Dawes  <dobey.pwns@gnome.org>
+
+	* tests/Makefile.am:
+	Add errors to CLEANFILES
+
+	* tests/selftest.pl.in:
+	Remove the C directory when finished as well
+
+	* tests/results/merge12.xml:
+	Update the test to deal with the previous fix for #499590
+
 2007-11-29  Christian Persch  <chpe@gnome.org>
 
 	* intltool-merge.in.in: (entity_encode_int_minimalist):
