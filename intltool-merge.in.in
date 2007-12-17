@@ -150,7 +150,7 @@ elsif ($KEYS_STYLE_ARG && @ARGV > 2)
 	&utf8_sanity_check;
 	&preparation;
 	&print_message;
-	&keys_merge_translations;
+        &keys_merge_translations;
 	&finalize;
 } 
 elsif ($DESKTOP_STYLE_ARG && @ARGV > 2) 
@@ -1100,33 +1100,53 @@ sub xml_merge_output
     }
 }
 
-sub keys_merge_translations
+sub keys_merge_translation
 {
-    open INPUT, "<${FILE}" or die;
-    open OUTPUT, ">${OUTFILE}" or die;
+    my ($lang) = @_;
+
+    if ( ! -d $lang && $MULTIPLE_OUTPUT)
+    {
+        mkdir $lang or -d $lang or die "Cannot create subdirectory $lang: $!\n";
+    }
+
+    open INPUT, "<${FILE}" or die "Cannot open ${FILE}: $!\n";
+    open OUTPUT, ">$lang/$OUTFILE" or die "Cannot open $lang/$OUTFILE: $!\n";
     binmode (OUTPUT) if $^O eq 'MSWin32';
 
-    while (<INPUT>) 
+    while (<INPUT>)
     {
-        if (s/^(\s*)_(\w+=(.*))/$1$2/)  
+        if (s/^(\s*)_(\w+=(.*))/$1$2/)
         {
-	    my $string = $3;
+            my $string = $3;
 
-            print OUTPUT;
-
-	    my $non_translated_line = $_;
-
-            for my $lang (sort keys %po_files_by_lang) 
+            if (!$MULTIPLE_OUTPUT)
             {
-		my $translation = $translations{$lang, $string};
-                next if !$translation;
+                print OUTPUT;
+
+                my $non_translated_line = $_;
+
+                for my $lang (sort keys %po_files_by_lang)
+                {
+                    my $translation = $translations{$lang, $string};
+                    next if !$translation;
+
+                    $_ = $non_translated_line;
+                    s/(\w+)=.*/[$lang]$1=$translation/;
+                    print OUTPUT;
+                }
+            }
+            else
+            {
+                my $non_translated_line = $_;
+                my $translation = $translations{$lang, $string};
+                $translation = $string if !$translation;
 
                 $_ = $non_translated_line;
-		s/(\w+)=.*/[$lang]$1=$translation/;
+                s/(\w+)=.*/$1=$translation/;
                 print OUTPUT;
             }
-	} 
-        else 
+        }
+        else
         {
             print OUTPUT;
         }
@@ -1134,6 +1154,24 @@ sub keys_merge_translations
 
     close OUTPUT;
     close INPUT;
+
+    print "CREATED $lang/$OUTFILE\n" unless $QUIET_ARG;
+}
+
+sub keys_merge_translations
+{
+    if ($MULTIPLE_OUTPUT)
+    {
+        for my $lang (sort keys %po_files_by_lang)
+        {
+            keys_merge_translation ($lang);
+        }
+        keys_merge_translation ("C");
+    }
+    else
+    {
+        keys_merge_translation (".");
+    }
 }
 
 sub desktop_merge_translations

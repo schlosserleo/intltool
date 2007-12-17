@@ -1,5 +1,17 @@
 2007-12-16  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-merge.in.in (keys_merge_translation):
+	New method name for merging a single translation for multi-output
+	(keys_merge_translations):
+	Call keys_merge_translation for each language with multi-ouput
+	Call keys_merge_translation with "." as the language for single file
+
+	Based on patch from Christian Persch <chpe@gnome.org>
+
+	Fixes #487818
+
+2007-12-16  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-extract.in.in:
 	* intltool-merge.in.in:
 	Add quotedxml mode for encoding/decoding entities
