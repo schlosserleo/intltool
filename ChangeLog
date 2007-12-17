@@ -1,5 +1,10 @@
 2007-12-16  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* configure.in:
+	Up version to 0.37.0 for release
+
+2007-12-16  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-merge.in.in (keys_merge_translation):
 	New method name for merging a single translation for multi-output
 	(keys_merge_translations):
