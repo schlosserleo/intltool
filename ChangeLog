@@ -1,3 +1,12 @@
+2007-12-16  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-extract.in.in:
+	* intltool-merge.in.in:
+	Add quotedxml mode for encoding/decoding entities
+	Patch from Christian Persch <chpe@gnome.org>
+
+	Fixes #487666
+
 2007-12-09  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* configure.in:
