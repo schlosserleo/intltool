@@ -1,3 +1,15 @@
+2008-01-17  Wouter Bolsterlee  <wbolster@svn.gnome.org>
+
+	reviewed by: Rodney Dawes
+
+	* intltool-update.in.in:
+
+	Fix a regression: try to detect package name from
+	configure.{ac,in} only if $GETTEXT_PACKAGE is not set.
+	Since the name detection aborts if no configure.{ac,in}
+	was found, this broke non-autotooled projects.
+	Fixes bug #509411.
+
 2007-12-16  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* configure.in:
