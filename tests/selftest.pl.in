@@ -19,6 +19,10 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 #  Author(s): Kenneth Christiansen
+#             Rodney Dawes
+
+## Unset LINGUAS environment variable
+$ENV{"LINGUAS"} = "";
 
 ## Release information
 my $PROGRAM  = "selftest";

@@ -1,3 +1,10 @@
+2008-02-24  Rodney Dawes <dobey.pwns@gmail.com>
+
+	* tests/selftest.pl.in: Unset $LINGUAS to avoid failing when
+	we use tests with locales not specified in LINGUAS
+
+	Fixes #518257
+
 2008-01-17  Wouter Bolsterlee  <wbolster@svn.gnome.org>
 
 	reviewed by: Rodney Dawes
