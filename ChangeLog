@@ -1,5 +1,14 @@
 2008-02-24  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* Makefile.in.in:
+	Update comment block with proper author information
+	Update comment block with copyright information
+	Fix typos in comment block and remove extraneous confusing line
+
+	Fixes #508320
+
+2008-02-24  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-update.in.in (FindPOTKeywords):
 	Unwrap lines wplit with trailing \
 	Patch from Loïc Minier <lool@dooz.org>
