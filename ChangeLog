@@ -1,5 +1,12 @@
 2008-02-25  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-extract.in.in (type_glade):
+	Handle the col tag when extracting strings, for GTK+ ui files
+
+	Fixes #517559
+
+2008-02-25  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* Makefile.am:
 	Make the resulting final script output executable
 
