@@ -52,3 +52,4 @@ intltool-update.in: intltool-update.in.in Makefile
 
 %: %.in Makefile
 	$(edit) < $< > $@
+	chmod +x $@
