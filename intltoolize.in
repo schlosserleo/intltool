@@ -152,7 +152,7 @@ else
 fi
 
 
-files='intltool-extract.in intltool-merge.in intltool-update.in po/Makefile.in.in'
+files='po/Makefile.in.in'
 
 auxdir=.
 auxdirline=`egrep '^AC_CONFIG_AUX_DIR' $configure 2>/dev/null`

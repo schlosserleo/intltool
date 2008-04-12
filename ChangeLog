@@ -1,3 +1,27 @@
+2008-04-11  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* configure.in:
+	Up version to 0.39.99 to avoid conflicts with 0.3x.y versions
+	
+	* Makefile.am:
+	Don't distribute the *.in scripts any longer
+	Clean up the sed replacing
+	We don't use *.in.in for scripts any longer, just *.in
+
+	* intltool.m4:
+	Update the version check to use intltool-update --version instead
+	Check for the intltool scripts in PATH instead of local copies
+	Remove the AC_CONFIG_COMMANDS to create the local script copies
+
+	* intltool-*.in:
+	* intltool-*.in.in:
+	Rename all the *.in.in scripts to just *.in
+
+	* intltoolize.in:
+	Only copy Makefile.in.in to a project's distribution
+
+	Fixes #490620
+
 2008-02-25  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-extract.in.in (type_glade):
