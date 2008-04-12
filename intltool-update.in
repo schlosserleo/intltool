@@ -279,7 +279,7 @@ sub POFile_DetermineType ($)
 
 sub TextFile_DetermineEncoding ($) 
 {
-    my $gettext_code="ASCII"; # All files are ASCII by default
+    my $gettext_code="UTF-8"; # All files are UTF-8 by default
     my $filetype=`file $_ | cut -d ' ' -f 2`;
 
     if ($? eq "0")
@@ -677,14 +677,11 @@ sub GeneratePOTemplate
     }
     else
     {
-	# urge everybody to upgrade gettext
-	print STDERR "WARNING: This version of gettext does not support extracting non-ASCII\n".
-		     "         strings. That means you should install a version of gettext\n".
-		     "         that supports non-ASCII strings (such as GNU gettext >= 0.12),\n".
-		     "         or have to let non-ASCII strings untranslated. (If there is any)\n";
+	# require gnu gettext >= 0.12
+	die "$PROGRAM: GNU gettext >= 0.12 is required for intltool\n";
     }
 
-    my $encoding = "ASCII";
+    my $encoding = "UTF-8";
     my $forced_gettext_code;
     my @temp_headers;
     my $encoding_problem_is_reported = 0;
@@ -805,12 +802,16 @@ sub GeneratePOTemplate
     {
 	if ($xgettext_error_msg =~ /--from-code/)
 	{
-	    # replace non-ASCII error message with a more useful one.
-	    print STDERR "ERROR: xgettext failed to generate PO template file because there is non-ASCII\n".
-			 "       string marked for translation. Please make sure that all strings marked\n".
-			 "       for translation are in uniform encoding (say UTF-8), then \e[1m*prepend*\e[0m the\n".
-			 "       following line to POTFILES.in and rerun $PROGRAM:\n\n".
-			 "           [encoding: UTF-8]\n\n";
+            my $errlocation = "unknown";
+
+            if ($xgettext_error_msg =~ /Non-ASCII string at (.*)\..*/)
+            {
+                $errlocation = $1;
+            }
+            print STDERR "ERROR: xgettext failed to generate PO tempalte file because the following     \n".
+                         "       file contains strings marked for translation, not encoded in UTF-8.    \n".
+                         "       Please ensure all strings marked for translation are UTF-8 encoded.  \n\n".
+                         "           $errlocation\n\n";
 	}
 	else
 	{

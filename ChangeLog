@@ -1,5 +1,18 @@
 2008-04-12  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-update.in (TextFile_DetermineEncoding):
+	Default to UTF-8 in determining file encoding
+	(GeneratePOTemplate):
+	Require that GNU gettext >= 0.12 be installed for UTF-8 support
+	Set the encoding to UTF-8 by default
+	Replace the old ASCII error message with a shorter UTF-8 message to
+	encourage developers to use UTF-8 for all translated strings, and to
+	show the filename and line number of the offending string
+
+	Fixes #377573
+	
+2008-04-12  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-update.in (FindPackageName):
 	Strip "\(+$" off the end of name/version to allow parens with m4 names
 
