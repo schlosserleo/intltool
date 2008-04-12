@@ -1,3 +1,8 @@
+2008-04-12  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool.m4:
+	Up the serial for IT_PROG_INTLTOOL to 40
+
 2008-04-11  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* configure.in:
