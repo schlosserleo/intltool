@@ -1,5 +1,12 @@
 2008-04-12  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-update.in (FindLeftoutFiles):
+	Add code to handle skipping entire directores of translatable files
+
+	Fixes #436241
+
+2008-04-12  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-update.in (TextFile_DetermineEncoding):
 	Default to UTF-8 in determining file encoding
 	(GeneratePOTemplate):

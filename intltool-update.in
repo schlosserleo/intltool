@@ -360,7 +360,33 @@ sub FindLeftoutFiles
 	    
 	while (<FILE>)
 	{
-	    push @buf_potfiles_ignore, $_ unless /^(#|\s*$)/;
+            next if (/^$/);
+            next if (/^(#|\s*$)/);
+
+            my $skipdir = "../$_";
+            $skipdir = "$SRCDIR/../$_" if "$SRCDIR" ne ".";
+            $skipdir =~ s/\n//g;
+
+            my @dirignored;
+
+            if (-d "$skipdir")
+            {
+                find sub {
+                    push @dirignored, "$File::Find::name" if /\.($buildin_gettext_support)$/;
+                    push @dirignored, "$File::Find::name" if /\.($xml_support)$/;
+                    push @dirignored, "$File::Find::name" if /\.($ini_support)$/;
+                    push @dirignored, "$File::Find::name" if /\.(schemas(\.in)+)$/;
+                }, "$skipdir";
+                foreach my $ignored (@dirignored)
+                {
+                    $ignored =~ s/^$SRCDIR\///g;
+                    $ignored =~ s/^..\///g;
+                    $ignored =~ s/$/\n/g;
+                    push @buf_potfiles_ignore, $ignored;
+                }
+                next;
+            }
+            push @buf_potfiles_ignore, $_;
 	}
 	close FILE;
 
