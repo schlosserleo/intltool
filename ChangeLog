@@ -1,5 +1,12 @@
 2008-04-12  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-update.in (FindPackageName):
+	Strip "\(+$" off the end of name/version to allow parens with m4 names
+
+	Fixes #489135
+
+2008-04-12  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool.m4:
 	Up the serial for IT_PROG_INTLTOOL to 40
 
