@@ -1,3 +1,8 @@
+2008-06-03  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* configure.in:
+	Up version to 0.40.0 for release
+
 2008-04-12  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-update.in (FindLeftoutFiles):
