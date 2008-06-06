@@ -7,8 +7,8 @@
 	line.
 
 	(The MSYS Perl, as it runs on a Unix emulator, would be able to
-	run executable scripts based on their hashbang lines jus fine, but
-	then MSYS Perl doesn't come with XML::Parser. Installing
+	run executable scripts based on their hashbang lines just fine,
+	but then MSYS Perl doesn't come with XML::Parser. Installing
 	XML::Parser for MSYS Perl is somewhat hard. So usually when using
 	mingw+MSYS to build GNOMEish software one wants to use
 	ActicveState's Perl to run the intltool scripts, even if the
