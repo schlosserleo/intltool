@@ -627,6 +627,8 @@ sub GenerateHeaders
 {
     my $EXTRACT = $ENV{"INTLTOOL_EXTRACT"} || "intltool-extract";
 
+    $EXTRACT = "$^X $EXTRACT" if ($^O eq 'MSWin32' && !($EXTRACT =~ /perl/));
+
     ## Generate the .h header files, so we can allow glade and
     ## xml translation support
     if (! isProgramInPath ("$EXTRACT"))

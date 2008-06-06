@@ -1,3 +1,19 @@
+2008-06-06  Tor Lillqvist  <tml@novell.com>
+
+	* intltool-update.in (GenerateHeaders): If running under
+	ActiveState Perl then prefix the intltool-extract command with the
+	Perl interpreter pathname, as the system() function has no clue
+	about Unixish executable scripts indicated by just a hashbang
+	line.
+
+	(The MSYS Perl, as it runs on a Unix emulator, would be able to
+	run executable scripts based on their hashbang lines jus fine, but
+	then MSYS Perl doesn't come with XML::Parser. Installing
+	XML::Parser for MSYS Perl is somewhat hard. So usually when using
+	mingw+MSYS to build GNOMEish software one wants to use
+	ActicveState's Perl to run the intltool scripts, even if the
+	built-in MSYS Perl is good for other Perl uses.)
+
 2008-06-03  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* configure.in:
