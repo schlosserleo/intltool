@@ -1,3 +1,11 @@
+2008-06-06  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-update.in (FindPOTKeywords):
+	Replace U_ with C_ as keyword argument to xgettext
+	U_ does not exist in gi18n.h
+
+	Fixes #536970
+
 2008-06-06  Tor Lillqvist  <tml@novell.com>
 
 	* intltool-update.in (GenerateHeaders): If running under
