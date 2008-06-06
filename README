@@ -45,7 +45,7 @@ To use intltool in your module, do the following:
 
  o Add this line to configure.in near the top
 
-	AC_PROG_INTLTOOL([minimum required version], [no-xml])
+	IT_PROG_INTLTOOL([minimum required version], [no-xml])
 
  o Add intltool-extract.in, intltool-merge.in, and intltool-update.in
    to EXTRA_DIST in your top-level Makefile.am and also to the top-level
@@ -66,7 +66,7 @@ become obsolete after intltoolization has taken place.
 
 Examples of packages that use intltool are listed in the USED file.
 
-Details of the AC_PROG_INTLTOOL macro
+Details of the IT_PROG_INTLTOOL macro
 -------------------------------------------
 
 The first parameter indicates the minimum required version. The

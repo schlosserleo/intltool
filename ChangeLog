@@ -1,5 +1,13 @@
 2008-06-06  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* README:
+	* doc/I18N-HOWTO:
+	Replace AC_PROG_INTLTOOL references with IT_PROG_INTLTOOL
+
+	Fixes #531894
+
+2008-06-06  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltool-update.in (FindPOTKeywords):
 	Replace U_ with C_ as keyword argument to xgettext
 	U_ does not exist in gi18n.h

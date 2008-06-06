@@ -92,7 +92,7 @@ int main (void) {
     The gettext macros need to be added after the initial checks.  
     Putting them after the checks for library functions is a good idea.
 
-    AC_PROG_INTLTOOL(0.26)
+    IT_PROG_INTLTOOL(0.26)
 
     AM_GNU_GETTEXT([external])		# Only one of these two macro calls
     AM_GLIB_GNU_GETTEXT			# is needed to set up your project
@@ -107,7 +107,7 @@ int main (void) {
 	po/Makefile.in
     )
 
-    AC_PROG_INTLTOOL checks if a good enough intltool is available.
+    IT_PROG_INTLTOOL checks if a good enough intltool is available.
     Please require the latest intltool that exists. Intltool releases
     are pretty stable and often only contains bugfixes.
 
