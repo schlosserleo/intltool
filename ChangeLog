@@ -1,3 +1,14 @@
+2008-07-20  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-update.in (FindLeftoutFiles):
+	Check for NC_ as well as C_ N_ Q_ and _
+	(FindPOTKeywords):
+	No need to escape = and _ in a string
+	Add NC_ to the list of keywords
+	Use context and string argument specifiers for C_ and NC_
+
+	Fixes #543665
+
 2008-06-06  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* README:
