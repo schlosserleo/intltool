@@ -1,3 +1,11 @@
+2008-07-21  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltoolize.in:
+	Remove the AC_CONFIG_AUX_DIR checks as we no longer need it
+	We do not copy the scripts locally now, only Makefile.in.in
+
+	Fixes #323968
+
 2008-07-20  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-update.in (FindLeftoutFiles):

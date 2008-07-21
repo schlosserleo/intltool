@@ -154,41 +154,6 @@ fi
 
 files='po/Makefile.in.in'
 
-auxdir=.
-auxdirline=`egrep '^AC_CONFIG_AUX_DIR' $configure 2>/dev/null`
-if test -n "$auxdirline"; then
-  # Handle explicit AC_CONFIG_AUX_DIR settings.
-  auxdir=`echo "$auxdirline" | sed 's/^AC_CONFIG_AUX_DIR(\([^)]*\)).*$/\1/'`
-
-  if test "$auxdir" = "$auxdirline"; then
-    echo "$progname: invalid AC_CONFIG_AUX_DIR syntax: $auxdirline" 1>&2
-    exit 1
-  else
-    # Strip any quote brackets.
-    auxdir=`echo "$auxdir" | sed 's/^\[\(.*\)\]$/\1/g'`
-    case "$auxdir" in
-    *\$*)
-      echo "$progname: cannot handle variables in AC_CONFIG_AUX_DIR" 1>&2
-      exit 1
-      ;;
-    *)
-    ;;
-    esac
-  fi
-else
-  # Try to discover auxdir the same way it is discovered by configure.
-  # Note that we default to the current directory.
-  for dir in . .. ../..; do
-    if test -f $dir/install-sh; then
-      auxdir=$dir
-      break
-    elif test -f $dir/install.sh; then
-      auxdir=$dir
-      break
-    fi
-  done
-fi
-
 if test -z "$automake"; then
   if egrep '^(AC|IT)_PROG_INTLTOOL' $configure >/dev/null 2>&1; then :
   else
@@ -234,12 +199,6 @@ fi
 
 # Change to the auxiliary directory.
 (
-cur=`pwd`
-if test "$auxdir" != .; then
-  test -z "$automake" && echo "Putting files in AC_CONFIG_AUX_DIR, '$auxdir'."
-  cd $auxdir || exit 1
-fi
-
 for file in $files; do
   if test -f "$file" && test -z "$force"; then
     test -z "$automake" && echo "$progname: '$file' exists: use '--force' to overwrite" 1>&2
