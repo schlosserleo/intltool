@@ -1,3 +1,8 @@
+2008-07-23  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* doc/I18N-HOWTO:
+	Remove reference to adding intltool scripts to EXTRA_DIST
+
 2008-07-21  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* configure.in:

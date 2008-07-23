@@ -192,8 +192,6 @@ int main (void) {
 
      SUBDIRS = src po
 
-     EXTRA_DIST = intltool-extract.in intltool-merge.in intltool-update.in
-
 14. Go into the directory po/ and create POTFILES.in
     This file should contain a list of all the files in your distribution
     (starting from the top, one level above the po dir) that contain
