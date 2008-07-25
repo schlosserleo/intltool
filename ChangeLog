@@ -1,3 +1,10 @@
+2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* tests/cases/context.xml.in:
+	* tests/results/context.xml:
+	* tests/results/context.xml.in.h:
+	Add these files that Wouter forgot to add
+
 2008-07-25  Wouter Bolsterlee  <wbolster@svn.gnome.org>
 
 	reviewed by: Rodney Dawes <dobey.pwns@gmail.com>
