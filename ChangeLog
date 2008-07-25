@@ -1,5 +1,15 @@
 2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* Makefile.in.in:
+	Redirect errors from grep to /dev/null
+	Use tr to force locale-per-line for passing ALL_LINGUAS to grep
+	Check that $LINGUAS is also non-zero for user-defined locales
+	Remove extraneous mkdir_p usage when installing locale files
+
+	Fixes #544574
+
+2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* intltoolize.in:
 	Check for symlinks to intltool scripts and remove them
 	Touch the script.in files for compatibility
