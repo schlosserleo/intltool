@@ -1,5 +1,10 @@
 2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* configure.in:
+	Up version to 0.40.3 for brown-bag release
+
+2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* Makefile.in.in:
 	Change a ^$$lang regex to be ^$$lang$$ as it should have been
 	For bug #544574
