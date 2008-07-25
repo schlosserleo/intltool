@@ -1,5 +1,11 @@
 2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* tests/cases/Makefile.am:
+	* tests/results/Makefile.am:
+	Add new test cases to EXTRA_DIST and CLEANFILES as appropriate
+
+2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* tests/cases/context.xml.in:
 	* tests/results/context.xml:
 	* tests/results/context.xml.in.h:

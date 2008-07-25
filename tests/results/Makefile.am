@@ -1,6 +1,8 @@
 NULL = 
 
 EXTRA_DIST =					\
+	context.xml				\
+	context.xml.in.h			\
 	extract-comments.xml.h			\
 	extract1.desktop.h			\
 	extract10.templates_.h			\

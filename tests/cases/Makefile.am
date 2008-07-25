@@ -2,6 +2,7 @@ NULL =
 
 EXTRA_DIST =					\
 	az.po					\
+	context.xml.in				\
 	extract-comments.xml			\
 	extract1.desktop			\
 	extract10.templates_			\
@@ -44,6 +45,8 @@ EXTRA_DIST =					\
 	$(NULL)
 
 CLEANFILES =					\
+	context.xml				\
+	context.xml.in.h			\
 	extract-comments.xml.h			\
 	extract10.templates_.h			\
 	extract12.xml.in.h			\
