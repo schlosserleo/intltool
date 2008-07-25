@@ -1,3 +1,11 @@
+2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltoolize.in:
+	Check for symlinks to intltool scripts and remove them
+	Touch the script.in files for compatibility
+	We just touch the scripts as we no longer generate executable versions,
+	and the Makefile.in.in uses the installed scripts anyway.
+	
 2008-07-23  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* doc/I18N-HOWTO:

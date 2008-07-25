@@ -196,8 +196,7 @@ if test -z "$automake"; then
 fi
 
 
-
-# Change to the auxiliary directory.
+# Copy or symlink the Makefile.in.in
 (
 for file in $files; do
   if test -f "$file" && test -z "$force"; then
@@ -212,6 +211,11 @@ for file in $files; do
     echo "$progname: cannot copy '$pkgdatadir/`basename $file`' to '$file'" 1>&2
     status=1
   fi
+# Touch script names for backward compatibility
+  for script in intltool-extract.in intltool-merge.in intltool-update.in; do
+      if test -h $script; then rm -f $script; fi
+      touch $script
+  done
 done
 
 exit $status
