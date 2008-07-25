@@ -441,6 +441,18 @@ sub get_cached_translation_database
     &create_cache;
 }
 
+sub add_translation
+{
+    my ($lang, $msgctxt, $msgid, $msgstr) = @_;
+
+    return if !($msgid && $msgstr);
+
+    if ($msgctxt) {
+	$msgid = "$msgctxt\004$msgid";
+    }
+    $translations{$lang, $msgid} = $msgstr;
+}
+
 sub create_translation_database
 {
     for my $lang (keys %po_files_by_lang) 
@@ -468,8 +480,10 @@ sub create_translation_database
         }
 
 	my $nextfuzzy = 0;
+	my $inmsgctxt = 0;
 	my $inmsgid = 0;
 	my $inmsgstr = 0;
+	my $msgctxt = "";
 	my $msgid = "";
 	my $msgstr = "";
 
@@ -477,31 +491,52 @@ sub create_translation_database
         {
 	    $nextfuzzy = 1 if /^#, fuzzy/;
        
+	    if (/^msgctxt "((\\.|[^\\]+)*)"/ ) 
+            {
+		if ($inmsgstr) {
+		    add_translation ($lang, $msgctxt, $msgid, $msgstr);
+		    $msgctxt = "";
+		    $msgid = "";
+		    $msgstr = "";
+		}
+
+		$msgctxt = unescape_po_string($1);
+		$inmsgctxt = 1;
+		$inmsgid = 0;
+		$inmsgstr = 0;
+	    }
+
 	    if (/^msgid "((\\.|[^\\]+)*)"/ ) 
             {
-		$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgid && $msgstr;
-		$msgid = "";
-		$msgstr = "";
+		if ($inmsgstr) {
+		    add_translation ($lang, $msgctxt, $msgid, $msgstr);
+		    $msgctxt = "";
+		    $msgid = "";
+		    $msgstr = "";
+		}
 
 		if ($nextfuzzy) {
 		    $inmsgid = 0;
+		    $nextfuzzy = 0;
 		} else {
 		    $msgid = unescape_po_string($1);
 		    $inmsgid = 1;
 		}
+		$inmsgctxt = 0;
 		$inmsgstr = 0;
-		$nextfuzzy = 0;
 	    }
 
 	    if (/^msgstr "((\\.|[^\\]+)*)"/) 
             {
 	        $msgstr = unescape_po_string($1);
 		$inmsgstr = 1;
+		$inmsgctxt = 0;
 		$inmsgid = 0;
 	    }
 
 	    if (/^"((\\.|[^\\]+)*)"/) 
             {
+	        $msgctxt .= unescape_po_string($1) if $inmsgctxt;
 	        $msgid .= unescape_po_string($1) if $inmsgid;
 	        $msgstr .= unescape_po_string($1) if $inmsgstr;
 	    }
@@ -814,16 +849,23 @@ sub traverse
 
 	print $fh "<$nodename", $outattr;
 	if ($translate) {
-	    $lookup = getXMLstring($content, $spacepreserve);
+	    $content = getXMLstring($content, $spacepreserve);
             if (!$spacepreserve) {
-                $lookup =~ s/^\s+//s;
-                $lookup =~ s/\s+$//s;
+                $content =~ s/^\s+//s;
+                $content =~ s/\s+$//s;
+            }
+            if (exists $attrs->{"msgctxt"}) {
+                my $context = entity_decode ($attrs->{"msgctxt"});
+                $context =~ s/^["'](.*)["']/$1/;
+                $lookup = "$context\004$content";
+            } else {
+                $lookup = $content;
             }
 
 	    if ($lookup || $translate == 2) {
                 my $translation = $translations{$language, $lookup} if isWellFormedXmlFragment($translations{$language, $lookup});
                 if ($MULTIPLE_OUTPUT && ($translation || $translate == 2)) {
-                    $translation = $lookup if (!$translation);
+                    $translation = $content if (!$translation);
                     print $fh " xml:lang=\"", $language, "\"" if $language;
                     print $fh ">";
                     if ($translate == 2) {
@@ -840,7 +882,7 @@ sub traverse
                     if ($translate == 2) {
                         translate_subnodes($fh, \@all, $language, 1, $spacepreserve);
                     } else {
-                        print $fh $lookup;
+                        print $fh $content;
                     }
                     print $fh "</$nodename>";
                 }
@@ -859,7 +901,7 @@ sub traverse
                         my $localattrs = getAttributeString($attrs, 1, $lang, \$translate);
                         my $translation = $translations{$lang, $lookup} if isWellFormedXmlFragment($translations{$lang, $lookup});
                         if ($translate && !$translation) {
-                            $translation = $lookup;
+                            $translation = $content;
                         }
 
                         if ($translation || $translate) {

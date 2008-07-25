@@ -26,3 +26,14 @@ msgstr "Bu lay sınaq üçündür"
 msgid "A cake mixer"
 msgstr "Kökə qarışdırıcı"
 
+#: cases/context.xml.in.h:1
+msgid "Bar"
+msgstr "(not used, because no msgctxt)"
+
+#: cases/context.xml.in.h:2
+msgid "Baz"
+msgstr "az-baz"
+
+#: cases/context.xml.in.h:3
+msgid "Foo"
+msgstr "az-foo"

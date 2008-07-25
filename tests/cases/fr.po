@@ -59,3 +59,21 @@ msgstr ""
 #: cases/extract10.templates_:20
 msgid "Current month?"
 msgstr "Mois en cours ?"
+
+#: cases/context.xml.in.h:2
+msgctxt "1"
+msgid "Bar"
+msgstr "bar un"
+
+#: cases/context.xml.in.h:4
+msgctxt "2"
+msgid "Bar"
+msgstr "bar deux"
+
+#: cases/context.xml.in.h:6
+msgid "Baz"
+msgstr "le baz"
+
+#: cases/context.xml.in.h:7
+msgid "Foo"
+msgstr "le foo"

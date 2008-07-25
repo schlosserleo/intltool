@@ -1,3 +1,17 @@
+2008-07-25  Wouter Bolsterlee  <wbolster@svn.gnome.org>
+
+	reviewed by: Rodney Dawes <dobey.pwns@gmail.com>
+
+	* intltool-extract.in:
+	* intltool-merge.in:
+	* tests/cases/az.po:
+	* tests/cases/fr.po:
+	* tests/selftest.pl.in:
+
+	Bug 458794 – Context support works only for single
+	context on a msgid. Patch and test case by Dan Winship
+	<danw@gnome.org>.
+
 2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* Makefile.in.in:

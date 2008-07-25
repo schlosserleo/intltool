@@ -47,6 +47,7 @@ my $VERSION_ARG = "0";
 my $UPDATE_ARG  = "0";
 my $QUIET_ARG   = "0";
 my $SRCDIR_ARG	= ".";
+my $NOMSGCTXT_ARG = "0";
 
 my $FILE;
 my $OUTFILE;
@@ -76,6 +77,7 @@ GetOptions (
             "update"     => \$UPDATE_ARG,
 	    "quiet|q"    => \$QUIET_ARG,
 	    "srcdir=s"	 => \$SRCDIR_ARG,
+	    "nomsgctxt"  => \$NOMSGCTXT_ARG,            
             ) or &error;
 
 &split_on_argument;
@@ -444,6 +446,11 @@ sub traverse
             if (!$spacepreserve) {
                 $lookup =~ s/^\s+//s;
                 $lookup =~ s/\s+$//s;
+            }
+            if (exists $attrs->{"msgctxt"}) {
+                my $context = entity_decode ($attrs->{"msgctxt"});
+                $context =~ s/^["'](.*)["']/$1/;
+                $lookup = "$context\004$lookup";
             }
 
 	    if ($lookup && $translate != 2) {
@@ -833,6 +840,7 @@ sub msg_write {
     for my $message (@msgids)
     {
 	my $offsetlines = 1;
+	my $context = undef;
 	$offsetlines++ if $message =~ /%/;
 	if (defined ($comments{$message}))
 	{
@@ -847,12 +855,30 @@ sub msg_write {
                 if defined $comments{$message};
    	print OUT "/* xgettext:no-c-format */\n" if $message =~ /%/;
         
+    	if ($message =~ /(.*)\004(.*)/) {
+    	    $context = $1;
+    	    $message = $2;
+    	}
     	my @lines = split (/\n/, $message, -1);
     	for (my $n = 0; $n < @lines; $n++)
 	{
             if ($n == 0)
             {
- 		print OUT "char *s = N_(\""; 
+                if (defined $context)
+                {
+                     if ($NOMSGCTXT_ARG)
+                     {
+                          print OUT "char *s = N_(\"", $context, "|"; 
+                     }
+                     else
+                     {
+ 		          print OUT "char *s = C_(\"", $context, "\", \""; 
+                     }
+                }
+                else
+                {
+ 		     print OUT "char *s = N_(\""; 
+                }
             }
             else
             {  
