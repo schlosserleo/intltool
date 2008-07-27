@@ -1,3 +1,11 @@
+2008-07-27  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool.m4 (IT_PROG_INTLTOOL):
+	Require the AM_NLS macro, so USE_NLS gets defined
+	Add a check for gmsgfmt that falls back to $MSGFMT
+	This change removes the need for using AM_GLIB_GNU_GETTEXT or
+	AM_GNU_GETTEXT for some projects.
+
 2008-07-25  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* configure.in:
