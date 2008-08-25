@@ -48,8 +48,10 @@ CLEANFILES =					\
 	context.xml				\
 	context.xml.in.h			\
 	extract-comments.xml.h			\
+	extract1.desktop.h			\
 	extract10.templates_.h			\
 	extract12.xml.in.h			\
+	extract13.desktop			\
 	extract13.desktop.in.h			\
 	extract14.xml.in.h			\
 	extract9.xml				\

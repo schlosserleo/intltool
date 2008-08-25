@@ -1224,7 +1224,7 @@ sub desktop_merge_translations
 
     while (<INPUT>) 
     {
-        if (s/^(\s*)_(\w+=(.*))/$1$2/)  
+        if (s/^(\s*)_([A-Za-z0-9\-]+=(.*))/$1$2/)  
         {
 	    my $string = $3;
 

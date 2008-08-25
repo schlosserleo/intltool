@@ -1,3 +1,17 @@
+2008-08-24  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-merge.in (desktop_merge_translations):
+	Fix the regex here to adhere to the Desktop File Spec's allowed chars
+
+	* tests/cases/Makefile.am:
+	* tests/cases/extract13.desktop.in:
+	* tests/results/extract13.desktop:
+	* tests/results/extract13.desktop.in.h:
+	* tests/selftest.pl.in:
+	Add a test case for merging translations back into the desktop file
+
+	Fixes #549243
+
 2008-07-27  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool.m4 (IT_PROG_INTLTOOL):
