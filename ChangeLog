@@ -1,3 +1,11 @@
+2008-09-04  Christian Persch  <chpe@gnome.org>
+
+	* Makefile.in.in: (DISTFILES, EXTRA_DISTFILES): Move ChangeLog to
+	EXTRA_DISTFILES so "make dist" does not fail with nonexistent
+	po/ChangeLog file. 
+
+	Fixes #550044
+
 2008-09-03  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* Makefile.in.in (PO_LINGUAS, POFILES):
