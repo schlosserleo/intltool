@@ -1,3 +1,11 @@
+2008-09-03  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* Makefile.in.in (PO_LINGUAS, POFILES):
+	Set PO_LINGUAS to ALL_LINGUAS if the LINGUAS file doesn't exist
+	Use PO_LINGUAS instead of USE_LINGUAS in POFILES for disting
+
+	Fixes #550727
+
 2008-08-24  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-merge.in (desktop_merge_translations):
