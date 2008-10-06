@@ -1,3 +1,10 @@
+2008-10-06  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool.m4 (IT_PO_SUBDIR):
+	Check that Makefile.in came from a Makefile.in.in from intltool
+
+	Fixes #554280
+
 2008-09-19  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* configure.in:
