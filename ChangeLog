@@ -1,3 +1,8 @@
+2008-10-08  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* configure.in:
+	Up version to 0.40.5 for release
+
 2008-10-06  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool.m4 (IT_PO_SUBDIR):
