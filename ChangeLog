@@ -1,3 +1,12 @@
+2008-11-16  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* intltool-extract.in:
+	Add support for extracting string data from Bioware Aurora Talk Table
+	format files, along with the extra metadata associated with the strings
+
+	* intltool-update.in:
+	Add support for Bioware Aurora Talk Table format files in POTFILES
+
 2008-11-05  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool.m4:

@@ -164,7 +164,7 @@ XML files. Read manpage (man ${PROGRAM}) for more info.
                     "gettext/glade", "gettext/ini", "gettext/keys"
                     "gettext/rfc822deb", "gettext/schemas",
                     "gettext/scheme", "gettext/xml", "gettext/quoted",
-                    "gettext/quotedxml"
+                    "gettext/quotedxml", "gettext/tlk"
   -l, --local       Writes output into current working directory
                     (conflicts with --update)
       --update      Writes output into the same directory the source file 
@@ -210,7 +210,9 @@ sub convert {
 	local (*IN);
 	local $/; #slurp mode
 	open (IN, "<$SRCDIR_ARG/$FILE") || die "can't open $SRCDIR_ARG/$FILE: $!";
-	$input = <IN>;
+        binmode (IN);
+        $input = <IN>;
+        close IN;
     }
 
     &type_ini if $gettext_type eq "ini";
@@ -222,6 +224,7 @@ sub convert {
     &type_rfc822deb  if $gettext_type eq "rfc822deb";
     &type_quoted if $gettext_type eq "quoted";
     &type_quotedxml if $gettext_type eq "quotedxml";
+    &type_tlk if $gettext_type eq "tlk";
 }
 
 sub entity_decode_minimal
@@ -824,6 +827,104 @@ sub type_scheme {
             }
             $i++;
         }
+    }
+}
+
+sub type_tlk {
+    my ($ftype, $fvers, $langid, $strcount, $stroff);
+    my $count = 0;
+    my $pos = 0;
+    my @inputa = split (//, $input, 21);
+    my $foo;
+    my $strdata;
+
+    $ftype = substr ($input, 0, 3);
+    $fvers = substr ($input, 4, 7);
+    $langid = unpack ("L", $inputa[8] . $inputa[9] .
+                      $inputa[10] . $inputa[11]);
+    $strcount = unpack ("L", $inputa[12] . $inputa[13] .
+                        $inputa[14] . $inputa[15]);
+    $stroff = unpack ("L", $inputa[16] . $inputa[17] .
+                      $inputa[18] . $inputa[19]);
+
+    use bytes;
+    $strdata = bytes::substr ($input, $stroff); 
+
+    my $sinpos = 20;
+
+    $foo = $inputa[$sinpos];
+    $sinpos = 40 * 2000;
+    @inputa = split (//, $foo, $sinpos + 1);
+
+    $pos = 0;
+    while ($count < $strcount) {
+        my ($flags, $soundref, $volvar, $pitch, $offset, $strsize, $sndlen) = 0;
+
+        if ($count > 0 && $count % 2000 == 0) {
+            $foo = $inputa[$sinpos];
+            my $numleft = ($strcount - $count);
+            if ($numleft > 2000) {
+                $sinpos = 40 * 2000;
+            } else {
+                $sinpos = 40 * $numleft;
+            }
+            @inputa = split (//, $foo, $sinpos + 1);
+            my $numbytes = @inputa;
+            $pos = 0;
+        }
+
+
+        $flags = unpack ("L", $inputa[$pos] . $inputa[$pos + 1] .
+                         $inputa[$pos + 2] . $inputa[$pos + 3]);
+        $pos += 4;
+        if ($flags & 0x0002) {
+            $soundref = join ('', @inputa[$pos..$pos + 15]);
+            $soundref =~ s/\0//g;
+        }
+        $pos += 16;
+# According to the Bioware Aurora Talk Table Format documentation
+# the VolumeVariance and PitchVariance DWORDs are not used
+# We increment the pos counter, but do not read the data, here
+#        $volvar = unpack ("L", $inputa[$pos] . $inputa[$pos + 1] .
+#                          $inputa[$pos + 2] . $inputa[$pos + 3]);
+        $pos += 4;
+#        $pitch = unpack ("L", $inputa[$pos] . $inputa[$pos + 1] .
+#                         $inputa[$pos + 2] . $inputa[$pos + 3]);
+        $pos += 4;
+        $offset = unpack ("L", $inputa[$pos] . $inputa[$pos + 1] .
+                          $inputa[$pos + 2] . $inputa[$pos + 3])
+            if ($flags & 0x0001);
+        $pos += 4;
+        $strsize = unpack ("L", $inputa[$pos] . $inputa[$pos + 1] .
+                           $inputa[$pos + 2] . $inputa[$pos + 3])
+            if ($flags & 0x0001);
+        $pos += 4;
+        $sndlen = unpack ("d", $inputa[$pos] . $inputa[$pos + 1] .
+                          $inputa[$pos + 2] . $inputa[$pos + 3])
+            if ($flags & 0x0004);
+        $pos += 4;
+
+        if (defined $strsize && $strsize > 0) {
+            my $message = substr ($strdata, $offset, $strsize);
+            if (defined $message) {
+                use Encode;
+                Encode::from_to ($message, "iso-8859-1", "UTF-8");
+                $messages{$message} = [];
+                if ($message =~ /^Bad Strref$/ ) {
+                    $comments{$message} = "DO NOT Translate this Entry.";
+                    $comments{$message} .= "\nTLK:position=$count";
+               } else {
+                    $comments{$message} = "TLK:position=$count";
+                    $comments{$message} .= "; TLK:sndresref=$soundref"
+                        if (defined $soundref && $soundref ne "");
+                    $comments{$message} .= "; TLK:sndlen=$sndlen"
+                        if (defined $sndlen && $sndlen != 0);
+                }
+            } else {
+                print STDERR "Missing message? ID: $count\n";
+            }
+        }
+        $count++;
     }
 }
 

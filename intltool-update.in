@@ -84,6 +84,9 @@ my $ini_support =
 "theme(?:\\.in)+|".	# http://www.freedesktop.org/Standards/icon-theme-spec
 "service(?:\\.in)+";    # DBus specific
 
+my $tlk_support =
+"tlk(?:\\.in)+";        # Bioware Aurora Talk Table Format
+
 my $buildin_gettext_support = 
 "c|y|cs|cc|cpp|c\\+\\+|h|hh|gob|py";
 
@@ -232,6 +235,7 @@ sub POFile_DetermineType ($)
 
    my $xml_regex     = "(?:" . $xml_support . ")";
    my $ini_regex     = "(?:" . $ini_support . ")";
+   my $tlk_regex     = "(?:" . $tlk_support . ")";
    my $buildin_regex = "(?:" . $buildin_gettext_support . ")";
 
    if ($type =~ /\[type: gettext\/([^\]].*)]/) 
@@ -264,6 +268,10 @@ sub POFile_DetermineType ($)
    elsif ($type =~ /$ini_regex$/) 
    { 
        $gettext_type="ini";
+   }
+   elsif ($type =~ /$tlk_regex$/)
+   {
+       $gettext_type="tlk";
    }
    elsif ($type =~ /$buildin_regex$/) 
    {
@@ -651,7 +659,7 @@ sub GenerateHeaders
 
 	   my $gettext_type= &POFile_DetermineType ($1);
 
-	   if (/\.($xml_support|$ini_support)$/ || /^\[/)
+	   if (/\.($xml_support|$ini_support|$tlk_support)$/ || /^\[/)
 	   {
 	       s/^\[[^\[].*]\s*//;
 
@@ -726,7 +734,7 @@ sub GeneratePOTemplate
 	{
 	    $forced_gettext_code=$1;
 	}
-	elsif (/\.($xml_support|$ini_support)$/ || /^\[/)
+	elsif (/\.($xml_support|$ini_support|$tlk_support)$/ || /^\[/)
 	{
 	    s/^\[.*]\s*//;
             print OUTFILE "../$_.h\n";
