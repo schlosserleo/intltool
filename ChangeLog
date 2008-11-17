@@ -1,3 +1,10 @@
+2008-11-17  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* Makefile.in.in:
+	Quote the grep arguments that use ^
+
+	Fixes #559528
+
 2008-11-16  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-extract.in:
