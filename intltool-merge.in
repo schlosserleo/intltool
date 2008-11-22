@@ -42,6 +42,7 @@ use strict;
 use Getopt::Long;
 use Text::Wrap;
 use File::Basename;
+use Encode;
 
 my $must_end_tag      = -1;
 my $last_depth        = -1;
@@ -95,23 +96,6 @@ my $OUTFILE;
 
 my %po_files_by_lang = ();
 my %translations = ();
-my $iconv = $ENV{"ICONV"} || "iconv";
-my $devnull = ($^O eq 'MSWin32' ? 'NUL:' : '/dev/null');
-
-sub isProgramInPath
-{
-    my ($file) = @_;
-    # If either a file exists, or when run it returns 0 exit status
-    return 1 if ((-x $file) or (system("$file -l >$devnull") == 0));
-    return 0;
-}
-
-if (! isProgramInPath ("$iconv"))
-{
-	print STDERR " *** iconv is not found on this system!\n".
-		     " *** Without it, intltool-merge can not convert encodings.\n";
-	exit;
-}
 
 # Use this instead of \w for XML files to handle more possible characters.
 my $w = "[-A-Za-z0-9._:]";
@@ -316,29 +300,6 @@ sub gather_po_files
     }
 }
 
-sub get_local_charset
-{
-    my ($encoding) = @_;
-    my $alias_file = $ENV{"G_CHARSET_ALIAS"} || "@INTLTOOL_LIBDIR@/charset.alias";
-
-    # seek character encoding aliases in charset.alias (glib)
-
-    if (open CHARSET_ALIAS, $alias_file) 
-    {
-	while (<CHARSET_ALIAS>) 
-        {
-            next if /^\#/;
-            return $1 if (/^\s*([-._a-zA-Z0-9]+)\s+$encoding\b/i)
-        }
-
-        close CHARSET_ALIAS;
-    }
-
-    # if not found, return input string
-
-    return $encoding;
-}
-
 sub get_po_encoding
 {
     my ($in_po_file) = @_;
@@ -360,11 +321,6 @@ sub get_po_encoding
     {
         print STDERR "Warning: no encoding found in $in_po_file. Assuming ISO-8859-1\n" unless $QUIET_ARG;
         $encoding = "ISO-8859-1";
-    }
-
-    system ("$iconv -f $encoding -t UTF-8 <$devnull 2>$devnull");
-    if ($?) {
-	$encoding = get_local_charset($encoding);
     }
 
     return $encoding
@@ -443,12 +399,16 @@ sub get_cached_translation_database
 
 sub add_translation
 {
-    my ($lang, $msgctxt, $msgid, $msgstr) = @_;
+    my ($lang, $encoding, $msgctxt, $msgid, $msgstr) = @_;
 
     return if !($msgid && $msgstr);
 
     if ($msgctxt) {
 	$msgid = "$msgctxt\004$msgid";
+    }
+    if (uc $encoding ne "UTF-8") {
+        Encode::from_to ($msgid, $encoding, "UTF-8");
+        Encode::from_to ($msgstr, $encoding, "UTF-8");
     }
     $translations{$lang, $msgid} = $msgstr;
 }
@@ -458,26 +418,16 @@ sub create_translation_database
     for my $lang (keys %po_files_by_lang) 
     {
     	my $po_file = $po_files_by_lang{$lang};
+        my $encoding = "UTF-8";
 
         if ($UTF8_ARG) 
         {
-            my $encoding = get_po_encoding ($po_file);
-
-            if (lc $encoding eq "utf-8") 
-            {
-                open PO_FILE, "<$po_file";	
-            } 
-            else 
-            {
-		print "NOTICE: $po_file is not in UTF-8 but $encoding, converting...\n" unless $QUIET_ARG;;
-
-                open PO_FILE, "$iconv -f $encoding -t UTF-8 $po_file|";	
+            $encoding = get_po_encoding ($po_file);
+            if (uc $encoding ne "UTF-8") {
+                print "NOTICE: $po_file is not in UTF-8 but $encoding, converting...\n" unless $QUIET_ARG;;
             }
-        } 
-        else 
-        {
-            open PO_FILE, "<$po_file";	
         }
+        open PO_FILE, "<$po_file";	
 
 	my $nextfuzzy = 0;
 	my $inmsgctxt = 0;
@@ -494,7 +444,8 @@ sub create_translation_database
 	    if (/^msgctxt "((\\.|[^\\]+)*)"/ ) 
             {
 		if ($inmsgstr) {
-		    add_translation ($lang, $msgctxt, $msgid, $msgstr);
+		    add_translation ($lang, $encoding,
+                                     $msgctxt, $msgid, $msgstr);
 		    $msgctxt = "";
 		    $msgid = "";
 		    $msgstr = "";
@@ -509,7 +460,8 @@ sub create_translation_database
 	    if (/^msgid "((\\.|[^\\]+)*)"/ ) 
             {
 		if ($inmsgstr) {
-		    add_translation ($lang, $msgctxt, $msgid, $msgstr);
+                    add_translation ($lang, $encoding,
+                                     $msgctxt, $msgid, $msgstr);
 		    $msgctxt = "";
 		    $msgid = "";
 		    $msgstr = "";
@@ -541,7 +493,8 @@ sub create_translation_database
 	        $msgstr .= unescape_po_string($1) if $inmsgstr;
 	    }
 	}
-	$translations{$lang, $msgid} = $msgstr if $inmsgstr && $msgid && $msgstr;
+        add_translation ($lang, $encoding, $msgctxt, $msgid, $msgstr)
+            if ($inmsgstr);
     }
 }
 
