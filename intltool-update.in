@@ -583,6 +583,7 @@ sub FindLeftoutFiles
 	    warn "If some of these files are left out on purpose then please add them to\n".
 		 "POTFILES.skip instead of POTFILES.in. A file \e[1m'missing'\e[0m containing this list\n".
 		 "of left out files has been written in the current directory.\n";
+            warn "Please report to ". $varhash{"PACKAGE_BUGREPORT"} ."\n" if (defined $varhash{"PACKAGE_BUGREPORT"});
 	}
 	if (@buf_potfiles_notexist)
 	{
@@ -594,7 +595,8 @@ sub FindLeftoutFiles
 	    warn "\e[1mThe following files do not exist anymore:\e[0m\n\n";
 	    warn @buf_potfiles_notexist, "\n";
 	    warn "Please remove them from POTFILES.in. A file \e[1m'notexist'\e[0m\n".
-		 "containing this list of absent files has been written in the current directory.\n";
+                "containing this list of absent files has been written in the current directory.\n";
+            warn "Please report to ". $varhash{"PACKAGE_BUGREPORT"} ."\n" if (defined $varhash{"PACKAGE_BUGREPORT"});
 	}
     }
 
@@ -1081,6 +1083,7 @@ sub FindPackageName
     my $version;
     my $domain = &FindMakevarsDomain;
     my $name = $domain || "untitled";
+    my $bugurl;
 
     &CONF_Handle_Open;
 
@@ -1114,18 +1117,23 @@ sub FindPackageName
 	$varhash{"VERSION"} = $version if (not $name =~ /\${?VERSION}?/);
     }
     
-    if ($conf_source =~ /^AC_INIT\(([^,\)]+),([^,\)]+)/m) 
+    if ($conf_source =~ /^AC_INIT\(([^,\)]+),([^,\)]+)[,]?([^,\)]+)?/m) 
     {
 	($name, $version) = ($1, $2);
+        $bugurl = $3 if (defined $3);
+
 	$name    =~ s/[\[\]\s]//g;
 	$version =~ s/[\[\]\s]//g;
+        $bugurl  =~ s/[\[\]\s]//g if (defined $bugurl);
 	$name    =~ s/\(+$//g;
 	$version =~ s/\(+$//g;
+        $bugurl  =~ s/\(+$//g if (defined $bugurl);
 
 	$varhash{"PACKAGE_NAME"} = $name if (not $name =~ /\${?AC_PACKAGE_NAME}?/);
 	$varhash{"PACKAGE"} = $name if (not $name =~ /\${?PACKAGE}?/);
 	$varhash{"PACKAGE_VERSION"} = $version if (not $name =~ /\${?AC_PACKAGE_VERSION}?/);
 	$varhash{"VERSION"} = $version if (not $name =~ /\${?VERSION}?/);
+        $varhash{"PACKAGE_BUGREPORT"} = $bugurl if (defined $bugurl and not $bugurl =~ /\${?\w+}?/);
     }
 
     # \s makes this not work, why?

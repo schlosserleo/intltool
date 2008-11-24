@@ -1,5 +1,10 @@
 2008-11-24  Rodney Dawes  <dobey.pwns@gmail.com>
 
+	* intltool-update.in:
+	Add basic support for PACKAGE_BUGREPORT specified by packages
+
+2008-11-24  Rodney Dawes  <dobey.pwns@gmail.com>
+
 	* configure.ac:
 	Check for at least perl 5.8.1, and print the found version
 
