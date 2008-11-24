@@ -1,3 +1,15 @@
+2008-11-24  Rodney Dawes  <dobey.pwns@gmail.com>
+
+	* configure.ac:
+	Check for at least perl 5.8.1, and print the found version
+
+	* intltool.m4:
+	Check for at least perl 5.8.1 and print the found version
+	Add _IT_SUBST macro to abstract usage of _AM_SUBST_NOTMAKE when we
+	are using automake 1.10 or nwere
+
+	Fixes #562085 and #561513
+
 2008-11-22  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-merge.in:
