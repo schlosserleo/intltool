@@ -1,3 +1,10 @@
+2009-02-28  Rodney Dawes  <dobey@gnome.org>
+
+	* Makefile.in.in:
+	Don't hardcode /bin/sh as the shell
+
+	Fixes #573525
+
 2008-11-24  Rodney Dawes  <dobey.pwns@gmail.com>
 
 	* intltool-update.in:
