@@ -1,3 +1,10 @@
+2009-03-14  Rodney Dawes  <dobey@gnome.org>
+
+	* README:
+	Update for new usage style and to refer to server files instead of oaf
+
+	Fixes #568863
+
 2009-02-28  Rodney Dawes  <dobey@gnome.org>
 
 	* Makefile.in.in:
