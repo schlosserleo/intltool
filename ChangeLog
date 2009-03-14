@@ -1,5 +1,10 @@
 2009-03-14  Rodney Dawes  <dobey@gnome.org>
 
+	* configure.in:
+	Up version to 0.40.6 for release
+
+2009-03-14  Rodney Dawes  <dobey@gnome.org>
+
 	* README:
 	Update for new usage style and to refer to server files instead of oaf
 
