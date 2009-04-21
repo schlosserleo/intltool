@@ -313,6 +313,17 @@ sub isNotValidMissing
     return if $file =~ /^$varhash{"PACKAGE"}-$varhash{"VERSION"}\/.*$/;
 }
 
+sub removeFromArray
+{
+    my ($file, @array) = @_;
+
+    my $i = 0;
+    foreach my $potfile (@array) {
+        delete $array[$i] if $potfile =~ m/$file/;
+        $i++;
+    }
+}
+
 sub FindLeftoutFiles
 {
     my (@buf_i18n_plain,
@@ -390,10 +401,19 @@ sub FindLeftoutFiles
                     $ignored =~ s/^$SRCDIR\///g;
                     $ignored =~ s/^..\///g;
                     $ignored =~ s/$/\n/g;
+
+                    removeFromArray ($ignored, @buf_i18n_plain);
+                    removeFromArray ($ignored, @buf_i18n_xml);
+                    removeFromArray ($ignored, @buf_i18n_ini);
+                    removeFromArray ($ignored, @buf_i18n_xml_unmarked);
                     push @buf_potfiles_ignore, $ignored;
                 }
                 next;
             }
+            removeFromArray ($_, @buf_i18n_plain);
+            removeFromArray ($_, @buf_i18n_xml);
+            removeFromArray ($_, @buf_i18n_ini);
+            removeFromArray ($_, @buf_i18n_xml_unmarked);
             push @buf_potfiles_ignore, $_;
 	}
 	close FILE;
