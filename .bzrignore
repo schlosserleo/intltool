@@ -1,0 +1,8 @@
+Makefile
+Makefile.in
+intltool-extract
+intltool-merge
+intltool-prepare
+intltool-update
+intltoolize
+tests/selftest.pl
