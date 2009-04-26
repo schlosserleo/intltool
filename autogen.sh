@@ -7,7 +7,7 @@ test -z "$srcdir" && srcdir=.
 PKG_NAME="intltool"
 REQUIRED_AUTOMAKE_VERSION="1.6"
 
-(test -f $srcdir/configure.in) || {
+(test -f $srcdir/intltoolize.in) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level $PKG_NAME directory"
     exit 1

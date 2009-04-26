@@ -1,8 +1,10 @@
 dnl Process this file with autoconf to create configure.
-AC_INIT(intltoolize.in)
-INTLTOOL_VERSION=0.40.6
+AC_PREREQ([2.53])
 
-AM_INIT_AUTOMAKE(intltool, $INTLTOOL_VERSION)
+AC_INIT([intltool], [0.40.6])
+AC_CONFIG_SRCDIR([intltoolize.in])
+
+AM_INIT_AUTOMAKE([foreign])
 
 pkgdatadir='${datadir}'"/${PACKAGE}"
 AC_SUBST(pkgdatadir) dnl automake does not need this, but libtoolize does
@@ -28,13 +30,14 @@ else
    AC_MSG_ERROR([XML::Parser perl module is required for intltool])
 fi
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 doc/Makefile
-intltool.spec
 intltoolize
 tests/Makefile
 tests/cases/Makefile
 tests/results/Makefile
 tests/selftest.pl
 ])
+
+AC_OUTPUT

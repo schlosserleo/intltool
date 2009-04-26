@@ -30,8 +30,7 @@ CLEANFILES =					\
 EXTRA_DIST =					\
 	$(distributed_scripts:=.in)		\
 	intltool-prepare.in			\
-	intltool-unicodify.in			\
-	intltool.spec
+	intltool-unicodify.in
 
 edit = sed -e 's|[@]PACKAGE@|$(PACKAGE)|g' \
 	   -e 's|[@]VERSION@|$(VERSION)|g' \

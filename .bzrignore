@@ -6,3 +6,6 @@ intltool-prepare
 intltool-update
 intltoolize
 tests/selftest.pl
+*.gz
+*.bz2
+
