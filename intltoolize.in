@@ -214,7 +214,7 @@ for file in $files; do
 # Touch script names for backward compatibility
   for script in intltool-extract.in intltool-merge.in intltool-update.in; do
       if test -h $script; then rm -f $script; fi
-      if grep $script Makefile.am; then
+      if egrep $script Makefile.am >/dev/null 2>&1; then
 	  touch $script
       fi
   done
