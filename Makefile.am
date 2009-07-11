@@ -14,9 +14,6 @@ bin_SCRIPTS =					\
 	intltoolize				\
 	intltool-prepare
 
-# Deprecated:
-EXTRA_SCRIPTS = intltool-unicodify
-
 # These are required by intltoolize
 dist_pkgdata_DATA =	Makefile.in.in
 
@@ -29,8 +26,7 @@ CLEANFILES =					\
 
 EXTRA_DIST =					\
 	$(distributed_scripts:=.in)		\
-	intltool-prepare.in			\
-	intltool-unicodify.in
+	intltool-prepare.in
 
 edit = sed -e 's|[@]PACKAGE@|$(PACKAGE)|g' \
 	   -e 's|[@]VERSION@|$(VERSION)|g' \
