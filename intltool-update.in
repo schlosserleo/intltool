@@ -425,6 +425,7 @@ sub FindLeftoutFiles
     {
 	my $in_comment = 0;
 	my $in_macro = 0;
+        my $in_string = 0;
 
 	open FILE, "<$file";
 	while (<FILE>)
@@ -435,6 +436,13 @@ sub FindLeftoutFiles
 		next unless s-.*\*/--;
 		$in_comment = 0;
 	    }
+
+            # Handle continued multi-line string.
+            if ($in_string)
+            {
+                next unless /(\'\'\'|\"\"\")/;
+                $in_string = 0;
+            }
 
 	    # Handle continued macro.
 	    if ($in_macro)
@@ -451,7 +459,7 @@ sub FindLeftoutFiles
 	    }
 
 	    # Handle comments and quoted text.
-	    while (m-(/\*|//|\'|\")-) # \' and \" keep emacs perl mode happy
+	    while (m-(/\*|//|\'\'\'|\"\"\"|\'|\")-) # \' and \" keep emacs perl mode happy
 	    {
 		my $match = $1;
 		if ($match eq "/*")
@@ -466,6 +474,14 @@ sub FindLeftoutFiles
 		{
 		    s-//.*--;
 		}
+                elsif ($match eq "\"\"\"" or $match eq "\'\'\'")
+                {
+                    if (!s-$match.*?$match--)
+                    {
+                        s-$match.*--;
+                        $in_string = 1;
+                    }
+                }
 		else # ' or "
 		{
 		    if (!s-$match([^\\]|\\.)*?$match-QUOTEDTEXT-)
