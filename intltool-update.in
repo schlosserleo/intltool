@@ -1142,6 +1142,17 @@ sub FindPackageName
 	($name, $version) = ($1, $2);
         $bugurl = $3 if (defined $3);
 
+        # Handle m4_esyscmd
+        # FIXME: We should do this in a more generic way that works for all vars
+        if ($version =~ /m4_esyscmd\([\[]?([^\)\]]+)/)
+        {
+            my $cwd = getcwd ();
+            chdir ("$SRCDIR/..");
+            $version = qx($1);
+            chdir ($cwd);
+        }
+
+
 	$name    =~ s/[\[\]\s]//g;
 	$version =~ s/[\[\]\s]//g;
         $bugurl  =~ s/[\[\]\s]//g if (defined $bugurl);
