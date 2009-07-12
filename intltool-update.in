@@ -510,6 +510,16 @@ sub FindLeftoutFiles
                 }
 		last;
 	    }
+
+            # Check for direct calls to the glib gettext wrappers
+            if (/g_d[np]?gettext[2]? *\(QUOTEDTEXT/)
+            {
+                if (defined isNotValidMissing (unpack("x3 A*", $file))) {
+                    ## Remove the first 3 chars and add newline
+                    push @buf_allfiles, unpack("x3 A*", $file) . "\n";
+                }
+                last;
+            }
 	}
 	close FILE;
     }
@@ -1202,7 +1212,7 @@ sub FindPackageName
 sub FindPOTKeywords
 {
 
-    my $keywords = "--keyword=_ --keyword=N_ --keyword=C_:1c,2 --keyword=NC_:1c,2 --keyword=Q_";
+    my $keywords = "--keyword=_ --keyword=N_ --keyword=C_:1c,2 --keyword=NC_:1c,2 --keyword=Q_ --keyword=g_dgettext:2 --keyword=g_dngettext:2,3 --keyword=g_dpgettext:2 --keyword=g_dpgettext2=2c,3";
     my $varname = "XGETTEXT_OPTIONS";
     my $make_source; {
 	local (*IN);
