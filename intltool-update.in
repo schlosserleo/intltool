@@ -1156,6 +1156,16 @@ sub FindPackageName
         $varhash{"PACKAGE_BUGREPORT"} = $bugurl if (defined $bugurl and not $bugurl =~ /\${?\w+}?/);
     }
 
+    # Handle m4_esyscmd
+    # FIXME: We should do this in a more generic way that works for all vars
+    if ($version =~ /\s*m4_esyscmd\([\[]?([^\)\]]+)/m)
+    {
+        my $cwd = getcwd ();
+        chdir ("$SRCDIR/..");
+        $version = qx($1);
+        chdir ($cwd);
+    }
+
     # \s makes this not work, why?
     $name = $1 if $conf_source =~ /^GETTEXT_PACKAGE=\[?([^\n\]]+)/m;
     
