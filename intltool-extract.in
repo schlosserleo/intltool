@@ -174,8 +174,7 @@ XML files. Read manpage (man ${PROGRAM}) for more info.
   -h, --help        Display this help and exit
   -q, --quiet       Quiet mode
 
-Report bugs to http://bugzilla.gnome.org/ (product name "$PACKAGE")
-or send email to <xml-i18n-tools\@gnome.org>.
+Report bugs to http://bugs.launchpad.net/intltool
 _EOF_
     exit;
 }

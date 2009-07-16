@@ -212,8 +212,7 @@ Examples of use:
 ${PROGRAM} --pot    just create a new PO template
 ${PROGRAM} xy       create new PO template and merge xy.po with it
 
-Report bugs to http://bugzilla.gnome.org/ (product name "$PACKAGE")
-or send email to <xml-i18n-tools\@gnome.org>.
+Report bugs to http://bugs.launchpad.net/intltool
 _EOF_
     exit;
 }

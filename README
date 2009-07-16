@@ -2,12 +2,8 @@ intltool README
 ===============
 
 If you have problems understanding this README file, then please report 
-these in bugzilla.gnome.org, intltool module. Also, patches are very 
-welcome.
-
-Discussion about intltool takes place on intltool mailing list at
-freedesktop.org - you can find subscribtion information and archives at:
-http://lists.freedesktop.org/mailman/listinfo/intltool
+these at http://bugs.launchpad.net/intltool on Launchpad. Patches are
+also very welcome. See HACKING for more information on submitting patches.
 
 The intltool collection can be used to do these things:
 
