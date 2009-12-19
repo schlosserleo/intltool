@@ -501,7 +501,7 @@ sub FindLeftoutFiles
 	    }
 
             ## C_ N_ NC_ Q_ and _ are the macros defined in gi8n.h
-	    if (/(NC|[CNQ]?)_ *\(QUOTEDTEXT/)
+	    if (/(NC_|[NCQ]_|[^_]_|$_) *\(QUOTEDTEXT/)
 	    {
                 if (defined isNotValidMissing (unpack("x3 A*", $file))) {
                     ## Remove the first 3 chars and add newline
