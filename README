@@ -85,7 +85,7 @@ This step also applies for similar files (.directory, .soundlist).
 
  o Remove old .desktop files and add new .desktop.in files.
 
- o Adjust .cvsignore
+ o Adjust .cvsignore, .gitignore, .bzrignore or similar.
 
  o Adjust Makefile.am, e.g.:
 
@@ -108,8 +108,8 @@ Here's a .desktop.in example:
         _Name=Bug Report Tool
         _Comment=Report a bug in GNOME
         Exec=bug-buddy
-        Icon=bug-buddy.png
-        Terminal=0
+        Icon=bug-buddy
+        Terminal=false
         Type=Application
 
 	--- end ----
