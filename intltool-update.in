@@ -516,7 +516,7 @@ sub FindLeftoutFiles
 	    }
 
             ## C_ N_ NC_ Q_ and _ are the macros defined in gi8n.h
-	    if (/(NC_|[NCQ]_|[^_]_|$_) *\(QUOTEDTEXT/)
+	    if (/\b(NC_|[NCQ]_|[^_]_|_) *\(QUOTEDTEXT/)
 	    {
                 AddFileToListIfMissing($file, @buf_allfiles);
 		last;
