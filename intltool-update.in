@@ -325,7 +325,7 @@ sub removeFromArray
 
 sub AddFileToListIfMissing
 {
-    my ($file, @list) = @_;
+    my ($file, $list) = @_;
 
     my $name_pattern;
     if ($file =~ /^\.\.\//) {
@@ -337,7 +337,7 @@ sub AddFileToListIfMissing
     my $file_name = unpack($name_pattern, $file);
     if (defined isNotValidMissing ($file_name)) {
         ## Remove the first 3 chars if needed and add newline
-        push @list, $file_name . "\n";
+        push @$list, $file_name . "\n";
     }
 }
 
