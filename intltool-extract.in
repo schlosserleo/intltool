@@ -765,7 +765,7 @@ sub type_glade {
         # translating strings that only includes something like label4 or window1.
 	$messages{entity_decode($2)} = [] unless $2 =~ /^(window|label|dialog)[0-9]+$/;
     }
-    
+
     while ($input =~ /<items>(..[^<]*)<\/items>/sg) {
 	for my $item (split (/\n/, $1)) {
 	    $messages{entity_decode($item)} = [];
@@ -773,10 +773,16 @@ sub type_glade {
     }
 
     ## handle new glade files
-    while ($input =~ /<(property|atkproperty|col)\s+[^>]*translatable\s*=\s*"yes"(?:\s+[^>]*comments\s*=\s*"([^"]*)")?[^>]*>([^<]+)<\/\1>/sg) {
-	$messages{entity_decode($3)} = [] unless $3 =~ /^(window|label)[0-9]+$/;
-        if (defined($2) and !($3 =~ /^(window|label)[0-9]+$/)) {
-	   $comments{entity_decode($3)} = entity_decode($2) ;
+    while ($input =~ /<(property|atkproperty|col)\s+[^>]*translatable\s*=\s*"yes"(?:\s+[^>]*context\s*=\s*"([^"]*)")?(?:\s+[^>]*comments\s*=\s*"([^"]*)")?[^>]*>([^<]+)<\/\1>/sg) {
+        if (!($4 =~ /^(window|label)[0-9]+$/)) {
+            my $message = entity_decode($4);
+            if (defined($2)) {
+                $message = entity_decode($2) . "\004" . $message;
+            }
+            $messages{$message} = [];
+            if (defined($3)) {
+                $comments{$message} = entity_decode($3) ;
+            }
         }
     }
     while ($input =~ /<atkaction\s+action_name="([^>]*)"\s+description="([^>]+)"\/>/sg) {
@@ -954,7 +960,7 @@ sub msg_write {
    	print OUT "/* ".$comments{$message}." */\n"
                 if defined $comments{$message};
    	print OUT "/* xgettext:no-c-format */\n" if $message =~ /%/;
-        
+
     	if ($message =~ /(.*)\004(.*)/) {
     	    $context = $1;
     	    $message = $2;
