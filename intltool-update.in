@@ -356,13 +356,13 @@ sub FindLeftoutFiles
     );
 
     ## Search and find all translatable files
-    find sub { 
+    find sub {
 	push @buf_i18n_plain,        "$File::Find::name" if /\.($buildin_gettext_support)$/;
 	push @buf_i18n_xml,          "$File::Find::name" if /\.($xml_support)$/;
 	push @buf_i18n_ini,          "$File::Find::name" if /\.($ini_support)$/;
 	push @buf_i18n_xml_unmarked, "$File::Find::name" if /\.(schemas(\.in)+)$/;
 	}, "..";
-    find sub { 
+    find sub {
 	push @buf_i18n_plain,        "$File::Find::name" if /\.($buildin_gettext_support)$/;
 	push @buf_i18n_xml,          "$File::Find::name" if /\.($xml_support)$/;
 	push @buf_i18n_ini,          "$File::Find::name" if /\.($ini_support)$/;
@@ -393,7 +393,7 @@ sub FindLeftoutFiles
 
 	print "Found $ignore: Ignoring files...\n" if $VERBOSE;
 	open FILE, "<$SRCDIR/$ignore" or die "ERROR: Failed to open $SRCDIR/$ignore!\n";
-	    
+
 	while (<FILE>)
 	{
             next if (/^$/);
@@ -511,37 +511,37 @@ sub FindLeftoutFiles
 
 	    if (/\w\.GetString *\(QUOTEDTEXT/)
 	    {
-                AddFileToListIfMissing($file, @buf_allfiles);
+                AddFileToListIfMissing($file, \@buf_allfiles);
 		last;
 	    }
 
             ## C_ N_ NC_ Q_ and _ are the macros defined in gi8n.h
-	    if (/\b(NC_|[NCQ]_|[^_]_|_) *\(QUOTEDTEXT/)
+	    if (/(NC_|[NCQ]_|[^_]_|(^|$)[_]) *\(QUOTEDTEXT/m)
 	    {
-                AddFileToListIfMissing($file, @buf_allfiles);
+                AddFileToListIfMissing($file, \@buf_allfiles);
 		last;
 	    }
 
             # Check for direct calls to the glib gettext wrappers
             if (/g_d[np]?gettext[2]? *\(QUOTEDTEXT/)
             {
-                AddFileToListIfMissing($file, @buf_allfiles);
+                AddFileToListIfMissing($file, \@buf_allfiles);
                 last;
             }
 	}
 	close FILE;
     }
 
-    foreach my $file (@buf_i18n_xml) 
+    foreach my $file (@buf_i18n_xml)
     {
 	open FILE, "<$file";
-	
-	while (<FILE>) 
+
+	while (<FILE>)
 	{
 	    # FIXME: share the pattern matching code with intltool-extract
 	    if (/\s_[-A-Za-z0-9._:]+\s*=\s*\"([^"]+)\"/ || /<_[^>]+>/ || /translatable=\"yes\"/)
 	    {
-                AddFileToListIfMissing($file, @buf_allfiles);
+                AddFileToListIfMissing($file, \@buf_allfiles);
 		last;
 	    }
 	}
@@ -551,11 +551,11 @@ sub FindLeftoutFiles
     foreach my $file (@buf_i18n_ini)
     {
 	open FILE, "<$file";
-	while (<FILE>) 
+	while (<FILE>)
 	{
 	    if (/_(.*)=/)
 	    {
-                AddFileToListIfMissing($file, @buf_allfiles);
+                AddFileToListIfMissing($file, \@buf_allfiles);
 		last;
 	    }
 	}
@@ -564,7 +564,7 @@ sub FindLeftoutFiles
 
     foreach my $file (@buf_i18n_xml_unmarked)
     {
-        AddFileToListIfMissing($file, @buf_allfiles);
+        AddFileToListIfMissing($file, \@buf_allfiles);
     }
 
 
@@ -572,14 +572,14 @@ sub FindLeftoutFiles
     @buf_potfiles_sorted = sort (@buf_potfiles);
 
     my %in2;
-    foreach (@buf_potfiles_sorted) 
+    foreach (@buf_potfiles_sorted)
     {
         s#^$SRCDIR/../##;
         s#^$SRCDIR/##;
 	$in2{$_} = 1;
     }
 
-    foreach (@buf_potfiles_ignore_sorted) 
+    foreach (@buf_potfiles_ignore_sorted)
     {
         s#^$SRCDIR/../##;
         s#^$SRCDIR/##;
