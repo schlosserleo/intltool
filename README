@@ -56,7 +56,8 @@ The intltool-prepare script will help you to prepare the package. It will
 try to extract translations from existing .desktop files which will
 become obsolete after intltoolization has taken place.
 
-Examples of packages that use intltool are listed in the USED file.
+Examples of packages that use intltool are many of the GNOME components:
+find them at http://git.gnome.org/.
 
 Details of the IT_PROG_INTLTOOL macro
 -------------------------------------------
