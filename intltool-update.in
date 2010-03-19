@@ -664,8 +664,11 @@ sub Console_WriteError_InvalidOption
 sub isProgramInPath
 {
     my ($file) = @_;
-    # If either a file exists, or when run it returns 0 exit status
-    return 1 if ((-x $file) or (system("$file --version >$devnull") == 0));
+    # If a file is executable (or exists on Windows),
+    # or when it returns 0 exit status.
+    return 1 if (
+        ((-x $file) or ($^O eq 'MSWin32' and (-e $file))) or
+        (system("$file --version >$devnull") == 0));
     return 0;
 }
 
@@ -685,8 +688,6 @@ sub GenerateHeaders
 {
     my $EXTRACT = $ENV{"INTLTOOL_EXTRACT"} || "intltool-extract";
 
-    $EXTRACT = "$^X $EXTRACT" if ($^O eq 'MSWin32' && !($EXTRACT =~ /perl/));
-
     ## Generate the .h header files, so we can allow glade and
     ## xml translation support
     if (! isProgramInPath ("$EXTRACT"))
@@ -698,8 +699,8 @@ sub GenerateHeaders
     else
     {
 	open (FILE, $POTFILES_in) or die "$PROGRAM: POTFILES.in not found.\n";
-	
-	while (<FILE>) 
+
+	while (<FILE>)
 	{
 	   chomp;
 	   next if /^\[\s*encoding/;
@@ -713,18 +714,15 @@ sub GenerateHeaders
 	   {
 	       s/^\[[^\[].*]\s*//;
 
-	       my $filename = "../$_";
+	       my @cmd = ($EXTRACT, "--update", "--type=$gettext_type", 
+	                  "--srcdir=$SRCDIR");
 
-	       if ($VERBOSE)
-	       {
-		   system ($EXTRACT, "--update", "--srcdir=$SRCDIR",
-			   "--type=$gettext_type", $filename);
-	       } 
-	       else 
-	       {
-	 	   system ($EXTRACT, "--update", "--type=$gettext_type", 
-			   "--srcdir=$SRCDIR", "--quiet", $filename);
-	       }
+	       unshift (@cmd, $^X) if ($^O eq 'MSWin32' && !($EXTRACT =~ /perl/));
+
+	       push (@cmd, "--quiet") if (! $VERBOSE);
+	       push (@cmd, "../$_");
+
+	       system (@cmd);
 	   }
        }
        close FILE;
