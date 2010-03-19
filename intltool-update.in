@@ -7,7 +7,7 @@
 #  Copyright (C) 2000-2003 Free Software Foundation.
 #
 #  Intltool is free software; you can redistribute it and/or
-#  modify it under the terms of the GNU General Public License 
+#  modify it under the terms of the GNU General Public License
 #  version 2 published by the Free Software Foundation.
 #
 #  Intltool is distributed in the hope that it will be useful,
@@ -65,13 +65,13 @@ my $xml_support =
 "lang|".		# ?
 "glade2?(?:\\.in)*|".	# Glade specific - User Interface desc. files (Note: .in is not required)
 "scm(?:\\.in)*|".	# ? (Note: .in is not required)
-"oaf(?:\\.in)+|".	# DEPRECATED: Replaces by Bonobo .server files 
+"oaf(?:\\.in)+|".	# DEPRECATED: Replaces by Bonobo .server files
 "etspec|".		# ?
 "server(?:\\.in)+|".	# Bonobo specific
 "sheet(?:\\.in)+|".	# ?
 "schemas(?:\\.in)+|".	# GConf specific
 "pong(?:\\.in)+|".	# DEPRECATED: PONG is not used [by GNOME] any longer.
-"kbd(?:\\.in)+|".	# GOK specific. 
+"kbd(?:\\.in)+|".	# GOK specific.
 "policy(?:\\.in)+";	# PolicyKit files
 
 my $ini_support =
@@ -87,7 +87,7 @@ my $ini_support =
 my $tlk_support =
 "tlk(?:\\.in)+";        # Bioware Aurora Talk Table Format
 
-my $buildin_gettext_support = 
+my $buildin_gettext_support =
 "c|y|cs|cc|cpp|c\\+\\+|h|hh|gob|py";
 
 ## Always flush buffer when printing
@@ -102,7 +102,7 @@ $POTFILES_in = "<$SRCDIR/POTFILES.in";
 my $devnull = ($^O eq 'MSWin32' ? 'NUL:' : '/dev/null');
 
 ## Handle options
-GetOptions 
+GetOptions
 (
  "help" 	       => \$HELP_ARG,
  "version" 	       => \$VERSION_ARG,
@@ -165,8 +165,8 @@ elsif ((defined $ARGV[0]) && $ARGV[0] =~ /^[a-z]/)
     }
     &POFile_Update ($lang, $OUTPUT_FILE);
     &Console_Write_TranslationStatus ($lang, $OUTPUT_FILE);
-} 
-else 
+}
+else
 {
     &Console_Write_IntltoolHelp;
 }
@@ -227,7 +227,7 @@ sub echo_n
     return $ret;
 }
 
-sub POFile_DetermineType ($) 
+sub POFile_DetermineType ($)
 {
    my $type = $_;
    my $gettext_type;
@@ -237,54 +237,54 @@ sub POFile_DetermineType ($)
    my $tlk_regex     = "(?:" . $tlk_support . ")";
    my $buildin_regex = "(?:" . $buildin_gettext_support . ")";
 
-   if ($type =~ /\[type: gettext\/([^\]].*)]/) 
+   if ($type =~ /\[type: gettext\/([^\]].*)]/)
    {
 	$gettext_type=$1;
    }
-   elsif ($type =~ /schemas(\.in)+$/) 
+   elsif ($type =~ /schemas(\.in)+$/)
    {
 	$gettext_type="schemas";
    }
-   elsif ($type =~ /glade2?(\.in)*$/) 
+   elsif ($type =~ /glade2?(\.in)*$/)
    {
        $gettext_type="glade";
    }
-   elsif ($type =~ /scm(\.in)*$/) 
+   elsif ($type =~ /scm(\.in)*$/)
    {
        $gettext_type="scheme";
    }
-   elsif ($type =~ /keys(\.in)+$/) 
+   elsif ($type =~ /keys(\.in)+$/)
    {
        $gettext_type="keys";
    }
 
    # bucket types
 
-   elsif ($type =~ /$xml_regex$/) 
+   elsif ($type =~ /$xml_regex$/)
    {
        $gettext_type="xml";
    }
-   elsif ($type =~ /$ini_regex$/) 
-   { 
+   elsif ($type =~ /$ini_regex$/)
+   {
        $gettext_type="ini";
    }
    elsif ($type =~ /$tlk_regex$/)
    {
        $gettext_type="tlk";
    }
-   elsif ($type =~ /$buildin_regex$/) 
+   elsif ($type =~ /$buildin_regex$/)
    {
        $gettext_type="buildin";
    }
    else
-   { 
-       $gettext_type="unknown"; 
+   {
+       $gettext_type="unknown";
    }
 
    return "gettext\/$gettext_type";
 }
 
-sub TextFile_DetermineEncoding ($) 
+sub TextFile_DetermineEncoding ($)
 {
     my $gettext_code="UTF-8"; # All files are UTF-8 by default
     my $filetype=`file $_ | cut -d ' ' -f 2`;
@@ -618,7 +618,7 @@ sub FindLeftoutFiles
     ## if any, and give information about this procedure.
     if (@result + @buf_potfiles_notexist > 0)
     {
-	if (@result) 
+	if (@result)
 	{
 	    print "\n" if $VERBOSE;
 	    unlink "missing";
@@ -714,7 +714,7 @@ sub GenerateHeaders
 	   {
 	       s/^\[[^\[].*]\s*//;
 
-	       my @cmd = ($EXTRACT, "--update", "--type=$gettext_type", 
+	       my @cmd = ($EXTRACT, "--update", "--type=$gettext_type",
 	                  "--srcdir=$SRCDIR");
 
 	       unshift (@cmd, $^X) if ($^O eq 'MSWin32' && !($EXTRACT =~ /perl/));
@@ -770,7 +770,7 @@ sub GeneratePOTemplate
     my @temp_headers;
     my $encoding_problem_is_reported = 0;
 
-    while (<INFILE>) 
+    while (<INFILE>)
     {
 	next if (/^#/ or /^\s*$/);
 
@@ -788,8 +788,8 @@ sub GeneratePOTemplate
             print OUTFILE "../$_.h\n";
 	    push @temp_headers, "../$_.h";
 	    $gettext_code = &TextFile_DetermineEncoding ("../$_.h") if ($gettext_support_nonascii and not defined $forced_gettext_code);
-	} 
-	else 
+	}
+	else
 	{
             print OUTFILE "$SRCDIR/../$_\n";
 	    $gettext_code = &TextFile_DetermineEncoding ("$SRCDIR/../$_") if ($gettext_support_nonascii and not defined $forced_gettext_code);
@@ -955,7 +955,7 @@ sub GatherPOFiles
 
     @languages = map (&POFile_GetLanguage, @po_files);
 
-    foreach my $lang (@languages) 
+    foreach my $lang (@languages)
     {
 	$po_files_by_lang{$lang} = shift (@po_files);
     }
@@ -997,7 +997,7 @@ sub Console_Write_CoverageReport
 
     &GatherPOFiles;
 
-    foreach my $lang (@languages) 
+    foreach my $lang (@languages)
     {
 	print STDERR "$lang: ";
 	&POFile_Update ($lang, "");
@@ -1015,7 +1015,7 @@ sub Console_Write_CoverageReport
 sub SubstituteVariable
 {
     my ($str) = @_;
-    
+
     # always need to rewind file whenever it has been accessed
     seek (CONF, 0, 0);
 
@@ -1028,7 +1028,7 @@ sub SubstituteVariable
 	    ($varhash{$1} = $2) =~  s/^["'](.*)["']$/$1/;
 	}
     }
-    
+
     if ($str =~ /^(.*)\${?([A-Z_]+)}?(.*)$/)
     {
 	my $rest = $3;
@@ -1039,8 +1039,8 @@ sub SubstituteVariable
 
 	return SubstituteVariable ("$untouched$sub$rest");
     }
-    
-    # We're using Perl backticks ` and "echo -n" here in order to 
+
+    # We're using Perl backticks ` and "echo -n" here in order to
     # expand any shell escapes (such as backticks themselves) in every variable
     return echo_n ($str);
 }
@@ -1052,18 +1052,18 @@ sub CONF_Handle_Open
 
     my ($conf_in, $src_dir);
 
-    if ($base_dirname =~ /^po(-.+)?$/) 
+    if ($base_dirname =~ /^po(-.+)?$/)
     {
-	if (-f "Makevars") 
+	if (-f "Makevars")
 	{
 	    my $makefile_source;
 
 	    local (*IN);
 	    open (IN, "<Makevars") || die "can't open Makevars: $!";
 
-	    while (<IN>) 
+	    while (<IN>)
 	    {
-		if (/^top_builddir[ \t]*=/) 
+		if (/^top_builddir[ \t]*=/)
 		{
 		    $src_dir = $_;
 		    $src_dir =~ s/^top_builddir[ \t]*=[ \t]*([^ \t\n\r]*)/$1/;
@@ -1081,26 +1081,26 @@ sub CONF_Handle_Open
 
 	    $conf_in || die "Cannot find top_builddir in Makevars.";
 	}
-	elsif (-f "$SRCDIR/../configure.ac") 
+	elsif (-f "$SRCDIR/../configure.ac")
 	{
 	    $conf_in = "$SRCDIR/../configure.ac";
-	} 
-	elsif (-f "$SRCDIR/../configure.in") 
+	}
+	elsif (-f "$SRCDIR/../configure.in")
 	{
 	    $conf_in = "$SRCDIR/../configure.in";
-	} 
-	else 
+	}
+	else
 	{
 	    my $makefile_source;
 
 	    local (*IN);
 	    open (IN, "<Makefile") || return;
 
-	    while (<IN>) 
+	    while (<IN>)
 	    {
-		if (/^top_srcdir[ \t]*=/) 
+		if (/^top_srcdir[ \t]*=/)
 		{
-		    $src_dir = $_;		    
+		    $src_dir = $_;
 		    $src_dir =~ s/^top_srcdir[ \t]*=[ \t]*([^ \t\n\r]*)/$1/;
 
 		    chomp $src_dir;
@@ -1147,7 +1147,7 @@ sub FindPackageName
     # 2. first argument of AC_INIT (with >= 2 arguments)
     # 3. first argument of AM_INIT_AUTOMAKE (with >= 2 argument)
 
-    # /^AM_INIT_AUTOMAKE\([\s\[]*([^,\)\s\]]+)/m 
+    # /^AM_INIT_AUTOMAKE\([\s\[]*([^,\)\s\]]+)/m
     # the \s makes this not work, why?
     if ($conf_source =~ /^AM_INIT_AUTOMAKE\(([^,\)]+),([^,\)]+)/m)
     {
@@ -1162,8 +1162,8 @@ sub FindPackageName
 	$varhash{"PACKAGE_VERSION"} = $version if (not $name =~ /\${?AC_PACKAGE_VERSION}?/);
 	$varhash{"VERSION"} = $version if (not $name =~ /\${?VERSION}?/);
     }
-    
-    if ($conf_source =~ /^AC_INIT\(([^,\)]+),([^,\)]+)[,]?([^,\)]+)?/m) 
+
+    if ($conf_source =~ /^AC_INIT\(([^,\)]+),([^,\)]+)[,]?([^,\)]+)?/m)
     {
 	($name, $version) = ($1, $2);
         $bugurl = $3 if (defined $3);
@@ -1195,7 +1195,7 @@ sub FindPackageName
 
     # \s makes this not work, why?
     $name = $1 if $conf_source =~ /^GETTEXT_PACKAGE=\[?([^\n\]]+)/m;
-    
+
     # m4 macros AC_PACKAGE_NAME, AC_PACKAGE_VERSION etc. have same value
     # as corresponding $PACKAGE_NAME, $PACKAGE_VERSION etc. shell variables.
     $name =~ s/\bAC_PACKAGE_/\$PACKAGE_/g;
@@ -1226,7 +1226,7 @@ sub FindPOTKeywords
     # unwrap lines split with a trailing \
     $make_source =~  s/\\ $ \n/ /mxg;
     $keywords = $1 if $make_source =~ /^$varname[ ]*=\[?([^\n\]]+)/m;
-    
+
     return $keywords;
 }
 
@@ -1234,7 +1234,7 @@ sub FindMakevarsDomain
 {
 
     my $domain = "";
-    my $makevars_source; { 
+    my $makevars_source; {
 	local (*IN);
 	open (IN, "<Makevars") || return $domain;
 	seek (IN, 0, 0);
@@ -1246,7 +1246,7 @@ sub FindMakevarsDomain
     $domain = $1 if $makevars_source =~ /^DOMAIN[ ]*=\[?([^\n\]\$]+)/m;
     $domain =~ s/^\s+//;
     $domain =~ s/\s+$//;
-    
+
     return $domain;
 }
 
@@ -1254,7 +1254,7 @@ sub FindMakevarsBugAddress
 {
 
     my $address = "";
-    my $makevars_source; { 
+    my $makevars_source; {
 	local (*IN);
 	open (IN, "<Makevars") || return undef;
 	seek (IN, 0, 0);
@@ -1266,6 +1266,6 @@ sub FindMakevarsBugAddress
     $address = $1 if $makevars_source =~ /^MSGID_BUGS_ADDRESS[ ]*=\[?([^\n\]\$]+)/m;
     $address =~ s/^\s+//;
     $address =~ s/\s+$//;
-    
+
     return $address;
 }
