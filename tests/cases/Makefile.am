@@ -4,17 +4,18 @@ EXTRA_DIST =					\
 	az.po					\
 	context.xml.in				\
 	extract-comments.xml			\
+	extract-gtkbuilder.ui			\
 	extract1.desktop			\
 	extract10.templates_			\
+	extract12.xml.in			\
 	extract13.desktop.in			\
+	extract14.xml.in			\
 	extract3.xml.in				\
 	extract6.glade				\
 	extract7.xml				\
 	extract8.glade				\
 	extract9.po				\
 	extract9.xml.in				\
-	extract12.xml.in			\
-	extract14.xml.in			\
 	fr.po					\
 	fr_BE.po				\
 	fr_FR.po				\
@@ -48,6 +49,7 @@ CLEANFILES =					\
 	context.xml				\
 	context.xml.in.h			\
 	extract-comments.xml.h			\
+	extract-gtkbuilder.ui.h			\
 	extract1.desktop.h			\
 	extract10.templates_.h			\
 	extract12.xml.in.h			\
@@ -62,11 +64,23 @@ CLEANFILES =					\
 	merge10.templates			\
 	merge11.xml				\
 	merge12.xml				\
-	space-preserve.xml.in.h			\
 	space-preserve.xml			\
+	space-preserve.xml.in.h			\
 	test-quoted.dtd.h			\
 	test.schemas				\
 	test.schemas.in.h			\
 	test.scm.h				\
 	unicodetext.xml.in.h			\
+	extract1.desktop.in			\
+	extract3.xml.in.h			\
+	extract6.glade.h			\
+	extract7.xml.h				\
+	extract8.glade.h			\
+	merge1.xml				\
+	merge4.xml				\
+	merge5p.sheet				\
+	merge5u.sheet				\
+	merge6.xml				\
+	merge7.xml				\
+	merge8.keys				\
 	$(NULL)
