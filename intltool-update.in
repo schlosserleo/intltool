@@ -307,9 +307,13 @@ sub TextFile_DetermineEncoding ($)
 sub isNotValidMissing
 {
     my ($file) = @_;
+    my $package_name = "";
+    my $version = "";
+    $package_name = $varhash{"PACKAGE"} if (defined $varhash{"PACKAGE"});
+    $version = $varhash{"VERSION"} if (defined $varhash{"VERSION"});
 
     return if $file =~ /^\{arch\}\/.*$/;
-    return if $file =~ /^$varhash{"PACKAGE"}-$varhash{"VERSION"}\/.*$/;
+    return if $file =~ /^$package_name-$version\/.*$/;
 }
 
 sub removeFromArray
