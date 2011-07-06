@@ -461,7 +461,7 @@ sub FindLeftoutFiles
             # Handle continued multi-line string.
             if ($in_string)
             {
-                next unless /(\'\'\'|\"\"\")/;
+                next unless s/.*(\'\'\'|\"\"\")//;
                 $in_string = 0;
             }
 
@@ -477,7 +477,7 @@ sub FindLeftoutFiles
 	    {
 		$in_macro = 1 if /^([^\\]|\\.)*\\$/;
 		next;
-	    }
+            }
 
 	    # Handle comments and quoted text.
 	    while (m-(/\*|//|\'\'\'|\"\"\"|\'|\")-) # \' and \" keep emacs perl mode happy
@@ -505,7 +505,12 @@ sub FindLeftoutFiles
                 }
 		else # ' or "
 		{
-		    if (!s-$match([^\\]|\\.)*?$match-QUOTEDTEXT-)
+		    s-$match(\\$match|[^$match])*$match-QUOTEDTEXT-g;
+
+                    # Handle inline # comments.
+                    s/^([^$match]+)\#.*/$1/;
+
+		    if (m-$match-)
 		    {
 			warn "mismatched quotes at line $. in $file\n";
 			s-$match.*--;
