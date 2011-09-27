@@ -361,12 +361,16 @@ sub FindLeftoutFiles
 
     ## Search and find all translatable files
     find sub {
+	# Ignore hidden files
+	return if "$File::Find::name" =~ /\/\./;
 	push @buf_i18n_plain,        "$File::Find::name" if /\.($buildin_gettext_support)$/;
 	push @buf_i18n_xml,          "$File::Find::name" if /\.($xml_support)$/;
 	push @buf_i18n_ini,          "$File::Find::name" if /\.($ini_support)$/;
 	push @buf_i18n_xml_unmarked, "$File::Find::name" if /\.(schemas(\.in)+)$/;
 	}, "..";
     find sub {
+	# Ignore hidden files
+	return if "$File::Find::name" =~ /\/\.[^.]/;
 	push @buf_i18n_plain,        "$File::Find::name" if /\.($buildin_gettext_support)$/;
 	push @buf_i18n_xml,          "$File::Find::name" if /\.($xml_support)$/;
 	push @buf_i18n_ini,          "$File::Find::name" if /\.($ini_support)$/;
