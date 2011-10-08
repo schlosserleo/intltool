@@ -163,11 +163,11 @@ XML files. Read manpage (man ${PROGRAM}) for more info.
       --type=TYPE   Specify the file type of FILENAME. Currently supports:
                     "gettext/glade", "gettext/ini", "gettext/keys"
                     "gettext/rfc822deb", "gettext/schemas",
-                    "gettext/scheme", "gettext/xml", "gettext/quoted",
-                    "gettext/quotedxml", "gettext/tlk"
+                    "gettext/xml", "gettext/quoted", "gettext/quotedxml",
+                    "gettext/tlk"
   -l, --local       Writes output into current working directory
                     (conflicts with --update)
-      --update      Writes output into the same directory the source file 
+      --update      Writes output into the same directory the source file
                     reside (conflicts with --local)
       --srcdir      Root of the source tree
   -v, --version     Output version information and exit
@@ -218,7 +218,6 @@ sub convert {
     &type_keys if $gettext_type eq "keys";
     &type_xml if $gettext_type eq "xml";
     &type_glade if $gettext_type eq "glade";
-    &type_scheme if $gettext_type eq "scheme";
     &type_schemas  if $gettext_type eq "schemas";
     &type_rfc822deb  if $gettext_type eq "rfc822deb";
     &type_quoted if $gettext_type eq "quoted";
@@ -790,51 +789,6 @@ sub type_glade {
     }
 }
 
-sub type_scheme {
-    my ($line, $i, $state, $str, $trcomment, $char);
-    for $line (split(/\n/, $input)) {
-        $i = 0;
-        $state = 0; # 0 - nothing, 1 - string, 2 - translatable string
-        while ($i < length($line)) {
-            if (substr($line,$i,1) eq "\"") {
-                if ($state == 2) {
-                    $comments{$str} = $trcomment if ($trcomment);
-                    $messages{$str} = [];
-                    $str = '';
-                    $state = 0; $trcomment = "";
-                } elsif ($state == 1) {
-                    $str = '';
-                    $state = 0; $trcomment = "";
-                } else {
-                    $state = 1;
-                    $str = '';
-                    if ($i>0 && substr($line,$i-1,1) eq '_') {
-                        $state = 2;
-                    }
-                }
-            } elsif (!$state) {
-                if (substr($line,$i,1) eq ";") {
-                    $trcomment = substr($line,$i+1);
-                    $trcomment =~ s/^;*\s*//;
-                    $i = length($line);
-                } elsif ($trcomment && substr($line,$i,1) !~ /\s|\(|\)|_/) {
-                    $trcomment = "";
-                }
-            } else {
-                if (substr($line,$i,1) eq "\\") {
-                    $char = substr($line,$i+1,1);
-                    if ($char ne "\"" && $char ne "\\") {
-                       $str = $str . "\\";
-                    }
-                    $i++;
-                }
-                $str = $str . substr($line,$i,1);
-            }
-            $i++;
-        }
-    }
-}
-
 sub type_tlk {
     my ($ftype, $fvers, $langid, $strcount, $stroff);
     my $count = 0;
@@ -853,7 +807,7 @@ sub type_tlk {
                       $inputa[18] . $inputa[19]);
 
     use bytes;
-    $strdata = bytes::substr ($input, $stroff); 
+    $strdata = bytes::substr ($input, $stroff);
 
     my $sinpos = 20;
 
