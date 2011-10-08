@@ -38,6 +38,7 @@ my $VERSION      = "@VERSION@";
 use strict; 
 use File::Basename;
 use Getopt::Long;
+use XML::Parser;
 
 ## Scalars used by the option stuff
 my $TYPE_ARG	= "0";
@@ -164,8 +165,8 @@ XML files. Read manpage (man ${PROGRAM}) for more info.
       --type=TYPE   Specify the file type of FILENAME. Currently supports:
                     "gettext/glade", "gettext/ini", "gettext/keys"
                     "gettext/rfc822deb", "gettext/schemas",
-                    "gettext/xml", "gettext/quoted", "gettext/quotedxml",
-                    "gettext/tlk"
+                    "gettext/gsettings", "gettext/xml", "gettext/quoted",
+                    "gettext/quotedxml", "gettext/tlk"
   -l, --local       Writes output into current working directory
                     (conflicts with --update)
       --update      Writes output into the same directory the source file
@@ -219,6 +220,7 @@ sub convert {
     &type_keys if $gettext_type eq "keys";
     &type_xml if $gettext_type eq "xml";
     &type_glade if $gettext_type eq "glade";
+    &type_gsettings  if $gettext_type eq "gsettings";
     &type_schemas  if $gettext_type eq "schemas";
     &type_rfc822deb  if $gettext_type eq "rfc822deb";
     &type_quoted if $gettext_type eq "quoted";
@@ -626,7 +628,6 @@ sub readXml
     ## differences end here from intltool-merge.in.in
 
     my $tree = $xp->parse($xmldoc);
-    #print_var($tree);
 
 # <foo><!-- comment --><head id="a">Hello <em>there</em></head><bar>Howdy<ref/></bar>do</foo>
 # would be:
@@ -657,6 +658,61 @@ sub type_schemas {
             $comments{entity_decode_minimal($_)} = $currentcomment if (defined($currentcomment));
         }
     }
+}
+
+    my $content;
+    my $comment;
+    my %attrs;
+
+sub type_gsettings {
+
+
+    sub element_start {
+        shift; shift;
+        $content = '';
+        %attrs = @_;
+    }
+
+    sub cleanup {
+        s/^\s+//;
+        s/\s+$//;
+        s/\s+/ /g;
+        return $_;
+    }
+
+    sub element_end {
+        my ($expat, $element) = @_;
+
+        if (($element eq 'default' and $attrs{'l10n'}) or
+            ($element eq 'summary') or ($element eq 'description')) {
+            $content = (join "\n\n", map cleanup, split/\n\n/, $content);
+    		$content = $attrs{'context'} . "\004" . $content
+                    if $attrs{'context'};
+            add_message(entity_decode($content));
+            $comments{entity_decode($content)} = $comment
+                if (defined($comment));
+        }
+        undef $comment;
+    }
+
+    sub comment {
+        my ($expat, $data) = @_;
+    	$comment = $data;
+    }
+
+    sub char {
+        my ($expat, $data) = @_;
+        $content = $content . $data;
+    }
+
+    #use Data::Dumper;
+    #print Dumper readXml($input); print "\n";
+
+    my $parser = new XML::Parser (Handlers => {Start   => \&element_start,
+                                               End     => \&element_end,
+                                               Comment => \&comment,
+                                               Char    => \&char});
+    $parser->parse($input);
 }
 
 sub type_rfc822deb {
@@ -923,7 +979,7 @@ sub msg_write {
                 if defined $comments{$message};
    	print OUT "/* xgettext:no-c-format */\n" if $message =~ /%/;
 
-    	if ($message =~ /(.*)\004(.*)/) {
+    	if ($message =~ /(.*)\004(.*)/s) {
     	    $context = $1;
     	    $message = $2;
     	}
