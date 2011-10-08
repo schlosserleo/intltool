@@ -38,7 +38,6 @@ my $VERSION      = "@VERSION@";
 use strict; 
 use File::Basename;
 use Getopt::Long;
-use XML::Parser;
 
 ## Scalars used by the option stuff
 my $TYPE_ARG	= "0";
@@ -639,7 +638,7 @@ sub readXml
 
 sub type_schemas {
     ### For schemas XML files ###
-         
+
     # FIXME: We should handle escaped < (less than)
     while ($input =~ /
                       <locale\ name="C">\s*
@@ -660,59 +659,51 @@ sub type_schemas {
     }
 }
 
-    my $content;
-    my $comment;
-    my %attrs;
+# Parse the tree as returned by readXml() for gschema.xml files.
+sub traverse_gsettings {
+    my $nodename = shift;
+    my $content = shift;
+    my $comment = shift || 0;
+    my @list = @{ $content };
+    my $attrs_ref = shift @list;
+    my %attrs = %{ $attrs_ref };
+    if (($nodename eq 'default' and $attrs{'l10n'}) or
+        ($nodename eq 'summary') or ($nodename eq 'description')) {
+        my $message = getXMLstring($content);
+        my $context = $attrs{'context'};
+        $context =~ s/^["'](.*)["']/$1/ if $context;
+        $message = $context . "\004" . $message if $context;
+        add_message($message);
+        $comments{$message} = $comment if $comment;
+    } else {
+        my $index = 0;
+        my $comment;
+        while (scalar(@list) > 1) {
+            my $type = shift @list;
+            my $content = shift @list;
+            if (!$type || "$type" eq "1") {
+                if ($type == 1) {
+                    $comment = $content;
+                }
+                next;
+            } else {
+                traverse_gsettings($type, $content, $comment);
+                $comment = 0;
+            }
+        }
+    }
+}
 
 sub type_gsettings {
-
-
-    sub element_start {
-        shift; shift;
-        $content = '';
-        %attrs = @_;
+    my $tree = readXml($input);
+    my @tree_nodes = @{ $tree };
+    my $node = shift @tree_nodes;
+    while (!$node || "$node" eq "1") {
+        shift @tree_nodes;
+        $node = shift @tree_nodes;
     }
-
-    sub cleanup {
-        s/^\s+//;
-        s/\s+$//;
-        s/\s+/ /g;
-        return $_;
-    }
-
-    sub element_end {
-        my ($expat, $element) = @_;
-
-        if (($element eq 'default' and $attrs{'l10n'}) or
-            ($element eq 'summary') or ($element eq 'description')) {
-            $content = (join "\n\n", map cleanup, split/\n\n/, $content);
-    		$content = $attrs{'context'} . "\004" . $content
-                    if $attrs{'context'};
-            add_message(entity_decode($content));
-            $comments{entity_decode($content)} = $comment
-                if (defined($comment));
-        }
-        undef $comment;
-    }
-
-    sub comment {
-        my ($expat, $data) = @_;
-    	$comment = $data;
-    }
-
-    sub char {
-        my ($expat, $data) = @_;
-        $content = $content . $data;
-    }
-
-    #use Data::Dumper;
-    #print Dumper readXml($input); print "\n";
-
-    my $parser = new XML::Parser (Handlers => {Start   => \&element_start,
-                                               End     => \&element_end,
-                                               Comment => \&comment,
-                                               Char    => \&char});
-    $parser->parse($input);
+    my $content = shift @tree_nodes;
+    traverse_gsettings($node, $content);
 }
 
 sub type_rfc822deb {
