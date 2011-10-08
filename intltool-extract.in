@@ -55,6 +55,7 @@ my $OUTFILE;
 my $gettext_type = "";
 my $input;
 my %messages = ();
+my @messages_sorted = ();
 my %loc = ();
 my %count = ();
 my %comments = ();
@@ -77,7 +78,7 @@ GetOptions (
             "update"     => \$UPDATE_ARG,
 	    "quiet|q"    => \$QUIET_ARG,
 	    "srcdir=s"	 => \$SRCDIR_ARG,
-	    "nomsgctxt"  => \$NOMSGCTXT_ARG,            
+	    "nomsgctxt"  => \$NOMSGCTXT_ARG,
             ) or &error;
 
 &split_on_argument;
@@ -265,20 +266,27 @@ sub escape
     return join "", map &escape_char, split //, $string;
 }
 
+sub add_message
+{
+    my ($string) = @_;
+    push @messages_sorted, $string if !defined $messages{$string};
+    $messages{$string} = [];
+}
+
 sub type_ini {
     ### For generic translatable desktop files ###
     while ($input =~ /^(#(.+)\n)?^_.*=(.*)$/mg) {
         if (defined($2))  {
             $comments{$3} = $2;
         }
-        $messages{$3} = [];
+        add_message($3);
     }
 }
 
 sub type_keys {
     ### For generic translatable mime/keys files ###
     while ($input =~ /^\s*_\w+=(.*)$/mg) {
-        $messages{$1} = [];
+        add_message($1);
     }
 }
 
@@ -340,7 +348,7 @@ sub getAttributeString
         ## differences from intltool-merge.in.in
 	if ($key =~ /^_/) {
             $comments{entity_decode($string)} = $XMLCOMMENT if $XMLCOMMENT;
-            $messages{entity_decode($string)} = [];
+            add_message(entity_decode($string));
             $$translate = 2;
 	}
         ## differences end here from intltool-merge.in.in
@@ -457,7 +465,7 @@ sub traverse
 
 	    if ($lookup && $translate != 2) {
                 $comments{$lookup} = $XMLCOMMENT if $XMLCOMMENT;
-                $messages{$lookup} = [];
+                add_message($lookup);
             } elsif ($translate == 2) {
                 translate_subnodes($fh, \@all, $language, 1, $spacepreserve);
 	    }
@@ -646,7 +654,7 @@ sub type_schemas {
             my $currentcomment = shift @eachcomment;
             next if !$_;
             s/\s+/ /g;
-            $messages{entity_decode_minimal($_)} = [];
+            add_message(entity_decode_minimal($_));
             $comments{entity_decode_minimal($_)} = $currentcomment if (defined($currentcomment));
         }
     }
@@ -669,7 +677,7 @@ sub type_rfc822deb {
         for my $str (@str_list)
         {
             $strcount++;
-            $messages{$str} = [];
+            add_message($str);
             $loc{$str} = $lineno;
             $count{$str} = $strcount;
             my $usercomment = '';
@@ -737,7 +745,7 @@ sub type_quoted {
         my $before = $`;
         $message =~ s/\\\"/\"/g;
         $before =~ s/[^\n]//g;
-        $messages{$message} = [];
+        add_message($message);
         $loc{$message} = length ($before) + 2;
     }
 }
@@ -749,7 +757,7 @@ sub type_quotedxml {
         $message =~ s/\\\"/\"/g;
         $message = entity_decode($message);
         $before =~ s/[^\n]//g;
-        $messages{$message} = [];
+        add_message($message);
         $loc{$message} = length ($before) + 2;
     }
 }
@@ -763,12 +771,12 @@ sub type_glade {
 	# Glade sometimes uses tags that normally mark translatable things for
         # little bits of non-translatable content. We work around this by not
         # translating strings that only includes something like label4 or window1.
-	$messages{entity_decode($2)} = [] unless $2 =~ /^(window|label|dialog)[0-9]+$/;
+	add_message(entity_decode($2)) unless $2 =~ /^(window|label|dialog)[0-9]+$/;
     }
 
     while ($input =~ /<items>(..[^<]*)<\/items>/sg) {
 	for my $item (split (/\n/, $1)) {
-	    $messages{entity_decode($item)} = [];
+            add_message(entity_decode($item));
 	}
     }
 
@@ -779,14 +787,14 @@ sub type_glade {
             if (defined($2)) {
                 $message = entity_decode($2) . "\004" . $message;
             }
-            $messages{$message} = [];
+            add_message($message);
             if (defined($3)) {
                 $comments{$message} = entity_decode($3) ;
             }
         }
     }
     while ($input =~ /<atkaction\s+action_name="([^>]*)"\s+description="([^>]+)"\/>/sg) {
-        $messages{entity_decode_minimal($2)} = [];
+        add_message(entity_decode_minimal($2));
     }
 }
 
@@ -799,7 +807,7 @@ sub type_scheme {
             if (substr($line,$i,1) eq "\"") {
                 if ($state == 2) {
                     $comments{$str} = $trcomment if ($trcomment);
-                    $messages{$str} = [];
+                    add_message($str);
                     $str = '';
                     $state = 0; $trcomment = "";
                 } elsif ($state == 1) {
@@ -914,7 +922,7 @@ sub type_tlk {
             if (defined $message) {
                 use Encode;
                 Encode::from_to ($message, "iso-8859-1", "UTF-8");
-                $messages{$message} = [];
+                add_message($message);
                 if ($message =~ /^Bad Strref$/ ) {
                     $comments{$message} = "DO NOT Translate this Entry.";
                     $comments{$message} .= "\nTLK:position=$count";
@@ -941,7 +949,7 @@ sub msg_write {
     }
     else
     {
-        @msgids = sort keys %messages;
+        @msgids = @messages_sorted;
     }
     for my $message (@msgids)
     {
