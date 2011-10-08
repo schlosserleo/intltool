@@ -451,9 +451,11 @@ sub FindLeftoutFiles
 	my $in_comment = 0;
 	my $in_macro = 0;
         my $in_string = 0;
-        my @multiline_quotes = ("'''", '"""');
+        my @multiline_quotes;
         if ($file =~ /\.scm/) {
             @multiline_quotes = ('"');
+        } else {
+            @multiline_quotes = ("'''", '"""');
         }
 
 	open FILE, "<$file";
