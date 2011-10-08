@@ -67,6 +67,7 @@ my $QUIET_ARG = 0;
 my $PASS_THROUGH_ARG = 0;
 my $UTF8_ARG = 0;
 my $MULTIPLE_OUTPUT = 0;
+my $NO_TRANSLATIONS_ARG = 0;
 my $cache_file;
 
 ## Handle options
@@ -87,6 +88,7 @@ GetOptions
  "pass-through|p" => \$PASS_THROUGH_ARG,
  "utf8|u" => \$UTF8_ARG,
  "multiple-output|m" => \$MULTIPLE_OUTPUT,
+ "no-translations" => \$NO_TRANSLATIONS_ARG,
  "cache|c=s" => \$cache_file
  ) or &error;
 
@@ -121,7 +123,7 @@ elsif ($BA_STYLE_ARG && @ARGV > 2)
 	&ba_merge_translations;
 	&finalize;
 } 
-elsif ($XML_STYLE_ARG && @ARGV > 2) 
+elsif ($XML_STYLE_ARG && (@ARGV > 2 || ($NO_TRANSLATIONS_ARG && @ARGV > 1))) 
 {
 	&utf8_sanity_check;
 	&preparation;
@@ -214,6 +216,9 @@ Other options:
   -p, --pass-through     deprecated, does nothing and issues a warning
   -m, --multiple-output  output one localized file per locale, instead of 
 	                 a single file containing all localized elements
+      --no-translations  do not merge any translations: only generates the
+                         unlocalised (English) version -- applies only
+                         to XML merging
   -c, --cache=FILE       specify cache file name
                          (usually \$top_builddir/po/.intltool-merge-cache)
   -q, --quiet            suppress most messages
@@ -242,12 +247,17 @@ sub print_message
 
 sub preparation 
 {
-    $PO_DIR = $ARGV[0];
-    $FILE = $ARGV[1];
-    $OUTFILE = $ARGV[2];
+    if (!$XML_STYLE_ARG || !$NO_TRANSLATIONS_ARG) {
+        $PO_DIR = $ARGV[0];
+        $FILE = $ARGV[1];
+        $OUTFILE = $ARGV[2];
 
-    &gather_po_files;
-    &get_translation_database;
+        &gather_po_files;
+        &get_translation_database;
+    } else {
+        $FILE = $ARGV[0];
+        $OUTFILE = $ARGV[1];
+    }
 }
 
 # General-purpose code for looking up translations in .po files
