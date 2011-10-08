@@ -19,6 +19,7 @@ EXTRA_DIST =					\
 	fr.po					\
 	fr_BE.po				\
 	fr_FR.po				\
+	gsettings.gschema.xml			\
 	iso88591text.xml.in			\
 	merge-cdata.xml.in			\
 	merge-deepattr.xml.in			\
@@ -57,6 +58,7 @@ CLEANFILES =					\
 	extract14.xml.in.h			\
 	extract9.xml				\
 	extract9.xml.in.h			\
+	gsettings.gschema.xml.h			\
 	iso88591text.xml.in.h			\
 	merge-cdata.xml				\
 	merge-deepattr.xml			\

@@ -284,6 +284,11 @@ $case = "extract-gtkbuilder.ui";
 system("$INTLTOOL_EXTRACT --type=gettext/glade --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
+print "38. Extract messages from an GSettings gschema XML file:             ";
+$case = "gsettings.gschema.xml";
+system("$INTLTOOL_EXTRACT --type=gettext/gsettings --quiet --update cases/$case") == 0 or $failed = 1;
+check_extract_result($case);
+
 system("rm -f cases/*.*") if $srcdir ne ".";
 system("rm -rf C az extract9 fr fr_BE fr_FR merge6 schemasmerge1 schemasmerge2 spacepreserve test test-quoted merge6.xml");
 
