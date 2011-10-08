@@ -41,7 +41,6 @@ EXTRA_DIST =					\
 	test-quoted.po				\
 	test.po 				\
 	test.schemas.in				\
-	test.scm				\
 	unicodetext.xml.in			\
 	$(NULL)
 
@@ -69,7 +68,6 @@ CLEANFILES =					\
 	test-quoted.dtd.h			\
 	test.schemas				\
 	test.schemas.in.h			\
-	test.scm.h				\
 	unicodetext.xml.in.h			\
 	extract1.desktop.in			\
 	extract3.xml.in.h			\
