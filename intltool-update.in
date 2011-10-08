@@ -64,7 +64,6 @@ my $xml_support =
 "ui|".			# Bonobo specific - User Interface desc. files
 "lang|".		# ?
 "glade2?(?:\\.in)*|".	# Glade specific - User Interface desc. files (Note: .in is not required)
-"scm(?:\\.in)*|".	# ? (Note: .in is not required)
 "oaf(?:\\.in)+|".	# DEPRECATED: Replaces by Bonobo .server files
 "etspec|".		# ?
 "server(?:\\.in)+|".	# Bonobo specific
@@ -88,7 +87,7 @@ my $tlk_support =
 "tlk(?:\\.in)+";        # Bioware Aurora Talk Table Format
 
 my $buildin_gettext_support =
-"c|y|cs|cc|cpp|c\\+\\+|h|hh|gob|py(?:\\.in)*";
+"c|y|cs|cc|cpp|c\\+\\+|h|hh|gob|py|scm(?:\\.in)*";
 
 ## Always flush buffer when printing
 $| = 1;
@@ -451,10 +450,21 @@ sub FindLeftoutFiles
 	my $in_comment = 0;
 	my $in_macro = 0;
         my $in_string = 0;
+        my @multiline_quotes;
+        if ($file =~ /\.scm/) {
+            @multiline_quotes = ('"');
+        } else {
+            @multiline_quotes = ("'''", '"""');
+        }
 
 	open FILE, "<$file";
 	while (<FILE>)
 	{
+            if ($file =~ /\.scm/) {
+                # Strip single quotes from .scm files.
+                s-\'--g;
+            }
+
 	    # Handle continued multi-line comment.
 	    if ($in_comment)
 	    {
@@ -465,7 +475,11 @@ sub FindLeftoutFiles
             # Handle continued multi-line string.
             if ($in_string)
             {
-                next unless s/.*(\'\'\'|\"\"\")//;
+                my $pattern = join '|', @multiline_quotes;
+                if (!s/.*$pattern//) {
+                    s///s;
+                    next;
+                };
                 $in_string = 0;
             }
 
@@ -499,11 +513,11 @@ sub FindLeftoutFiles
 		{
 		    s-//.*--;
 		}
-                elsif ($match eq "\"\"\"" or $match eq "\'\'\'")
+                elsif (grep($match, @multiline_quotes))
                 {
-                    if (!s-$match.*?$match--)
+                    if (!s-$match(\\$match|[^$match])*$match-QUOTEDTEXT-g)
                     {
-                        s-$match.*--;
+                        s-$match.*-QUOTEDTEXT-s;
                         $in_string = 1;
                     }
                 }
@@ -529,7 +543,7 @@ sub FindLeftoutFiles
 	    }
 
             ## C_ N_ NC_ Q_ and _ are the macros defined in gi8n.h
-	    if (/(NC_|[NCQ]_|[^_]_|(^|$)[_]) *\(QUOTEDTEXT/m)
+	    if (/(NC_|[NCQ]_|[^_]_|(^|$)[_]) *\(?QUOTEDTEXT/m)
 	    {
                 AddFileToListIfMissing($file, \@buf_allfiles);
 		last;

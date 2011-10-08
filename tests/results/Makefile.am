@@ -37,6 +37,5 @@ EXTRA_DIST =					\
 	test-quoted.dtd.h			\
 	test.schemas				\
 	test.schemas.in.h			\
-	test.scm.h				\
 	unicodetext.xml.in.h			\
 	$(NULL)

@@ -197,94 +197,89 @@ $case = "extract-comments.xml";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "21. Extract messages from Scheme file:                               ";
-$case = "test.scm";
-system("$INTLTOOL_EXTRACT --type=gettext/scheme --quiet --update cases/$case") == 0 or $failed = 1;
-check_extract_result($case);
-
-print "22. Merge into file with CDATA sections:                             ";
+print "21. Merge into file with CDATA sections:                             ";
 $case = "merge-cdata.xml";
 system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
-print "23. Merge into XML file with deep translation/attribute nesting:     ";
+print "22. Merge into XML file with deep translation/attribute nesting:     ";
 $case = "merge-deepattr.xml";
 system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
-print "24. Ignore empty strings from XML file                               ";
+print "23. Ignore empty strings from XML file                               ";
 $case = "extract12.xml.in";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "25. Extract messages from a xml file using inherited xml:space:      ";
+print "24. Extract messages from a xml file using inherited xml:space:      ";
 $case = "space-preserve.xml.in";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "26. Merge messages into xml file using inherited xml:space:          ";
+print "25. Merge messages into xml file using inherited xml:space:          ";
 $case = "space-preserve.xml";
 system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
-print "27. Merge non-well-formed translations into xml file:                ";
+print "26. Merge non-well-formed translations into xml file:                ";
 $case = "merge11.xml";
 system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
  
-print "28. Extract UTF-8 encoded messages/comments from xml file:           ";
+print "27. Extract UTF-8 encoded messages/comments from xml file:           ";
 $case = "unicodetext.xml.in";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "29. Extract iso-8859-1 encoded messages/comments from xml file:      ";
+print "28. Extract iso-8859-1 encoded messages/comments from xml file:      ";
 $case = "iso88591text.xml.in";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "30. Extract messages from a quoted style file:                       ";
+print "29. Extract messages from a quoted style file:                       ";
 $case = "test-quoted.dtd";
 system("$INTLTOOL_EXTRACT --type=gettext/quoted --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "31. Merge translations into multiple quoted style files:             ";
+print "30. Merge translations into multiple quoted style files:             ";
 $case = "test-quoted.dtd";
 system("$INTLTOOL_MERGE --quoted-style --quiet --multiple-output cases cases/$case $case") == 0 or $failed = 1;
 check_multimerge_result($case, "test-quoted");
 
-print "32. Extract comments for translators from a .desktop.in file:        ";
+print "31. Extract comments for translators from a .desktop.in file:        ";
 $case = "extract13.desktop.in";
 system("$INTLTOOL_EXTRACT --type=gettext/ini --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "33. Merge translations from a .desktop.in file:                      ";
+print "32. Merge translations from a .desktop.in file:                      ";
 $case = "extract13.desktop.in";
 $result = $case;
 ($result = $case) =~ s/\.in//;
 system("$INTLTOOL_MERGE -d --quiet cases cases/$case cases/$result") == 0 or $failed = 1;
 check_merge_result($case);
 
-print "34. Decode XML entities in the right order when extracting:          ";
+print "33. Decode XML entities in the right order when extracting:          ";
 $case = "extract14.xml.in";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "35. Merge XML translations, decoding entities in the right order:    ";
+print "34. Merge XML translations, decoding entities in the right order:    ";
 $case = "merge12.xml";
 system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
-print "36. Extract messages from an XML file with msgctxts:                 ";
+print "35. Extract messages from an XML file with msgctxts:                 ";
 $case = "context.xml.in";
 system("$INTLTOOL_EXTRACT --type=gettext/xml --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
 
-print "37. Merge translations into an XML file with msgctxts:               ";
+print "36. Merge translations into an XML file with msgctxts:               ";
 $case = "context.xml";
 system("$INTLTOOL_MERGE -x --quiet cases cases/$case.in cases/$case") == 0 or $failed = 1;
 check_merge_result($case);
 
-print "38. Extract messages from an GtkBuilder XML file with msgctxts:      ";
+print "37. Extract messages from an GtkBuilder XML file with msgctxts:      ";
 $case = "extract-gtkbuilder.ui";
 system("$INTLTOOL_EXTRACT --type=gettext/glade --quiet --update cases/$case") == 0 or $failed = 1;
 check_extract_result($case);
