@@ -69,7 +69,7 @@ my $xml_support =
 "server(?:\\.in)+|".	# Bonobo specific
 "sheet(?:\\.in)+|".	# ?
 "schemas(?:\\.in)+|".	# GConf specific
-"gschema.xml|".     # GLib schema (ie: GSettings) specific
+"gschema.xml|".         # GLib schema (ie: GSettings) specific
 "pong(?:\\.in)+|".	# DEPRECATED: PONG is not used [by GNOME] any longer.
 "kbd(?:\\.in)+|".	# GOK specific.
 "policy(?:\\.in)+";	# PolicyKit files
