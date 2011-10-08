@@ -119,7 +119,7 @@ $INTLTOOL_PERL -e "use 5.8.1;" > /dev/null 2>&1
 if test $? -ne 0; then
    AC_MSG_ERROR([perl 5.8.1 is required for intltool])
 else
-   IT_PERL_VERSION="`$INTLTOOL_PERL -e \"printf '%vd', $^V\"`"
+   IT_PERL_VERSION=`$INTLTOOL_PERL -e "printf '%vd', $^V"`
    AC_MSG_RESULT([$IT_PERL_VERSION])
 fi
 if test "x$2" != "xno-xml"; then
