@@ -64,7 +64,6 @@ my $xml_support =
 "ui|".			# Bonobo specific - User Interface desc. files
 "lang|".		# ?
 "glade2?(?:\\.in)*|".	# Glade specific - User Interface desc. files (Note: .in is not required)
-"scm(?:\\.in)*|".	# ? (Note: .in is not required)
 "oaf(?:\\.in)+|".	# DEPRECATED: Replaces by Bonobo .server files
 "etspec|".		# ?
 "server(?:\\.in)+|".	# Bonobo specific
@@ -88,7 +87,7 @@ my $tlk_support =
 "tlk(?:\\.in)+";        # Bioware Aurora Talk Table Format
 
 my $buildin_gettext_support =
-"c|y|cs|cc|cpp|c\\+\\+|h|hh|gob|py(?:\\.in)*";
+"c|y|cs|cc|cpp|c\\+\\+|h|hh|gob|py|scm(?:\\.in)*";
 
 ## Always flush buffer when printing
 $| = 1;
