@@ -661,6 +661,13 @@ sub type_schemas {
 
 # Parse the tree as returned by readXml() for gschema.xml files.
 sub traverse_gsettings {
+    sub cleanup {
+        s/^\s+//;
+        s/\s+$//;
+        s/\s+/ /g;
+        return $_;
+    }
+
     my $nodename = shift;
     my $content = shift;
     my $comment = shift || 0;
@@ -669,7 +676,20 @@ sub traverse_gsettings {
     my %attrs = %{ $attrs_ref };
     if (($nodename eq 'default' and $attrs{'l10n'}) or
         ($nodename eq 'summary') or ($nodename eq 'description')) {
-        my $message = getXMLstring($content);
+        # preserve whitespace.  deal with it ourselves, below.
+        my $message = getXMLstring($content, 1);
+
+        if ($nodename eq 'default') {
+            # for <default> we strip leading and trailing whitespace but
+            # preserve (possibly quoted) whitespace within
+            $message =~ s/^\s+//;
+            $message =~ s/\s+$//;
+        } else {
+            # for <summary> and <description>, we normalise all
+            # whitespace while preserving paragraph boundaries
+            $message = join "\n\n", map &cleanup, split/\n\n+/, $message;
+        }
+
         my $context = $attrs{'context'};
         $context =~ s/^["'](.*)["']/$1/ if $context;
         $message = $context . "\004" . $message if $context;
