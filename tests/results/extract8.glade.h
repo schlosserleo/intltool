@@ -1,3 +1,6 @@
+char *s = N_("_New Window");
+char *s = N_("_New Tab");
+char *s = N_("_Quit");
 char *s = N_("Testing");
 /* Comment on <property> tag */
 char *s = N_("A label");
