@@ -42,9 +42,11 @@
         This is a key with multiple newlines.
       </summary>
       <description context='GSettings description'>
-        Paragraph one.
+        Paragraph one. Please keep the whitespace indentation in empty
+        lines for testing as well.
 
-
+	
+        
 
 
         Paragraph two.  There was never anyone who

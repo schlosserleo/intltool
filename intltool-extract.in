@@ -687,7 +687,7 @@ sub traverse_gsettings {
         } else {
             # for <summary> and <description>, we normalise all
             # whitespace while preserving paragraph boundaries
-            $message = join "\n\n", map &cleanup, split/\n\n+/, $message;
+            $message = join "\n\n", map &cleanup, split/\n\s*\n+/, $message;
         }
 
         my $context = $attrs{'context'};

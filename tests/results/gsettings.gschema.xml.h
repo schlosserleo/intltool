@@ -11,6 +11,6 @@ char *s = C_("clock-format", "24");
 char *s = N_("Time format");
 char *s = C_("Time format gsettings description", "How many hours can you tell apart?");
 char *s = N_("This is a key with multiple newlines.");
-char *s = C_("GSettings description", "Paragraph one.\n"
+char *s = C_("GSettings description", "Paragraph one. Please keep the whitespace indentation in empty lines for testing as well.\n"
              "\n"
              "Paragraph two. There was never anyone who tried to make sense out of this.");
