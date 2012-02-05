@@ -1,0 +1,15 @@
+intltool 0.50.1
+===============
+
+intltool 0.50.1 is a minor release with the following improvements:
+
+ * Support AM_SILENT_RULES (#402516).
+   Patch contributed by Hib Eris (https://launchpad.net/~hiberis).
+
+ * Improve support for extracting messages from GSettings files (#922685).
+   Patch contributed by Ryan Lortie (https://launchpad.net/~desrt).
+
+ * Support attribute tag extraction for Glade/GtkBuilder files (#923841).
+   Patch contributed by Ryan Lortie (https://launchpad.net/~desrt).
+
+ * Start including a ChangeLog in tarballs and provide a NEWS file (#924386).

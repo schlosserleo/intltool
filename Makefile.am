@@ -27,6 +27,7 @@ CLEANFILES =					\
 EXTRA_DIST =					\
 	$(distributed_scripts:=.in)		\
 	intltool-prepare.in			\
+	NEWS					\
 	ChangeLog
 
 edit = sed -e 's|[@]PACKAGE@|$(PACKAGE)|g' \
