@@ -26,7 +26,9 @@ CLEANFILES =					\
 
 EXTRA_DIST =					\
 	$(distributed_scripts:=.in)		\
-	intltool-prepare.in
+	intltool-prepare.in			\
+	NEWS					\
+	ChangeLog
 
 edit = sed -e 's|[@]PACKAGE@|$(PACKAGE)|g' \
 	   -e 's|[@]VERSION@|$(VERSION)|g' \
@@ -36,3 +38,14 @@ edit = sed -e 's|[@]PACKAGE@|$(PACKAGE)|g' \
 %: %.in Makefile
 	$(edit) < $< > $@
 	chmod +x $@
+
+ChangeLog:
+	@if test -z "$(BZR)"; then \
+	    echo "bzr is required for generating the ChangeLog."; \
+	    exit 1; \
+	elif test ! -d "$(srcdir)/.bzr"; then \
+	    echo "ChangeLog can only be generated in a check-out."; \
+	    exit 1; \
+	else \
+	    $(BZR) log > $@; \
+	fi
