@@ -13,3 +13,5 @@ intltool 0.50.1 is a minor release with the following improvements:
    Patch contributed by Ryan Lortie (https://launchpad.net/~desrt).
 
  * Start including a ChangeLog in tarballs and provide a NEWS file (#924386).
+   This introduces a soft dependency on "bzr": it's only required for
+   maintainers who wish to regenerate a ChangeLog file from the bzr checkout.
