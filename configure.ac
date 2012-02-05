@@ -29,6 +29,8 @@ if `$PERL -e "require XML::Parser" 2>/dev/null`; then
 else
    AC_MSG_ERROR([XML::Parser perl module is required for intltool])
 fi
+AC_PATH_PROG(BZR, bzr)
+
 
 AC_CONFIG_FILES([
 Makefile
