@@ -1,3 +1,12 @@
+intltool 0.50.2
+===============
+
+intltool 0.50.2 is another minor release improving backwards compatibility.
+Only one bug is fixed in this release:
+
+ * Use --no-translations only if intltool >= 0.50 is available (#903340).
+   Patch contributed by Hib Eris (https://launchpad.net/~hiberis).
+
 intltool 0.50.1
 ===============
 
