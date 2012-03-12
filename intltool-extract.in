@@ -165,7 +165,7 @@ XML files. Read manpage (man ${PROGRAM}) for more info.
                     "gettext/glade", "gettext/ini", "gettext/keys"
                     "gettext/rfc822deb", "gettext/schemas",
                     "gettext/gsettings", "gettext/xml", "gettext/quoted",
-                    "gettext/quotedxml", "gettext/tlk"
+                    "gettext/quotedxml", "gettext/tlk", "gettext/qtdesigner"
   -l, --local       Writes output into current working directory
                     (conflicts with --update)
       --update      Writes output into the same directory the source file
@@ -225,6 +225,7 @@ sub convert {
     &type_quoted if $gettext_type eq "quoted";
     &type_quotedxml if $gettext_type eq "quotedxml";
     &type_tlk if $gettext_type eq "tlk";
+    &type_qtdesigner if $gettext_type eq "qtdesigner";
 }
 
 sub entity_decode_minimal
@@ -825,6 +826,34 @@ sub type_quotedxml {
         $before =~ s/[^\n]//g;
         add_message($message);
         $loc{$message} = length ($before) + 2;
+    }
+}
+
+sub type_qtdesigner {
+    ### For translatable Qt Designer XML files ###
+    # From http://qt-project.org/doc/designer-ui-file-format.html and
+    # http://qt-project.org/doc/linguist-ts-file-format.html
+    #
+    # <string> tag attributes:
+    #
+    # notr="true" means the string is not translatable
+    # extracomment maps to a developer comment in gettext
+    # comment corresponds to "disambiguation" in the Qt Linguist API, and maps
+    # to msgctxt in gettext
+
+    #                                                $1                                  $2                                       $3               $4
+    while ($input =~ /<string(?:\s+[^>]*notr\s*=\s*"([^"]*)")?(?:\s+[^>]*\bcomment\b\s*=\s*"([^"]*)")?(?:\s+[^>]*extracomment\s*=\s*"([^"]*)")?[^>]*>([^<]+)<\/string>/sg) {
+	if (defined($1)){
+	    next;
+	}
+        my $message = entity_decode($4);
+        if (defined($2)) {
+            $message = entity_decode($2) . "\004" . $message;
+        }
+        add_message($message);
+        if (defined($3)) {
+            $comments{$message} = entity_decode($3) ;
+        }
     }
 }
 
