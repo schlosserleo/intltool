@@ -847,7 +847,7 @@ sub type_glade {
     }
 
     ## handle new glade files
-    while ($input =~ /<(\w+)\s+[^>]*translatable\s*=\s*"yes"(?:\s+[^>]*context\s*=\s*"([^"]*)")?(?:\s+[^>]*comments\s*=\s*"([^"]*)")?[^>]*>([^<]+)<\/\1>/sg) {
+    while ($input =~ /<(\w+)\s+[^>]*translatable\s*=\s*["']yes["'](?:\s+[^>]*context\s*=\s*["']([^"']*)["'])?(?:\s+[^>]*comments\s*=\s*["']([^"']*)["'])?[^>]*>([^<]+)<\/\1>/sg) {
         if (!($4 =~ /^(window|label)[0-9]+$/)) {
             my $message = entity_decode($4);
             if (defined($2)) {
