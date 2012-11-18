@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to create configure.
 AC_PREREQ([2.53])
 
-AC_INIT([intltool], [0.50.1])
+AC_INIT([intltool], [0.50.3])
 AC_CONFIG_SRCDIR([intltoolize.in])
 
 AM_INIT_AUTOMAKE([foreign])
