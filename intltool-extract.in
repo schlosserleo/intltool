@@ -840,19 +840,40 @@ sub type_qtdesigner {
     # extracomment maps to a developer comment in gettext
     # comment corresponds to "disambiguation" in the Qt Linguist API, and maps
     # to msgctxt in gettext
+    #
+    # Example:
+    #
+    # <string comment="Button" extracomment="TRANSLATORS: refers to the
+    # action of accepting something">Ok</string>
 
-    #                                                $1                                  $2                                       $3               $4
-    while ($input =~ /<string(?:\s+[^>]*notr\s*=\s*"([^"]*)")?(?:\s+[^>]*\bcomment\b\s*=\s*"([^"]*)")?(?:\s+[^>]*extracomment\s*=\s*"([^"]*)")?[^>]*>([^<]+)<\/string>/sg) {
-	if (defined($1)){
-	    next;
-	}
+    # Read all <string> tags one by one and extract the translatable messages
+    # within them
+    while ($input =~ /<string
+        (?:\s+[^>]*notr\s*=\s*"([^"]*)")?
+        (?:\s+[^>]*\bcomment\b\s*=\s*"([^"]*)")?
+        (?:\s+[^>]*extracomment\s*=\s*"([^"]*)")?
+        [^>]*>([^<]+)
+        <\/string>/xsg) {
+
+        # Skip string if notr="true" (i.e. string marked as non-translatable)
+        if (defined($1) && $1 eq "true") {
+            next;
+        }
+
+        # Read translatable message
         my $message = entity_decode($4);
+
+        # Add msgctxt to the translatable message if present
         if (defined($2)) {
             $message = entity_decode($2) . "\004" . $message;
         }
+
+        # Add message to the array of translatable messages (msgids)
         add_message($message);
+
+        # Add developer comment to the comments hash
         if (defined($3)) {
-            $comments{$message} = entity_decode($3) ;
+            $comments{$message} = entity_decode($3);
         }
     }
 }
