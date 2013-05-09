@@ -831,8 +831,11 @@ sub type_quotedxml {
 
 sub type_qtdesigner {
     ### For translatable Qt Designer XML files ###
-    # From http://qt-project.org/doc/designer-ui-file-format.html and
-    # http://qt-project.org/doc/linguist-ts-file-format.html
+    #
+    # Specs:
+    # 
+    # - http://qt-project.org/doc/qt-5.0/qtlinguist/linguist-ts-file-format.html
+    # - http://qt-project.org/doc/qt-5.0/qtdesigner/designer-ui-file-format.html
     #
     # <string> tag attributes:
     #
