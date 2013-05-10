@@ -17,6 +17,7 @@ EXTRA_DIST =					\
 	extract12.xml.in.h			\
 	extract14.xml.in.h			\
 	extract-gtkbuilder.ui.h			\
+	extract-qtdesigner.ui.h			\
 	gsettings.gschema.xml.h			\
 	iso88591text.xml.in.h			\
 	merge-cdata.xml				\

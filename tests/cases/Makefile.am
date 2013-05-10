@@ -16,6 +16,7 @@ EXTRA_DIST =					\
 	extract8.glade				\
 	extract9.po				\
 	extract9.xml.in				\
+	extract-qtdesigner.ui			\
 	fr.po					\
 	fr_BE.po				\
 	fr_FR.po				\
@@ -58,6 +59,7 @@ CLEANFILES =					\
 	extract14.xml.in.h			\
 	extract9.xml				\
 	extract9.xml.in.h			\
+	extract-qtdesigner.ui.h			\
 	gsettings.gschema.xml.h			\
 	iso88591text.xml.in.h			\
 	merge-cdata.xml				\
