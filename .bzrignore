@@ -1,11 +1,14 @@
+ChangeLog
 Makefile
 Makefile.in
+config.*
 intltool-extract
 intltool-merge
 intltool-prepare
 intltool-update
 intltoolize
 tests/selftest.pl
-*.gz
 *.bz2
+*.gz
+*.xz
 

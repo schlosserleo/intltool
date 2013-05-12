@@ -47,5 +47,5 @@ ChangeLog:
 	    echo "ChangeLog can only be generated in a check-out."; \
 	    exit 1; \
 	else \
-	    $(BZR) log > $@; \
+	    $(BZR) log --gnu-changelog -l 50 > $@; \
 	fi
