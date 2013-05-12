@@ -53,7 +53,7 @@ A list of all these files are written into another file called
 Display a status report for all translations in the software.
 .IP "\fB\-d \fILANGCODE\fR" 4
 .PD 0
-.IP "\fB\-\-dist \fILANGCODE \fR" 4
+.IP "\fB\-\-dist \fILANGCODE\fR" 4
 .PD
 Merge
 .BR LANGCODE .po
@@ -96,7 +96,7 @@ Creates a new PO template from source code, and name it foo.pot:
 .nf
 .ft CW
 .ne 1
-intltool-update \-\-pot \-\-gettext\-package=foo
+intltool-update \-\-pot \-\-gettext-package=foo
 .ft R
 .fi
 .RE
@@ -108,7 +108,7 @@ Updates translation file xy.po using existing po template called
 .nf
 .ft CW
 .ne 1
-intltool-update --dist --gettext-package=bar --output-file=xy1.po xy
+intltool-update \-\-dist \-\-gettext-package=bar \-\-output-file=xy1.po xy
 .ft R
 .fi
 .RE
@@ -123,7 +123,7 @@ Creates new PO template and updates translation file xy.po
 intltool-update xy
 .ft R
 .fi
-(same as \fBintltool-update --pot && intltool-update --dist xy\fR)
+(same as \fBintltool-update \-\-pot && intltool-update \-\-dist xy\fR)
 .RE
 
 .SH FILES
