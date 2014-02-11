@@ -165,7 +165,7 @@ XML files. Read manpage (man ${PROGRAM}) for more info.
                     "gettext/glade", "gettext/ini", "gettext/keys"
                     "gettext/rfc822deb", "gettext/schemas",
                     "gettext/gsettings", "gettext/xml", "gettext/quoted",
-                    "gettext/quotedxml", "gettext/tlk"
+                    "gettext/quotedxml", "gettext/tlk", "gettext/qtdesigner"
   -l, --local       Writes output into current working directory
                     (conflicts with --update)
       --update      Writes output into the same directory the source file
@@ -225,6 +225,7 @@ sub convert {
     &type_quoted if $gettext_type eq "quoted";
     &type_quotedxml if $gettext_type eq "quotedxml";
     &type_tlk if $gettext_type eq "tlk";
+    &type_qtdesigner if $gettext_type eq "qtdesigner";
 }
 
 sub entity_decode_minimal
@@ -826,6 +827,77 @@ sub type_quotedxml {
         add_message($message);
         $loc{$message} = length ($before) + 2;
     }
+}
+
+# Parse the tree as returned by readXml() for Qt Designer .ui files.
+sub traverse_qtdesigner {
+    my $nodename = shift;
+    my $content = shift;
+    my @list = @{ $content };
+    my $attrs_ref = shift @list;
+    my %attrs = %{ $attrs_ref };
+    if ($nodename eq 'string' and !exists $attrs{"notr"}) {
+        # Preserve whitespace.  Deal with it ourselves, below.
+        my $message = getXMLstring($content, 1);
+
+        # We strip leading and trailing whitespace but
+        # preserve whitespace within (e.g. newlines)
+        $message =~ s/^\s+//;
+        $message =~ s/\s+$//;
+
+        my $context = $attrs{'comment'};
+        # Remove enclosing quotes from msgctxt
+        $context =~ s/^["'](.*)["']/$1/ if $context;
+        $message = $context . "\004" . $message if $context;
+        add_message($message);
+	my $comment = $attrs{'extracomment'};
+        # Remove enclosing quotes from developer comments
+        $comment =~ s/^["'](.*)["']/$1/ if $comment;
+        $comments{$message} = $comment if $comment;
+    } else {
+        my $index = 0;
+        while (scalar(@list) > 1) {
+            my $type = shift @list;
+            my $content = shift @list;
+            if (!$type || "$type" eq "1") {
+                next;
+            } else {
+                traverse_qtdesigner($type, $content);
+            }
+        }
+    }
+}
+
+sub type_qtdesigner {
+    ### For translatable Qt Designer XML files ###
+    #
+    # Specs:
+    # 
+    # - http://qt-project.org/doc/qt-5.0/qtlinguist/linguist-ts-file-format.html
+    # - http://qt-project.org/doc/qt-5.0/qtdesigner/designer-ui-file-format.html
+    #
+    # <string> tag attributes:
+    #
+    # notr="true" means the string is not translatable
+    # extracomment maps to a developer comment in gettext
+    # comment corresponds to "disambiguation" in the Qt Linguist API, and maps
+    # to msgctxt in gettext
+    #
+    # Example:
+    #
+    # <string comment="Button" extracomment="TRANSLATORS: refers to the
+    # action of accepting something">Ok</string>
+
+    my $tree = readXml($input);
+    my @tree_nodes = @{ $tree };
+    my $node = shift @tree_nodes;
+    while (!$node || "$node" eq "1") {
+        shift @tree_nodes;
+        $node = shift @tree_nodes;
+    }
+    my $content = shift @tree_nodes;
+    traverse_qtdesigner($node, $content);
+
 }
 
 sub type_glade {
