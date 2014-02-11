@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string> Form </string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
@@ -156,7 +156,7 @@ p, li { white-space: pre-wrap; }
              </font>
             </property>
             <property name="text">
-             <string comment="Button" extracomment="TRANSLATORS: refers to the action of accepting something">Ok</string>
+             <string comment="Button" extracomment="TRANSLATORS: refers to the action of accepting something">O  K</string>
             </property>
            </widget>
            <widget class="QCheckBox" name="checkBox">
