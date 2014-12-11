@@ -24,3 +24,6 @@ X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=gnome-utils
 X-GNOME-Bugzilla-Component=gsearchtool
 X-Color=Blue
+X-Color2 = Red
+X-Color3= Green
+X-Color4 =Yellow

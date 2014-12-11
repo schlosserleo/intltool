@@ -1186,7 +1186,7 @@ sub desktop_merge_translations
 
     while (<INPUT>) 
     {
-        if (s/^(\s*)_([A-Za-z0-9\-]+=(.*))/$1$2/)  
+        if (s/^(\s*)_([A-Za-z0-9\-]+\s*=\s*(.*))/$1$2/)  
         {
 	    my $string = $3;
 
@@ -1200,7 +1200,7 @@ sub desktop_merge_translations
                 next if !$translation;
 
                 $_ = $non_translated_line;
-                s/(\w+)=.*/${1}[$lang]=$translation/;
+                s/(\w+)\s*=\s*.*/${1}[$lang]=$translation/;
                 print OUTPUT;
             }
 	} 

@@ -276,7 +276,7 @@ sub add_message
 
 sub type_ini {
     ### For generic translatable desktop files ###
-    while ($input =~ /^(#(.+)\n)?^_.*=(.*)$/mg) {
+    while ($input =~ /^(#(.+)\n)?^_[A-Za-z0-9\-]+\s*=\s*(.*)$/mg) {
         if (defined($2))  {
             $comments{$3} = $2;
         }
