@@ -823,7 +823,7 @@ sub GeneratePOTemplate
 	}
 	else
 	{
-            print OUTFILE "$SRCDIR/../$_\n";
+            print OUTFILE "../$_\n";
 	    $gettext_code = &TextFile_DetermineEncoding ("$SRCDIR/../$_") if ($gettext_support_nonascii and not defined $forced_gettext_code);
 	}
 
@@ -866,6 +866,7 @@ sub GeneratePOTemplate
     my @xgettext_argument=("$XGETTEXT",
 			   "--add-comments",
 			   "--directory\=.",
+                           "--directory\=$SRCDIR",
                            "--default-domain\=$MODULE",
                            "--flag\=g_strdup_printf:1:c-format",
                            "--flag\=g_string_printf:2:c-format",
