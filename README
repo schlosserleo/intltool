@@ -1,3 +1,12 @@
+THIS IS NOT MY WORK
+
+intltool was/is originally hosted here: https://code.launchpad.net/~intltool/intltool/trunk
+I just migrated the old bazaar repo to git with this guide:https://jugmac00.github.io/blog/migrate-a-repository-from-bazaar-to-git/
+I made no changes to the code.
+I did this because of preservation concerns, because launchpad will be shut down.
+
+The original README comes righ below
+
 intltool README
 ===============
 
